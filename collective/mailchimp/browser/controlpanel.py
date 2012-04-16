@@ -35,3 +35,15 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
             mailchimp_settings.ssl,
             mailchimp_settings.debug)
         return mailchimp(method='getAccountDetails')
+
+    def available_lists(self):
+        registry = getUtility(IRegistry)
+        mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        mailchimp = greatape.MailChimp(
+            mailchimp_settings.api_key,
+            mailchimp_settings.ssl,
+            mailchimp_settings.debug)
+        try:
+            return mailchimp(method='lists')
+        except:
+            pass
