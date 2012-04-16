@@ -1,3 +1,6 @@
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 import greatape
 from z3c.form import validator
 
@@ -22,3 +25,13 @@ class MailchimpSettingsEditForm(controlpanel.RegistryEditForm):
 
 class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     form = MailchimpSettingsEditForm
+    index = ViewPageTemplateFile('controlpanel.pt')
+
+    def mailchimp_account(self):
+        registry = getUtility(IRegistry)
+        mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        mailchimp = greatape.MailChimp(
+            mailchimp_settings.api_key,
+            mailchimp_settings.ssl,
+            mailchimp_settings.debug)
+        return mailchimp(method='getAccountDetails')

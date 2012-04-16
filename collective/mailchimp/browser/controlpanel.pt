@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/prefs_main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+<div id="content"
+     metal:fill-slot="prefs_configlet_content">
+
+    <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+      Portal status message
+    </div>
+
+    <a href=""
+       id="setup-link"
+       tal:attributes="href string:$portal_url/plone_control_panel"
+       i18n:translate="">
+        Site Setup
+    </a> &rsaquo;
+
+    <h1 class="documentFirstHeading" tal:content="view/label">View Title</h1>
+
+    <div id="layout-contents">
+        <span tal:replace="structure view/contents" />
+    </div>
+
+    <h2>Your MailChimp Account</h2>
+    <div tal:define="account view/mailchimp_account;
+                     empty string:-">
+      <table>
+        <tr>
+           <td i18n:translate="">Username:</td>
+           <td tal:content="account/username|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">E-mails left: </td>
+          <td tal:content="account/emails_left|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Member since: </td>
+          <td tal:content="account/member_since|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Last login: </td>
+          <td tal:content="account/last_login|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Plan type: </td>
+          <td tal:content="account/plan_type|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Company: </td>
+          <td tal:content="account/contact/company|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">First name: </td>
+          <td tal:content="account/contact/fname|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Last name: </td>
+          <td tal:content="account/contact/lname|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Email: </td>
+          <td tal:content="account/contact/email|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Address 1: </td>
+          <td tal:content="account/contact/address1|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Address 2: </td>
+          <td tal:content="account/contact/address2|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Zip: </td>
+          <td tal:content="account/contact/zip|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">State: </td>
+          <td tal:content="account/contact/state|empty"/>
+        </tr>
+        <tr>
+           <td i18n:translate="">City: </td>
+          <td tal:content="account/contact/city|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Country: </td>
+          <td tal:content="account/contact/country|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">URL: </td>
+          <td tal:content="account/contact/url|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Phone: </td>
+          <td tal:content="account/contact/phone|empty"/>
+        </tr>
+        <tr>
+          <td i18n:translate="">Fax: </td>
+          <td tal:content="account/contact/fax|empty"/>
+        </tr>
+      </table>
+    </div>
+</div>
+</body>
+</html>
