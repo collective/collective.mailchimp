@@ -1,0 +1,6 @@
+<layers>
+  <layer
+    name="collective.mailchimp"
+    interface="collective.mailchimp.interfaces.ICollectiveMailchimp"
+    />
+</layers>

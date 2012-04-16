@@ -12,8 +12,10 @@ class TestSetup(unittest.TestCase):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
 
-    def test_foo(self):
-        pass
+    def test_browserlayer_available(self):
+        from plone.browserlayer import utils
+        from collective.mailchimp.interfaces import ICollectiveMailchimp
+        self.failUnless(ICollectiveMailchimp in utils.registered_layers())
 
 
 def test_suite():
