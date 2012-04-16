@@ -15,9 +15,9 @@ setup(name='collective.mailchimp',
         "Programming Language :: Python",
         ],
       keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      author='Timo Stollenwerk',
+      author_email='contact@timostollenwerk.net',
+      url='http://github.com/tisto/collective.mailchimp',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective'],
@@ -25,8 +25,11 @@ setup(name='collective.mailchimp',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          'Products.CMFPlone',
       ],
+      extras_require={
+        'test': ['plone.app.testing'],
+      },
       entry_points="""
       # -*- Entry points: -*-
 
