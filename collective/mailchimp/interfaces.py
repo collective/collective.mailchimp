@@ -1,11 +1,14 @@
-from z3c.form import interfaces
-
 from zope import schema
 from zope.interface import Interface
 
-from zope.i18nmessageid import MessageFactory
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
-_ = MessageFactory('collective.akismet')
+from collective.mailchimp import _
+
+available_fields = SimpleVocabulary([
+    SimpleTerm(value=u'subscriber_list', title=_(u'Subscriber list')),
+    SimpleTerm(value=u'email', title=_(u'E-Mail'))
+    ])
 
 
 class ICollectiveMailchimp(Interface):
@@ -26,6 +29,62 @@ class IMailchimpSettings(Interface):
     api_key = schema.TextLine(
         title=_(u"MailChimp API Key"),
         description=_(u"help_api_key",
-        default=u"Enter in your MailChimp key here."),
+                      default=u"Enter in your MailChimp key here."),
         required=True,
         default=u'',)
+
+    debug = schema.Bool(
+        title=_(u"Debug MailChimp"),
+        description=_(u"help_debug",
+                      default=u""),
+        required=True,
+        default=False)
+
+    ssl = schema.Bool(
+        title=_(u"SSL"),
+        description=_(u"help_ssl",
+                      default=u""),
+        required=True,
+        default=True)
+
+    cache_sec = schema.Int(
+        title=_(u"SSL"),
+        description=_(u"help_cache_sec",
+                      default=u""),
+        required=True,
+        default=500)
+
+    available_fields = schema.Choice(
+        title=_(u"Available fields"),
+        description=_(u"help_available_fields",
+                      default=u""),
+        vocabulary=available_fields,
+        required=False)
+
+    lists_email_type = schema.TextLine(
+        title=_(u"lists_email_type"),
+        description=_(u"help_lists_email_type",
+                      default=u""),
+        required=True,
+        default=u'html',)
+
+    lists_double_optin = schema.Bool(
+        title=_(u"lists_double_optin"),
+        description=_(u"help_lists_double_optin",
+                      default=u""),
+        required=True,
+        default=True)
+
+    lists_update_existing = schema.Bool(
+        title=_(u"lists_update_existing"),
+        description=_(u"help_lists_update_existing",
+                      default=u""),
+        required=True,
+        default=False)
+
+    lists_replace_interests = schema.Bool(
+        title=_(u"lists_replace_interests"),
+        description=_(u"help_lists_replace_interests",
+                      default=u""),
+        required=True,
+        default=True)

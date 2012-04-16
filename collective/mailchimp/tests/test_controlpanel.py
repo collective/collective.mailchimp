@@ -42,18 +42,60 @@ class TestSetup(unittest.TestCase):
         self.failUnless('mailchimp' in [a.getAction(self)['id']
                             for a in self.controlpanel.listActions()])
 
-    def test_record_mailchimp_key(self):
-        record_api_key = self.registry.records[
+    def test_record_api_key(self):
+        record = self.registry.records[
             'collective.mailchimp.interfaces.IMailchimpSettings.api_key']
         self.failUnless('api_key' in IMailchimpSettings)
-        self.assertEquals(record_api_key.value, u"")
-#
-#    def test_record_mailchimp_key_site(self):
-#        # Test that the mailchimp_key_site record is in the control panel
-#        record_mailchimp_key_site = self.registry.records[
-#            'collective.mailchimp.interfaces.IAkismetSettings.mailchimp_key_site']
-#        self.failUnless('mailchimp_key_site' in IAkismetSettings)
-#        self.assertEquals(record_mailchimp_key_site.value, u"")
+        self.assertEquals(record.value, u"")
+
+    def test_record_debug(self):
+        record = self.registry.records[
+            'collective.mailchimp.interfaces.IMailchimpSettings.debug']
+        self.failUnless('debug' in IMailchimpSettings)
+        self.assertEquals(record.value, False)
+
+    def test_record_ssl(self):
+        record = self.registry.records[
+            'collective.mailchimp.interfaces.IMailchimpSettings.ssl']
+        self.failUnless('ssl' in IMailchimpSettings)
+        self.assertEquals(record.value, True)
+
+    def test_record_cache_sec(self):
+        record = self.registry.records[
+            'collective.mailchimp.interfaces.IMailchimpSettings.cache_sec']
+        self.failUnless('cache_sec' in IMailchimpSettings)
+        self.assertEquals(record.value, 500)
+
+    def test_record_available_fields(self):
+        record = self.registry.records[
+            'collective.mailchimp.interfaces.IMailchimpSettings.available_fields']
+        self.failUnless('available_fields' in IMailchimpSettings)
+        # XXX: Should return vocabulary
+        #self.assertEquals(record.value, None)
+
+    def test_record_lists_email_type(self):
+        record = self.registry.records[
+            'collective.mailchimp.interfaces.IMailchimpSettings.lists_email_type']
+        self.failUnless('lists_email_type' in IMailchimpSettings)
+        self.assertEquals(record.value, 'html')
+
+    def test_lists_double_optin(self):
+        record = self.registry.records[
+            'collective.mailchimp.interfaces.IMailchimpSettings.lists_double_optin']
+        self.failUnless('lists_double_optin' in IMailchimpSettings)
+        self.assertEquals(record.value, True)
+
+    def test_lists_update_existing(self):
+        record = self.registry.records[
+            'collective.mailchimp.interfaces.IMailchimpSettings.lists_update_existing']
+        self.failUnless('lists_update_existing' in IMailchimpSettings)
+        self.assertEquals(record.value, False)
+
+    def test_record_lists_replace_interests(self):
+        record = self.registry.records[
+            'collective.mailchimp.interfaces.IMailchimpSettings.lists_replace_interests']
+        self.failUnless('lists_replace_interests' in IMailchimpSettings)
+        self.assertEquals(record.value, True)
 
 
 def test_suite():

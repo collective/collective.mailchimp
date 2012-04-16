@@ -13,4 +13,11 @@
     permission="cmf.ManagePortal"
     />
 
+  <!-- Resource directory for images -->
+  <browser:resourceDirectory
+    name="collective.mailchimp.images"
+    directory="images"
+    layer="..interfaces.ICollectiveMailchimp"
+    />
+
 </configure>

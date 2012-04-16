@@ -11,6 +11,7 @@
         appId="collective.mailchimp"
         category="Products"
         condition_expr=""
+        icon_expr="string:${portal_url}/++resource++collective.mailchimp.images/mailchimp.gif"
         url_expr="string:${portal_url}/@@mailchimp-settings"
         visible="True"
         i18n:attributes="title">
