@@ -1,3 +1,6 @@
+import greatape
+from z3c.form import validator
+
 from plone.app.registry.browser import controlpanel
 
 from collective.mailchimp.interfaces import IMailchimpSettings

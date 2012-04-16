@@ -1,7 +1,13 @@
-from zope import schema
-from zope.interface import Interface
+import greatape
 
+from zope import schema
+from zope.component import getUtility
+from zope.interface import Interface
+from zope.interface import invariant
+from zope.interface import Invalid
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+
+from plone.registry.interfaces import IRegistry
 
 from collective.mailchimp import _
 
@@ -29,7 +35,9 @@ class IMailchimpSettings(Interface):
     api_key = schema.TextLine(
         title=_(u"MailChimp API Key"),
         description=_(u"help_api_key",
-                      default=u"Enter in your MailChimp key here."),
+                      default=u"Enter in your MailChimp key here. Log into " +
+                      "mailchimp.com, go to account -> extras -> API Keys & " +
+                      "Authorized Apps and copy the API Key to this field."),
         required=True,
         default=u'',)
 
@@ -88,3 +96,17 @@ class IMailchimpSettings(Interface):
                       default=u""),
         required=True,
         default=True)
+
+    @invariant
+    def valid_api_key(obj):
+        registry = getUtility(IRegistry)
+        mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        mailchimp = greatape.MailChimp(
+            obj.api_key,
+            mailchimp_settings.ssl,
+            mailchimp_settings.debug)
+        try:
+            return mailchimp(method='ping')
+        except:
+            raise Invalid(u"Your MailChimp API key is not valid. Please go " +
+                "to mailchimp.com and check your API key.")

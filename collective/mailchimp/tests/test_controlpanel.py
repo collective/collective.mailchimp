@@ -14,7 +14,7 @@ from collective.mailchimp.testing import \
 from collective.mailchimp.interfaces import IMailchimpSettings
 
 
-class TestSetup(unittest.TestCase):
+class TestMailchimpSettingsControlPanel(unittest.TestCase):
 
     layer = COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
 
