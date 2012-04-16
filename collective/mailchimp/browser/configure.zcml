@@ -1,0 +1,16 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="jungzeelandia.contenttypes">
+
+  <include package="plone.app.registry" />
+
+  <!-- Control panel -->
+  <browser:page
+    name="mailchimp-settings"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".controlpanel.MailchimpSettingsControlPanel"
+    permission="cmf.ManagePortal"
+    />
+
+</configure>

@@ -26,6 +26,7 @@ setup(name='collective.mailchimp',
       install_requires=[
           'setuptools',
           'Products.CMFPlone',
+          'plone.app.registry',
           'greatape',
       ],
       extras_require={
