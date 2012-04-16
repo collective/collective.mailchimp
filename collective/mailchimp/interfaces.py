@@ -35,7 +35,8 @@ class IMailchimpSettings(Interface):
     api_key = schema.TextLine(
         title=_(u"MailChimp API Key"),
         description=_(u"help_api_key",
-                      default=u"Enter in your MailChimp key here. Log into " +
+                      default=u"Enter in your MailChimp key here (.e.g. " +
+                      "'8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into " +
                       "mailchimp.com, go to account -> extras -> API Keys & " +
                       "Authorized Apps and copy the API Key to this field."),
         required=True,
