@@ -35,6 +35,8 @@ def validate_email(value):
 class INewsletterSubscribe(interface.Interface):
     email = schema.TextLine(
         title=_(u"Email address"),
+        description=_(u"help_email",
+                      default=u"Please enter your email address."),
         required=True,
         constraint=validate_email)
 

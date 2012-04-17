@@ -22,11 +22,11 @@ msgstr "Verfügbare Felder"
 msgid "Cache Sec"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:65
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:67
 msgid "Could not fetch list from mailchimp.com: %s"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:78
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:80
 msgid "Could not subscribe to newsletter: %s"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr "MailChimp Einstellungen"
 msgid "SSL"
 msgstr "SSL"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:45
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:47
 msgid "Subscribe to newsletter"
 msgstr "Newsletter bestellen"
 
@@ -70,7 +70,7 @@ msgstr "Newsletter bestellen"
 msgid "Subscriber list"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:81
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:83
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr "Wir müssen Ihre E-Mail-Adresse bestätigen. Um die Anmeldung abzuschließen, klicken Sie bitte auf den Link in der E-Mail, die wir soeben an Sie geschickt haben."
 
@@ -90,6 +90,11 @@ msgstr ""
 #: collective.mailchimp/collective/mailchimp/interfaces.py:47
 msgid "help_debug"
 msgstr ""
+
+#. Default: "Please enter your email address."
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:38
+msgid "help_email"
+msgstr "Bitte geben Sie Ihre E-Mail Adresse ein."
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:82
 msgid "help_lists_double_optin"
