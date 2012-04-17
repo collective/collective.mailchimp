@@ -22,17 +22,17 @@ msgstr "Verfügbare Felder"
 msgid "Cache Sec"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:67
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:69
 msgid "Could not fetch list from mailchimp.com: %s"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:80
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:82
 msgid "Could not subscribe to newsletter: %s"
 msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:46
 msgid "Debug MailChimp"
-msgstr ""
+msgstr "Debug Modus einschalten"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:16
 msgid "E-Mail"
@@ -68,9 +68,9 @@ msgstr "Newsletter bestellen"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:15
 msgid "Subscriber list"
-msgstr ""
+msgstr "Empfängerliste"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:83
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:85
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr "Wir müssen Ihre E-Mail-Adresse bestätigen. Um die Anmeldung abzuschließen, klicken Sie bitte auf den Link in der E-Mail, die wir soeben an Sie geschickt haben."
 
@@ -131,4 +131,9 @@ msgstr ""
 #: collective.mailchimp/collective/mailchimp/interfaces.py:88
 msgid "lists_update_existing"
 msgstr ""
+
+#. Default: "Subscribe"
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:49
+msgid "subscribe_to_newsletter_button"
+msgstr "Bestellen"
 

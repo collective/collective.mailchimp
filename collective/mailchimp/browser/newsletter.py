@@ -46,7 +46,9 @@ class NewsletterSubscriberForm(form.Form):
     ignoreContext = True
     label = _(u"Subscribe to newsletter")
 
-    @button.buttonAndHandler(u'Subscribe')
+    @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
+                             default=u"Subscribe"),
+                             name='subscribe')
     def handleApply(self, action):
         data, errors = self.extractData()
         if 'email' in data:

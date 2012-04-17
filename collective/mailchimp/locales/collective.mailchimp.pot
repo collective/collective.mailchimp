@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-04-17 08:43+0000\n"
+"POT-Creation-Date: 2012-04-17 09:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,11 +29,11 @@ msgstr ""
 msgid "Cache Sec"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:67
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:69
 msgid "Could not fetch list from mailchimp.com: %s"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:80
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:82
 msgid "Could not subscribe to newsletter: %s"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr ""
 msgid "Subscriber list"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:83
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:85
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr ""
 
@@ -137,5 +137,10 @@ msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:88
 msgid "lists_update_existing"
+msgstr ""
+
+#. Default: "Subscribe"
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:49
+msgid "subscribe_to_newsletter_button"
 msgstr ""
 
