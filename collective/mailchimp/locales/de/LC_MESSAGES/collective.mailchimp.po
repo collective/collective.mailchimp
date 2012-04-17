@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Timo Stollenwerk <contact@timostollenwerk.net\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -16,7 +16,7 @@ msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:67
 msgid "Available fields"
-msgstr ""
+msgstr "Verfügbare Felder"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:60
 msgid "Cache Sec"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:16
 msgid "E-Mail"
-msgstr ""
+msgstr "E-Mail"
 
 #: collective.mailchimp/collective/mailchimp/browser/newsletter.py:23
 msgid "Invalid email address"
@@ -36,32 +36,32 @@ msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/profiles/default/controlpanel.xml
 msgid "MailChimp"
-msgstr ""
+msgstr "MailChimp"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:36
 msgid "MailChimp API Key"
-msgstr ""
+msgstr "MailChimp API Key"
 
 #: collective.mailchimp/collective/mailchimp/browser/controlpanel.py:17
 msgid "MailChimp settings"
-msgstr ""
+msgstr "MailChimp Einstellungen"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:53
 msgid "SSL"
-msgstr ""
+msgstr "SSL"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:15
 msgid "Subscriber list"
 msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/browser/newsletter.py:81
-msgid "Wir müssen Ihre E-Mail-Adresse bestätigen. Um die Anmeldung abzuschließen, klicken Sie bitte auf den Link in der E-Mail, die wir soeben an Sie geschickt haben."
-msgstr ""
+msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
+msgstr "Wir müssen Ihre E-Mail-Adresse bestätigen. Um die Anmeldung abzuschließen, klicken Sie bitte auf den Link in der E-Mail, die wir soeben an Sie geschickt haben."
 
 #. Default: "Enter in your MailChimp key here (.e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into mailchimp.com, go to account -> extras -> API Keys & Authorized Apps and copy the API Key to this field."
 #: collective.mailchimp/collective/mailchimp/interfaces.py:37
 msgid "help_api_key"
-msgstr ""
+msgstr "Bitte geben sie ihren MailChimp API-Key (e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4') hier ein."
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:68
 msgid "help_available_fields"

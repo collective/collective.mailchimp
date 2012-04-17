@@ -78,7 +78,9 @@ class NewsletterSubscriberForm(form.Form):
                     Invalid(u"Could not subscribe to newsletter: %s" % error))
 
             IStatusMessage(self.context.REQUEST).addStatusMessage(
-                _(u"Wir müssen Ihre E-Mail-Adresse bestätigen. Um die Anmeldung abzuschließen, klicken Sie bitte auf den Link in der E-Mail, die wir soeben an Sie geschickt haben."),
+                _(u"We have to confirm your email address. In order to " +
+                   "finish the newsletter subscription, click on the link " +
+                   "inside the email we just send you."),
                 type="info")
             portal = getSite()
             self.request.response.redirect(portal.absolute_url())
