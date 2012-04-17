@@ -1,8 +1,9 @@
+from zope.interface import Invalid
+from z3c.form.interfaces import WidgetActionExecutionError
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 import greatape
-from z3c.form import validator
 
 from plone.app.registry.browser import controlpanel
 
@@ -34,7 +35,12 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
             mailchimp_settings.api_key,
             mailchimp_settings.ssl,
             mailchimp_settings.debug)
-        return mailchimp(method='getAccountDetails')
+        try:
+            return mailchimp(method='getAccountDetails')
+        except greatape.MailChimpError, error:
+            raise WidgetActionExecutionError(
+                Invalid(u"Could not fetch account details from MailChimp. " +
+                    "Please check your MailChimp API key: %s" % error))
 
     def available_lists(self):
         registry = getUtility(IRegistry)
@@ -45,5 +51,7 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
             mailchimp_settings.debug)
         try:
             return mailchimp(method='lists')
-        except:
-            pass
+        except greatape.MailChimpError, error:
+            raise WidgetActionExecutionError(
+                Invalid(u"Could not fetch available lists from MailChimp. " +
+                    "Please check your MailChimp API key: %s" % error))
