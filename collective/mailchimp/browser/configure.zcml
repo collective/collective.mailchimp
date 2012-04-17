@@ -20,4 +20,11 @@
     layer="..interfaces.ICollectiveMailchimp"
     />
 
+  <browser:page
+    name="newsletter"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".newsletter.NewsletterView"
+    permission="zope2.View"
+    />
+
 </configure>
