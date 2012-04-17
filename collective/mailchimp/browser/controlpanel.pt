@@ -28,7 +28,7 @@
         <span tal:replace="structure view/contents" />
     </div>
 
-    <tal:block tal:define="account view/mailchimp_account;
+    <tal:block tal:define="account view/mailchimp_account|nothing;
                    empty string:-"
       tal:condition="account">
       <h2>Your MailChimp Account</h2>
