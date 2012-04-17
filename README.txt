@@ -1,6 +1,4 @@
 Introduction
 ============
 
-
-
-This product may contain traces of nuts.
+MailChimp (http://mailchimp.com) integration for Plone.
