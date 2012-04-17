@@ -57,7 +57,7 @@ class IMailchimpSettings(Interface):
         default=True)
 
     cache_sec = schema.Int(
-        title=_(u"SSL"),
+        title=_(u"Cache Sec"),
         description=_(u"help_cache_sec",
                       default=u""),
         required=True,
