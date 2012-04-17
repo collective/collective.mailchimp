@@ -22,6 +22,14 @@ msgstr "Verfügbare Felder"
 msgid "Cache Sec"
 msgstr ""
 
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:65
+msgid "Could not fetch list from mailchimp.com: %s"
+msgstr ""
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:78
+msgid "Could not subscribe to newsletter: %s"
+msgstr ""
+
 #: collective.mailchimp/collective/mailchimp/interfaces.py:46
 msgid "Debug MailChimp"
 msgstr ""
@@ -30,9 +38,13 @@ msgstr ""
 msgid "E-Mail"
 msgstr "E-Mail"
 
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:37
+msgid "Email address"
+msgstr "E-Mail Adresse"
+
 #: collective.mailchimp/collective/mailchimp/browser/newsletter.py:23
 msgid "Invalid email address"
-msgstr ""
+msgstr "Keine gültige E-Mail Adresse"
 
 #: collective.mailchimp/collective/mailchimp/profiles/default/controlpanel.xml
 msgid "MailChimp"
@@ -49,6 +61,10 @@ msgstr "MailChimp Einstellungen"
 #: collective.mailchimp/collective/mailchimp/interfaces.py:53
 msgid "SSL"
 msgstr "SSL"
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:45
+msgid "Subscribe to newsletter"
+msgstr "Newsletter bestellen"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:15
 msgid "Subscriber list"

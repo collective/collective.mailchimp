@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-04-17 08:30+0000\n"
+"POT-Creation-Date: 2012-04-17 08:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,12 +29,24 @@ msgstr ""
 msgid "Cache Sec"
 msgstr ""
 
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:65
+msgid "Could not fetch list from mailchimp.com: %s"
+msgstr ""
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:78
+msgid "Could not subscribe to newsletter: %s"
+msgstr ""
+
 #: collective.mailchimp/collective/mailchimp/interfaces.py:46
 msgid "Debug MailChimp"
 msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:16
 msgid "E-Mail"
+msgstr ""
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:37
+msgid "Email address"
 msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/browser/newsletter.py:23
@@ -55,6 +67,10 @@ msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:53
 msgid "SSL"
+msgstr ""
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:45
+msgid "Subscribe to newsletter"
 msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:15

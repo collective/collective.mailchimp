@@ -34,7 +34,7 @@ def validate_email(value):
 
 class INewsletterSubscribe(interface.Interface):
     email = schema.TextLine(
-        title=u"E-Mail Adresse",
+        title=_(u"Email address"),
         required=True,
         constraint=validate_email)
 
@@ -42,7 +42,7 @@ class INewsletterSubscribe(interface.Interface):
 class NewsletterSubscriberForm(form.Form):
     fields = field.Fields(INewsletterSubscribe)
     ignoreContext = True
-    label = u"Subscribe to newsletter"
+    label = _(u"Subscribe to newsletter")
 
     @button.buttonAndHandler(u'Subscribe')
     def handleApply(self, action):
@@ -62,8 +62,8 @@ class NewsletterSubscriberForm(form.Form):
                 list_id = lists[0]['id']
             except greatape.MailChimpError, error:
                 raise WidgetActionExecutionError(
-                    Invalid(u"Could not fetch list from mailchimp.com: %s" %
-                        error))
+                    Invalid(_(u"Could not fetch list from mailchimp.com: %s" %
+                        error)))
             # Subscribe to MailChimp list
             merge_vars = dict(dummy='dummy')
             try:
@@ -75,7 +75,7 @@ class NewsletterSubscriberForm(form.Form):
                     )
             except greatape.MailChimpError, error:
                 raise WidgetActionExecutionError(
-                    Invalid(u"Could not subscribe to newsletter: %s" % error))
+                    Invalid(_(u"Could not subscribe to newsletter: %s" % error)))
 
             IStatusMessage(self.context.REQUEST).addStatusMessage(
                 _(u"We have to confirm your email address. In order to " +
