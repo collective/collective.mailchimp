@@ -46,6 +46,10 @@ class NewsletterSubscriberForm(form.Form):
     ignoreContext = True
     label = _(u"Subscribe to newsletter")
 
+    def updateActions(self):
+        super(NewsletterSubscriberForm, self).updateActions();
+        self.actions['subscribe'].addClass('context')
+
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
                              default=u"Subscribe"),
                              name='subscribe')
