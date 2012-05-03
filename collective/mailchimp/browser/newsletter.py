@@ -82,7 +82,8 @@ class NewsletterSubscriberForm(form.Form):
                     merge_vars=merge_vars,
                     )
             except greatape.MailChimpError, error:
-                raise WidgetActionExecutionError(
+                import pdb; pdb.set_trace()
+                raise WidgetActionExecutionError('email',
                     Invalid(_(u"Could not subscribe to newsletter: %s" % error)))
 
             IStatusMessage(self.context.REQUEST).addStatusMessage(
