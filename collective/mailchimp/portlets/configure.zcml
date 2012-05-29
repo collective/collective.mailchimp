@@ -1,0 +1,14 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:plone="http://namespaces.plone.org/plone">
+
+    <plone:portlet
+        name="portlet.MailChimp"
+        interface=".mailchimp.IMailChimpPortlet"
+        assignment=".mailchimp.Assignment"
+        renderer=".mailchimp.Renderer"
+        addview=".mailchimp.AddForm"
+        editview=".mailchimp.EditForm"
+        />
+
+</configure>

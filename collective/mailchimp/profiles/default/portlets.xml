@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<portlets>
+
+  <portlet
+    addview="portlet.MailChimp"
+    title="MailChimp Portlet"
+    description="Description of My Portlet."
+    />
+
+</portlets>
