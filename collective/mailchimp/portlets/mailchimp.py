@@ -7,6 +7,7 @@ from zope.component import getMultiAdapter
 from zope.formlib import form
 from zope.interface import implements
 from zope import schema
+from z3c.form import field
 
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
@@ -15,6 +16,9 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets import PloneMessageFactory as _
 from plone.app.portlets.cache import render_cachekey
 from plone.app.portlets.portlets import base
+
+from z3cformhelpers import AddForm
+from z3cformhelpers import EditForm
 
 
 class IMailChimpPortlet(IPortletDataProvider):
@@ -88,10 +92,11 @@ class Renderer(base.Renderer):
                        sort_limit=limit)[:limit]
 
 
-class AddForm(base.AddForm):
-    form_fields = form.Fields(IMailChimpPortlet)
+class AddForm(AddForm):
+    fields = field.Fields(IMailChimpPortlet)
     label = _(u"Add MailChimp Portlet")
-    description = _(u"This portlet displays recent MailChimp Items.")
+    description = _(u"This portlet displays a subscription form for a " +
+        "MailChimp newsletter.")
 
     def create(self, data):
         return Assignment(
@@ -99,7 +104,8 @@ class AddForm(base.AddForm):
             state=data.get('state', ('published', )))
 
 
-class EditForm(base.EditForm):
-    form_fields = form.Fields(IMailChimpPortlet)
+class EditForm(EditForm):
+    fields = field.Fields(IMailChimpPortlet)
     label = _(u"Edit MailChimp Portlet")
-    description = _(u"This portlet displays recent MailChimp Items.")
+    description = _(u"This portlet displays a subscription form for a " +
+        "MailChimp newsletter.")
