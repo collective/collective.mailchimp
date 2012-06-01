@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
+from plone.testing.z2 import Browser
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import setRoles
 from zope.component import getUtility, getMultiAdapter
 from zope.site.hooks import setHooks
@@ -44,7 +47,6 @@ class TestPortlet(unittest.TestCase):
         for m in mapping.keys():
             del mapping[m]
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
-
         addview.createAndAdd(data={})
 
         self.assertEquals(len(mapping), 1)
@@ -126,3 +128,33 @@ class TestRenderer(unittest.TestCase):
 #        setRoles(self.portal, TEST_USER_ID, ['Manager'])
 #        self.portal.invokeFactory('Folder', 'news')
 #        self.failUnless(r.all_news_link().endswith('/news'))
+
+
+class TestPortletIntegration(unittest.TestCase):
+
+    layer = COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+
+    def setUp(self):
+        app = self.layer['app']
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        self.portal_url = self.portal.absolute_url()
+        self.browser = Browser(app)
+        self.browser.handleErrors = False
+        self.browser.addHeader('Authorization',
+            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
+        )
+
+    def test_add_portlet_form(self):
+        self.browser.open(self.portal_url +
+            "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
+        self.assertTrue("Add MailChimp Portlet" in self.browser.contents)
+        self.assertTrue("Title" in self.browser.contents)
+        self.assertTrue("Available lists" in self.browser.contents)
+
+    def test_edit_portlet_form(self):
+        pass
+
+
+def test_suite():
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)

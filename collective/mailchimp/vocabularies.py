@@ -14,6 +14,11 @@ def available_lists(context):
         mailchimp_settings.api_key,
         mailchimp_settings.ssl,
         mailchimp_settings.debug)
-    lists = mailchimp(method='lists')
+    try:
+        lists = mailchimp(method='lists')
+    except greatape.MailChimpError:
+        pass
+    except:
+        return SimpleVocabulary([])
     return SimpleVocabulary([
         SimpleTerm(value=li['id'], title=li['name']) for li in lists])
