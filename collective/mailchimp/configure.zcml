@@ -18,4 +18,8 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <utility component=".vocabularies.available_lists"
+           name="collective.mailchimp.vocabularies.AvailableListsVocabulary"
+           provides="zope.schema.interfaces.IVocabularyFactory" />
+
 </configure>

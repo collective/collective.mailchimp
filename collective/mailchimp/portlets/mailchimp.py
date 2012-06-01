@@ -28,7 +28,8 @@ class IMailChimpPortlet(IPortletDataProvider):
         description=_(u'Select available lists to subscribe to.'),
         required=True,
         min_length=1,
-        value_type=schema.Choice(source='raptus.mailchimp.available_list'))
+        value_type=schema.Choice(
+            source='collective.mailchimp.vocabularies.AvailableListsVocabulary'))
 
 
 class Assignment(base.Assignment):
