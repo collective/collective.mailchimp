@@ -1,4 +1,5 @@
-import greatape
+from greatape import MailChimp
+from greatape import MailChimpError
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from zope.schema.vocabulary import SimpleVocabulary
@@ -10,13 +11,13 @@ from collective.mailchimp.interfaces import IMailchimpSettings
 def available_lists(context):
     registry = getUtility(IRegistry)
     mailchimp_settings = registry.forInterface(IMailchimpSettings)
-    mailchimp = greatape.MailChimp(
+    mailchimp = MailChimp(
         mailchimp_settings.api_key,
         mailchimp_settings.ssl,
         mailchimp_settings.debug)
     try:
         lists = mailchimp(method='lists')
-    except greatape.MailChimpError:
+    except MailChimpError:
         pass
     except:
         return SimpleVocabulary([])

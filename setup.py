@@ -30,7 +30,11 @@ setup(name='collective.mailchimp',
           'greatape',
       ],
       extras_require={
-        'test': ['plone.app.testing'],
+        'test': [
+          'plone.app.testing',
+          'mocker',
+          'plone.mocktestcase',
+        ],
       },
       entry_points="""
       # -*- Entry points: -*-

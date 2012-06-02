@@ -139,6 +139,18 @@ class TestPortletIntegration(unittest.TestCase):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
         self.portal_url = self.portal.absolute_url()
+
+        from mocker import Mocker
+        mocker = Mocker()
+        obj = mocker.replace("greatape.MailChimp")
+        obj("foo", "bar")()
+        mocker.result([{
+            u'web_id': 625,
+            u'name': u'ACME Newsletter',
+            u'default_from_name': u'info@acme.com',
+            }])
+        mocker.replay()
+
         self.browser = Browser(app)
         self.browser.handleErrors = False
         self.browser.addHeader('Authorization',
@@ -152,8 +164,17 @@ class TestPortletIntegration(unittest.TestCase):
         self.assertTrue("Title" in self.browser.contents)
         self.assertTrue("Available lists" in self.browser.contents)
 
-    def test_edit_portlet_form(self):
-        pass
+    def test_add_portlet(self):
+        self.browser.open(self.portal_url +
+            "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
+        self.browser.getControl("Title").value = "My MailChimp Portlet"
+        self.assertTrue(
+            self.browser.getControl(
+                name="form.widgets.available_list.from").options > 0)
+
+#    def test_edit_portlet_form(self):
+#        self.browser.open(self.portal_url +
+#            "/++contextportlets++plone.leftcolumn/mailchimp/edit")
 
 
 def test_suite():
