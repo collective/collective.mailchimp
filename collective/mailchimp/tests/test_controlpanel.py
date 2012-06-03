@@ -47,7 +47,7 @@ class TestMailchimpSettingsControlPanel(unittest.TestCase):
         record = self.registry.records[
             'collective.mailchimp.interfaces.IMailchimpSettings.api_key']
         self.failUnless('api_key' in IMailchimpSettings)
-        self.assertEquals(record.value, u"")
+        self.assertEquals(record.value, None)
 
     def test_record_debug(self):
         record = self.registry.records[

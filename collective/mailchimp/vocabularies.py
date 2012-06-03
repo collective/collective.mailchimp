@@ -1,4 +1,4 @@
-from greatape import MailChimp
+import greatape
 from greatape import MailChimpError
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
@@ -11,8 +11,8 @@ from collective.mailchimp.interfaces import IMailchimpSettings
 def available_lists(context):
     registry = getUtility(IRegistry)
     mailchimp_settings = registry.forInterface(IMailchimpSettings)
-    mailchimp = MailChimp(
-        mailchimp_settings.api_key,
+    mailchimp = greatape.MailChimp(
+        mailchimp_settings.api_key or "",
         mailchimp_settings.ssl,
         mailchimp_settings.debug)
     try:

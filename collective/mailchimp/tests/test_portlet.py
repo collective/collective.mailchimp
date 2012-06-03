@@ -141,10 +141,14 @@ class TestPortletIntegration(unittest.TestCase):
         self.portal_url = self.portal.absolute_url()
 
         from mocker import Mocker
+        from mocker import ANY
         mocker = Mocker()
-        obj = mocker.replace("greatape.MailChimp")
-        obj("foo", "bar")()
+        greatape = mocker.replace("greatape")
+        mailchimp = greatape.MailChimp(ANY, ANY, ANY)
+        mocker.count(None, None)
+        mailchimp(method="lists")
         mocker.result([{
+            u'id': 625,
             u'web_id': 625,
             u'name': u'ACME Newsletter',
             u'default_from_name': u'info@acme.com',
@@ -157,20 +161,37 @@ class TestPortletIntegration(unittest.TestCase):
             'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
         )
 
+    def test_greatape_mocker(self):
+        from greatape import MailChimp
+        mailchimp = MailChimp("", True, False)
+        self.assertEqual(mailchimp(method="lists"), [{
+            u'id': 625,
+            u'web_id': 625,
+            u'name': u'ACME Newsletter',
+            u'default_from_name': u'info@acme.com',
+            }])
+
     def test_add_portlet_form(self):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
         self.assertTrue("Add MailChimp Portlet" in self.browser.contents)
         self.assertTrue("Title" in self.browser.contents)
         self.assertTrue("Available lists" in self.browser.contents)
+        self.assertTrue(len(
+            self.browser.getControl(
+                name="form.widgets.available_list.from").options) > 0)
+        self.assertEqual(
+            self.browser.getControl(
+                name="form.widgets.available_list.from").options[0],
+                '625')
 
     def test_add_portlet(self):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
         self.browser.getControl("Title").value = "My MailChimp Portlet"
-        self.assertTrue(
-            self.browser.getControl(
-                name="form.widgets.available_list.from").options > 0)
+        self.browser.getControl(
+            name="form.widgets.available_list.from").value = ['625']
+        self.browser.getControl("Save").click()
 
 #    def test_edit_portlet_form(self):
 #        self.browser.open(self.portal_url +

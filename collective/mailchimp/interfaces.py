@@ -39,8 +39,7 @@ class IMailchimpSettings(Interface):
                       "'8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into " +
                       "mailchimp.com, go to account -> extras -> API Keys & " +
                       "Authorized Apps and copy the API Key to this field."),
-        required=True,
-        default=u'',)
+        required=True)
 
     debug = schema.Bool(
         title=_(u"Debug MailChimp"),
