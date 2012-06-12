@@ -22,7 +22,7 @@
 
   <browser:page
     name="newsletter"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    for="*"
     class=".newsletter.NewsletterView"
     permission="zope2.View"
     />
