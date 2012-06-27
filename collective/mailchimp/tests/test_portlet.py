@@ -16,7 +16,7 @@ from plone.portlets.interfaces import IPortletRenderer
 
 from plone.app.portlets.storage import PortletAssignmentMapping
 
-from collective.mailchimp.portlets import mailchimp as news
+from collective.mailchimp.portlets import mailchimp as mailchimp
 from collective.mailchimp.testing import \
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
 
@@ -36,7 +36,7 @@ class TestPortlet(unittest.TestCase):
         self.assertEquals(portlet.addview, 'portlet.MailChimp')
 
     def testInterfaces(self):
-        portlet = news.Assignment(count=5)
+        portlet = mailchimp.Assignment(name="foo")
         self.failUnless(IPortletAssignment.providedBy(portlet))
         self.failUnless(IPortletDataProvider.providedBy(portlet.data))
 
@@ -50,15 +50,15 @@ class TestPortlet(unittest.TestCase):
         addview.createAndAdd(data={})
 
         self.assertEquals(len(mapping), 1)
-        self.failUnless(isinstance(mapping.values()[0], news.Assignment))
+        self.failUnless(isinstance(mapping.values()[0], mailchimp.Assignment))
 
     def testInvokeEditView(self):
         mapping = PortletAssignmentMapping()
         request = self.portal.REQUEST
 
-        mapping['foo'] = news.Assignment(count=5)
+        mapping['foo'] = mailchimp.Assignment(name="foo")
         editview = getMultiAdapter((mapping['foo'], request), name='edit')
-        self.failUnless(isinstance(editview, news.EditForm))
+        self.failUnless(isinstance(editview, mailchimp.EditForm))
 
     def testRenderer(self):
         context = self.portal
@@ -66,12 +66,12 @@ class TestPortlet(unittest.TestCase):
         view = self.portal.restrictedTraverse('@@plone')
         manager = getUtility(IPortletManager,
             name='plone.leftcolumn', context=self.portal)
-        assignment = news.Assignment(count=5)
+        assignment = mailchimp.Assignment(name="foo")
 
         renderer = getMultiAdapter(
             (context, request, view, manager, assignment),
             IPortletRenderer)
-        self.failUnless(isinstance(renderer, news.Renderer))
+        self.failUnless(isinstance(renderer, mailchimp.Renderer))
 
 
 class TestRenderer(unittest.TestCase):
@@ -95,39 +95,13 @@ class TestRenderer(unittest.TestCase):
         manager = manager or getUtility(IPortletManager,
             name='plone.leftcolumn',
             context=self.portal)
-        assignment = assignment or news.Assignment(
+        assignment = assignment or mailchimp.Assignment(
             template='portlet_recent',
             macro='portlet')
 
         return getMultiAdapter(
             (context, request, view, manager, assignment),
             IPortletRenderer)
-
-#    def test_published_news_items(self):
-#        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-#        self.portal.invokeFactory('News Item', 'n1')
-#        self.portal.invokeFactory('News Item', 'n2')
-#        self.portal.portal_workflow.doActionFor(self.portal.n1, 'publish')
-#
-#        r = self.renderer(
-#            assignment=news.Assignment(count=5, state=('draft', )))
-#        self.assertEquals(0, len(r.published_news_items()))
-#        r = self.renderer(
-#            assignment=news.Assignment(count=5, state=('published', )))
-#        self.assertEquals(1, len(r.published_news_items()))
-#        r = self.renderer(
-#            assignment=news.Assignment(
-#                count=5, state=('published', 'private', )))
-#        self.assertEquals(2, len(r.published_news_items()))
-
-#    def test_all_news_link(self):
-#        if 'news' in self.portal:
-#            self.portal._delObject('news')
-#        r = self.renderer(assignment=news.Assignment(count=5))
-#        self.assertEqual(r.all_news_link(), None)
-#        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-#        self.portal.invokeFactory('Folder', 'news')
-#        self.failUnless(r.all_news_link().endswith('/news'))
 
 
 class TestPortletIntegration(unittest.TestCase):
@@ -147,12 +121,20 @@ class TestPortletIntegration(unittest.TestCase):
         mailchimp = greatape.MailChimp(ANY, ANY, ANY)
         mocker.count(None, None)
         mailchimp(method="lists")
-        mocker.result([{
-            u'id': 625,
-            u'web_id': 625,
-            u'name': u'ACME Newsletter',
-            u'default_from_name': u'info@acme.com',
-            }])
+        mocker.result([
+            {
+                u'id': 625,
+                u'web_id': 625,
+                u'name': u'ACME Newsletter',
+                u'default_from_name': u'info@acme.com',
+            },
+            {
+                u'id': 626,
+                u'web_id': 626,
+                u'name': u'ACME Newsletter 2',
+                u'default_from_name': u'info@acme.com',
+            },
+            ])
         mocker.replay()
 
         self.browser = Browser(app)
@@ -164,38 +146,52 @@ class TestPortletIntegration(unittest.TestCase):
     def test_greatape_mocker(self):
         from greatape import MailChimp
         mailchimp = MailChimp("", True, False)
-        self.assertEqual(mailchimp(method="lists"), [{
-            u'id': 625,
-            u'web_id': 625,
-            u'name': u'ACME Newsletter',
-            u'default_from_name': u'info@acme.com',
-            }])
+        self.assertEqual(mailchimp(method="lists"), [
+            {
+                u'id': 625,
+                u'web_id': 625,
+                u'name': u'ACME Newsletter',
+                u'default_from_name': u'info@acme.com',
+            },
+            {
+                u'id': 626,
+                u'web_id': 626,
+                u'name': u'ACME Newsletter 2',
+                u'default_from_name': u'info@acme.com',
+            },
+            ])
 
     def test_add_portlet_form(self):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
+
         self.assertTrue("Add MailChimp Portlet" in self.browser.contents)
         self.assertTrue("Title" in self.browser.contents)
         self.assertTrue("Available lists" in self.browser.contents)
-        self.assertTrue(len(
-            self.browser.getControl(
-                name="form.widgets.available_list.from").options) > 0)
-        self.assertEqual(
-            self.browser.getControl(
-                name="form.widgets.available_list.from").options[0],
-                '625')
+        self.assertTrue("ACME Newsletter" in self.browser.contents)
+        self.assertTrue("ACME Newsletter 2" in self.browser.contents)
 
     def test_add_portlet(self):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
-        self.browser.getControl("Title").value = "My MailChimp Portlet"
-        self.browser.getControl(
-            name="form.widgets.available_list.from").value = ['625']
+        self.browser.getControl("Title").value = "ACME Newsletter Portlet"
+        self.browser.getControl(name="form.widgets.available_list:list")\
+            .value = ["625"]
+        #self.browser.getControl(name="form.widgets.available_list:list")\
+        #    .controls[0].click()
         self.browser.getControl("Save").click()
 
-#    def test_edit_portlet_form(self):
-#        self.browser.open(self.portal_url +
-#            "/++contextportlets++plone.leftcolumn/mailchimp/edit")
+        #self.assertEqual(self.browser.url,
+        #    self.portal_url + '/@@manage-portlets')
+        #self.assertTrue("ACME Newsletter Portlet" in self.browser.contents)
+
+    def test_edit_portlet(self):
+        pass
+        #self.browser.open(self.portal_url +
+        #    "/++contextportlets++plone.leftcolumn/mailchimp/edit")
+
+    def test_view_portlet(self):
+        pass
 
 
 def test_suite():
