@@ -175,9 +175,9 @@ class TestPortletIntegration(unittest.TestCase):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
         self.browser.getControl("Title").value = "ACME Newsletter Portlet"
-        self.browser.getControl(name="form.widgets.available_list:list")\
+        self.browser.getControl(name="form.widgets.available_lists:list")\
             .value = ["625"]
-        #self.browser.getControl(name="form.widgets.available_list:list")\
+        #self.browser.getControl(name="form.widgets.available_lists:list")\
         #    .controls[0].click()
         self.browser.getControl("Save").click()
 

@@ -27,7 +27,7 @@ class IMailChimpPortlet(IPortletDataProvider):
         title=_(u'Title'),
         description=_(u'Title of the portlet'))
 
-    available_list = schema.List(
+    available_lists = schema.List(
         title=_(u'Available lists'),
         description=_(u'Select available lists to subscribe to.'),
         required=True,
@@ -41,9 +41,9 @@ class IMailChimpPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IMailChimpPortlet)
 
-    def __init__(self, name=u'', available_list=[]):
+    def __init__(self, name=u'', available_lists=[]):
         self.name = name
-        self.available_list = available_list
+        self.available_lists = available_lists
 
     @property
     def title(self):
@@ -73,7 +73,7 @@ class Renderer(base.Renderer):
 
 class AddForm(AddForm):
     fields = field.Fields(IMailChimpPortlet)
-    fields['available_list'].widgetFactory = CheckBoxFieldWidget
+    fields['available_lists'].widgetFactory = CheckBoxFieldWidget
     label = _(u"Add MailChimp Portlet")
     description = _(
         u"This portlet displays a subscription form for a " +
@@ -82,12 +82,12 @@ class AddForm(AddForm):
     def create(self, data):
         return Assignment(
             name=data.get('name'),
-            available_list=data.get('available_list'))
+            available_lists=data.get('available_lists'))
 
 
 class EditForm(EditForm):
     fields = field.Fields(IMailChimpPortlet)
-    fields['available_list'].widgetFactory = CheckBoxFieldWidget
+    fields['available_lists'].widgetFactory = CheckBoxFieldWidget
     label = _(u"Edit MailChimp Portlet")
     description = _(
         u"This portlet displays a subscription form for a " +
