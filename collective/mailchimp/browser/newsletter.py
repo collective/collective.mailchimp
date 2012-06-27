@@ -9,7 +9,6 @@ from Products.statusmessages.interfaces import IStatusMessage
 
 from zope.component import getUtility
 
-from zope import interface, schema
 from z3c.form import form, field, button
 from z3c.form.interfaces import WidgetActionExecutionError
 
@@ -17,28 +16,7 @@ from plone.z3cform.layout import wrap_form
 from plone.registry.interfaces import IRegistry
 
 from collective.mailchimp import _
-
-
-class NotAnEmailAddress(schema.ValidationError):
-    __doc__ = _(u"Invalid email address")
-
-
-check_email = re.compile(r"[a-zA-Z0-9._%-]+@([a-zA-Z0-9-]+.)*[a-zA-Z]{2,4}").match
-
-
-def validate_email(value):
-    if not check_email(value):
-        raise NotAnEmailAddress(value)
-    return True
-
-
-class INewsletterSubscribe(interface.Interface):
-    email = schema.TextLine(
-        title=_(u"Email address"),
-        description=_(u"help_email",
-                      default=u"Please enter your email address."),
-        required=True,
-        constraint=validate_email)
+from collective.mailchimp.interfaces import INewsletterSubscribe
 
 
 class NewsletterSubscriberForm(form.Form):
@@ -47,7 +25,7 @@ class NewsletterSubscriberForm(form.Form):
     label = _(u"Subscribe to newsletter")
 
     def updateActions(self):
-        super(NewsletterSubscriberForm, self).updateActions();
+        super(NewsletterSubscriberForm, self).updateActions()
         self.actions['subscribe'].addClass('context')
 
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",

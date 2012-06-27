@@ -1,3 +1,4 @@
+import re
 import greatape
 
 from zope import schema
@@ -25,6 +26,29 @@ class ICollectiveMailchimp(Interface):
     The browser layer is installed via the browserlayer.xml GenericSetup
     import step.
     """
+
+
+class NotAnEmailAddress(schema.ValidationError):
+    __doc__ = _(u"Invalid email address")
+
+
+check_email = re.compile(r"[a-zA-Z0-9._%-]+@([a-zA-Z0-9-]+.)*[a-zA-Z]{2,4}")\
+    .match
+
+
+def validate_email(value):
+    if not check_email(value):
+        raise NotAnEmailAddress(value)
+    return True
+
+
+class INewsletterSubscribe(Interface):
+    email = schema.TextLine(
+        title=_(u"Email address"),
+        description=_(u"help_email",
+                      default=u"Please enter your email address."),
+        required=True,
+        constraint=validate_email)
 
 
 class IMailchimpSettings(Interface):

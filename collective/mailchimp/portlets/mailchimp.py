@@ -1,3 +1,9 @@
+from Acquisition import aq_inner
+from zope.interface import alsoProvides
+from z3c.form.interfaces import IFormLayer
+from plone.app.discussion.browser.comments import CommentsViewlet
+from plone.z3cform.interfaces import IWrappedForm
+from plone.z3cform import z2
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -19,6 +25,9 @@ from plone.app.portlets.portlets import base
 
 from z3cformhelpers import AddForm
 from z3cformhelpers import EditForm
+
+from collective.mailchimp.interfaces import INewsletterSubscribe
+from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
 
 
 class IMailChimpPortlet(IPortletDataProvider):
@@ -51,8 +60,9 @@ class Assignment(base.Assignment):
 
 
 class Renderer(base.Renderer):
-
+    fields = field.Fields(INewsletterSubscribe)
     _template = ViewPageTemplateFile('mailchimp.pt')
+    form = NewsletterSubscriberForm
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
@@ -69,6 +79,13 @@ class Renderer(base.Renderer):
     def _data(self):
         catalog = getToolByName(self.context, 'portal_catalog')
         return catalog(portal_type='MailChimp Item')
+
+    def update(self):
+        super(Renderer, self).update()
+        z2.switch_on(self, request_layer=IFormLayer)
+        self.form = self.form(aq_inner(self.context), self.request)
+        alsoProvides(self.form, IWrappedForm)
+        self.form.update()
 
 
 class AddForm(AddForm):
