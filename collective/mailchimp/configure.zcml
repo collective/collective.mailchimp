@@ -7,9 +7,9 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="MailChimp Plone integration"
+      title="MailChimp"
       directory="profiles/default"
-      description="Installs the collective.mailchimp package"
+      description="MailChimp integration for Plone."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
