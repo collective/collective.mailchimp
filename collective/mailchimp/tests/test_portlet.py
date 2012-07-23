@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-from postmonkey import PostMonkey
-from collective.mailchimp.interfaces import IMailchimpSettings
-from plone.registry.interfaces import IRegistry
 import unittest2 as unittest
 from plone.testing.z2 import Browser
 from plone.app.testing import TEST_USER_ID
@@ -19,7 +16,7 @@ from plone.portlets.interfaces import IPortletRenderer
 
 from plone.app.portlets.storage import PortletAssignmentMapping
 
-from collective.mailchimp.portlets import mailchimp as mailchimp
+from collective.mailchimp.browser import portlet as mailchimp
 from collective.mailchimp.testing import \
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
 

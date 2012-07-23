@@ -60,7 +60,7 @@ class Assignment(base.Assignment):
 
 class Renderer(base.Renderer):
     fields = field.Fields(INewsletterSubscribe)
-    _template = ViewPageTemplateFile('mailchimp.pt')
+    _template = ViewPageTemplateFile('portlet.pt')
     form = NewsletterSubscriberForm
 
     def __init__(self, *args):
