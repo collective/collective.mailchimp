@@ -1,7 +1,6 @@
 from Acquisition import aq_inner
 from zope.interface import alsoProvides
 from z3c.form.interfaces import IFormLayer
-from plone.app.discussion.browser.comments import CommentsViewlet
 from plone.z3cform.interfaces import IWrappedForm
 from plone.z3cform import z2
 from Products.CMFCore.utils import getToolByName

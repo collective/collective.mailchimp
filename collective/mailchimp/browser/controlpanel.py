@@ -3,7 +3,9 @@ from z3c.form.interfaces import WidgetActionExecutionError
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-import greatape
+
+from postmonkey import PostMonkey
+from postmonkey import MailChimpException
 
 from plone.app.registry.browser import controlpanel
 
@@ -31,13 +33,12 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     def mailchimp_account(self):
         registry = getUtility(IRegistry)
         mailchimp_settings = registry.forInterface(IMailchimpSettings)
-        mailchimp = greatape.MailChimp(
-            mailchimp_settings.api_key,
-            mailchimp_settings.ssl,
-            mailchimp_settings.debug)
+        if len(mailchimp_settings.api_key) == 0:
+            return
+        mailchimp = PostMonkey(mailchimp_settings.api_key)
         try:
-            return mailchimp(method='getAccountDetails')
-        except greatape.MailChimpError, error:
+            return mailchimp.getAccountDetails()
+        except MailChimpException, error:
             raise WidgetActionExecutionError(
                 Invalid(u"Could not fetch account details from MailChimp. " +
                     "Please check your MailChimp API key: %s" % error))
@@ -45,13 +46,10 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     def available_lists(self):
         registry = getUtility(IRegistry)
         mailchimp_settings = registry.forInterface(IMailchimpSettings)
-        mailchimp = greatape.MailChimp(
-            mailchimp_settings.api_key,
-            mailchimp_settings.ssl,
-            mailchimp_settings.debug)
+        mailchimp = PostMonkey(mailchimp_settings.api_key)
         try:
-            return mailchimp(method='lists')
-        except greatape.MailChimpError, error:
+            return mailchimp.lists()
+        except MailChimpException, error:
             raise WidgetActionExecutionError(
                 Invalid(u"Could not fetch available lists from MailChimp. " +
                     "Please check your MailChimp API key: %s" % error))

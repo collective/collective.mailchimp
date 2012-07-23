@@ -28,7 +28,7 @@ setup(name='collective.mailchimp',
           'Products.CMFPlone',
           'plone.app.portlets',
           'plone.app.registry',
-          'greatape',
+          'postmonkey',
       ],
       extras_require={
         'test': [

@@ -116,7 +116,8 @@
       </table>
 
       <h2>Available MailChimp Lists</h2>
-      <table class="listing">
+      <table class="listing"
+             tal:define="lists python:view.available_lists()['data']">
         <thead>
           <tr>
             <th>ID</th>
@@ -137,24 +138,24 @@
             <th>Cleaned count since send</th>
           </tr>
         </thead>
-        <tbody tal:repeat="list view/available_lists">
+        <tbody tal:repeat="list lists">
           <tr>
             <td tal:content="list/id"></td>
             <td tal:content="list/web_id"></td>
             <td tal:content="list/name"></td>
-            <td tal:content="list/member_count"></td>
+            <td tal:content="list/stats/member_count"></td>
             <td tal:content="list/email_type_option"></td>
-            <td tal:content="list/member_count_since_send"></td>
+            <td tal:content="list/stats/member_count_since_send"></td>
             <td tal:content="list/default_language"></td>
             <td tal:content="list/default_from_name"></td>
-            <td tal:content="list/unsubscribe_count_since_send"></td>
+            <td tal:content="list/stats/unsubscribe_count_since_send"></td>
             <td tal:content="list/default_subject"></td>
             <td tal:content="list/default_from_email"></td>
-            <td tal:content="list/unsubscribe_count"></td>
-            <td tal:content="list/cleaned_count"></td>
+            <td tal:content="list/stats/unsubscribe_count"></td>
+            <td tal:content="list/stats/cleaned_count"></td>
             <td tal:content="list/date_created"></td>
             <td tal:content="list/list_rating"></td>
-            <td tal:content="list/cleaned_count_since_send"></td>
+            <td tal:content="list/stats/cleaned_count_since_send"></td>
           </tr>
         </tbody>
       </table>

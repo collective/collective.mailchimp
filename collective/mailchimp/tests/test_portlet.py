@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from postmonkey import PostMonkey
+from collective.mailchimp.interfaces import IMailchimpSettings
+from plone.registry.interfaces import IRegistry
 import unittest2 as unittest
 from plone.testing.z2 import Browser
 from plone.app.testing import TEST_USER_ID
@@ -114,56 +117,39 @@ class TestPortletIntegration(unittest.TestCase):
         self.request = self.layer['request']
         self.portal_url = self.portal.absolute_url()
 
-        from mocker import Mocker
-        from mocker import ANY
-        mocker = Mocker()
-        greatape = mocker.replace("greatape")
-        mailchimp = greatape.MailChimp(ANY, ANY, ANY)
-        mocker.count(None, None)
-        mailchimp(method="lists")
-        mocker.result([
-            {
-                u'id': 625,
-                u'web_id': 625,
-                u'name': u'ACME Newsletter',
-                u'default_from_name': u'info@acme.com',
-            },
-            {
-                u'id': 626,
-                u'web_id': 626,
-                u'name': u'ACME Newsletter 2',
-                u'default_from_name': u'info@acme.com',
-            },
-            ])
-        mocker.replay()
-
         self.browser = Browser(app)
         self.browser.handleErrors = False
         self.browser.addHeader('Authorization',
             'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
         )
 
-    def test_greatape_mocker(self):
-        from greatape import MailChimp
-        mailchimp = MailChimp("", True, False)
-        self.assertEqual(mailchimp(method="lists"), [
-            {
-                u'id': 625,
-                u'web_id': 625,
-                u'name': u'ACME Newsletter',
-                u'default_from_name': u'info@acme.com',
-            },
-            {
-                u'id': 626,
-                u'web_id': 626,
-                u'name': u'ACME Newsletter 2',
-                u'default_from_name': u'info@acme.com',
-            },
-            ])
+    def test_postmonkey_mocker(self):
+        from postmonkey import PostMonkey
+        mailchimp = PostMonkey(u"abc")
+        self.assertEqual(mailchimp.lists(), {
+            u'total': 2,
+            u'data': [
+                {
+                    u'id': 625,
+                    u'web_id': 625,
+                    u'name': u'ACME Newsletter',
+                    u'default_from_name': u'info@acme.com',
+                },
+                {
+                    u'id': 626,
+                    u'web_id': 626,
+                    u'name': u'ACME Newsletter 2',
+                    u'default_from_name': u'info@acme.com',
+                }
+            ]
+        })
 
     def test_add_portlet_form(self):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
+
+        open('/tmp/testbrowser.html', 'w').write(self.browser.contents)
+#        import pdb; pdb.set_trace()
 
         self.assertTrue("Add MailChimp Portlet" in self.browser.contents)
         self.assertTrue("Title" in self.browser.contents)
@@ -175,8 +161,9 @@ class TestPortletIntegration(unittest.TestCase):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
         self.browser.getControl("Title").value = "ACME Newsletter Portlet"
-        self.browser.getControl(name="form.widgets.available_lists:list")\
-            .value = ["625"]
+
+        self.browser.getControl(
+            name="form.widgets.available_lists:list", index=0).value = ["625"]
         #self.browser.getControl(name="form.widgets.available_lists:list")\
         #    .controls[0].click()
         self.browser.getControl("Save").click()

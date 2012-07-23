@@ -1,5 +1,6 @@
 import re
-import greatape
+
+from postmonkey import PostMonkey
 
 from zope import schema
 from zope.component import getUtility
@@ -63,6 +64,7 @@ class IMailchimpSettings(Interface):
                       "'8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into " +
                       "mailchimp.com, go to account -> extras -> API Keys & " +
                       "Authorized Apps and copy the API Key to this field."),
+        default=u"",
         required=True)
 
     debug = schema.Bool(
@@ -125,12 +127,11 @@ class IMailchimpSettings(Interface):
     def valid_api_key(obj):
         registry = getUtility(IRegistry)
         mailchimp_settings = registry.forInterface(IMailchimpSettings)
-        mailchimp = greatape.MailChimp(
-            obj.api_key,
-            mailchimp_settings.ssl,
-            mailchimp_settings.debug)
+        if len(mailchimp_settings.api_key) == 0:
+            return
+        mailchimp = PostMonkey(mailchimp_settings.api_key)
         try:
-            return mailchimp(method='ping')
+            return mailchimp.ping()
         except:
             raise Invalid(u"Your MailChimp API key is not valid. Please go " +
                 "to mailchimp.com and check your API key.")

@@ -1,5 +1,6 @@
-import greatape
-from greatape import MailChimpError
+from postmonkey import PostMonkey
+from postmonkey import MailChimpException
+
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from zope.schema.vocabulary import SimpleVocabulary
@@ -11,13 +12,12 @@ from collective.mailchimp.interfaces import IMailchimpSettings
 def available_lists(context):
     registry = getUtility(IRegistry)
     mailchimp_settings = registry.forInterface(IMailchimpSettings)
-    mailchimp = greatape.MailChimp(
-        mailchimp_settings.api_key or "",
-        mailchimp_settings.ssl,
-        mailchimp_settings.debug)
+    if len(mailchimp_settings.api_key) == 0:
+        return SimpleVocabulary([])
+    mailchimp = PostMonkey(mailchimp_settings.api_key)
     try:
-        lists = mailchimp(method='lists')
-    except MailChimpError:
+        lists = mailchimp.lists()['data']
+    except MailChimpException:
         pass
     except:
         return SimpleVocabulary([])

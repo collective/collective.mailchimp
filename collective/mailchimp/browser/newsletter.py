@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-import re
 from zope.component.hooks import getSite
 from zope.interface import Invalid
-import greatape
 from collective.mailchimp.interfaces import IMailchimpSettings
+
+from postmonkey import PostMonkey
+from postmonkey import MailChimpException
 
 from Products.statusmessages.interfaces import IStatusMessage
 
@@ -37,31 +38,28 @@ class NewsletterSubscriberForm(form.Form):
             # Fetch MailChimp settings
             registry = getUtility(IRegistry)
             mailchimp_settings = registry.forInterface(IMailchimpSettings)
-            mailchimp = greatape.MailChimp(
-                mailchimp_settings.api_key,
-                mailchimp_settings.ssl,
-                mailchimp_settings.debug)
+            if len(mailchimp_settings.api_key) == 0:
+                return
+            mailchimp = PostMonkey(mailchimp_settings.api_key)
             # Fetch MailChimp lists
             # XXX, Todo: For now we just fetch the first list.
             try:
-                lists = mailchimp(method='lists')
+                lists = mailchimp.lists()['data']
                 list_id = lists[0]['id']
-            except greatape.MailChimpError, error:
+            except MailChimpException, error:
                 raise WidgetActionExecutionError(
                     Invalid(_(u"Could not fetch list from mailchimp.com: %s" %
                         error)))
             # Subscribe to MailChimp list
-            merge_vars = dict(dummy='dummy')
             try:
-                mailchimp(
-                    method='listSubscribe',
+                mailchimp.listSubscribe(
                     id=list_id,
-                    email_address=data['email'],
-                    merge_vars=merge_vars,
-                    )
-            except greatape.MailChimpError, error:
-                raise WidgetActionExecutionError('email',
-                    Invalid(_(u"Could not subscribe to newsletter: %s" % error)))
+                    email_address=data['email'])
+            except MailChimpException, error:
+                raise WidgetActionExecutionError(
+                    'email',
+                    Invalid(_(
+                        u"Could not subscribe to newsletter: %s" % error)))
 
             IStatusMessage(self.context.REQUEST).addStatusMessage(
                 _(u"We have to confirm your email address. In order to " +
