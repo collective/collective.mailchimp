@@ -66,7 +66,9 @@ class Renderer(base.Renderer):
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
 
-    @ram.cache(render_cachekey)
+# XXX: This breaks the test_edit_portlet test because the entire portlet is
+# cached in the test and changes will not show up.
+#    @ram.cache(render_cachekey)
     def render(self):
         return xhtml_compress(self._template())
 
@@ -97,8 +99,8 @@ class AddForm(AddForm):
 
     def create(self, data):
         return Assignment(
-            name=data.get('name'),
-            available_lists=data.get('available_lists'))
+            name=data.get('name', u''),
+            available_lists=data.get('available_lists', []))
 
 
 class EditForm(EditForm):

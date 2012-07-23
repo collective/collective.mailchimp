@@ -21,6 +21,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
         postmonkey = mocker.replace("postmonkey")
         mailchimp = postmonkey.PostMonkey(ANY)
         mocker.count(0, 1000)
+        # Lists
         mailchimp.lists()
         mocker.count(0, 1000)
         mocker.result({
@@ -38,7 +39,10 @@ class CollectiveMailchimp(PloneSandboxLayer):
                     u'default_from_name': u'info@acme.com',
                 },
             ]})
-
+        # Get account details
+        mailchimp.getAccountDetails()
+        mocker.count(0, 1000)
+        mocker.result([])
         result = {
             u'total': 1,
             u'data': [{
@@ -52,7 +56,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
                 u'default_from_name': u'Timo Stollenwerk',
                 u'visibility': u'pub',
                 u'subscribe_url_long':
-                    u'http://johndoe.us4.list-manage1.com/subscribe?u=5efc&id=fdd8',
+                    u'http://johndoe.us4.list-manage1.com/subscribe?u=5e&id=fd',
                 u'default_subject': u'Test Newsletter',
                 u'subscribe_url_short': u'http://eepurl.com/h6Rjg',
                 u'default_from_email': u'no-reply@timostollenwerk.net',
@@ -76,8 +80,8 @@ class CollectiveMailchimp(PloneSandboxLayer):
                     u'unsubscribe_count_since_send': 0,
                     u'campaign_count': 1
                     }
-                    }
-                ]}
+                }
+            ]}
 
         mocker.replay()
 
@@ -87,16 +91,12 @@ class CollectiveMailchimp(PloneSandboxLayer):
                        collective.mailchimp,
                        context=configurationContext)
 
-
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.mailchimp:default')
 
         registry = getUtility(IRegistry)
         mailchimp_settings = registry.forInterface(IMailchimpSettings)
         mailchimp_settings.api_key = u"abc"
-
-        import transaction
-        transaction.commit()
 
 COLLECTIVE_MAILCHIMP_FIXTURE = CollectiveMailchimp()
 COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING = IntegrationTesting(

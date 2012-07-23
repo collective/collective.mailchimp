@@ -148,9 +148,6 @@ class TestPortletIntegration(unittest.TestCase):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
 
-        open('/tmp/testbrowser.html', 'w').write(self.browser.contents)
-#        import pdb; pdb.set_trace()
-
         self.assertTrue("Add MailChimp Portlet" in self.browser.contents)
         self.assertTrue("Title" in self.browser.contents)
         self.assertTrue("Available lists" in self.browser.contents)
@@ -161,21 +158,40 @@ class TestPortletIntegration(unittest.TestCase):
         self.browser.open(self.portal_url +
             "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
         self.browser.getControl("Title").value = "ACME Newsletter Portlet"
-
         self.browser.getControl(
             name="form.widgets.available_lists:list", index=0).value = ["625"]
-        #self.browser.getControl(name="form.widgets.available_lists:list")\
-        #    .controls[0].click()
         self.browser.getControl("Save").click()
 
-        #self.assertEqual(self.browser.url,
-        #    self.portal_url + '/@@manage-portlets')
-        #self.assertTrue("ACME Newsletter Portlet" in self.browser.contents)
+        self.assertEqual(self.browser.url,
+            self.portal_url + '/@@manage-portlets')
+        self.assertTrue("Hide" in self.browser.contents)
+        self.assertTrue("MailChimp" in self.browser.contents)
+
+        self.browser.open(self.portal_url)
+        self.assertTrue("ACME Newsletter Portlet" in self.browser.contents)
+        self.assertTrue("Email address" in self.browser.contents)
 
     def test_edit_portlet(self):
-        pass
-        #self.browser.open(self.portal_url +
-        #    "/++contextportlets++plone.leftcolumn/mailchimp/edit")
+        # Create portlet
+        self.browser.open(self.portal_url +
+            "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
+        self.browser.getControl("Title").value = "ACME Newsletter Portlet"
+        self.browser.getControl(
+            name="form.widgets.available_lists:list", index=0).value = ["625"]
+        self.browser.getControl("Save").click()
+        # Edit portlet
+        self.browser.open(self.portal_url +
+            "/++contextportlets++plone.leftcolumn/mailchimp/edit")
+        self.browser.getControl("Title").value = "Lorem Ipsum"
+        self.browser.getControl(
+            name="form.widgets.available_lists:list", index=0).value = ["626"]
+        self.browser.getControl("Save").click()
+
+        self.browser.open(self.portal_url +
+            "/++contextportlets++plone.leftcolumn/mailchimp/edit")
+        self.assertTrue("Lorem Ipsum" in self.browser.contents)
+        self.browser.open(self.portal_url)
+        self.assertTrue("Lorem Ipsum" in self.browser.contents)
 
     def test_view_portlet(self):
         pass

@@ -34,7 +34,7 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
         registry = getUtility(IRegistry)
         mailchimp_settings = registry.forInterface(IMailchimpSettings)
         if len(mailchimp_settings.api_key) == 0:
-            return
+            return []
         mailchimp = PostMonkey(mailchimp_settings.api_key)
         try:
             return mailchimp.getAccountDetails()
