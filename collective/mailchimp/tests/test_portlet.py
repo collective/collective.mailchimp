@@ -193,9 +193,6 @@ class TestPortletIntegration(unittest.TestCase):
         self.browser.open(self.portal_url)
         self.assertTrue("Lorem Ipsum" in self.browser.contents)
 
-    def test_view_portlet(self):
-        pass
-
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
