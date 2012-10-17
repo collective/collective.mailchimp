@@ -1,11 +1,10 @@
 from setuptools import setup, find_packages
-import os
 
 version = '1.0'
 description = 'MailChimp integration for Plone.'
 long_description = \
     open("README.rst").read() + "\n" + \
-    open(os.path.join("docs", "HISTORY.txt")).read()
+    open("CHANGES.txt").read()
 
 setup(name='collective.mailchimp',
       version=version,
