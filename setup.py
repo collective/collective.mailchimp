@@ -2,22 +2,25 @@ from setuptools import setup, find_packages
 import os
 
 version = '1.0'
+description = 'MailChimp integration for Plone.'
+long_description = \
+    open("README.rst").read() + "\n" + \
+    open(os.path.join("docs", "HISTORY.txt")).read()
 
 setup(name='collective.mailchimp',
       version=version,
-      description="",
-      long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      description=description,
+      long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        "Framework :: Plone",
-        "Programming Language :: Python",
-        ],
+          "Framework :: Plone",
+          "Programming Language :: Python",
+      ],
       keywords='',
       author='Timo Stollenwerk',
       author_email='contact@timostollenwerk.net',
-      url='http://github.com/tisto/collective.mailchimp',
+      url='http://github.com/collective/collective.mailchimp',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective'],
@@ -31,11 +34,11 @@ setup(name='collective.mailchimp',
           'postmonkey',
       ],
       extras_require={
-        'test': [
-          'plone.app.testing',
-          'mocker',
-          'plone.mocktestcase',
-        ],
+          'test': [
+              'plone.app.testing',
+              'mocker',
+              'plone.mocktestcase',
+          ],
       },
       entry_points="""
       # -*- Entry points: -*-
