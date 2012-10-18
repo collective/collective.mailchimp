@@ -16,7 +16,7 @@ versions of Plone (> 4.0).
 .. _MailChimp: http://mailchimp.com
 .. _raptus.mailchimp: http://plone.org/products/raptus.mailchimp
 
-The difference between collective.mailchimp and raptus.mailchimpis:
+The difference between collective.mailchimp and raptus.mailchimp is:
 
 - postmonkey_ instead of greatape_ as Python wrapper
 - z3c.form_ instead of formlib for forms
@@ -36,3 +36,11 @@ Installation
 ============
 
 Just add collective.mailchimp to the eggs section of your buildout.
+
+
+Issue Tracker
+=============
+
+Please report bugs to the `issue tracker on github`_.
+
+.. _`issue tracker on github`: https://github.com/collective/collective.mailchimp/issues
