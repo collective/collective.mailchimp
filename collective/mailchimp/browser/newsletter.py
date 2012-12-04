@@ -41,6 +41,7 @@ class NewsletterSubscriberForm(form.Form):
             if len(mailchimp_settings.api_key) == 0:
                 return
             mailchimp = PostMonkey(mailchimp_settings.api_key)
+
             # Fetch MailChimp lists
             # XXX, Todo: For now we just fetch the first list.
             try:
@@ -48,24 +49,38 @@ class NewsletterSubscriberForm(form.Form):
                 list_id = lists[0]['id']
             except MailChimpException, error:
                 raise WidgetActionExecutionError(
-                    Invalid(_(u"Could not fetch list from mailchimp.com: %s" %
-                        error)))
+                    Invalid(_(
+                        u"Could not fetch list from mailchimp.com: %s" %
+                        error
+                    ))
+                )
             # Subscribe to MailChimp list
             try:
                 mailchimp.listSubscribe(
                     id=list_id,
                     email_address=data['email'])
             except MailChimpException, error:
+                if error.code == 230:
+                    # Email_AlreadySubscribed
+                    error_msg = _(
+                        u"The email '%s'is already subscribed to the "
+                        u"newsletter." % data['email']
+                    )
+                else:
+                    error_msg = _(
+                        u"Could not subscribe to newsletter: %s" % error
+                    )
                 raise WidgetActionExecutionError(
                     'email',
-                    Invalid(_(
-                        u"Could not subscribe to newsletter: %s" % error)))
+                    Invalid(error_msg)
+                )
 
-            IStatusMessage(self.context.REQUEST).addStatusMessage(
-                _(u"We have to confirm your email address. In order to " +
-                   "finish the newsletter subscription, click on the link " +
-                   "inside the email we just send you."),
-                type="info")
+            IStatusMessage(self.context.REQUEST).addStatusMessage(_(
+                u"We have to confirm your email address. In order to " +
+                u"finish the newsletter subscription, click on the link " +
+                u"inside the email we just send you."),
+                type="info"
+            )
             portal = getSite()
             self.request.response.redirect(portal.absolute_url())
 

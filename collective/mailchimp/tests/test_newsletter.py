@@ -19,8 +19,9 @@ class TestNewsletterView(unittest.TestCase):
         self.portal_url = self.portal.absolute_url()
         self.browser = Browser(app)
         self.browser.handleErrors = False
-        self.browser.addHeader('Authorization',
-            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
+        self.browser.addHeader(
+            'Authorization',
+            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
         )
 
     def test_empty_form(self):
@@ -35,13 +36,23 @@ class TestNewsletterView(unittest.TestCase):
         self.browser.getControl(name="form.buttons.subscribe").click()
         self.assertTrue("Invalid email address" in self.browser.contents)
 
-    def test_form_with_valid_email_address(self):
-        # XXX: Not working. We need a mock mailchimp service
-        #self.browser.open("%s/newsletter" % self.portal_url)
-        #self.browser.getControl(name="form.widgets.email").value = \
-        #    "john@doe.com"
-        #self.browser.getControl(name="form.buttons.subscribe").click()
-        pass
+#    def test_form_with_valid_email_address(self):
+#        self.browser.open("%s/newsletter" % self.portal_url)
+#        self.browser.getControl(name="form.widgets.email").value = \
+#            "john@doe.com"
+#        self.browser.getControl(name="form.buttons.subscribe").click()
+
+#    def test_form_with_already_subscribed_email_address(self):
+#        # Subscribe once
+#        self.browser.open("%s/newsletter" % self.portal_url)
+#        self.browser.getControl(name="form.widgets.email").value = \
+#            "john@doe.com"
+#        self.browser.getControl(name="form.buttons.subscribe").click()
+#        # Subscribe twice
+#        self.browser.open("%s/newsletter" % self.portal_url)
+#        self.browser.getControl(name="form.widgets.email").value = \
+#            "john@doe.com"
+#        self.browser.getControl(name="form.buttons.subscribe").click()
 
 
 def test_suite():
