@@ -14,126 +14,178 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.mailchimp\n"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:67
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:95
+msgid "Add MailChimp Portlet"
+msgstr "MailChimp Portlet hinzufügen"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:92
 msgid "Available fields"
 msgstr "Verfügbare Felder"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:60
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:39
+msgid "Available lists"
+msgstr "Verfügbare Listen"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:85
 msgid "Cache Sec"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:69
-msgid "Could not fetch list from mailchimp.com: %s"
-msgstr ""
+#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:21
+msgid "Configure portlet"
+msgstr "Portlet konfigurieren"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:82
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:52
+msgid "Could not fetch list from mailchimp.com: %s"
+msgstr "Liste konnte nicht von mailchimp.com geladen werden: %s"
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:70
 msgid "Could not subscribe to newsletter: %s"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:46
+#: collective.mailchimp/collective/mailchimp/interfaces.py:71
 msgid "Debug MailChimp"
 msgstr "Debug Modus einschalten"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:16
+#: collective.mailchimp/collective/mailchimp/interfaces.py:18
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:37
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:109
+msgid "Edit MailChimp Portlet"
+msgstr "MailChimp Portlet bearbeiten"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:48
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:23
+#: collective.mailchimp/collective/mailchimp/interfaces.py:33
 msgid "Invalid email address"
 msgstr "Keine gültige E-Mail Adresse"
 
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:58
 #: collective.mailchimp/collective/mailchimp/profiles/default/controlpanel.xml
 msgid "MailChimp"
 msgstr "MailChimp"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:36
+#: collective.mailchimp/collective/mailchimp/interfaces.py:61
 msgid "MailChimp API Key"
 msgstr "MailChimp API Key"
 
-#: collective.mailchimp/collective/mailchimp/browser/controlpanel.py:17
+#: collective.mailchimp/collective/mailchimp/browser/controlpanel.py:19
 msgid "MailChimp settings"
 msgstr "MailChimp Einstellungen"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:53
+#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:65
+msgid "Modify portlet"
+msgstr "Portlet bearbeiten"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:78
 msgid "SSL"
 msgstr "SSL"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:47
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:40
+msgid "Select available lists to subscribe to."
+msgstr ""
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:26
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:77
 msgid "Subscribe to newsletter"
 msgstr "Newsletter bestellen"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:15
+#: collective.mailchimp/collective/mailchimp/interfaces.py:17
 msgid "Subscriber list"
 msgstr "Empfängerliste"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:85
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:65
+msgid "The email '%s'is already subscribed to the newsletter.email"
+msgstr "Die E-Mail '%s' ist bereits im Newsletter eingetragen."
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:96
+msgid "This portlet displays a subscription form for a MailChimp newsletter."
+msgstr ""
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:35
+msgid "Title"
+msgstr "Titel"
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:36
+msgid "Title of the portlet"
+msgstr "Titel Portlet"
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:78
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr "Wir müssen Ihre E-Mail-Adresse bestätigen. Um die Anmeldung abzuschließen, klicken Sie bitte auf den Link in der E-Mail, die wir soeben an Sie geschickt haben."
 
 #. Default: "Enter in your MailChimp key here (.e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into mailchimp.com, go to account -> extras -> API Keys & Authorized Apps and copy the API Key to this field."
-#: collective.mailchimp/collective/mailchimp/interfaces.py:37
+#: collective.mailchimp/collective/mailchimp/interfaces.py:62
 msgid "help_api_key"
 msgstr "Bitte geben sie ihren MailChimp API-Key (e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4') hier ein."
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:68
+#: collective.mailchimp/collective/mailchimp/interfaces.py:93
 msgid "help_available_fields"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:61
+#: collective.mailchimp/collective/mailchimp/interfaces.py:86
 msgid "help_cache_sec"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:47
+#: collective.mailchimp/collective/mailchimp/interfaces.py:72
 msgid "help_debug"
 msgstr ""
 
 #. Default: "Please enter your email address."
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:38
+#: collective.mailchimp/collective/mailchimp/interfaces.py:49
 msgid "help_email"
 msgstr "Bitte geben Sie Ihre E-Mail Adresse ein."
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:82
+#: collective.mailchimp/collective/mailchimp/interfaces.py:107
 msgid "help_lists_double_optin"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:75
+#: collective.mailchimp/collective/mailchimp/interfaces.py:100
 msgid "help_lists_email_type"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:96
+#: collective.mailchimp/collective/mailchimp/interfaces.py:121
 msgid "help_lists_replace_interests"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:89
+#: collective.mailchimp/collective/mailchimp/interfaces.py:114
 msgid "help_lists_update_existing"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:54
+#: collective.mailchimp/collective/mailchimp/interfaces.py:79
 msgid "help_ssl"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:81
+#. Default: "Cancel"
+#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:50
+msgid "label_cancel"
+msgstr ""
+
+#. Default: "Save"
+#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:39
+msgid "label_save"
+msgstr ""
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:106
 msgid "lists_double_optin"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:74
+#: collective.mailchimp/collective/mailchimp/interfaces.py:99
 msgid "lists_email_type"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:95
+#: collective.mailchimp/collective/mailchimp/interfaces.py:120
 msgid "lists_replace_interests"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:88
+#: collective.mailchimp/collective/mailchimp/interfaces.py:113
 msgid "lists_update_existing"
 msgstr ""
 
 #. Default: "Subscribe"
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:49
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:32
 msgid "subscribe_to_newsletter_button"
 msgstr "Bestellen"
 
