@@ -40,7 +40,7 @@ msgstr "Liste konnte nicht von mailchimp.com geladen werden: %s"
 
 #: collective.mailchimp/collective/mailchimp/browser/newsletter.py:70
 msgid "Could not subscribe to newsletter: %s"
-msgstr ""
+msgstr "Sie konnten leider nicht für den Newsletter angemeldet werden. Bitte wenden sie sich an den Administrator der Webseite."
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:71
 msgid "Debug MailChimp"
