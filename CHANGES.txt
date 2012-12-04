@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.0.2 (unreleased)
+------------------
+
+- Raise a more specific error when an email has been already subscribed to a
+  newsletter.
+  [timo]
+
+- German translations updated.
+  [timo]
+
+
 1.0.1 (2012-10-28)
 ------------------
 
