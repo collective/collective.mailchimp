@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.0.1'
+version = '1.0.2dev'
 description = 'MailChimp integration for Plone.'
 long_description = \
     open("README.txt").read() + "\n" + \
