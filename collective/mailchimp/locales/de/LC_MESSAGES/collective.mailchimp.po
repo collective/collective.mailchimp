@@ -38,10 +38,6 @@ msgstr "Portlet konfigurieren"
 msgid "Could not fetch list from mailchimp.com: %s"
 msgstr "Liste konnte nicht von mailchimp.com geladen werden: %s"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:70
-msgid "Could not subscribe to newsletter: %s"
-msgstr "Sie konnten leider nicht für den Newsletter angemeldet werden. Bitte wenden sie sich an den Administrator der Webseite."
-
 #: collective.mailchimp/collective/mailchimp/interfaces.py:71
 msgid "Debug MailChimp"
 msgstr "Debug Modus einschalten"
@@ -96,10 +92,6 @@ msgstr "Newsletter bestellen"
 msgid "Subscriber list"
 msgstr "Empfängerliste"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:65
-msgid "The email '%s'is already subscribed to the newsletter.email"
-msgstr "Die E-Mail '%s' ist bereits im Newsletter eingetragen."
-
 #: collective.mailchimp/collective/mailchimp/browser/portlet.py:96
 msgid "This portlet displays a subscription form for a MailChimp newsletter."
 msgstr ""
@@ -112,7 +104,7 @@ msgstr "Titel"
 msgid "Title of the portlet"
 msgstr "Titel Portlet"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:78
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:99
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr "Wir müssen Ihre E-Mail-Adresse bestätigen. Um die Anmeldung abzuschließen, klicken Sie bitte auf den Link in der E-Mail, die wir soeben an Sie geschickt haben."
 
@@ -183,6 +175,16 @@ msgstr ""
 #: collective.mailchimp/collective/mailchimp/interfaces.py:113
 msgid "lists_update_existing"
 msgstr ""
+
+#. Default: "Could not subscribe to newsletter. The email '${email}' is already subscribed."
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:65
+msgid "mailchimp_error_msg_already_subscribed"
+msgstr "Der Newsletter konnte nicht abonniert werden. Die E-Mail Adresse '${email}' ist bereits im Newsletter eingetragen."
+
+#. Default: "Could not subscribe to newsletter. The email '${email}' has been banned."
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:74
+msgid "mailchimp_error_msg_banned"
+msgstr "Der Newsletter konnte nicht abonniert werden. Die E-Mail Adresse '${email}' wurde verbannt."
 
 #. Default: "Subscribe"
 #: collective.mailchimp/collective/mailchimp/browser/newsletter.py:32

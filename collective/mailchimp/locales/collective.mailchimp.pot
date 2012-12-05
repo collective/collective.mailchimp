@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-12-04 15:55+0000\n"
+"POT-Creation-Date: 2012-12-05 09:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,10 +43,6 @@ msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/browser/newsletter.py:52
 msgid "Could not fetch list from mailchimp.com: %s"
-msgstr ""
-
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:70
-msgid "Could not subscribe to newsletter: %s"
 msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:71
@@ -103,10 +99,6 @@ msgstr ""
 msgid "Subscriber list"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:65
-msgid "The email '%s'is already subscribed to the newsletter.email"
-msgstr ""
-
 #: collective.mailchimp/collective/mailchimp/browser/portlet.py:96
 msgid "This portlet displays a subscription form for a MailChimp newsletter."
 msgstr ""
@@ -119,7 +111,7 @@ msgstr ""
 msgid "Title of the portlet"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:78
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:99
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr ""
 
@@ -189,6 +181,16 @@ msgstr ""
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:113
 msgid "lists_update_existing"
+msgstr ""
+
+#. Default: "Could not subscribe to newsletter. The email '${email}' is already subscribed."
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:65
+msgid "mailchimp_error_msg_already_subscribed"
+msgstr ""
+
+#. Default: "Could not subscribe to newsletter. The email '${email}' has been banned."
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:74
+msgid "mailchimp_error_msg_banned"
 msgstr ""
 
 #. Default: "Subscribe"

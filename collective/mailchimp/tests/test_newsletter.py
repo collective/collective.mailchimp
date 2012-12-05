@@ -54,6 +54,12 @@ class TestNewsletterView(unittest.TestCase):
 #            "john@doe.com"
 #        self.browser.getControl(name="form.buttons.subscribe").click()
 
+#    def test_form_with_banned_email_address(self):
+#        self.browser.open("%s/newsletter" % self.portal_url)
+#        self.browser.getControl(name="form.widgets.email").value = \
+#            "john@doe.com"
+#        self.browser.getControl(name="form.buttons.subscribe").click()
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
