@@ -58,21 +58,42 @@ class NewsletterSubscriberForm(form.Form):
             try:
                 mailchimp.listSubscribe(
                     id=list_id,
-                    email_address=data['email'])
+                    email_address=data['email']
+                )
             except MailChimpException, error:
-                if error.code == 230:
-                    # Email_AlreadySubscribed
+                if error.code == 214:
                     error_msg = _(
-                        u"The email '%s'is already subscribed to the "
-                        u"newsletter." % data['email']
+                        u"mailchimp_error_msg_already_subscribed",
+                        default=u"Could not subscribe to newsletter. "
+                                u"The email '${email}' is already subscribed.",
+                        mapping={
+                            u"email": data['email']
+                        }
+                    )
+                elif error.code == 220:
+                    error_msg = _(
+                        u"mailchimp_error_msg_banned",
+                        default=u"Could not subscribe to newsletter. "
+                                u"The email '${email}' has been banned.",
+                        mapping={
+                            u"email": data['email']
+                        }
                     )
                 else:
                     error_msg = _(
-                        u"Could not subscribe to newsletter: %s" % error
+                        u"mailchimp_error_msg_banned",
+                        default=u"Could not subscribe to newsletter. "
+                                u"Please contact the site administrator: "
+                                u"'${error}'",
+                        mapping={
+                            u"error": error
+                        }
                     )
+                # strings need to be manually translated if they contain vars
+                translated_error_msg = self.context.translate(error_msg)
                 raise WidgetActionExecutionError(
                     'email',
-                    Invalid(error_msg)
+                    Invalid(translated_error_msg)
                 )
 
             IStatusMessage(self.context.REQUEST).addStatusMessage(_(
