@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.2 (unreleased)
+1.0.2 (2012-12-05)
 ------------------
 
 - Raise a more specific error when an email has been already subscribed to a
