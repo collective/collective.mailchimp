@@ -39,6 +39,6 @@
     permission="zope2.View"
     />
 
-  <include file="extender.zcml" />
+  <!-- <include file="extender.zcml" /> -->
 
 </configure>
