@@ -1,0 +1,16 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="jungzeelandia.contenttypes">
+
+  <adapter
+    factory=".extender.ExtraBehavior"
+    provides=".extender.IExtraBehavior"
+    />
+
+  <adapter
+    factory=".extender.ExtraBehaviorExtender"
+    provides="plone.z3cform.fieldsets.interfaces.IFormExtender"
+    />
+
+</configure>

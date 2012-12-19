@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from plone.z3cform.fieldsets import extensible
+from zope.interface import implements
+from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.component.hooks import getSite
 from zope.interface import Invalid
 from collective.mailchimp.interfaces import IMailchimpSettings
@@ -20,7 +23,12 @@ from collective.mailchimp import _
 from collective.mailchimp.interfaces import INewsletterSubscribe
 
 
-class NewsletterSubscriberForm(form.Form):
+class NewsletterSubcriber(object):
+    implements(INewsletterSubscribe, IAttributeAnnotatable)
+    title = u""
+
+
+class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
     fields = field.Fields(INewsletterSubscribe)
     ignoreContext = True
     label = _(u"Subscribe to newsletter")
