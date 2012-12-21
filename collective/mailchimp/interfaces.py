@@ -16,7 +16,7 @@ from collective.mailchimp import _
 available_fields = SimpleVocabulary([
     SimpleTerm(value=u'subscriber_list', title=_(u'Subscriber list')),
     SimpleTerm(value=u'email', title=_(u'E-Mail'))
-    ])
+])
 
 
 class ICollectiveMailchimp(Interface):
@@ -59,69 +59,77 @@ class IMailchimpSettings(Interface):
 
     api_key = schema.TextLine(
         title=_(u"MailChimp API Key"),
-        description=_(u"help_api_key",
-                      default=u"Enter in your MailChimp key here (.e.g. " +
-                      "'8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into " +
-                      "mailchimp.com, go to account -> extras -> API Keys & " +
-                      "Authorized Apps and copy the API Key to this field."),
+        description=_(
+            u"help_api_key",
+            default=u"Enter in your MailChimp key here (.e.g. " +
+                    u"'8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into " +
+                    u"mailchimp.com, go to account -> extras -> API Keys & " +
+                    u"Authorized Apps and copy the API Key to this field."
+        ),
         default=u"",
-        required=True)
+        required=True
+    )
 
-    debug = schema.Bool(
-        title=_(u"Debug MailChimp"),
-        description=_(u"help_debug",
-                      default=u""),
+    email_type = schema.TextLine(
+        title=_(u"email_type"),
+        description=_(
+            u"help_email_type",
+            default=u"Email type preference for the email (html, text, or "
+                    u"mobile defaults to html)"
+        ),
         required=True,
-        default=False)
+        default=u'html',
+    )
 
-    ssl = schema.Bool(
-        title=_(u"SSL"),
-        description=_(u"help_ssl",
-                      default=u""),
+    double_optin = schema.Bool(
+        title=_(u"double_optin"),
+        description=_(
+            u"help_double_optin",
+            default=u"Flag to control whether a double opt-in confirmation "
+                    u"message is sent, defaults to true. Abusing this may "
+                    u"cause your account to be suspended."
+        ),
         required=True,
-        default=True)
+        default=True
+    )
 
-    cache_sec = schema.Int(
-        title=_(u"Cache Sec"),
-        description=_(u"help_cache_sec",
-                      default=u""),
+    update_existing = schema.Bool(
+        title=_(u"update_existing"),
+        description=_(
+            u"help_update_existing",
+            default=u"Flag to control whether existing subscribers should be "
+                    u"updated instead of throwing an error, defaults to false"
+        ),
         required=True,
-        default=500)
+        default=False
+    )
 
-    available_fields = schema.Choice(
-        title=_(u"Available fields"),
-        description=_(u"help_available_fields",
-                      default=u""),
-        vocabulary=available_fields,
-        required=False)
-
-    lists_email_type = schema.TextLine(
-        title=_(u"lists_email_type"),
-        description=_(u"help_lists_email_type",
-                      default=u""),
+    replace_interests = schema.Bool(
+        title=_(u"replace_interests"),
+        description=_(
+            u"help_replace_interests",
+            default=u"Flag to determine whether we replace the interest "
+                    u"groups with the groups provided or we add the provided"
+                    u"groups to the member's interest groups (optional, "
+                    u"defaults to true)"
+        ),
         required=True,
-        default=u'html',)
+        default=True
+    )
 
-    lists_double_optin = schema.Bool(
-        title=_(u"lists_double_optin"),
-        description=_(u"help_lists_double_optin",
-                      default=u""),
+    send_welcome = schema.Bool(
+        title=_(u"send_welcome"),
+        description=_(
+            u"help_send_welcome",
+            default=u"If your double_optin is false and this is true, we "
+                    u"will send your lists Welcome Email if this subscribe "
+                    u"succeeds - this will *not* fire if we end up updating "
+                    u"an existing subscriber. If double_optin is true, this "
+                    u"has no effect. defaults to false."
+        ),
         required=True,
-        default=True)
-
-    lists_update_existing = schema.Bool(
-        title=_(u"lists_update_existing"),
-        description=_(u"help_lists_update_existing",
-                      default=u""),
-        required=True,
-        default=False)
-
-    lists_replace_interests = schema.Bool(
-        title=_(u"lists_replace_interests"),
-        description=_(u"help_lists_replace_interests",
-                      default=u""),
-        required=True,
-        default=True)
+        default=False
+    )
 
     @invariant
     def valid_api_key(obj):
@@ -133,5 +141,6 @@ class IMailchimpSettings(Interface):
         try:
             return mailchimp.ping()
         except:
-            raise Invalid(u"Your MailChimp API key is not valid. Please go " +
-                "to mailchimp.com and check your API key.")
+            raise Invalid(
+                u"Your MailChimp API key is not valid. Please go " +
+                u"to mailchimp.com and check your API key.")

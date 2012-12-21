@@ -62,11 +62,21 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                         error
                     ))
                 )
+            if 'emailtype' in data:
+                email_type = data['emailtype']
+            else:
+                email_type = mailchimp_settings.email_type
             # Subscribe to MailChimp list
             try:
                 mailchimp.listSubscribe(
                     id=list_id,
-                    email_address=data['email']
+                    email_address=data['email'],
+                    merge_vars=data,
+                    email_type=email_type,
+                    double_optin=mailchimp_settings.double_optin,
+                    update_existing=mailchimp_settings.update_existing,
+                    replace_interests=mailchimp_settings.replace_interests,
+                    send_welcome=mailchimp_settings.send_welcome
                 )
             except MailChimpException, error:
                 if error.code == 214:

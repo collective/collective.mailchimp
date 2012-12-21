@@ -7,6 +7,11 @@ Changelog
 - Make NewsletterForm extendable.
   [timo]
 
+- Use MailChimp list settings from the control panel. Note: You have to
+  reinstall collective.mailchimp, otherwise you will end up with a
+  "KeyError: 'Interface .. defines a field .., for which there is no record.'"
+  [timo]
+
 
 1.0.3 (2012-12-05)
 ------------------
