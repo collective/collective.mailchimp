@@ -40,7 +40,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
     def updateFields(self):
         super(NewsletterSubscriberForm, self).updateFields()
-        self.fields['interest_groups'].widgetFactory = \
+        self.fields['groupings'].widgetFactory = \
             CheckBoxFieldWidget
         self.fields['email_type'].widgetFactory = \
             RadioFieldWidget
