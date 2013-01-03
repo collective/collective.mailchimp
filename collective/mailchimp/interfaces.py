@@ -51,6 +51,13 @@ class INewsletterSubscribe(Interface):
         required=True,
         constraint=validate_email)
 
+    interests = schema.Tuple(
+        value_type=schema.Choice(
+            vocabulary="collective.mailchimp.vocabularies.InterestGroups",
+        ),
+        required=False,
+    )
+
 
 class IMailchimpSettings(Interface):
     """Global mailchimp settings. This describes records stored in the

@@ -21,4 +21,8 @@
            name="collective.mailchimp.vocabularies.AvailableListsVocabulary"
            provides="zope.schema.interfaces.IVocabularyFactory" />
 
+  <utility component=".vocabularies.interest_groups"
+           name="collective.mailchimp.vocabularies.InterestGroups"
+           provides="zope.schema.interfaces.IVocabularyFactory" />
+
 </configure>
