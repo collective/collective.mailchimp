@@ -45,3 +45,29 @@ def interest_groups(context):
             title=group['name']
         ) for group in groups
     ])
+
+
+def email_type(context):
+    terms = []
+    terms.append(
+        SimpleTerm(
+            value='text',
+            token='text',
+            title='Plain text',
+        )
+    )
+    terms.append(
+        SimpleTerm(
+            value='html',
+            token='html',
+            title='HTML',
+        )
+    )
+    terms.append(
+        SimpleTerm(
+            value='mobile',
+            token='mobile',
+            title='Mobile',
+        )
+    )
+    return SimpleVocabulary(terms)

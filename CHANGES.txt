@@ -12,8 +12,11 @@ Changelog
   "KeyError: 'Interface .. defines a field .., for which there is no record.'"
   [timo]
 
-- Support for MailChimp interest group added. For now this feature only works
+- Support for MailChimp interest groups added. For now this feature only works
   with one single list.
+  [timo]
+
+- Email type option added.
   [timo]
 
 

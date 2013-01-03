@@ -44,6 +44,7 @@ def validate_email(value):
 
 
 class INewsletterSubscribe(Interface):
+
     email = schema.TextLine(
         title=_(u"Email address"),
         description=_(u"help_email",
@@ -51,11 +52,18 @@ class INewsletterSubscribe(Interface):
         required=True,
         constraint=validate_email)
 
-    interests = schema.Tuple(
+    interest_groups = schema.Tuple(
+        title=_(u"Interest groups"),
         value_type=schema.Choice(
             vocabulary="collective.mailchimp.vocabularies.InterestGroups",
         ),
         required=False,
+    )
+
+    email_type = schema.Choice(
+        title=_(u"Mail format"),
+        vocabulary="collective.mailchimp.vocabularies.EmailType",
+        default="text",
     )
 
 

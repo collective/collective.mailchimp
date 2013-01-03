@@ -37,6 +37,14 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         super(NewsletterSubscriberForm, self).updateActions()
         self.actions['subscribe'].addClass('context')
 
+    def updateFields(self):
+        super(NewsletterSubscriberForm, self).updateFields()
+        from z3c.form.browser.checkbox import CheckBoxFieldWidget
+        self.fields['interest_groups'].widgetFactory = \
+            CheckBoxFieldWidget
+        self.fields['email_type'].widgetFactory = \
+            CheckBoxFieldWidget
+
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
                              default=u"Subscribe"),
                              name='subscribe')
@@ -62,8 +70,10 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                         error
                     ))
                 )
-            if 'emailtype' in data:
-                email_type = data['emailtype']
+            # Use email_type if one is provided by the form, if not choose the
+            # default email type from the control panel settings.
+            if 'email_type' in data:
+                email_type = data['email_type']
             else:
                 email_type = mailchimp_settings.email_type
             # Subscribe to MailChimp list

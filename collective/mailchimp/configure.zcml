@@ -25,4 +25,8 @@
            name="collective.mailchimp.vocabularies.InterestGroups"
            provides="zope.schema.interfaces.IVocabularyFactory" />
 
+  <utility component=".vocabularies.email_type"
+           name="collective.mailchimp.vocabularies.EmailType"
+           provides="zope.schema.interfaces.IVocabularyFactory" />
+
 </configure>
