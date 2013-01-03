@@ -19,6 +19,9 @@ Changelog
 - Email type option added.
   [timo]
 
+- Rename AvailableListsVocabulary to AvailableLists.
+  [timo]
+
 
 1.0.3 (2012-12-05)
 ------------------

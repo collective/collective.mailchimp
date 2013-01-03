@@ -41,7 +41,7 @@ class IMailChimpPortlet(IPortletDataProvider):
         required=True,
         min_length=1,
         value_type=schema.Choice(
-            source='collective.mailchimp.vocabularies.AvailableListsVocabulary'
+            source='collective.mailchimp.vocabularies.AvailableLists'
             )
         )
 
