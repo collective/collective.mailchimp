@@ -17,6 +17,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         from mocker import Mocker
         from mocker import ANY
+        from mocker import KWARGS
         mocker = Mocker()
         postmonkey = mocker.replace("postmonkey")
         mailchimp = postmonkey.PostMonkey(ANY)
@@ -39,6 +40,34 @@ class CollectiveMailchimp(PloneSandboxLayer):
                     u'default_from_name': u'info@acme.com',
                 },
             ]})
+        # List Interest Groupings
+        mailchimp.listInterestGroupings(KWARGS)
+        mocker.count(0, 1000)
+        mocker.result([
+            {
+                u'groups': [
+                    {
+                        u'bit': u'1',
+                        u'display_order': u'1',
+                        u'name': u'Interest Group 1',
+                        u'subscribers': 0
+                    },
+                    {
+                        u'bit': u'2',
+                        u'display_order': u'2',
+                        u'name': u'Interest Group 2',
+                        u'subscribers': 0
+                    },
+                    {
+                        u'bit': u'3',
+                        u'display_order': u'3',
+                        u'name': u'Interest Group 3',
+                        u'subscribers': 1
+                    }
+                ]
+            }
+        ])
+
         # Get account details
         mailchimp.getAccountDetails()
         mocker.count(0, 1000)
