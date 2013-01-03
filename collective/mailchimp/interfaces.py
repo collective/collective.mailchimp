@@ -64,6 +64,7 @@ class INewsletterSubscribe(Interface):
         title=_(u"Mail format"),
         vocabulary="collective.mailchimp.vocabularies.EmailType",
         default="text",
+        required=False,
     )
 
 

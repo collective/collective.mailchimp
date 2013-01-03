@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
-from plone.z3cform.fieldsets import extensible
-from zope.interface import implements
-from zope.annotation.interfaces import IAttributeAnnotatable
-from zope.component.hooks import getSite
-from zope.interface import Invalid
-from collective.mailchimp.interfaces import IMailchimpSettings
+from Products.statusmessages.interfaces import IStatusMessage
 
 from postmonkey import PostMonkey
 from postmonkey import MailChimpException
 
-from Products.statusmessages.interfaces import IStatusMessage
-
+from zope.interface import Invalid
+from zope.interface import implements
+from zope.annotation.interfaces import IAttributeAnnotatable
+from zope.component.hooks import getSite
 from zope.component import getUtility
 
 from z3c.form import form, field, button
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from z3c.form.browser.radio import RadioFieldWidget
 from z3c.form.interfaces import WidgetActionExecutionError
 
-from plone.z3cform.layout import wrap_form
 from plone.registry.interfaces import IRegistry
+from plone.z3cform.layout import wrap_form
+from plone.z3cform.fieldsets import extensible
 
 from collective.mailchimp import _
+from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import INewsletterSubscribe
 
 
@@ -39,11 +40,10 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
     def updateFields(self):
         super(NewsletterSubscriberForm, self).updateFields()
-        from z3c.form.browser.checkbox import CheckBoxFieldWidget
         self.fields['interest_groups'].widgetFactory = \
             CheckBoxFieldWidget
         self.fields['email_type'].widgetFactory = \
-            CheckBoxFieldWidget
+            RadioFieldWidget
 
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
                              default=u"Subscribe"),
