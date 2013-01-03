@@ -36,8 +36,6 @@ def interest_groups(context):
         list_id = mailchimp.lists()['data'][0]['id']
         groups = mailchimp.listInterestGroupings(id=list_id)[0]['groups']
     except MailChimpException:
-        pass
-    except:
         return SimpleVocabulary([])
     return SimpleVocabulary([
         SimpleTerm(
