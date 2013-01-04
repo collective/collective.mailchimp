@@ -52,7 +52,7 @@ class INewsletterSubscribe(Interface):
         required=True,
         constraint=validate_email)
 
-    groupings = schema.Tuple(
+    interest_groups = schema.Tuple(
         title=_(u"Interest groups"),
         value_type=schema.Choice(
             vocabulary="collective.mailchimp.vocabularies.InterestGroups",

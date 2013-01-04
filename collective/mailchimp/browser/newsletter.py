@@ -40,7 +40,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
     def updateFields(self):
         super(NewsletterSubscriberForm, self).updateFields()
-        self.fields['groupings'].widgetFactory = \
+        self.fields['interest_groups'].widgetFactory = \
             CheckBoxFieldWidget
         self.fields['email_type'].widgetFactory = \
             RadioFieldWidget
@@ -76,6 +76,21 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                 email_type = data['email_type']
             else:
                 email_type = mailchimp_settings.email_type
+            # Groupings
+            if 'interest_groups' in data:
+                interest_groupings = mailchimp.listInterestGroupings(
+                    id=list_id
+                )
+                if interest_groupings:
+                    # XXX: For now we take only the first interest group. More
+                    # than one group is not supported yet.
+                    interest_grouping = interest_groupings[0]
+                    data['groupings'] = [
+                        {
+                            'id': interest_grouping['id'],
+                            'groups': ",".join(data['interest_groups']),
+                        }
+                    ]
             # Subscribe to MailChimp list
             try:
                 mailchimp.listSubscribe(
