@@ -124,7 +124,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                     )
                 else:
                     error_msg = _(
-                        u"mailchimp_error_msg_banned",
+                        u"mailchimp_error_msg",
                         default=u"Could not subscribe to newsletter. "
                                 u"Please contact the site administrator: "
                                 u"'${error}'",
