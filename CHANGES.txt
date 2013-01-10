@@ -22,6 +22,9 @@ Changelog
 - Rename AvailableListsVocabulary to AvailableLists.
   [timo]
 
+- Add fieldsets to MailChimp control panel.
+  [timo]
+
 
 1.0.3 (2012-12-05)
 ------------------

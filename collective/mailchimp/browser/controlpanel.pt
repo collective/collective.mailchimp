@@ -24,142 +24,150 @@
 
     <h1 class="documentFirstHeading" tal:content="view/label">View Title</h1>
 
-    <div id="layout-contents">
+    <div id="layout-contents"
+         class="enableUnloadProtection enableAutoFocus enableFormTabbing enableUnlockProtection"
+         tal:define="account view/mailchimp_account|nothing;
+                     empty string:-">
+      <fieldset id="fieldset-send">
+        <legend id="fieldsetlegend-send">Standard</legend>
         <span tal:replace="structure view/contents" />
+      </fieldset>
+      <fieldset id="fieldset-lists" tal:condition="account">
+        <legend id="fieldsetlegend-lists">MailChimp Account</legend>
+        Account
+        <table class="listing">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               <td i18n:translate="">Username:</td>
+               <td tal:content="account/username|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">E-mails left: </td>
+              <td tal:content="account/emails_left|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Member since: </td>
+              <td tal:content="account/member_since|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Last login: </td>
+              <td tal:content="account/last_login|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Plan type: </td>
+              <td tal:content="account/plan_type|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Company: </td>
+              <td tal:content="account/contact/company|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">First name: </td>
+              <td tal:content="account/contact/fname|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Last name: </td>
+              <td tal:content="account/contact/lname|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Email: </td>
+              <td tal:content="account/contact/email|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Address 1: </td>
+              <td tal:content="account/contact/address1|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Address 2: </td>
+              <td tal:content="account/contact/address2|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Zip: </td>
+              <td tal:content="account/contact/zip|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">State: </td>
+              <td tal:content="account/contact/state|empty"/>
+            </tr>
+            <tr>
+               <td i18n:translate="">City: </td>
+              <td tal:content="account/contact/city|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Country: </td>
+              <td tal:content="account/contact/country|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">URL: </td>
+              <td tal:content="account/contact/url|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Phone: </td>
+              <td tal:content="account/contact/phone|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Fax: </td>
+              <td tal:content="account/contact/fax|empty"/>
+            </tr>
+          </tbody>
+        </table>
+
+      </fieldset>
+      <fieldset id="fieldset-lists" tal:condition="account">
+        <legend id="fieldsetlegend-preview">MailChimp Lists</legend>
+        <table class="listing"
+               tal:define="lists python:view.available_lists()['data']">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Web ID</th>
+              <th>Name</th>
+              <th>Member count</th>
+              <th>Email type option</th>
+              <th>Member count since send</th>
+              <th>Default language</th>
+              <th>Default from name</th>
+              <th>Unsubscribed count since send</th>
+              <th>Default subject</th>
+              <th>Default from email</th>
+              <th>Unsubscribed count</th>
+              <th>Cleaned cound</th>
+              <th>Date created</th>
+              <th>List rating</th>
+              <th>Cleaned count since send</th>
+            </tr>
+          </thead>
+          <tbody tal:repeat="list lists">
+            <tr>
+              <td tal:content="list/id"></td>
+              <td tal:content="list/web_id"></td>
+              <td tal:content="list/name"></td>
+              <td tal:content="list/stats/member_count"></td>
+              <td tal:content="list/email_type_option"></td>
+              <td tal:content="list/stats/member_count_since_send"></td>
+              <td tal:content="list/default_language"></td>
+              <td tal:content="list/default_from_name"></td>
+              <td tal:content="list/stats/unsubscribe_count_since_send"></td>
+              <td tal:content="list/default_subject"></td>
+              <td tal:content="list/default_from_email"></td>
+              <td tal:content="list/stats/unsubscribe_count"></td>
+              <td tal:content="list/stats/cleaned_count"></td>
+              <td tal:content="list/date_created"></td>
+              <td tal:content="list/list_rating"></td>
+              <td tal:content="list/stats/cleaned_count_since_send"></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </fieldset>
     </div>
 
-    <tal:block tal:define="account view/mailchimp_account|nothing;
-                   empty string:-"
-      tal:condition="account">
-      <h2>Your MailChimp Account</h2>
-      <table class="listing">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-             <td i18n:translate="">Username:</td>
-             <td tal:content="account/username|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">E-mails left: </td>
-            <td tal:content="account/emails_left|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Member since: </td>
-            <td tal:content="account/member_since|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Last login: </td>
-            <td tal:content="account/last_login|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Plan type: </td>
-            <td tal:content="account/plan_type|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Company: </td>
-            <td tal:content="account/contact/company|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">First name: </td>
-            <td tal:content="account/contact/fname|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Last name: </td>
-            <td tal:content="account/contact/lname|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Email: </td>
-            <td tal:content="account/contact/email|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Address 1: </td>
-            <td tal:content="account/contact/address1|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Address 2: </td>
-            <td tal:content="account/contact/address2|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Zip: </td>
-            <td tal:content="account/contact/zip|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">State: </td>
-            <td tal:content="account/contact/state|empty"/>
-          </tr>
-          <tr>
-             <td i18n:translate="">City: </td>
-            <td tal:content="account/contact/city|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Country: </td>
-            <td tal:content="account/contact/country|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">URL: </td>
-            <td tal:content="account/contact/url|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Phone: </td>
-            <td tal:content="account/contact/phone|empty"/>
-          </tr>
-          <tr>
-            <td i18n:translate="">Fax: </td>
-            <td tal:content="account/contact/fax|empty"/>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>Available MailChimp Lists</h2>
-      <table class="listing"
-             tal:define="lists python:view.available_lists()['data']">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Web ID</th>
-            <th>Name</th>
-            <th>Member count</th>
-            <th>Email type option</th>
-            <th>Member count since send</th>
-            <th>Default language</th>
-            <th>Default from name</th>
-            <th>Unsubscribed count since send</th>
-            <th>Default subject</th>
-            <th>Default from email</th>
-            <th>Unsubscribed count</th>
-            <th>Cleaned cound</th>
-            <th>Date created</th>
-            <th>List rating</th>
-            <th>Cleaned count since send</th>
-          </tr>
-        </thead>
-        <tbody tal:repeat="list lists">
-          <tr>
-            <td tal:content="list/id"></td>
-            <td tal:content="list/web_id"></td>
-            <td tal:content="list/name"></td>
-            <td tal:content="list/stats/member_count"></td>
-            <td tal:content="list/email_type_option"></td>
-            <td tal:content="list/stats/member_count_since_send"></td>
-            <td tal:content="list/default_language"></td>
-            <td tal:content="list/default_from_name"></td>
-            <td tal:content="list/stats/unsubscribe_count_since_send"></td>
-            <td tal:content="list/default_subject"></td>
-            <td tal:content="list/default_from_email"></td>
-            <td tal:content="list/stats/unsubscribe_count"></td>
-            <td tal:content="list/stats/cleaned_count"></td>
-            <td tal:content="list/date_created"></td>
-            <td tal:content="list/list_rating"></td>
-            <td tal:content="list/stats/cleaned_count_since_send"></td>
-          </tr>
-        </tbody>
-      </table>
-    </tal:block>
   </div>
 </body>
 </html>
