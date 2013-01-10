@@ -86,15 +86,15 @@ class IMailchimpSettings(Interface):
         required=True
     )
 
-    email_type = schema.TextLine(
+    email_type = schema.Choice(
         title=_(u"email_type"),
         description=_(
             u"help_email_type",
             default=u"Email type preference for the email (html, text, or "
-                    u"mobile defaults to html)"
-        ),
+                    u"mobile defaults to html)"),
+        vocabulary="collective.mailchimp.vocabularies.EmailType",
+        default="text",
         required=True,
-        default=u'html',
     )
 
     double_optin = schema.Bool(
