@@ -28,13 +28,13 @@ class CollectiveMailchimp(PloneSandboxLayer):
         mocker.result({
             u'total': 2,
             u'data': [{
-                    u'id': 625,
+                    u'id': u'f6257645gs',
                     u'web_id': 625,
                     u'name': u'ACME Newsletter',
                     u'default_from_name': u'info@acme.com',
                 },
                 {
-                    u'id': 626,
+                    u'id': u'f6267645gs',
                     u'web_id': 626,
                     u'name': u'ACME Newsletter 2',
                     u'default_from_name': u'info@acme.com',
@@ -91,7 +91,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
                 u'default_from_email': u'no-reply@timostollenwerk.net',
                 u'date_created': u'2011-12-27 16:15:03',
                 u'list_rating': 0,
-                u'id': u'fdd8e33870',
+                u'id': u'f6257645gs',
                 u'stats': {
                     u'grouping_count': 0,
                     u'open_rate': None,

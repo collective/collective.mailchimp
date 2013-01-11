@@ -38,6 +38,20 @@ Installation
 Just add collective.mailchimp to the eggs section of your buildout.
 
 
+Multiple MailChimp Lists
+========================
+
+collective.mailchimp supports multiple MailChimp lists. The MailChimp portlet
+allows administators to choose a MailChimp list from a dropdown list for each
+portlet. The MailChimp newsletter view (@@newsletter) allows to provide a
+list_id (see your MailChimp account) as optional URL parameter::
+
+  http://localhost:8080/Plone/@@newsletter?list_id=f3247645gs
+
+If no URL parameter is provided the form just chooses the first MailChimp list
+available (which is fine as long as you have just one list anyway).
+
+
 Extend Newsletter Subscription Form
 ===================================
 

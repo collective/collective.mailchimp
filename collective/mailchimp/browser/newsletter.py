@@ -14,6 +14,7 @@ from z3c.form import form, field, button
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.browser.radio import RadioFieldWidget
 from z3c.form.interfaces import WidgetActionExecutionError
+from z3c.form.interfaces import HIDDEN_MODE
 
 from plone.registry.interfaces import IRegistry
 from plone.z3cform.layout import wrap_form
@@ -45,6 +46,12 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         self.fields['email_type'].widgetFactory = \
             RadioFieldWidget
 
+    def updateWidgets(self):
+        super(NewsletterSubscriberForm, self).updateWidgets()
+        self.widgets['list_id'].mode = HIDDEN_MODE
+        if 'list_id' in self.context.REQUEST:
+            self.widgets['list_id'].value = self.context.REQUEST['list_id']
+
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
                              default=u"Subscribe"),
                              name='subscribe')
@@ -58,18 +65,21 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                 return
             mailchimp = PostMonkey(mailchimp_settings.api_key)
 
-            # Fetch MailChimp lists
-            # XXX, Todo: For now we just fetch the first list.
-            try:
-                lists = mailchimp.lists()['data']
-                list_id = lists[0]['id']
-            except MailChimpException, error:
-                raise WidgetActionExecutionError(
-                    Invalid(_(
-                        u"Could not fetch list from mailchimp.com: %s" %
-                        error
-                    ))
-                )
+            if 'list_id' in data:
+                list_id = data['list_id']
+            else:
+                # Fetch MailChimp lists
+                # XXX, Todo: For now we just fetch the first list.
+                try:
+                    lists = mailchimp.lists()['data']
+                    list_id = lists[0]['id']
+                except MailChimpException, error:
+                    raise WidgetActionExecutionError(
+                        Invalid(_(
+                            u"Could not fetch list from mailchimp.com: %s" %
+                            error
+                        ))
+                    )
             # Use email_type if one is provided by the form, if not choose the
             # default email type from the control panel settings.
             if 'email_type' in data:

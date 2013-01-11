@@ -22,6 +22,12 @@ Changelog
 - Rename AvailableListsVocabulary to AvailableLists.
   [timo]
 
+- Support multiple MailChimp lists for the newsletter view.
+  [timo]
+
+- Add a MailchimpLocator utility to encapsulate all MailChimp API calls.
+  [timo]
+
 
 1.0.3 (2012-12-05)
 ------------------
