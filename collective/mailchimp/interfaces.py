@@ -67,6 +67,16 @@ class INewsletterSubscribe(Interface):
         required=False,
     )
 
+    list_id = schema.TextLine(
+        title=_(u"List ID"),
+        required=False
+    )
+
+
+class IMailchimpLocator(Interface):
+    """
+    """
+
 
 class IMailchimpSettings(Interface):
     """Global mailchimp settings. This describes records stored in the

@@ -17,6 +17,12 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <!-- MailChimp Locator -->
+  <utility
+    provides="collective.mailchimp.interfaces.IMailchimpLocator"
+    factory=".locator.MailchimpLocator" />
+
+  <!-- Vocabularies -->
   <utility component=".vocabularies.available_lists"
            name="collective.mailchimp.vocabularies.AvailableLists"
            provides="zope.schema.interfaces.IVocabularyFactory" />

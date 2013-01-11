@@ -25,6 +25,12 @@ Changelog
 - Add fieldsets to MailChimp control panel.
   [timo]
 
+- Add a MailchimpLocator utility to encapsulate all MailChimp API calls.
+  [timo]
+
+- Allow multiple lists for newsletter view; add mailchimp locator to encapsulate api calls.
+  [timo]
+
 
 1.0.3 (2012-12-05)
 ------------------
