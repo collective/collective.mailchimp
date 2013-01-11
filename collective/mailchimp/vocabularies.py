@@ -30,6 +30,7 @@ def interest_groups(context):
     groups = mailchimp.groups(id=list_id)
     if not groups:
         return SimpleVocabulary([])
+    groups = groups['groups']
     return SimpleVocabulary([
         SimpleTerm(
             value=group['name'],

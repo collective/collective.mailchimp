@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from Products.statusmessages.interfaces import IStatusMessage
 
-from postmonkey import PostMonkey
 from postmonkey import MailChimpException
 
 from zope.interface import Invalid
@@ -16,12 +15,11 @@ from z3c.form.browser.radio import RadioFieldWidget
 from z3c.form.interfaces import WidgetActionExecutionError
 from z3c.form.interfaces import HIDDEN_MODE
 
-from plone.registry.interfaces import IRegistry
 from plone.z3cform.layout import wrap_form
 from plone.z3cform.fieldsets import extensible
 
 from collective.mailchimp import _
-from collective.mailchimp.interfaces import IMailchimpSettings
+from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import INewsletterSubscribe
 
 
@@ -48,6 +46,8 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
     def updateWidgets(self):
         super(NewsletterSubscriberForm, self).updateWidgets()
+        if self.widgets['interest_groups'].items == []:
+            self.widgets['interest_groups'].mode = HIDDEN_MODE
         self.widgets['list_id'].mode = HIDDEN_MODE
         if 'list_id' in self.context.REQUEST:
             self.widgets['list_id'].value = self.context.REQUEST['list_id']
@@ -59,11 +59,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         data, errors = self.extractData()
         if 'email' in data:
             # Fetch MailChimp settings
-            registry = getUtility(IRegistry)
-            mailchimp_settings = registry.forInterface(IMailchimpSettings)
-            if len(mailchimp_settings.api_key) == 0:
-                return
-            mailchimp = PostMonkey(mailchimp_settings.api_key)
+            mailchimp = getUtility(IMailchimpLocator)
 
             if 'list_id' in data:
                 list_id = data['list_id']
@@ -85,33 +81,23 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             if 'email_type' in data:
                 email_type = data['email_type']
             else:
-                email_type = mailchimp_settings.email_type
+                email_type = None
             # Groupings
             if 'interest_groups' in data:
-                interest_groupings = mailchimp.listInterestGroupings(
-                    id=list_id
-                )
-                if interest_groupings:
-                    # XXX: For now we take only the first interest group. More
-                    # than one group is not supported yet.
-                    interest_grouping = interest_groupings[0]
-                    data['groupings'] = [
-                        {
-                            'id': interest_grouping['id'],
-                            'groups': ",".join(data['interest_groups']),
-                        }
-                    ]
+                interest_grouping = mailchimp.groups(id=list_id)
+                data['groupings'] = [
+                    {
+                        'id': interest_grouping['id'],
+                        'groups': ",".join(data['interest_groups']),
+                    }
+                ]
             # Subscribe to MailChimp list
             try:
-                mailchimp.listSubscribe(
-                    id=list_id,
+                mailchimp.subscribe(
+                    list_id=list_id,
                     email_address=data['email'],
                     merge_vars=data,
                     email_type=email_type,
-                    double_optin=mailchimp_settings.double_optin,
-                    update_existing=mailchimp_settings.update_existing,
-                    replace_interests=mailchimp_settings.replace_interests,
-                    send_welcome=mailchimp_settings.send_welcome
                 )
             except MailChimpException, error:
                 if error.code == 214:
@@ -142,6 +128,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                             u"error": error
                         }
                     )
+
                 # strings need to be manually translated if they contain vars
                 translated_error_msg = self.context.translate(error_msg)
                 raise WidgetActionExecutionError(
