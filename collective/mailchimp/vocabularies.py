@@ -27,7 +27,7 @@ def interest_groups(context):
     else:
         # If no id param has been provided just take the first list.
         list_id = mailchimp.lists()[0]['id']
-    groups = mailchimp.groups(id=list_id)
+    groups = mailchimp.groups(list_id=list_id)
     if not groups:
         return SimpleVocabulary([])
     groups = groups['groups']

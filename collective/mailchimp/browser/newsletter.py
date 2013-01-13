@@ -12,6 +12,7 @@ from zope.component import getUtility
 from z3c.form import form, field, button
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.browser.radio import RadioFieldWidget
+from z3c.form.interfaces import ActionExecutionError
 from z3c.form.interfaces import WidgetActionExecutionError
 from z3c.form.interfaces import HIDDEN_MODE
 
@@ -61,13 +62,13 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             # Fetch MailChimp settings
             mailchimp = getUtility(IMailchimpLocator)
 
+            # Retrieve list_id either from a hidden field in the form or fetch
+            # the first list from mailchimp.
             if 'list_id' in data:
                 list_id = data['list_id']
-            else:
-                # Fetch MailChimp lists
-                # XXX, Todo: For now we just fetch the first list.
+            if list_id is None:
                 try:
-                    lists = mailchimp.lists()['data']
+                    lists = mailchimp.lists()
                     list_id = lists[0]['id']
                 except MailChimpException, error:
                     raise WidgetActionExecutionError(
@@ -76,21 +77,24 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                             error
                         ))
                     )
+
+            # Groupings
+            if 'interest_groups' in data:
+                interest_grouping = mailchimp.groups(list_id=list_id)
+                if interest_grouping and data['interest_groups']:
+                    data['groupings'] = [
+                        {
+                            'id': interest_grouping['id'],
+                            'groups': ",".join(data['interest_groups']),
+                        }
+                    ]
+
             # Use email_type if one is provided by the form, if not choose the
             # default email type from the control panel settings.
             if 'email_type' in data:
                 email_type = data['email_type']
             else:
                 email_type = None
-            # Groupings
-            if 'interest_groups' in data:
-                interest_grouping = mailchimp.groups(id=list_id)
-                data['groupings'] = [
-                    {
-                        'id': interest_grouping['id'],
-                        'groups': ",".join(data['interest_groups']),
-                    }
-                ]
             # Subscribe to MailChimp list
             try:
                 mailchimp.subscribe(
@@ -109,6 +113,11 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                             u"email": data['email']
                         }
                     )
+                    translated_error_msg = self.context.translate(error_msg)
+                    raise WidgetActionExecutionError(
+                        'email',
+                        Invalid(translated_error_msg)
+                    )
                 elif error.code == 220:
                     error_msg = _(
                         u"mailchimp_error_msg_banned",
@@ -117,6 +126,11 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                         mapping={
                             u"email": data['email']
                         }
+                    )
+                    translated_error_msg = self.context.translate(error_msg)
+                    raise WidgetActionExecutionError(
+                        'email',
+                        Invalid(translated_error_msg)
                     )
                 else:
                     error_msg = _(
@@ -128,13 +142,10 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                             u"error": error
                         }
                     )
-
-                # strings need to be manually translated if they contain vars
-                translated_error_msg = self.context.translate(error_msg)
-                raise WidgetActionExecutionError(
-                    'email',
-                    Invalid(translated_error_msg)
-                )
+                    translated_error_msg = self.context.translate(error_msg)
+                    raise ActionExecutionError(
+                        Invalid(translated_error_msg)
+                    )
 
             IStatusMessage(self.context.REQUEST).addStatusMessage(_(
                 u"We have to confirm your email address. In order to " +

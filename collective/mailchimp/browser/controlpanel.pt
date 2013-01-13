@@ -122,7 +122,7 @@
       <fieldset id="fieldset-lists" tal:condition="account">
         <legend id="fieldsetlegend-preview">MailChimp Lists</legend>
         <table class="listing"
-               tal:define="lists python:view.available_lists()['data']">
+               tal:define="lists python:view.available_lists()">
           <thead>
             <tr>
               <th>ID</th>

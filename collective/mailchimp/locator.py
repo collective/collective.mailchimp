@@ -30,23 +30,29 @@ class MailchimpLocator(object):
         except MailChimpException:
             raise
 
-    def groups(self, id):
+    def groups(self, list_id=None):
         """Return all available MailChimp interest groups.
 
         @id: the list id to connect to. e.g. u'a1346945ab'. Not the web_id!
 
         http://apidocs.mailchimp.com/api/rtfm/listinterestgroupings.func.php
         """
+        if not list_id:
+            return
         #print("MAILCHIMP LOCATOR: groups")
         self.connect()
         try:
             # mailchimp returns a list of groups for a single mailinglist.
             # We always choose the first and return just the groups part.
-            return self.mailchimp.listInterestGroupings(id=id)[0]
+            return self.mailchimp.listInterestGroupings(id=list_id)[0]
         except MailChimpException, error:
             if error.code == 211:
-                # http://apidocs.mailchimp.com/api/1.3/exceptions.field.php#210-list-_-basic-actions
                 # "This list does not have interest groups enabled"
+                # http://apidocs.mailchimp.com/api/1.3/exceptions.field.php#210-list-_-basic-actions
+                return
+            elif error.code == 200:
+                # "Invalid MailChimp List ID"
+                # http://apidocs.mailchimp.com/api/1.3/exceptions.field.php#200-list-related-errors
                 return
             raise
 
@@ -67,3 +73,7 @@ class MailchimpLocator(object):
             )
         except MailChimpException:
             raise
+
+    def account(self):
+        self.connect()
+        return self.mailchimp.getAccountDetails()
