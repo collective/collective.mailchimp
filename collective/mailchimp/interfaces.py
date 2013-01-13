@@ -107,6 +107,16 @@ class IMailchimpSettings(Interface):
         required=True,
     )
 
+    default_list = schema.Choice(
+        title=_(u"default_list"),
+        description=_(
+            u"help_default_list",
+            default=u"Default list which is used in the @@newsletter view if "
+                    u"no list_id param is provided."),
+        vocabulary="collective.mailchimp.vocabularies.AvailableLists",
+        required=True,
+    )
+
     double_optin = schema.Bool(
         title=_(u"double_optin"),
         description=_(

@@ -31,6 +31,10 @@ Changelog
 - Allow multiple lists for newsletter view; add mailchimp locator to encapsulate api calls.
   [timo]
 
+- Add new default_list setting to allow administrators to choose their default
+  MailChimp list for the @@newsletter view.
+  [timo]
+
 
 1.0.3 (2012-12-05)
 ------------------

@@ -16,11 +16,13 @@ from z3c.form.interfaces import ActionExecutionError
 from z3c.form.interfaces import WidgetActionExecutionError
 from z3c.form.interfaces import HIDDEN_MODE
 
+from plone.registry.interfaces import IRegistry
 from plone.z3cform.layout import wrap_form
 from plone.z3cform.fieldsets import extensible
 
 from collective.mailchimp import _
 from collective.mailchimp.interfaces import IMailchimpLocator
+from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import INewsletterSubscribe
 
 
@@ -47,11 +49,19 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
     def updateWidgets(self):
         super(NewsletterSubscriberForm, self).updateWidgets()
-        if self.widgets['interest_groups'].items == []:
+        # Retrieve the list id either from the request/form or fall back to
+        # the default_list setting.
+        if 'list_id' in self.context.REQUEST:
+            list_id = self.context.REQUEST['list_id']
+        else:
+            registry = getUtility(IRegistry)
+            mailchimp_settings = registry.forInterface(IMailchimpSettings)
+            list_id = mailchimp_settings.default_list
+        mailchimp = getUtility(IMailchimpLocator)
+        if not mailchimp.groups(list_id=list_id):
             self.widgets['interest_groups'].mode = HIDDEN_MODE
         self.widgets['list_id'].mode = HIDDEN_MODE
-        if 'list_id' in self.context.REQUEST:
-            self.widgets['list_id'].value = self.context.REQUEST['list_id']
+        self.widgets['list_id'].value = list_id
 
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
                              default=u"Subscribe"),
@@ -59,24 +69,16 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
     def handleApply(self, action):
         data, errors = self.extractData()
         if 'email' in data:
-            # Fetch MailChimp settings
             mailchimp = getUtility(IMailchimpLocator)
 
             # Retrieve list_id either from a hidden field in the form or fetch
             # the first list from mailchimp.
             if 'list_id' in data:
                 list_id = data['list_id']
-            if list_id is None:
-                try:
-                    lists = mailchimp.lists()
-                    list_id = lists[0]['id']
-                except MailChimpException, error:
-                    raise WidgetActionExecutionError(
-                        Invalid(_(
-                            u"Could not fetch list from mailchimp.com: %s" %
-                            error
-                        ))
-                    )
+            else:
+                registry = getUtility(IRegistry)
+                mailchimp_settings = registry.forInterface(IMailchimpSettings)
+                list_id = mailchimp_settings.default_list
 
             # Groupings
             if 'interest_groups' in data:
