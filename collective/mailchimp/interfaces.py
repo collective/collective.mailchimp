@@ -107,6 +107,17 @@ class IMailchimpSettings(Interface):
         required=True,
     )
 
+    email_type_is_optional = schema.Bool(
+        title=_(u"email_type_is_optional"),
+        description=_(
+            u"help_email_type_is_optional",
+            default=u"Let users choose their email type preference in the "
+                    u"newsletter subscription form."
+        ),
+        required=True,
+        default=False
+    )
+
     default_list = schema.Choice(
         title=_(u"default_list"),
         description=_(

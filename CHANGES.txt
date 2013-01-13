@@ -28,11 +28,16 @@ Changelog
 - Add a MailchimpLocator utility to encapsulate all MailChimp API calls.
   [timo]
 
-- Allow multiple lists for newsletter view; add mailchimp locator to encapsulate api calls.
+- Allow multiple lists for newsletter view; add mailchimp locator to
+  encapsulate api calls.
   [timo]
 
 - Add new default_list setting to allow administrators to choose their default
   MailChimp list for the @@newsletter view.
+  [timo]
+
+- Add email_type_is_optional setting to allow administrators to choose if they
+  want to allow users to choose their own email_type.
   [timo]
 
 

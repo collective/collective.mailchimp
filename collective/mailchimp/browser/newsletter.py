@@ -49,19 +49,23 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
     def updateWidgets(self):
         super(NewsletterSubscriberForm, self).updateWidgets()
+        # Show/hide mail format option widget
+        registry = getUtility(IRegistry)
+        mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        if not mailchimp_settings.email_type_is_optional:
+            self.widgets['email_type'].mode = HIDDEN_MODE
         # Retrieve the list id either from the request/form or fall back to
         # the default_list setting.
         if 'list_id' in self.context.REQUEST:
             list_id = self.context.REQUEST['list_id']
         else:
-            registry = getUtility(IRegistry)
-            mailchimp_settings = registry.forInterface(IMailchimpSettings)
             list_id = mailchimp_settings.default_list
+        self.widgets['list_id'].mode = HIDDEN_MODE
+        self.widgets['list_id'].value = list_id
+        # Show/hide interest_groups widget
         mailchimp = getUtility(IMailchimpLocator)
         if not mailchimp.groups(list_id=list_id):
             self.widgets['interest_groups'].mode = HIDDEN_MODE
-        self.widgets['list_id'].mode = HIDDEN_MODE
-        self.widgets['list_id'].value = list_id
 
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
                              default=u"Subscribe"),
