@@ -104,9 +104,10 @@ msgstr "We moeten uw email adres bevestigen om de nieuwsbrief inschrijving af te
 msgid "double_optin"
 msgstr ""
 
+#. Default: "Let users choose their email type preference in the newsletter subscription form."
 #: collective.mailchimp/collective/mailchimp/interfaces.py:90
 msgid "email_type"
-msgstr ""
+msgstr "Laat gebruikers hun email type voorkeur instellen in het nieuwsbrief inschrijf formulier."
 
 #. Default: "Enter in your MailChimp key here (.e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into mailchimp.com, go to account -> extras -> API Keys & Authorized Apps and copy the API Key to this field."
 #: collective.mailchimp/collective/mailchimp/interfaces.py:78
@@ -126,22 +127,22 @@ msgstr "Voer hier a.u.b. uw email adres in."
 #. Default: "Email type preference for the email (html, text, or mobile defaults to html)"
 #: collective.mailchimp/collective/mailchimp/interfaces.py:91
 msgid "help_email_type"
-msgstr "Email type voorkeuren voor de email (html, text, of mobiel. Standaard is html"
+msgstr "Email type voorkeuren voor de email (html, text, of mobiel. Standaard is html)"
 
 #. Default: "Flag to determine whether we replace the interest groups with the groups provided or we add the providedgroups to the member's interest groups (optional, defaults to true)"
 #: collective.mailchimp/collective/mailchimp/interfaces.py:125
 msgid "help_replace_interests"
-msgstr ""
+msgstr "Zet aan om te bepalen of we de interesse groepen vervangen met de groepen aangeleverd of we de aangeleverde groepen toevoegen aan het lid zijn interesse groepen. (optioneel, standaard true)"
 
 #. Default: "If your double_optin is false and this is true, we will send your lists Welcome Email if this subscribe succeeds - this will *not* fire if we end up updating an existing subscriber. If double_optin is true, this has no effect. defaults to false."
 #: collective.mailchimp/collective/mailchimp/interfaces.py:138
 msgid "help_send_welcome"
-msgstr ""
+msgstr "Als double_optin uitstaat en deze aanstaat, zullen we de welkom email van de lijst versturen als de inschrijving succesvol is. Dit wordt niet gedaan als we een bestaande gebruiker updaten. Als double_optin aanstaat heeft dit geen effect. Standaard false"
 
 #. Default: "Flag to control whether existing subscribers should be updated instead of throwing an error, defaults to false"
 #: collective.mailchimp/collective/mailchimp/interfaces.py:114
 msgid "help_update_existing"
-msgstr ""
+msgstr "Zet aan om bestaande gebruikers te updaten in plaats van een foutmelding te geven. Standaard false"
 
 #. Default: "Cancel"
 #: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:50
