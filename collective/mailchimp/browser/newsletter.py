@@ -58,6 +58,8 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         # the default_list setting.
         if 'list_id' in self.context.REQUEST:
             list_id = self.context.REQUEST['list_id']
+        elif 'form.widgets.list_id' in self.request.form:
+            list_id = self.request.form['form.widgets.list_id']
         else:
             list_id = mailchimp_settings.default_list
         self.widgets['list_id'].mode = HIDDEN_MODE
@@ -65,6 +67,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         # Show/hide interest_groups widget
         mailchimp = getUtility(IMailchimpLocator)
         if not mailchimp.groups(list_id=list_id):
+            import pdb; pdb.set_trace()
             self.widgets['interest_groups'].mode = HIDDEN_MODE
 
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
