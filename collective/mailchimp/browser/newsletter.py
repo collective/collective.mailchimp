@@ -67,7 +67,6 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         # Show/hide interest_groups widget
         mailchimp = getUtility(IMailchimpLocator)
         if not mailchimp.groups(list_id=list_id):
-            import pdb; pdb.set_trace()
             self.widgets['interest_groups'].mode = HIDDEN_MODE
 
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
