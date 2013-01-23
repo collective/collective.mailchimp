@@ -40,6 +40,9 @@ Changelog
   want to allow users to choose their own email_type.
   [timo]
 
+- Make README and CHANGES .rst files.
+  [timo]
+
 
 1.0.3 (2012-12-05)
 ------------------
