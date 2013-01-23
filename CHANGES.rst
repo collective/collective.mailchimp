@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.0 (unrelease)
------------------
+1.1.0 (2013-01-23)
+------------------
 
 - Make NewsletterForm extendable.
   [timo]
