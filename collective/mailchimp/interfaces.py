@@ -3,13 +3,10 @@ import re
 from postmonkey import PostMonkey
 
 from zope import schema
-from zope.component import getUtility
 from zope.interface import Interface
 from zope.interface import invariant
 from zope.interface import Invalid
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-
-from plone.registry.interfaces import IRegistry
 
 from collective.mailchimp import _
 
@@ -125,7 +122,7 @@ class IMailchimpSettings(Interface):
             default=u"Default list which is used in the @@newsletter view if "
                     u"no list_id param is provided."),
         vocabulary="collective.mailchimp.vocabularies.AvailableLists",
-        required=True,
+        required=False,
     )
 
     double_optin = schema.Bool(
@@ -179,12 +176,10 @@ class IMailchimpSettings(Interface):
     )
 
     @invariant
-    def valid_api_key(obj):
-        registry = getUtility(IRegistry)
-        mailchimp_settings = registry.forInterface(IMailchimpSettings)
-        if len(mailchimp_settings.api_key) == 0:
+    def valid_api_key(data):
+        if len(data.api_key) == 0:
             return
-        mailchimp = PostMonkey(mailchimp_settings.api_key)
+        mailchimp = PostMonkey(data.api_key)
         try:
             return mailchimp.ping()
         except:

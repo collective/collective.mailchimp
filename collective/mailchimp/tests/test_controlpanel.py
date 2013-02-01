@@ -1,3 +1,6 @@
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
+from plone.testing.z2 import Browser
 import unittest2 as unittest
 
 from zope.component import getMultiAdapter
@@ -53,5 +56,22 @@ class TestMailchimpSettingsControlPanel(unittest.TestCase):
         self.assertEquals(record.value, u"")
 
 
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)
+class ControlpanelFunctionalTest(unittest.TestCase):
+
+    layer = COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+
+    def setUp(self):
+        app = self.layer['app']
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        self.portal_url = self.portal.absolute_url()
+        self.browser = Browser(app)
+        self.browser.handleErrors = False
+        self.browser.addHeader(
+            'Authorization',
+            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+        )
+
+    def test_empty_form(self):
+        self.browser.open("%s/mailchimp-settings" % self.portal_url)
+        self.assertTrue("MailChimp settings" in self.browser.contents)

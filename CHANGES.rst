@@ -1,8 +1,19 @@
 Changelog
 =========
 
+1.1.1 (2013-02-01)
+------------------
+
+- Fix mailchimp control panel which fails if no valid MailChimp API key has
+  been provided.
+  [timo]
+
+
 1.1.0 (2013-01-23)
 ------------------
+
+- Dutch translation added.
+  [sjoerdve]
 
 - Make NewsletterForm extendable.
   [timo]

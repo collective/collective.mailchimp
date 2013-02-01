@@ -4,6 +4,7 @@ from zope.component import getUtility
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from postmonkey import MailChimpException
+from postmonkey.exceptions import PostRequestError
 
 from plone.app.registry.browser import controlpanel
 
@@ -33,6 +34,8 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
         mailchimp = getUtility(IMailchimpLocator)
         try:
             return mailchimp.account()
+        except PostRequestError:
+            return []
         except MailChimpException, error:
             raise WidgetActionExecutionError(
                 Invalid(

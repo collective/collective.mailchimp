@@ -2,6 +2,7 @@ from postmonkey import PostMonkey
 from collective.mailchimp.interfaces import IMailchimpSettings
 from zope.component import getUtility
 from postmonkey import MailChimpException
+from postmonkey.exceptions import PostRequestError
 from plone.registry.interfaces import IRegistry
 from zope.interface import implements
 from collective.mailchimp.interfaces import IMailchimpLocator
@@ -28,6 +29,10 @@ class MailchimpLocator(object):
             # lists returns a dict with 'total' and 'data'. we just need data
             return self.mailchimp.lists()['data']
         except MailChimpException:
+            return []
+        except PostRequestError:
+            return []
+        except:
             raise
 
     def groups(self, list_id=None):
