@@ -26,7 +26,11 @@ def interest_groups(context):
         list_id = context.REQUEST.form['form.widgets.list_id']
     else:
         # If no id param has been provided just take the first list.
-        list_id = mailchimp.lists()[0]['id']
+        default_list = mailchimp.default_list()
+        if default_list:
+            list_id = default_list['id']
+        else:
+            return SimpleVocabulary([])
     groups = mailchimp.groups(list_id=list_id)
     if not groups:
         return SimpleVocabulary([])

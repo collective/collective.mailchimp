@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1.2 (unreleased)
+------------------
+
+- Make newsletter view not fail if no default_list has been selected.
+  [timo]
+
+
 1.1.1 (2013-02-01)
 ------------------
 
