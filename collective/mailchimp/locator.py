@@ -35,13 +35,13 @@ class MailchimpLocator(object):
         except:
             raise
 
-    def default_list(self):
+    def default_list_id(self):
         self.connect()
         if self.settings.default_list:
             return self.settings.default_list
         lists = self.lists()
         if len(lists) > 0:
-            return lists[0]
+            return lists[0]['id']
 
     def groups(self, list_id=None):
         """Return all available MailChimp interest groups.
