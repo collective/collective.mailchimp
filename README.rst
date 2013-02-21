@@ -18,10 +18,10 @@ versions of Plone (> 4.0).
 
 The difference between collective.mailchimp and raptus.mailchimp is:
 
-- postmonkey_ instead of greatape_ as Python wrapper
-- z3c.form_ instead of formlib for forms
-- plone.app.registry_ instead of portal_properties for storing properties
-- it is tested by automated software tests
+- postmonkey_ instead of greatape_ as Python wrapper (because greatape is completely untested, does not support the latest MailChimp API version and seems to be not actively developed any longer)
+- z3c.form_ instead of formlib for forms (because formlib is deprecated)
+- plone.app.registry_ instead of portal_properties for storing properties (because portal_properties will be deprecated soon)
+- it is tested by automated software tests (because untested code is broken code)
 
 .. _postmonkey: http://pypi.python.org/pypi/postmonkey
 .. _greatape: http://pypi.python.org/pypi/greatape
@@ -29,7 +29,7 @@ The difference between collective.mailchimp and raptus.mailchimp is:
 .. _plone.app.registry: http://pypi.python.org/pypi/plone.app.registry
 
 collective.mailchimp is tested on Plone 4.x and should work on Plone > 3.3
-(with the appropriate version pins).
+(with the appropriate version pins for plone.app.registry and z3c.form).
 
 
 Installation
