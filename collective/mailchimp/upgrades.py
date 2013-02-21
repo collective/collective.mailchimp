@@ -13,7 +13,14 @@ def update_registry(context):
 
 
 def install_mailchimp_stylesheet(context):
-    cssreg = getToolByName(context, 'portal_css', None)
+    csstool = getToolByName(context, 'portal_css', None)
     stylesheet_id = \
         '++resource++collective.mailchimp.stylesheets/mailchimp.css'
-    cssreg.registerResource(stylesheet_id)
+    if stylesheet_id not in csstool.getResourceIds():
+        csstool.manage_addStylesheet(
+            id=stylesheet_id,
+            rel='stylesheet',
+            rendering='link',
+            enabled=True,
+            cookable=True,
+        )
