@@ -31,6 +31,13 @@
     layer="..interfaces.ICollectiveMailchimp"
     />
 
+  <!-- Resource directory for stylesheets -->
+  <browser:resourceDirectory
+    name="collective.mailchimp.stylesheets"
+    directory="stylesheets"
+    layer="..interfaces.ICollectiveMailchimp"
+    />
+
   <!-- Newsletter -->
   <browser:page
     name="newsletter"

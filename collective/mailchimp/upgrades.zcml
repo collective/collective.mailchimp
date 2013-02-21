@@ -11,4 +11,13 @@
       handler=".upgrades.update_registry"
       />
 
+  <genericsetup:upgradeStep
+      source="1100"
+      destination="1200"
+      title="Install collective.mailchimp stylesheet."
+      description=""
+      profile="collective.mailchimp:default"
+      handler=".upgrades.install_mailchimp_stylesheet"
+      />
+
 </configure>

@@ -1,10 +1,16 @@
 Changelog
 =========
 
-1.1.2 (unreleased)
+1.2.0 (unreleased)
 ------------------
 
 - Make newsletter view not fail if no default_list has been selected.
+  [timo]
+
+- German translation updated.
+  [timo]
+
+- Styles for newsletter subscription form added.
   [timo]
 
 

@@ -34,6 +34,7 @@ class NewsletterSubcriber(object):
 class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
     fields = field.Fields(INewsletterSubscribe)
     ignoreContext = True
+    id = "newsletter-subscriber-form"
     label = _(u"Subscribe to newsletter")
 
     def updateActions(self):

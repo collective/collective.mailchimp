@@ -44,13 +44,19 @@ class INewsletterSubscribe(Interface):
 
     email = schema.TextLine(
         title=_(u"Email address"),
-        description=_(u"help_email",
-                      default=u"Please enter your email address."),
+        description=_(
+            u"help_email",
+            default=u"Please enter your email address."
+        ),
         required=True,
         constraint=validate_email)
 
     interest_groups = schema.Tuple(
         title=_(u"Interest groups"),
+        description=_(
+            u"help_interest_groups",
+            default=u""
+        ),
         value_type=schema.Choice(
             vocabulary="collective.mailchimp.vocabularies.InterestGroups",
         ),
