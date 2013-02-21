@@ -44,7 +44,7 @@ msgstr "E-Mail Adresse"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:56
 msgid "Interest groups"
-msgstr ""
+msgstr "Interessengruppen"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:33
 msgid "Invalid email address"
@@ -52,7 +52,7 @@ msgstr "Keine gültige E-Mail Adresse"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:64
 msgid "Mail format"
-msgstr ""
+msgstr "E-Mail Format"
 
 #: collective.mailchimp/collective/mailchimp/browser/portlet.py:58
 #: collective.mailchimp/collective/mailchimp/profiles/default/controlpanel.xml
@@ -73,7 +73,7 @@ msgstr "Portlet bearbeiten"
 
 #: collective.mailchimp/collective/mailchimp/browser/portlet.py:40
 msgid "Select available lists to subscribe to."
-msgstr ""
+msgstr "Bitte wählen Sie welche Newsletter sie abonnieren möchten."
 
 #: collective.mailchimp/collective/mailchimp/browser/newsletter.py:35
 #: collective.mailchimp/collective/mailchimp/browser/portlet.py:77
@@ -86,7 +86,7 @@ msgstr "Empfängerliste"
 
 #: collective.mailchimp/collective/mailchimp/browser/portlet.py:96
 msgid "This portlet displays a subscription form for a MailChimp newsletter."
-msgstr ""
+msgstr "Dieses Portlet zeigt eine Abonnentenformular für einen MailChimp Newsletter."
 
 #: collective.mailchimp/collective/mailchimp/browser/portlet.py:35
 msgid "Title"
@@ -102,11 +102,11 @@ msgstr "Wir müssen Ihre E-Mail-Adresse bestätigen. Um die Anmeldung abzuschlie
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:101
 msgid "double_optin"
-msgstr ""
+msgstr "Double Opt-In Verfahren"
 
 #: collective.mailchimp/collective/mailchimp/interfaces.py:90
 msgid "email_type"
-msgstr ""
+msgstr "E-Mail Typ"
 
 #. Default: "Enter in your MailChimp key here (.e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into mailchimp.com, go to account -> extras -> API Keys & Authorized Apps and copy the API Key to this field."
 #: collective.mailchimp/collective/mailchimp/interfaces.py:78
