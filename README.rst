@@ -59,11 +59,13 @@ The collective.mailchimp newsletter form (used in the separate view as well
 as in the portlet) can be extended without touching the code of
 collective.mailchimp.
 
-.. seealso::
+.. note::
 
-  https://github.com/collective/collective.mailchimp/blob/master/collective/mailchimp/browser/extender.py
-  https://github.com/collective/collective.mailchimp/blob/master/collective/mailchimp/browser/extender.zcml
-  http://packages.python.org/plone.app.discussion/howtos/howto_extend_the_comment_form.html.
+  - https://github.com/collective/collective.mailchimp/blob/master/collective/mailchimp/browser/extender.py
+
+  - https://github.com/collective/collective.mailchimp/blob/master/collective/mailchimp/browser/extender.zcml
+
+  - http://packages.python.org/plone.app.discussion/howtos/howto_extend_the_comment_form.html.
 
 
 Issue Tracker
