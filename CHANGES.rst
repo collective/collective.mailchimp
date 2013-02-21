@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.0 (unreleased)
+1.2.0 (2013-02-13)
 ------------------
 
 - Make newsletter view not fail if no default_list has been selected.
