@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.2.2 (unreleased)
+------------------
+
+-
+
+
 1.2.1 (2013-02-13)
 ------------------
 
@@ -104,3 +110,4 @@ Fix MANIFEST.in to include readme and changelog.
 ----------------
 
 - Initial release
+  [timo]
