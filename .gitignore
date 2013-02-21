@@ -1,3 +1,5 @@
+.coverage
+htmlcov
 /develop-eggs
 /eggs
 /fake-eggs
