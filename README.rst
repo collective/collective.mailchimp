@@ -52,6 +52,17 @@ If no URL parameter is provided the form just chooses the first MailChimp list
 available (which is fine as long as you have just one list anyway).
 
 
+Preselect Interest Groups
+=========================
+
+collective.mailchimp supports MailChimp's interest groups. In case there is more than one single group you might want to pre-select some of the groups. To
+do so add one or more 'preselect_group' parameters to the URL that points to
+your MailChimp newsletter form. For instance to select the first and the fifth
+group entry use the following link::
+
+    http://localhost:8080/Plone/@@newsletter?preselect_group=0&preselect_group=4
+
+
 Extend Newsletter Subscription Form
 ===================================
 

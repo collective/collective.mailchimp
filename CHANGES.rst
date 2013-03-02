@@ -4,7 +4,8 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
--
+- Add option to preselect interest groups in the newsletter form.
+  [timo]
 
 
 1.2.1 (2013-02-13)
