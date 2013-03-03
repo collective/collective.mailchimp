@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.2 (unreleased)
+1.3.0 (2013-03-03)
 ------------------
 
 - Add option to preselect interest groups in the newsletter form.
