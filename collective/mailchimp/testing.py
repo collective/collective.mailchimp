@@ -67,6 +67,14 @@ class CollectiveMailchimp(PloneSandboxLayer):
                 ]
             }
         ])
+        # Templates
+        mailchimp.templates()
+        mocker.count(0, 1000)
+        mocker.result(
+            {
+                'user': []
+            }
+        )
 
         # Get account details
         mailchimp.getAccountDetails()
