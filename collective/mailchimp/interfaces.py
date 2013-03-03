@@ -59,16 +59,14 @@ class ISendAsNewsletter(Interface):
         required=False,
     )
 
-    template = schema.Tuple(
+    template = schema.Choice(
         title=_(u"Template"),
         description=_(
             u"help_template",
             default=u""
         ),
-        value_type=schema.Choice(
-            vocabulary="collective.mailchimp.vocabularies.Templates",
-        ),
-        required=False,
+        vocabulary="collective.mailchimp.vocabularies.Templates",
+        required=True,
     )
 
 

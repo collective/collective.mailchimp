@@ -1,7 +1,6 @@
 from z3c.form import button
 from z3c.form import form
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
-from z3c.form.browser.radio import RadioFieldWidget
 
 from zope.interface import alsoProvides
 
@@ -29,11 +28,16 @@ class SendAsNewsletter(AutoExtensibleForm, form.EditForm):
             CheckBoxFieldWidget
         self.fields['interest_groups'].widgetFactory = \
             CheckBoxFieldWidget
-        self.fields['template'].widgetFactory = \
-            RadioFieldWidget
 
     @button.buttonAndHandler(_(u'Send'), name='send')
     def handle_send_action(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+
+    @button.buttonAndHandler(_(u'Send test email'), name='send_test')
+    def handle_send_test_action(self, action):
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
