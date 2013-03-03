@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.3.1 (2013-03-03)
+------------------
+
+- Fix broken group subscription which has been introduced in 1.3.0.
+  [timo]
+
+
 1.3.0 (2013-03-03)
 ------------------
 
