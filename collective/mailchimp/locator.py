@@ -35,6 +35,21 @@ class MailchimpLocator(object):
         except:
             raise
 
+    def templates(self):
+        """Return all available MailChimp templates.
+        http://apidocs.mailchimp.com/api/rtfm/templates.func.php
+        """
+        #print("MAILCHIMP LOCATOR: lists")
+        self.connect()
+        try:
+            return self.mailchimp.templates()['user']
+        except MailChimpException:
+            return []
+        except PostRequestError:
+            return []
+        except:
+            raise
+
     def default_list_id(self):
         self.connect()
         if self.settings.default_list:

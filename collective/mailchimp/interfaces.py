@@ -26,6 +26,52 @@ class ICollectiveMailchimp(Interface):
     """
 
 
+class ISendable(Interface):
+    """Mark content objects to be sendable with MailChimp.
+    """
+
+
+class ISendAsNewsletter(Interface):
+    """
+    """
+
+    mailinglist = schema.Tuple(
+        title=_(u"List"),
+        description=_(
+            u"help_mailinglist",
+            default=u""
+        ),
+        value_type=schema.Choice(
+            vocabulary="collective.mailchimp.vocabularies.AvailableLists",
+        ),
+        required=False,
+    )
+
+    interest_groups = schema.Tuple(
+        title=_(u"Interest groups"),
+        description=_(
+            u"help_interest_groups",
+            default=u""
+        ),
+        value_type=schema.Choice(
+            vocabulary="collective.mailchimp.vocabularies.InterestGroups",
+        ),
+        required=False,
+    )
+
+    template = schema.Tuple(
+        title=_(u"Template"),
+        description=_(
+            u"help_template",
+            default=u""
+        ),
+        value_type=schema.Choice(
+            vocabulary="collective.mailchimp.vocabularies.Templates",
+        ),
+        required=False,
+    )
+
+
 class NotAnEmailAddress(schema.ValidationError):
     __doc__ = _(u"Invalid email address")
 

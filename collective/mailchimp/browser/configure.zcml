@@ -46,6 +46,30 @@
     permission="zope2.View"
     />
 
+  <!-- Sendable -->
+  <browser:page
+    for="*"
+    name="sendable"
+    class=".send.Sendable"
+    permission="cmf.ManagePortal"
+    />
+
+  <!-- MakeSendable -->
+  <browser:page
+    for="*"
+    name="make_sendable"
+    class=".send.MakeSendable"
+    permission="cmf.ManagePortal"
+    />
+
+  <!-- Mailchimp Send -->
+  <browser:page
+    name="send_as_newsletter"
+    for="collective.mailchimp.interfaces.ISendable"
+    class=".send.SendAsNewsletter"
+    permission="cmf.ManagePortal"
+    />
+
   <!-- <include file="extender.zcml" /> -->
 
 </configure>

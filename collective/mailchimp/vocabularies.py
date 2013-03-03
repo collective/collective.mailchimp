@@ -1,4 +1,3 @@
-
 from zope.component import getUtility
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleTerm
@@ -65,3 +64,13 @@ def email_type(context):
         )
     )
     return SimpleVocabulary(terms)
+
+
+def templates(context):
+    mailchimp = getUtility(IMailchimpLocator)
+    return SimpleVocabulary([
+        SimpleTerm(
+            value=template['id'],
+            title=template['name']
+        ) for template in mailchimp.templates()
+    ])

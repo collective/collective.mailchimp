@@ -37,4 +37,8 @@
            name="collective.mailchimp.vocabularies.EmailType"
            provides="zope.schema.interfaces.IVocabularyFactory" />
 
+  <utility component=".vocabularies.templates"
+           name="collective.mailchimp.vocabularies.Templates"
+           provides="zope.schema.interfaces.IVocabularyFactory" />
+
 </configure>
