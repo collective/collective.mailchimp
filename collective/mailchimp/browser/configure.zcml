@@ -65,7 +65,7 @@
   <!-- Mailchimp Send -->
   <browser:page
     name="send_as_newsletter"
-    for="collective.mailchimp.interfaces.ISendable"
+    for="*"
     class=".send.SendAsNewsletter"
     permission="cmf.ManagePortal"
     />
