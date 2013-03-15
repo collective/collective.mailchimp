@@ -55,3 +55,28 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
                     u"Please check your MailChimp API key: %s" % error
                 )
             )
+
+    def campaigns(self):
+        mailchimp = getUtility(IMailchimpLocator)
+        try:
+            return mailchimp.campaigns()
+        except MailChimpException, error:
+            raise WidgetActionExecutionError(
+                Invalid(
+                    u"Could not fetch available campaigns from MailChimp. " +
+                    u"Please check your MailChimp API key: %s" % error
+                )
+            )
+
+    def campaign_template_content(self):
+        mailchimp = getUtility(IMailchimpLocator)
+        try:
+            return mailchimp.campaign_template_content()
+        except MailChimpException, error:
+            raise WidgetActionExecutionError(
+                Invalid(
+                    u"Could not fetch the campaign template from MailChimp. " +
+                    u"Please check your MailChimp API key and template id: " +
+                    u"%s" % error
+                )
+            )
