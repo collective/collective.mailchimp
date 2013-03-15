@@ -109,3 +109,12 @@ class MailchimpLocator(object):
     def campaigns(self):
         self.connect()
         return self.mailchimp.campaigns()['data']
+
+    def campaign_template_content(self,cid=u'8998de9be7'):
+        self.connect()
+        return self.mailchimp.campaignTemplateContent(cid=cid)
+
+    def list_merge_vars(self, id='b00e4cab0e'):
+        self.connect()
+        return self.mailchimp.listMergeVars(id=id)
+        #[{u'field_type': u'email', u'name': u'Email Address', u'show': True, u'default': u'', u'req': True, u'public': True, u'tag': u'EMAIL', u'helptext': u'', u'id': 0, u'order': u'1', u'size': u'25'}]
