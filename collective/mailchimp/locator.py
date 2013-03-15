@@ -105,3 +105,7 @@ class MailchimpLocator(object):
     def account(self):
         self.connect()
         return self.mailchimp.getAccountDetails()
+
+    def campaigns(self):
+        self.connect()
+        return self.mailchimp.campaigns()['data']
