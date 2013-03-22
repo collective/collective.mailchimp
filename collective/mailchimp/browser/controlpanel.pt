@@ -27,17 +27,16 @@
     <div id="layout-contents"
          class="enableUnloadProtection enableAutoFocus enableFormTabbing enableUnlockProtection"
          tal:define="account view/mailchimp_account|nothing;
+                     campaigns view/campaigns;
                      empty string:-">
-      <fieldset id="fieldset-send">
-        <legend id="fieldsetlegend-send">Standard</legend>
+      <!-- STANDARD -->
+      <fieldset id="fieldset-standard">
+        <legend id="fieldsetlegend-standard">Standard</legend>
         <span tal:replace="structure view/contents" />
       </fieldset>
-      <fieldset id="fieldset-lists" tal:condition="account">
-        <legend id="fieldsetlegend-lists">MailChimp Account</legend>
-        <h1>Campaigns</h1>
-        <pre tal:content="view/campaigns" />
-        <h1>Campaign Templates</h1>
-        <pre tal:content="view/campaign_template_content" />
+      <!-- MAILCHIMP ACCOUNT -->
+      <fieldset id="fieldset-account" tal:condition="account">
+        <legend id="fieldsetlegend-account">MailChimp Account</legend>
         <table class="listing">
           <thead>
             <tr>
@@ -120,10 +119,10 @@
             </tr>
           </tbody>
         </table>
-
       </fieldset>
+      <!-- MAILCHIMP LISTS -->
       <fieldset id="fieldset-lists" tal:condition="account">
-        <legend id="fieldsetlegend-preview">MailChimp Lists</legend>
+        <legend id="fieldsetlegend-lists">MailChimp Lists</legend>
         <table class="listing"
                tal:define="lists python:view.available_lists()">
           <thead>
@@ -167,8 +166,63 @@
             </tr>
           </tbody>
         </table>
-
       </fieldset>
+
+      <!-- MAILCHIMP CAMPAIGNS -->
+      <fieldset id="fieldset-campaigns" tal:condition="campaigns">
+        <legend id="fieldsetlegend-campaigns">MailChimp Campaigns</legend>
+        <tal:campaigns tal:repeat="campaign campaigns">
+          <h1 tal:content="campaign/title">Campaign</h1>
+          <table class="listing">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                 <td i18n:translate="">ID:</td>
+                 <td tal:content="campaign/id|empty"/>
+              </tr>
+              <tr>
+                 <td i18n:translate="">Web ID:</td>
+                 <td tal:content="campaign/web_id|empty"/>
+              </tr>
+              <tr>
+                 <td i18n:translate="">Subject:</td>
+                 <td tal:content="campaign/subject|empty"/>
+              </tr>
+              <tr>
+                 <td i18n:translate="">List ID:</td>
+                 <td tal:content="campaign/list_id|empty"/>
+              </tr>
+              <tr>
+                 <td i18n:translate="">From Name:</td>
+                 <td tal:content="campaign/from_name|empty"/>
+              </tr>
+              <tr>
+                 <td i18n:translate="">Content Type:</td>
+                 <td tal:content="campaign/content_type|empty"/>
+              </tr>
+              <tr>
+                 <td i18n:translate="">Template ID:</td>
+                 <td tal:content="campaign/template_id|empty"/>
+              </tr>
+            </tbody>
+          </table>
+          <div tal:define="campaign_content python:view.campaign_content(cid=campaign['id'])"
+               tal:condition="campaign_content">
+            <h2>Campaign Content (Text)</h2>
+            <pre tal:content="campaign_content/html" />
+            <h2>Campaign Content (HTML)</h2>
+            <pre tal:content="campaign_content/html" />
+          </div>
+          <h2>Campaign Template Content</h2>
+          <pre tal:content="python:view.campaign_template_content(cid=campaign['id'])" />
+        </tal:campaigns>
+      </fieldset>
+
     </div>
 
   </div>

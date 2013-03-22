@@ -110,7 +110,11 @@ class MailchimpLocator(object):
         self.connect()
         return self.mailchimp.campaigns()['data']
 
-    def campaign_template_content(self,cid=u'8998de9be7'):
+    def campaign_content(self, cid=u'8998de9be7'):
+        self.connect()
+        return self.mailchimp.campaignContent(cid=cid)
+
+    def campaign_template_content(self, cid=u'8998de9be7'):
         self.connect()
         return self.mailchimp.campaignTemplateContent(cid=cid)
 

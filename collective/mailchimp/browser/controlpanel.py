@@ -68,15 +68,18 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
                 )
             )
 
-    def campaign_template_content(self):
+    def campaign_content(self, cid=None):
+        if cid is None:
+            return
         mailchimp = getUtility(IMailchimpLocator)
         try:
-            return mailchimp.campaign_template_content()
-        except MailChimpException, error:
-            raise WidgetActionExecutionError(
-                Invalid(
-                    u"Could not fetch the campaign template from MailChimp. " +
-                    u"Please check your MailChimp API key and template id: " +
-                    u"%s" % error
-                )
-            )
+            return mailchimp.campaign_content(cid)
+        except MailChimpException:
+            return
+
+    def campaign_template_content(self, cid):
+        mailchimp = getUtility(IMailchimpLocator)
+        try:
+            return mailchimp.campaign_template_content(cid)
+        except MailChimpException:
+            return
