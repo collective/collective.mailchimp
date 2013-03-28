@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+<metal:main fill-slot="main">
+  <tal:main-macro metal:define-macro="main">
+    
+    <h1 class="documentFirstHeading" 
+        tal:content="view/label">
+      View Title
+    </h1>
+
+    <!-- STANDARD -->
+    <fieldset id="fieldset-standard">
+      <legend id="fieldsetlegend-standard">Standard</legend>
+      <span tal:replace="structure view/contents" />
+    </fieldset>
+
+    <fieldset id="fieldset-campaign">
+      <legend id="fieldsetlegend-campaign">Standard</legend>
+      <span tal:replace="structure view/contents" />
+    </fieldset>
+
+  </tal:main-macro>
+</metal:main>
+
+</body>
+</html>

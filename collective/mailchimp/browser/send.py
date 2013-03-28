@@ -5,30 +5,35 @@ from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope.interface import alsoProvides
 
 from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 
 from plone.autoform.form import AutoExtensibleForm
+
+from plone.z3cform import layout
 
 from collective.mailchimp.interfaces import ISendable
 from collective.mailchimp.interfaces import ISendAsNewsletter
 from collective.mailchimp import _
 
 
-class SendAsNewsletter(AutoExtensibleForm, form.EditForm):
+class SendAsNewsletterForm(AutoExtensibleForm, form.EditForm):
     schema = ISendAsNewsletter
     id = "send-as-newsletter"
     label = _(u'Send as newsletter')
     description = _(u"")
     form_name = _(u'Send as newsletter')
     ignoreContext = True
-
+    
     def updateFields(self):
-        super(SendAsNewsletter, self).updateFields()
+        super(SendAsNewsletterForm, self).updateFields()
         self.fields['mailinglist'].widgetFactory = \
             CheckBoxFieldWidget
         self.fields['campaigns'].widgetFactory = \
             CheckBoxFieldWidget
         self.fields['interest_groups'].widgetFactory = \
+            CheckBoxFieldWidget
+        self.fields['template'].widgetFactory = \
             CheckBoxFieldWidget
 
     @button.buttonAndHandler(_(u'Send'), name='send')
@@ -44,6 +49,11 @@ class SendAsNewsletter(AutoExtensibleForm, form.EditForm):
         if errors:
             self.status = self.formErrorsMessage
             return
+
+
+class SendAsNewsletter(layout.FormWrapper):
+    form = SendAsNewsletterForm
+    index = ViewPageTemplateFile('send.pt')
 
 
 class Sendable(BrowserView):
