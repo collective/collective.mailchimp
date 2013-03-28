@@ -15,6 +15,16 @@ def available_lists(context):
     )
 
 
+def campaigns(context):
+    mailchimp = getUtility(IMailchimpLocator)
+    campaigns = mailchimp.campaigns()
+    if not campaigns:
+        return SimpleVocabulary([])
+    return SimpleVocabulary([
+        SimpleTerm(value=ca['id'], title=ca['title']) for ca in campaigns
+    ])
+
+
 def interest_groups(context):
     mailchimp = getUtility(IMailchimpLocator)
     if 'list_id' in context.REQUEST:

@@ -47,6 +47,18 @@ class ISendAsNewsletter(Interface):
         required=False,
     )
 
+    campaigns = schema.Tuple(
+        title=_(u"Campaigns"),
+        description=_(
+            u"help_campaigns",
+            default=u""
+        ),
+        value_type=schema.Choice(
+            vocabulary="collective.mailchimp.vocabularies.Campaigns",
+        ),
+        required=False,
+    )
+
     interest_groups = schema.Tuple(
         title=_(u"Interest groups"),
         description=_(

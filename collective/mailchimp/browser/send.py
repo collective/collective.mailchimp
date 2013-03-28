@@ -26,6 +26,8 @@ class SendAsNewsletter(AutoExtensibleForm, form.EditForm):
         super(SendAsNewsletter, self).updateFields()
         self.fields['mailinglist'].widgetFactory = \
             CheckBoxFieldWidget
+        self.fields['campaigns'].widgetFactory = \
+            CheckBoxFieldWidget
         self.fields['interest_groups'].widgetFactory = \
             CheckBoxFieldWidget
 

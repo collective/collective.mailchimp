@@ -108,7 +108,14 @@ class MailchimpLocator(object):
 
     def campaigns(self):
         self.connect()
-        return self.mailchimp.campaigns()['data']
+        try:
+            return self.mailchimp.campaigns()['data']
+        except MailChimpException:
+            return []
+        except PostRequestError:
+            return []
+        except:
+            raise
 
     def campaign_content(self, cid=u'8998de9be7'):
         self.connect()
