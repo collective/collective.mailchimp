@@ -27,7 +27,7 @@
     <div id="layout-contents"
          class="enableUnloadProtection enableAutoFocus enableFormTabbing enableUnlockProtection"
          tal:define="account view/mailchimp_account|nothing;
-                     campaigns view/campaigns;
+                     campaigns view/campaigns|nothing;
                      empty string:-">
       <!-- STANDARD -->
       <fieldset id="fieldset-standard">
