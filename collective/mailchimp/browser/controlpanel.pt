@@ -4,11 +4,11 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="here/prefs_main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="collective.mailchimp">
 
 <body>
 
-  <div id="content"
+  <div id="content" 
      metal:fill-slot="prefs_configlet_content">
 
     <div metal:use-macro="context/global_statusmessage/macros/portal_message">
@@ -24,22 +24,22 @@
 
     <h1 class="documentFirstHeading" tal:content="view/label">View Title</h1>
 
-    <div id="layout-contents"
+    <div id="layout-contents" 
          class="enableUnloadProtection enableAutoFocus enableFormTabbing enableUnlockProtection"
          tal:define="account view/mailchimp_account|nothing;
                      empty string:-">
       <fieldset id="fieldset-send">
-        <legend id="fieldsetlegend-send">Standard</legend>
+        <legend id="fieldsetlegend-send" i18n:translate="">Standard</legend>
         <span tal:replace="structure view/contents" />
       </fieldset>
       <fieldset id="fieldset-lists" tal:condition="account">
-        <legend id="fieldsetlegend-lists">MailChimp Account</legend>
+        <legend id="fieldsetlegend-lists" i18n:translate="">MailChimp Account</legend>
         Account
         <table class="listing">
           <thead>
             <tr>
-              <th>Key</th>
-              <th>Value</th>
+              <th i18n:translate="">Key</th>
+              <th i18n:translate="">Value</th>
             </tr>
           </thead>
           <tbody>
@@ -120,27 +120,27 @@
 
       </fieldset>
       <fieldset id="fieldset-lists" tal:condition="account">
-        <legend id="fieldsetlegend-preview">MailChimp Lists</legend>
+        <legend id="fieldsetlegend-preview" i18n:translate="">MailChimp Lists</legend>
         <table class="listing"
                tal:define="lists python:view.available_lists()">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Web ID</th>
-              <th>Name</th>
-              <th>Member count</th>
-              <th>Email type option</th>
-              <th>Member count since send</th>
-              <th>Default language</th>
-              <th>Default from name</th>
-              <th>Unsubscribed count since send</th>
-              <th>Default subject</th>
-              <th>Default from email</th>
-              <th>Unsubscribed count</th>
-              <th>Cleaned cound</th>
-              <th>Date created</th>
-              <th>List rating</th>
-              <th>Cleaned count since send</th>
+              <th i18n:translate="">ID</th>
+              <th i18n:translate="">Web ID</th>
+              <th i18n:translate="">Name</th>
+              <th i18n:translate="">Member count</th>
+              <th i18n:translate="">Email type option</th>
+              <th i18n:translate="">Member count since send</th>
+              <th i18n:translate="">Default language</th>
+              <th i18n:translate="">Default from name</th>
+              <th i18n:translate="">Unsubscribed count since send</th>
+              <th i18n:translate="">Default subject</th>
+              <th i18n:translate="">Default from email</th>
+              <th i18n:translate="">Unsubscribed count</th>
+              <th i18n:translate="">Cleaned cound</th>
+              <th i18n:translate="">Date created</th>
+              <th i18n:translate="">List rating</th>
+              <th i18n:translate="">Cleaned count since send</th>
             </tr>
           </thead>
           <tbody tal:repeat="list lists">
