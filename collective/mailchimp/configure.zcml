@@ -10,6 +10,7 @@
       title="MailChimp"
       directory="profiles/default"
       description="MailChimp integration for Plone."
+      i18n:attributes="title; description"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
