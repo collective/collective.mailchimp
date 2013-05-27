@@ -1,6 +1,12 @@
 Changelog
 =========
 
+
+1.3.2 (unreleased)
+------------------
+
+- Add french translations [toutpt]
+
 1.3.1 (2013-03-03)
 ------------------
 

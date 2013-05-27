@@ -1,0 +1,189 @@
+# Translation of pnr.policy.pot to French
+# French Translation Team "plone-fr" <plone-fr@lists.plone.org>, 2003-2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.mailchimp\n"
+"POT-Creation-Date: 2012-12-20 12:40+0000\n"
+"PO-Revision-Date: 2010-11-13 11:07+0100\n"
+"Last-Translator: JeanMichel FRANCOIS <toutpt@gmail.com>\n"
+"Language-Team: French <plone-fr@lists.plone.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: collective.mailchimp\n"
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:95
+msgid "Add MailChimp Portlet"
+msgstr "Ajouter le portlet MailChimp"
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:39
+msgid "Available lists"
+msgstr "Listes disponibles"
+
+#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:21
+msgid "Configure portlet"
+msgstr "Configuration du portlet"
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:68
+msgid "Could not fetch list from mailchimp.com: %s"
+msgstr "Impossible de récupérer la liste à partir de mailchimp.com: %s"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:18
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:109
+msgid "Edit MailChimp Portlet"
+msgstr "Modifier le portlet MailChimp"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:49
+msgid "Email address"
+msgstr "Adresse email"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:56
+msgid "Interest groups"
+msgstr "Centres d'intérêt"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:33
+msgid "Invalid email address"
+msgstr "Adresse email invalide"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:64
+msgid "Mail format"
+msgstr "Format des emails"
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:58
+#: collective.mailchimp/collective/mailchimp/profiles/default/controlpanel.xml
+msgid "MailChimp"
+msgstr "MailChimp"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:77
+msgid "MailChimp API Key"
+msgstr "Clé d'API MailChimp"
+
+#: collective.mailchimp/collective/mailchimp/browser/controlpanel.py:19
+msgid "MailChimp settings"
+msgstr "Configuration de Mailchimp"
+
+#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:65
+msgid "Modify portlet"
+msgstr "Modifier la portlet"
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:40
+msgid "Select available lists to subscribe to."
+msgstr "Sélectionner les listes mise à disposition."
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:35
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:77
+msgid "Subscribe to newsletter"
+msgstr "S'abonner à la newsletter"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:17
+msgid "Subscriber list"
+msgstr "Liste d'abonnés"
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:96
+msgid "This portlet displays a subscription form for a MailChimp newsletter."
+msgstr "Cette portlet affiche un formulaire d'abonnement à une newsletter MailChimp."
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:35
+msgid "Title"
+msgstr "Titre"
+
+#: collective.mailchimp/collective/mailchimp/browser/portlet.py:36
+msgid "Title of the portlet"
+msgstr "Titre du portlet"
+
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:142
+msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
+msgstr "Nous devons confirmer votre adresse email. Pour terminer votre abonnement à la newsletter, cliquer sur le lien dans le mail que nous venons juste de vous envoyer."
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:101
+msgid "double_optin"
+msgstr "Double vérification"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:90
+msgid "email_type"
+msgstr "Type d'email"
+
+#. Default: "Enter in your MailChimp key here (.e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into mailchimp.com, go to account -> extras -> API Keys & Authorized Apps and copy the API Key to this field."
+#: collective.mailchimp/collective/mailchimp/interfaces.py:78
+msgid "help_api_key"
+msgstr "Entrer ici votre clé d'API MailChimp (i.e. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Pour celà connectez vous sur mailchimp.com, aller dans 'account' -> 'extras' -> 'API Keys & Authorized Apps' et copier/coller la clé API dans ce champ."
+
+#. Default: "Flag to control whether a double opt-in confirmation message is sent, defaults to true. Abusing this may cause your account to be suspended."
+#: collective.mailchimp/collective/mailchimp/interfaces.py:102
+msgid "help_double_optin"
+msgstr "Ce champ contrôle si un double message de confirmation doit être envoyé, oui par défaut. Abuser de ceci peut causer une suspension de votre compte utilisateur."
+
+#. Default: "Please enter your email address."
+#: collective.mailchimp/collective/mailchimp/interfaces.py:50
+msgid "help_email"
+msgstr "Veuillez entrer une adresse email."
+
+#. Default: "Email type preference for the email (html, text, or mobile defaults to html)"
+#: collective.mailchimp/collective/mailchimp/interfaces.py:91
+msgid "help_email_type"
+msgstr "Type de mail préféré (html, text ou mobile, par défaut: html)."
+
+#. Default: "Flag to determine whether we replace the interest groups with the groups provided or we add the providedgroups to the member's interest groups (optional, defaults to true)"
+#: collective.mailchimp/collective/mailchimp/interfaces.py:125
+msgid "help_replace_interests"
+msgstr "Champ pour déterminer si nous remplaçons les centres d'intérêt avec les listes mise à disposition ou si nous ajoutons les listes mise à disposition aux centres d'intérêts du membre (optionnel, défaut à oui)"
+
+#. Default: "If your double_optin is false and this is true, we will send your lists Welcome Email if this subscribe succeeds - this will *not* fire if we end up updating an existing subscriber. If double_optin is true, this has no effect. defaults to false."
+#: collective.mailchimp/collective/mailchimp/interfaces.py:138
+msgid "help_send_welcome"
+msgstr "Si l'option de double validation n'est pas activée et cette option est activé, nous enverrons le mail d'accueil de votre liste si l'abonnement est validé - cet envoi n'aura pas lieu si c'est abonné déjà existant. Si l'option de double validation est activée, cet option n'a aucun effet. Défaut : désactivé."
+
+#. Default: "Flag to control whether existing subscribers should be updated instead of throwing an error, defaults to false"
+#: collective.mailchimp/collective/mailchimp/interfaces.py:114
+msgid "help_update_existing"
+msgstr "Champ pour contrôler si un membre existant devrait être mise à jour au lieu de soulever une erreur. Défaut : désactivé"
+
+#. Default: "Cancel"
+#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:50
+msgid "label_cancel"
+msgstr "Annuler"
+
+#. Default: "Save"
+#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:39
+msgid "label_save"
+msgstr "Enregistrer"
+
+#. Default: "Could not subscribe to newsletter. Please contact the site administrator: '${error}'"
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:126
+msgid "mailchimp_error_msg"
+msgstr "Impossible d'abonner à la newsletter. Veuillez contacter l'administrateur du site : '${error}'"
+
+#. Default: "Could not subscribe to newsletter. The email '${email}' is already subscribed."
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:108
+msgid "mailchimp_error_msg_already_subscribed"
+msgstr "Impossible d'abonner à la newsletter. L'adresse '${email}' est déjà inscrite."
+
+#. Default: "Could not subscribe to newsletter. The email '${email}' has been banned."
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:117
+msgid "mailchimp_error_msg_banned"
+msgstr "Impossible d'abonner à la newsletter. L'adresse '${email}' a été bannie."
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:124
+msgid "replace_interests"
+msgstr "Remplacer les centres d'intérêts"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:137
+msgid "send_welcome"
+msgstr "Envoyer un message de bienvenue"
+
+#. Default: "Subscribe"
+#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:48
+msgid "subscribe_to_newsletter_button"
+msgstr "S'abonner"
+
+#: collective.mailchimp/collective/mailchimp/interfaces.py:113
+msgid "update_existing"
+msgstr "Mettre à jour les abonnés"
+
