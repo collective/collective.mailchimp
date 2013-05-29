@@ -77,8 +77,35 @@ class INewsletterSubscribe(Interface):
 
 
 class IMailchimpLocator(Interface):
+    """Mailchimp API
     """
-    """
+
+    def connect():
+        """Do a postmonkey with the API so your connected to mailchimp API"""
+
+    def lists():
+        """Return all available MailChimp lists.
+        http://apidocs.mailchimp.com/api/rtfm/lists.func.php
+        """
+
+    def default_list_id():
+        """Return the default list from the settings if it exists.
+        Else return the first list available in your mailchimp account
+        """
+
+    def groups(list_id=None):
+        """Return all available MailChimp interest groups.
+
+        @id: the list id to connect to. e.g. u'a1346945ab'. Not the web_id!
+
+        http://apidocs.mailchimp.com/api/rtfm/listinterestgroupings.func.php
+        """
+
+    def subscribe(list_id, email_address, merge_vars, email_type):
+        """Do subscribe the email address to the list_id"""
+
+    def account():
+        """connect and return getAccountDetails"""
 
 
 class IMailchimpSettings(Interface):
