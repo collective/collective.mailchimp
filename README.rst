@@ -2,6 +2,7 @@ Introduction
 ============
 
 .. image:: https://secure.travis-ci.org/collective/collective.mailchimp.png
+    :target: http://travis-ci.org/collective/collective.mailchimp
 
 MailChimp integration for Plone.
 
