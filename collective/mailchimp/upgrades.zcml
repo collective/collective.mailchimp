@@ -20,4 +20,13 @@
       handler=".upgrades.install_mailchimp_stylesheet"
       />
 
+  <genericsetup:upgradeStep
+      source="1200"
+      destination="1250"
+      title="Install collective.mailchimp cache."
+      description=""
+      profile="collective.mailchimp:default"
+      handler=".upgrades.install_mailchimp_cache"
+      />
+
 </configure>

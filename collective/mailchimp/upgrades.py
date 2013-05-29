@@ -5,6 +5,7 @@ from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 
 from collective.mailchimp.interfaces import IMailchimpSettings
+PROFILE_ID = "profile-collective.mailchimp:default"
 
 
 def update_registry(context):
@@ -24,3 +25,8 @@ def install_mailchimp_stylesheet(context):
             enabled=True,
             cookable=True,
         )
+
+
+def install_mailchimp_cache(context):
+    setup = getToolByName(context, 'portal_setup')
+    setup.runImportStepFromProfile(PROFILE_ID, 'plone.app.registry')

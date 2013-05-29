@@ -1,4 +1,19 @@
 <?xml version="1.0"?>
 <registry>
  <records interface="collective.mailchimp.interfaces.IMailchimpSettings" />
+     <record name="collective.mailchimp.cache.lists">
+        <field type="plone.registry.field.Tuple">
+            <title>Mailchimp Lists</title>
+        </field>
+    </record>
+    <record name="collective.mailchimp.cache.groups">
+        <field type="plone.registry.field.Dict">
+            <title>Mailchimp Groups</title>
+        </field>
+    </record>
+    <record name="collective.mailchimp.cache.account">
+        <field type="plone.registry.field.Dict">
+            <title>Mailchimp account details</title>
+        </field>
+    </record>
 </registry>

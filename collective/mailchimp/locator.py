@@ -15,14 +15,19 @@ class MailchimpLocator(object):
     implements(IMailchimpLocator)
 
     def connect(self):
-        registry = getUtility(IRegistry)
-        self.settings = registry.forInterface(IMailchimpSettings)
+        if hasattr(self, 'mailchimp'):
+            return
+        self.registry = getUtility(IRegistry)
+        self.settings = self.registry.forInterface(IMailchimpSettings)
         self.mailchimp = PostMonkey(self.settings.api_key)
+        self.key_account = "collective.mailchimp.cache.account"
+        self.key_groups = "collective.mailchimp.cache.groups"
+        self.key_lists = "collective.mailchimp.cache.lists"
 
     def lists(self):
-        """Return all available MailChimp lists.
-        http://apidocs.mailchimp.com/api/rtfm/lists.func.php
-        """
+        return self.registry.get(self.key_lists, None) or self._lists()
+
+    def _lists(self):
         #print("MAILCHIMP LOCATOR: lists")
         self.connect()
         try:
@@ -44,12 +49,12 @@ class MailchimpLocator(object):
             return lists[0]['id']
 
     def groups(self, list_id=None):
-        """Return all available MailChimp interest groups.
+        if not list_id:
+            return
+        groups = self.registry.get(self.key_groups, {})
+        return groups.get(list_id, None) or self._groups(list_id)
 
-        @id: the list id to connect to. e.g. u'a1346945ab'. Not the web_id!
-
-        http://apidocs.mailchimp.com/api/rtfm/listinterestgroupings.func.php
-        """
+    def _groups(self, list_id=None):
         if not list_id:
             return
         #print("MAILCHIMP LOCATOR: groups")
@@ -88,5 +93,24 @@ class MailchimpLocator(object):
             raise
 
     def account(self):
+        return self.registry.get(self.key_account, None) or self._account()
+
+    def _account(self):
         self.connect()
         return self.mailchimp.getAccountDetails()
+
+    def updateCache(self):
+        self.connect()
+        if not self.settings.api_key:
+            return
+        account = self._account()
+        groups = {}
+        lists = self._lists()
+        for mailchimp_list in lists:
+            list_id = mailchimp_list['id']
+            groups[list_id] = self._groups(list_id=list_id)
+
+        #now save this to the registry
+        self.registry[self.key_account] = account
+        self.registry[self.key_groups] = groups
+        self.registry[self.key_lists] = tuple(lists)

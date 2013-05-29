@@ -19,11 +19,19 @@ class MailchimpSettingsEditForm(controlpanel.RegistryEditForm):
     label = _(u"MailChimp settings")
     description = _(u"""""")
 
+    def update(self):
+        self.updateCache()
+        super(MailchimpSettingsEditForm, self).update()
+
     def updateFields(self):
         super(MailchimpSettingsEditForm, self).updateFields()
 
     def updateWidgets(self):
         super(MailchimpSettingsEditForm, self).updateWidgets()
+
+    def updateCache(self):
+        mailchimp = getUtility(IMailchimpLocator)
+        mailchimp.updateCache()
 
 
 class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
