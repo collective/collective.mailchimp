@@ -6,6 +6,7 @@ from postmonkey.exceptions import PostRequestError
 from plone.registry.interfaces import IRegistry
 from zope.interface import implements
 from collective.mailchimp.interfaces import IMailchimpLocator
+_marker = object()
 
 
 class MailchimpLocator(object):
@@ -13,19 +14,33 @@ class MailchimpLocator(object):
     """
 
     implements(IMailchimpLocator)
+    key_account = "collective.mailchimp.cache.account"
+    key_groups = "collective.mailchimp.cache.groups"
+    key_lists = "collective.mailchimp.cache.lists"
+
+    def __init__(self):
+        self.mailchimp = None
+        self.registry = None
+        self.settings = None
+
+    def initialize(self):
+        if self.registry is None:
+            self.registry = getUtility(IRegistry)
+        if self.settings is None:
+            self.settings = self.registry.forInterface(IMailchimpSettings)
 
     def connect(self):
-        if hasattr(self, 'mailchimp'):
+        if self.mailchimp is not None:
             return
-        self.registry = getUtility(IRegistry)
-        self.settings = self.registry.forInterface(IMailchimpSettings)
+        self.initialize()
         self.mailchimp = PostMonkey(self.settings.api_key)
-        self.key_account = "collective.mailchimp.cache.account"
-        self.key_groups = "collective.mailchimp.cache.groups"
-        self.key_lists = "collective.mailchimp.cache.lists"
 
     def lists(self):
-        return self.registry.get(self.key_lists, None) or self._lists()
+        self.initialize()
+        cache = self.registry.get(self.key_lists, _marker)
+        if cache is not _marker:
+            return cache
+        return self._lists()
 
     def _lists(self):
         #print("MAILCHIMP LOCATOR: lists")
@@ -51,8 +66,13 @@ class MailchimpLocator(object):
     def groups(self, list_id=None):
         if not list_id:
             return
-        groups = self.registry.get(self.key_groups, {})
-        return groups.get(list_id, None) or self._groups(list_id)
+        self.initialize()
+        cache = self.registry.get(self.key_groups, _marker)
+        if cache is not _marker:
+            groups = cache.get(list_id, _marker)
+        if groups is not _marker:
+            return groups
+        return self._groups(list_id)
 
     def _groups(self, list_id=None):
         if not list_id:
@@ -93,7 +113,11 @@ class MailchimpLocator(object):
             raise
 
     def account(self):
-        return self.registry.get(self.key_account, None) or self._account()
+        self.initialize()
+        cache = self.registry.get(self.key_account, _marker)
+        if cache is not _marker:
+            return cache
+        return self._account()
 
     def _account(self):
         self.connect()
@@ -111,6 +135,9 @@ class MailchimpLocator(object):
             groups[list_id] = self._groups(list_id=list_id)
 
         #now save this to the registry
-        self.registry[self.key_account] = account
-        self.registry[self.key_groups] = groups
-        self.registry[self.key_lists] = tuple(lists)
+        if type(account) is dict:
+            self.registry[self.key_account] = account
+        if type(groups) is dict:
+            self.registry[self.key_groups] = groups
+        if type(lists) is list:
+            self.registry[self.key_lists] = tuple(lists)
