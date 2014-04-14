@@ -5,6 +5,9 @@ Changelog
 1.3.2 (unreleased)
 ------------------
 
+- Fix fallback for missing cache after startup.
+  [pbauer]
+
 - Fix UnicodeEncodeError
   [pbauer]
 

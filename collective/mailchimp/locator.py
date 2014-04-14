@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from postmonkey import PostMonkey
 from collective.mailchimp.interfaces import IMailchimpSettings
 from zope.component import getUtility
@@ -6,6 +7,7 @@ from postmonkey.exceptions import PostRequestError
 from plone.registry.interfaces import IRegistry
 from zope.interface import implements
 from collective.mailchimp.interfaces import IMailchimpLocator
+
 _marker = object()
 
 
@@ -38,7 +40,7 @@ class MailchimpLocator(object):
     def lists(self):
         self.initialize()
         cache = self.registry.get(self.key_lists, _marker)
-        if cache is not _marker:
+        if cache and cache is not _marker:
             return cache
         return self._lists()
 
@@ -68,10 +70,10 @@ class MailchimpLocator(object):
             return
         self.initialize()
         cache = self.registry.get(self.key_groups, _marker)
-        if cache is not _marker:
+        if cache and cache is not _marker:
             groups = cache.get(list_id, _marker)
-        if groups is not _marker:
-            return groups
+            if groups and groups is not _marker:
+                return groups
         return self._groups(list_id)
 
     def _groups(self, list_id=None):
@@ -115,7 +117,7 @@ class MailchimpLocator(object):
     def account(self):
         self.initialize()
         cache = self.registry.get(self.key_account, _marker)
-        if cache is not _marker:
+        if cache and cache is not _marker:
             return cache
         return self._account()
 
