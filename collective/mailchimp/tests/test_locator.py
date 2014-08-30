@@ -37,7 +37,8 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()
         self.assertTrue(locator.groups(list_id=u'a1346945ab'))
-        self.assertEqual(len(locator.groups(list_id=u'a1346945ab')['groups']), 3)
+        self.assertEqual(
+            len(locator.groups(list_id=u'a1346945ab')['groups']), 3)
 
 
 def test_suite():

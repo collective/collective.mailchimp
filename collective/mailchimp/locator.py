@@ -45,7 +45,6 @@ class MailchimpLocator(object):
         return self._lists()
 
     def _lists(self):
-        #print("MAILCHIMP LOCATOR: lists")
         self.connect()
         try:
             # lists returns a dict with 'total' and 'data'. we just need data
@@ -79,7 +78,6 @@ class MailchimpLocator(object):
     def _groups(self, list_id=None):
         if not list_id:
             return
-        #print("MAILCHIMP LOCATOR: groups")
         self.connect()
         try:
             # mailchimp returns a list of groups for a single mailinglist.
@@ -136,7 +134,7 @@ class MailchimpLocator(object):
             list_id = mailchimp_list['id']
             groups[list_id] = self._groups(list_id=list_id)
 
-        #now save this to the registry
+        # now save this to the registry
         if type(account) is dict:
             self.registry[self.key_account] = account
         if type(groups) is dict:

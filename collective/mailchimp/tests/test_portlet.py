@@ -184,24 +184,30 @@ class TestPortletIntegration(unittest.TestCase):
 
     def test_edit_portlet(self):
         # Create portlet
-        self.browser.open(self.portal_url +
-            "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp")
+        self.browser.open(
+            self.portal_url +
+            "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp"
+        )
         self.browser.getControl("Title").value = "ACME Newsletter Portlet"
         self.browser.getControl(
             name="form.widgets.available_lists:list", index=0)\
             .value = ["f6257645gs"]
         self.browser.getControl("Save").click()
         # Edit portlet
-        self.browser.open(self.portal_url +
-            "/++contextportlets++plone.leftcolumn/mailchimp/edit")
+        self.browser.open(
+            self.portal_url +
+            "/++contextportlets++plone.leftcolumn/mailchimp/edit"
+        )
         self.browser.getControl("Title").value = "Lorem Ipsum"
         self.browser.getControl(
             name="form.widgets.available_lists:list", index=0)\
             .value = ["f6267645gs"]
         self.browser.getControl("Save").click()
 
-        self.browser.open(self.portal_url +
-            "/++contextportlets++plone.leftcolumn/mailchimp/edit")
+        self.browser.open(
+            self.portal_url +
+            "/++contextportlets++plone.leftcolumn/mailchimp/edit"
+        )
         self.assertTrue("Lorem Ipsum" in self.browser.contents)
         self.browser.open(self.portal_url)
         self.assertTrue("Lorem Ipsum" in self.browser.contents)

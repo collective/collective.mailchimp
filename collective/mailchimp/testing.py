@@ -27,7 +27,8 @@ class CollectiveMailchimp(PloneSandboxLayer):
         mocker.count(0, 1000)
         mocker.result({
             u'total': 2,
-            u'data': [{
+            u'data': [
+                {
                     u'id': u'f6257645gs',
                     u'web_id': 625,
                     u'name': u'ACME Newsletter',
@@ -39,7 +40,8 @@ class CollectiveMailchimp(PloneSandboxLayer):
                     u'name': u'ACME Newsletter 2',
                     u'default_from_name': u'info@acme.com',
                 },
-            ]})
+            ]
+        })
         # List Interest Groupings
         mailchimp.listInterestGroupings(KWARGS)
         mocker.count(0, 1000)

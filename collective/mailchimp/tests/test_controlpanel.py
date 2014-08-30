@@ -45,8 +45,10 @@ class TestMailchimpSettingsControlPanel(unittest.TestCase):
     def test_mailchimp_in_controlpanel(self):
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
         self.failUnless(
-            'mailchimp' in [a.getAction(self)['id']
-            for a in self.controlpanel.listActions()]
+            'mailchimp' in [
+                a.getAction(self)['id']
+                for a in self.controlpanel.listActions()
+            ]
         )
 
     def test_record_api_key(self):
