@@ -8,11 +8,21 @@ Changelog
 - Fix fallback for missing cache after startup.
   [pbauer]
 
+- Add italian translation.
+  [gborelli]
+
 - Fix UnicodeEncodeError
   [pbauer]
 
+- Add persistent cache in the registry for the connection.
+  [toutpt]
+
 - Add french translations
   [toutpt]
+
+- Add brazilian translation.
+  [cleberjsantos]
+
 
 1.3.1 (2013-03-03)
 ------------------
