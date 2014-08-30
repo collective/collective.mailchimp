@@ -18,7 +18,6 @@ from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
 
 from plone.app.portlets import PloneMessageFactory as _
-from plone.app.portlets.cache import render_cachekey
 from plone.app.portlets.portlets import base
 
 from z3cformhelpers import AddForm
