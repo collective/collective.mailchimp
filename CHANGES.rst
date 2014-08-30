@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.3.2 (unreleased)
+1.4.0 (unreleased)
 ------------------
 
 - Fix fallback for missing cache after startup.

@@ -22,7 +22,7 @@
 
   <genericsetup:upgradeStep
       source="1200"
-      destination="1250"
+      destination="1400"
       title="Install collective.mailchimp cache."
       description=""
       profile="collective.mailchimp:default"
