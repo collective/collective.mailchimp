@@ -89,9 +89,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             if 'list_id' in data:
                 list_id = data['list_id']
             else:
-                registry = getUtility(IRegistry)
-                mailchimp_settings = registry.forInterface(IMailchimpSettings)
-                list_id = mailchimp_settings.default_list
+                list_id = mailchimp.default_list_id()
 
             # Groupings
             if 'interest_groups' in data:
