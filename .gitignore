@@ -12,6 +12,7 @@ htmlcov
 /local.cfg
 /*.egg-info
 *.egg
+*.eggs
 /.installed.cfg
 *.pyc
 /.Python
