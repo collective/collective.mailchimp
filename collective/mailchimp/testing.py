@@ -129,10 +129,60 @@ class CollectiveMailchimp(PloneSandboxLayer):
         mailchimp_settings = registry.forInterface(IMailchimpSettings)
         mailchimp_settings.api_key = u"abc"
 
+
+class BadMailchimp(PloneSandboxLayer):
+    # Let postmonkey throw exceptions always.
+
+    defaultBases = (PLONE_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        from mocker import Mocker
+        from mocker import ANY
+        from mocker import KWARGS
+        from postmonkey import MailChimpException
+        mocker = Mocker()
+        postmonkey = mocker.replace("postmonkey")
+        mailchimp = postmonkey.PostMonkey(ANY)
+        mocker.count(0, 1000)
+
+        # Lists
+        mailchimp.lists()
+        mocker.count(0, 1000)
+        mocker.throw(MailChimpException(104, 'Invalid MailChimp API Key'))
+
+        # List Interest Groupings
+        mailchimp.listInterestGroupings(KWARGS)
+        mocker.count(0, 1000)
+        mocker.throw(MailChimpException(211, 'no interest groups'))
+
+        # Get account details
+        mailchimp.getAccountDetails()
+        mocker.count(0, 1000)
+        mocker.throw(MailChimpException(104, 'Invalid MailChimp API Key'))
+
+        mocker.replay()
+
+        # Load ZCML
+        import collective.mailchimp
+        xmlconfig.file('configure.zcml',
+                       collective.mailchimp,
+                       context=configurationContext)
+
+    def setUpPloneSite(self, portal):
+        applyProfile(portal, 'collective.mailchimp:default')
+
+        registry = getUtility(IRegistry)
+        mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        mailchimp_settings.api_key = u"invalid"
+
 COLLECTIVE_MAILCHIMP_FIXTURE = CollectiveMailchimp()
+BAD_MAILCHIMP_FIXTURE = BadMailchimp()
 COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING = IntegrationTesting(
     bases=(COLLECTIVE_MAILCHIMP_FIXTURE,),
     name="CollectiveMailchimp:Integration")
 COLLECTIVE_MAILCHIMP_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(COLLECTIVE_MAILCHIMP_FIXTURE,),
     name="CollectiveMailchimp:Functional")
+BAD_MAILCHIMP_INTEGRATION_TESTING = IntegrationTesting(
+    bases=(BAD_MAILCHIMP_FIXTURE,),
+    name="BadMailchimp:Integration")
