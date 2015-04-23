@@ -5,6 +5,10 @@ Changelog
 1.4.0 (unreleased)
 ------------------
 
+- Show control panel even when api key is invalid.
+  Fixes issue #8.
+  [maurits]
+
 - Fix fallback for missing cache after startup.
   [pbauer]
 
