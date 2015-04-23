@@ -14,175 +14,357 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.mailchimp\n"
 
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:95
+#: collective/mailchimp/browser/portlet.py:90
 msgid "Add MailChimp Portlet"
 msgstr "MailChimp Portlet toevoegen"
 
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:39
+#: collective/mailchimp/browser/controlpanel.pt:83
+msgid "Address 1:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:87
+msgid "Address 2:"
+msgstr ""
+
+#: collective/mailchimp/browser/portlet.py:37
 msgid "Available lists"
 msgstr "Beschikbare Listen"
 
-#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:21
+#: collective/mailchimp/browser/controlpanel.pt:99
+msgid "City:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:140
+msgid "Cleaned cound"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:143
+msgid "Cleaned count since send"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:67
+msgid "Company:"
+msgstr ""
+
+#: collective/mailchimp/browser/z3cformhelpers.py:21
 msgid "Configure portlet"
 msgstr "Portlet configureren"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:68
-msgid "Could not fetch list from mailchimp.com: %s"
-msgstr "Lijst kon niet van mailchimp.com geladen worden: %s"
+#: collective/mailchimp/browser/controlpanel.pt:103
+msgid "Country:"
+msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:18
+#: collective/mailchimp/browser/controlpanel.pt:141
+msgid "Date created"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:138
+msgid "Default from email"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:135
+msgid "Default from name"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:134
+msgid "Default language"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:137
+msgid "Default subject"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:15
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:109
+#: collective/mailchimp/browser/controlpanel.pt:51
+msgid "E-mails left:"
+msgstr ""
+
+#: collective/mailchimp/browser/portlet.py:104
 msgid "Edit MailChimp Portlet"
 msgstr "MailChimp Portlet wijzigen"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:49
+#: collective/mailchimp/interfaces.py:46
 msgid "Email address"
 msgstr "E-Mail adres"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:56
+#: collective/mailchimp/browser/controlpanel.pt:132
+msgid "Email type option"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:79
+msgid "Email:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:115
+msgid "Fax:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:71
+msgid "First name:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:128
+msgid "ID"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:55
 msgid "Interest groups"
 msgstr "Interesse groepen"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:33
+#: collective/mailchimp/interfaces.py:30
 msgid "Invalid email address"
 msgstr "Ongeldig E-Mail adres"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:64
+#: collective/mailchimp/browser/controlpanel.pt:41
+msgid "Key"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:59
+msgid "Last login:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:75
+msgid "Last name:"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:74
+msgid "List ID"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:142
+msgid "List rating"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:67
 msgid "Mail format"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:58
-#: collective.mailchimp/collective/mailchimp/profiles/default/controlpanel.xml
+#: collective/mailchimp/browser/portlet.py:56
+#: collective/mailchimp/profiles/default/controlpanel.xml
 msgid "MailChimp"
 msgstr "MailChimp"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:77
+#: collective/mailchimp/interfaces.py:117
 msgid "MailChimp API Key"
 msgstr "MailChimp API Key"
 
-#: collective.mailchimp/collective/mailchimp/browser/controlpanel.py:19
+#: collective/mailchimp/browser/controlpanel.pt:36
+msgid "MailChimp Account"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:123
+msgid "MailChimp Lists"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.py:19
 msgid "MailChimp settings"
 msgstr "MailChimp instellingen"
 
-#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:65
+#: collective/mailchimp/browser/controlpanel.pt:131
+msgid "Member count"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:133
+msgid "Member count since send"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:55
+msgid "Member since:"
+msgstr ""
+
+#: collective/mailchimp/browser/z3cformhelpers.py:65
 msgid "Modify portlet"
 msgstr "Portlet wijzigen"
 
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:40
+#: collective/mailchimp/browser/controlpanel.pt:130
+msgid "Name"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:111
+msgid "Phone:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:63
+msgid "Plan type:"
+msgstr ""
+
+#: collective/mailchimp/browser/portlet.py:38
 msgid "Select available lists to subscribe to."
 msgstr "Selecteer beschikbare lijst om in te schrijven"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:35
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:77
+#: collective/mailchimp/browser/controlpanel.pt:18
+msgid "Site Setup"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:32
+msgid "Standard"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:95
+msgid "State:"
+msgstr ""
+
+#: collective/mailchimp/browser/newsletter.py:38
+#: collective/mailchimp/browser/portlet.py:72
 msgid "Subscribe to newsletter"
 msgstr "Inschrijven op nieuwsbrief"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:17
+#: collective/mailchimp/interfaces.py:14
 msgid "Subscriber list"
 msgstr "Lijst van inschrijvingen"
 
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:96
+#: collective/mailchimp/browser/portlet.py:91
 msgid "This portlet displays a subscription form for a MailChimp newsletter."
 msgstr "Dit portlet laat een inschrijflijst formulier zien voor MailChimp nieuwsbrieven"
 
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:35
+#: collective/mailchimp/browser/portlet.py:33
 msgid "Title"
 msgstr "Titel"
 
-#: collective.mailchimp/collective/mailchimp/browser/portlet.py:36
+#: collective/mailchimp/browser/portlet.py:34
 msgid "Title of the portlet"
 msgstr "Portlet titel"
 
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:142
+#: collective/mailchimp/browser/controlpanel.pt:107
+msgid "URL:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:139
+msgid "Unsubscribed count"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:136
+msgid "Unsubscribed count since send"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:47
+msgid "Username:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:42
+msgid "Value"
+msgstr ""
+
+#: collective/mailchimp/browser/newsletter.py:163
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr "We moeten uw email adres bevestigen om de nieuwsbrief inschrijving af te ronden. Klik op de link in de email die we u zojuist hebben verstuurd."
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:101
+#: collective/mailchimp/browser/controlpanel.pt:129
+msgid "Web ID"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:91
+msgid "Zip:"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:152
+msgid "default_list"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:162
 msgid "double_optin"
 msgstr ""
 
 #. Default: "Let users choose their email type preference in the newsletter subscription form."
-#: collective.mailchimp/collective/mailchimp/interfaces.py:90
+#: collective/mailchimp/interfaces.py:130
 msgid "email_type"
 msgstr "Laat gebruikers hun email type voorkeur instellen in het nieuwsbrief inschrijf formulier."
 
+#: collective/mailchimp/interfaces.py:141
+msgid "email_type_is_optional"
+msgstr ""
+
 #. Default: "Enter in your MailChimp key here (.e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into mailchimp.com, go to account -> extras -> API Keys & Authorized Apps and copy the API Key to this field."
-#: collective.mailchimp/collective/mailchimp/interfaces.py:78
+#: collective/mailchimp/interfaces.py:118
 msgid "help_api_key"
 msgstr "Voer hier uw MailChimp API-Key (e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4') in. Log in op mailchimp.com, ga naar account -> extras -> API Keys & Authorized Apps en kopier de API Key naar dit veld."
 
+#. Default: "Default list which is used in the @@newsletter view if no list_id param is provided."
+#: collective/mailchimp/interfaces.py:153
+msgid "help_default_list"
+msgstr ""
+
 #. Default: "Flag to control whether a double opt-in confirmation message is sent, defaults to true. Abusing this may cause your account to be suspended."
-#: collective.mailchimp/collective/mailchimp/interfaces.py:102
+#: collective/mailchimp/interfaces.py:163
 msgid "help_double_optin"
 msgstr "Zet aan om te controleren of een dubbele opt-in bevestiging is verstuurd, standaard staat dit aan. Misbruik hiervan kan uw account suspenden"
 
 #. Default: "Please enter your email address."
-#: collective.mailchimp/collective/mailchimp/interfaces.py:50
+#: collective/mailchimp/interfaces.py:47
 msgid "help_email"
 msgstr "Voer hier a.u.b. uw email adres in."
 
 #. Default: "Email type preference for the email (html, text, or mobile defaults to html)"
-#: collective.mailchimp/collective/mailchimp/interfaces.py:91
+#: collective/mailchimp/interfaces.py:131
 msgid "help_email_type"
 msgstr "Email type voorkeuren voor de email (html, text, of mobiel. Standaard is html)"
 
+#. Default: "Let users choose their email type preference in the newsletter subscription form."
+#: collective/mailchimp/interfaces.py:142
+msgid "help_email_type_is_optional"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:56
+msgid "help_interest_groups"
+msgstr ""
+
 #. Default: "Flag to determine whether we replace the interest groups with the groups provided or we add the providedgroups to the member's interest groups (optional, defaults to true)"
-#: collective.mailchimp/collective/mailchimp/interfaces.py:125
+#: collective/mailchimp/interfaces.py:186
 msgid "help_replace_interests"
 msgstr "Zet aan om te bepalen of we de interesse groepen vervangen met de groepen aangeleverd of we de aangeleverde groepen toevoegen aan het lid zijn interesse groepen. (optioneel, standaard true)"
 
 #. Default: "If your double_optin is false and this is true, we will send your lists Welcome Email if this subscribe succeeds - this will *not* fire if we end up updating an existing subscriber. If double_optin is true, this has no effect. defaults to false."
-#: collective.mailchimp/collective/mailchimp/interfaces.py:138
+#: collective/mailchimp/interfaces.py:199
 msgid "help_send_welcome"
 msgstr "Als double_optin uitstaat en deze aanstaat, zullen we de welkom email van de lijst versturen als de inschrijving succesvol is. Dit wordt niet gedaan als we een bestaande gebruiker updaten. Als double_optin aanstaat heeft dit geen effect. Standaard false"
 
 #. Default: "Flag to control whether existing subscribers should be updated instead of throwing an error, defaults to false"
-#: collective.mailchimp/collective/mailchimp/interfaces.py:114
+#: collective/mailchimp/interfaces.py:175
 msgid "help_update_existing"
 msgstr "Zet aan om bestaande gebruikers te updaten in plaats van een foutmelding te geven. Standaard false"
 
 #. Default: "Cancel"
-#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:50
+#: collective/mailchimp/browser/z3cformhelpers.py:50
 msgid "label_cancel"
 msgstr "Annuleren"
 
 #. Default: "Save"
-#: collective.mailchimp/collective/mailchimp/browser/z3cformhelpers.py:39
+#: collective/mailchimp/browser/z3cformhelpers.py:39
 msgid "label_save"
 msgstr "Opslaan"
 
 #. Default: "Could not subscribe to newsletter. Please contact the site administrator: '${error}'"
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:126
+#: collective/mailchimp/browser/newsletter.py:149
 msgid "mailchimp_error_msg"
 msgstr "Aanmelden op nieuwsbrief mislukt. Neem a.u.b. contact op met de website beheerder: '${error}'"
 
 #. Default: "Could not subscribe to newsletter. The email '${email}' is already subscribed."
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:108
+#: collective/mailchimp/browser/newsletter.py:121
 msgid "mailchimp_error_msg_already_subscribed"
 msgstr "Aanmelden op nieuwsbrief mislukt. Het email adres '${email}' is al aangemeld."
 
 #. Default: "Could not subscribe to newsletter. The email '${email}' has been banned."
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:117
+#: collective/mailchimp/browser/newsletter.py:135
 msgid "mailchimp_error_msg_banned"
 msgstr "Aanmelden op nieuwsbrief mislukt. Het e-mail adres '${email}' is verbannen."
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:124
+#: collective/mailchimp/interfaces.py:185
 msgid "replace_interests"
 msgstr ""
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:137
+#: collective/mailchimp/interfaces.py:198
 msgid "send_welcome"
 msgstr ""
 
 #. Default: "Subscribe"
-#: collective.mailchimp/collective/mailchimp/browser/newsletter.py:48
+#: collective/mailchimp/browser/newsletter.py:79
 msgid "subscribe_to_newsletter_button"
 msgstr "Inschrijven"
 
-#: collective.mailchimp/collective/mailchimp/interfaces.py:113
+#: collective/mailchimp/interfaces.py:174
 msgid "update_existing"
 msgstr ""
 
