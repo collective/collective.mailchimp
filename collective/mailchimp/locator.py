@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 from postmonkey import PostMonkey
 from collective.mailchimp.interfaces import IMailchimpSettings
 from zope.component import getUtility
