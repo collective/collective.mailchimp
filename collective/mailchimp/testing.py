@@ -6,31 +6,8 @@ from plone.app.testing import applyProfile
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
-from postmonkey import MailChimpException
+
 from zope.configuration import xmlconfig
-
-
-# We use mocker.  In one layer we want to change the result given back
-# by calling a function.  In a second layer we instead want to raise
-# an exception.  If you do that with 'mocker.result = result' and
-# 'mocker.throw(Exception()', the two approaches bite each other: the
-# first one wins, so it is active in both layers.  So: in both layers
-# we use 'mocker.call' and that solves our problem: the previous mock
-# call is overridden.  Well, that is the theory.
-
-
-def raise_exc_code(code):
-    # Return a function that raises an exception with this code.
-    def fun(*args, **kwargs):
-        raise MailChimpException(code, 'Some MailChimp error')
-    return fun
-
-
-def return_result(result):
-    # Return a function that returns this result.
-    def fun(*args, **kwargs):
-        return result
-    return fun
 
 
 class CollectiveMailchimp(PloneSandboxLayer):
@@ -48,7 +25,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
         # Lists
         mailchimp.lists()
         mocker.count(0, 1000)
-        result = {
+        mocker.result({
             u'total': 2,
             u'data': [
                 {
@@ -64,14 +41,11 @@ class CollectiveMailchimp(PloneSandboxLayer):
                     u'default_from_name': u'info@acme.com',
                 },
             ]
-        }
-        # mocker.result = result
-        mocker.call(return_result(result))
-
+        })
         # List Interest Groupings
         mailchimp.listInterestGroupings(KWARGS)
         mocker.count(0, 1000)
-        result = [
+        mocker.result([
             {
                 u'groups': [
                     {
@@ -94,17 +68,12 @@ class CollectiveMailchimp(PloneSandboxLayer):
                     }
                 ]
             }
-        ]
-        # mocker.result = result
-        mocker.call(return_result(result))
+        ])
 
         # Get account details
         mailchimp.getAccountDetails()
         mocker.count(0, 1000)
-        result = []
-        # mocker.result = result
-        mocker.call(return_result(result))
-        # NOTE: next result is never used.  Might want to remove it.
+        mocker.result([])
         result = {
             u'total': 1,
             u'data': [{
@@ -170,6 +139,7 @@ class BadMailchimp(PloneSandboxLayer):
         from mocker import Mocker
         from mocker import ANY
         from mocker import KWARGS
+        from postmonkey import MailChimpException
         mocker = Mocker()
         postmonkey = mocker.replace("postmonkey")
         mailchimp = postmonkey.PostMonkey(ANY)
@@ -178,20 +148,17 @@ class BadMailchimp(PloneSandboxLayer):
         # Lists
         mailchimp.lists()
         mocker.count(0, 1000)
-        # mocker.throw(MailChimpException(104, 'Invalid MailChimp API Key'))
-        mocker.call(raise_exc_code(104))
+        mocker.throw(MailChimpException(104, 'Invalid MailChimp API Key'))
 
         # List Interest Groupings
         mailchimp.listInterestGroupings(KWARGS)
         mocker.count(0, 1000)
-        # mocker.throw(MailChimpException(211, 'no interest groups'))
-        mocker.call(raise_exc_code(211))
+        mocker.throw(MailChimpException(211, 'no interest groups'))
 
         # Get account details
         mailchimp.getAccountDetails()
         mocker.count(0, 1000)
-        # mocker.throw(MailChimpException(104, 'Invalid MailChimp API Key'))
-        mocker.call(raise_exc_code(104))
+        mocker.throw(MailChimpException(104, 'Invalid MailChimp API Key'))
 
         mocker.replay()
 
