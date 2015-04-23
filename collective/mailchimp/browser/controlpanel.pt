@@ -30,6 +30,10 @@
                      empty string:-">
       <fieldset id="fieldset-send">
         <legend id="fieldsetlegend-send" i18n:translate="">Standard</legend>
+        <div id="mailchimp-no-valid-account" class="warning" tal:condition="not:account"
+             i18n:translate="msg_mailchimp_no_account">
+          Your account has not been saved yet or is not valid.
+        </div>
         <span tal:replace="structure view/contents" />
       </fieldset>
       <fieldset id="fieldset-account" tal:condition="account">
