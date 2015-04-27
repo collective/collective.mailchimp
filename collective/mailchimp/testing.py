@@ -74,7 +74,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
         mailchimp.getAccountDetails()
         mocker.count(0, 1000)
         mocker.result([])
-        result = {
+        result = {  # noqa
             u'total': 1,
             u'data': [{
                 u'use_awesomebar': True,
@@ -87,7 +87,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
                 u'default_from_name': u'Timo Stollenwerk',
                 u'visibility': u'pub',
                 u'subscribe_url_long':
-                    u'http://johndoe.us4.list-manage1.com/subscribe?u=5e&id=fd',
+                    u'http://johndoe.us4.list-manage1.com/subscribe?u=5e&id=fd',  # noqa
                 u'default_subject': u'Test Newsletter',
                 u'subscribe_url_short': u'http://eepurl.com/h6Rjg',
                 u'default_from_email': u'no-reply@timostollenwerk.net',
