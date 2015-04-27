@@ -23,6 +23,10 @@ Introduction
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: License
 
+.. image:: https://landscape.io/github/collective/collective.mailchimp/master/landscape.svg?style=plastic
+   :target: https://landscape.io/github/collective/collective.mailchimp/master
+   :alt: Code Health
+
 MailChimp integration for Plone.
 
 MailChimp_ helps you design email newsletters, share
