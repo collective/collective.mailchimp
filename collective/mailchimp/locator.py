@@ -1,4 +1,5 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
+import logging
 from postmonkey import PostMonkey
 from collective.mailchimp.interfaces import IMailchimpSettings
 from zope.component import getUtility
@@ -9,6 +10,7 @@ from zope.interface import implements
 from collective.mailchimp.interfaces import IMailchimpLocator
 
 _marker = object()
+logger = logging.getLogger('collective.mailchimp')
 
 
 class MailchimpLocator(object):
@@ -121,7 +123,11 @@ class MailchimpLocator(object):
 
     def _account(self):
         self.connect()
-        return self.mailchimp.getAccountDetails()
+        try:
+            return self.mailchimp.getAccountDetails()
+        except MailChimpException:
+            logger.exception("Exception getting account details.")
+            return None
 
     def updateCache(self):
         self.connect()
