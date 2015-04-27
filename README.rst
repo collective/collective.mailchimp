@@ -4,6 +4,25 @@ Introduction
 .. image:: https://secure.travis-ci.org/collective/collective.mailchimp.png
     :target: http://travis-ci.org/collective/collective.mailchimp
 
+.. image:: https://coveralls.io/repos/collective/collective.mailchimp/badge.png?branch=master
+    :target: https://coveralls.io/r/collective/collective.mailchimp
+
+.. image:: https://pypip.in/d/collective.mailchimp/badge.png
+    :target: https://pypi.python.org/pypi/collective.mailchimp/
+    :alt: Downloads
+
+.. image:: https://pypip.in/v/collective.mailchimp/badge.png
+    :target: https://pypi.python.org/pypi/collective.mailchimp/
+    :alt: Latest Version
+
+.. image:: https://pypip.in/egg/collective.mailchimp/badge.png
+    :target: https://pypi.python.org/pypi/collective.mailchimp/
+    :alt: Egg Status
+
+.. image:: https://pypip.in/license/collective.mailchimp/badge.png
+    :target: https://pypi.python.org/pypi/collective.mailchimp/
+    :alt: License
+
 MailChimp integration for Plone.
 
 MailChimp_ helps you design email newsletters, share
