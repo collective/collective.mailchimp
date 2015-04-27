@@ -9,8 +9,7 @@ install:
   - bin/buildout -N -t 3 -c travis.cfg
 script:
   - bin/code-analysis
-  - bin/test
+  - bin/test-coverage
 after_success:
-  - bin/createcoverage run bin/alltests
   - pip install -q coveralls
   - coveralls
