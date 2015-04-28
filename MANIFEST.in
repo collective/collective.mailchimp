@@ -1,4 +1,5 @@
-recursive-include collective *
+graft collective
+graft docs
 include *.rst
 include *.txt
 global-exclude *.pyc
