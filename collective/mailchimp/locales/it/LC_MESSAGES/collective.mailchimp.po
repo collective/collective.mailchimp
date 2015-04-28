@@ -18,11 +18,11 @@ msgstr ""
 msgid "Add MailChimp Portlet"
 msgstr "Aggiungi portlet mailchimp"
 
-#: collective/mailchimp/browser/controlpanel.pt:83
+#: collective/mailchimp/browser/controlpanel.pt:87
 msgid "Address 1:"
 msgstr "Indirizzo 1:"
 
-#: collective/mailchimp/browser/controlpanel.pt:87
+#: collective/mailchimp/browser/controlpanel.pt:91
 msgid "Address 2:"
 msgstr "Indirizzo 2"
 
@@ -30,19 +30,19 @@ msgstr "Indirizzo 2"
 msgid "Available lists"
 msgstr "Newsletter disponibili"
 
-#: collective/mailchimp/browser/controlpanel.pt:99
+#: collective/mailchimp/browser/controlpanel.pt:103
 msgid "City:"
 msgstr "Città:"
 
-#: collective/mailchimp/browser/controlpanel.pt:140
+#: collective/mailchimp/browser/controlpanel.pt:144
 msgid "Cleaned cound"
 msgstr ""
 
-#: collective/mailchimp/browser/controlpanel.pt:143
+#: collective/mailchimp/browser/controlpanel.pt:147
 msgid "Cleaned count since send"
 msgstr ""
 
-#: collective/mailchimp/browser/controlpanel.pt:67
+#: collective/mailchimp/browser/controlpanel.pt:71
 msgid "Company:"
 msgstr "Azienda:"
 
@@ -50,27 +50,27 @@ msgstr "Azienda:"
 msgid "Configure portlet"
 msgstr "Configurazione portlet"
 
-#: collective/mailchimp/browser/controlpanel.pt:103
+#: collective/mailchimp/browser/controlpanel.pt:107
 msgid "Country:"
 msgstr "Stato:"
 
-#: collective/mailchimp/browser/controlpanel.pt:141
+#: collective/mailchimp/browser/controlpanel.pt:145
 msgid "Date created"
 msgstr ""
 
-#: collective/mailchimp/browser/controlpanel.pt:138
+#: collective/mailchimp/browser/controlpanel.pt:142
 msgid "Default from email"
 msgstr ""
 
-#: collective/mailchimp/browser/controlpanel.pt:135
+#: collective/mailchimp/browser/controlpanel.pt:139
 msgid "Default from name"
 msgstr ""
 
-#: collective/mailchimp/browser/controlpanel.pt:134
+#: collective/mailchimp/browser/controlpanel.pt:138
 msgid "Default language"
 msgstr "Lingua di deafault"
 
-#: collective/mailchimp/browser/controlpanel.pt:137
+#: collective/mailchimp/browser/controlpanel.pt:141
 msgid "Default subject"
 msgstr "Oggetto di default"
 
@@ -78,7 +78,7 @@ msgstr "Oggetto di default"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: collective/mailchimp/browser/controlpanel.pt:51
+#: collective/mailchimp/browser/controlpanel.pt:55
 msgid "E-mails left:"
 msgstr "Email rimanenti"
 
@@ -90,23 +90,23 @@ msgstr "Modifica portlet MailChimp"
 msgid "Email address"
 msgstr "Indirizzo email"
 
-#: collective/mailchimp/browser/controlpanel.pt:132
+#: collective/mailchimp/browser/controlpanel.pt:136
 msgid "Email type option"
 msgstr "Tipologia di email"
 
-#: collective/mailchimp/browser/controlpanel.pt:79
+#: collective/mailchimp/browser/controlpanel.pt:83
 msgid "Email:"
 msgstr "Email:"
 
-#: collective/mailchimp/browser/controlpanel.pt:115
+#: collective/mailchimp/browser/controlpanel.pt:119
 msgid "Fax:"
 msgstr "Fax:"
 
-#: collective/mailchimp/browser/controlpanel.pt:71
+#: collective/mailchimp/browser/controlpanel.pt:75
 msgid "First name:"
 msgstr "Cognome:"
 
-#: collective/mailchimp/browser/controlpanel.pt:128
+#: collective/mailchimp/browser/controlpanel.pt:132
 msgid "ID"
 msgstr "ID"
 
@@ -118,15 +118,15 @@ msgstr ""
 msgid "Invalid email address"
 msgstr "Indirizzo email non valido"
 
-#: collective/mailchimp/browser/controlpanel.pt:41
+#: collective/mailchimp/browser/controlpanel.pt:45
 msgid "Key"
 msgstr "Key"
 
-#: collective/mailchimp/browser/controlpanel.pt:59
+#: collective/mailchimp/browser/controlpanel.pt:63
 msgid "Last login:"
 msgstr "Ultimo login:"
 
-#: collective/mailchimp/browser/controlpanel.pt:75
+#: collective/mailchimp/browser/controlpanel.pt:79
 msgid "Last name:"
 msgstr "Nome:"
 
@@ -134,7 +134,7 @@ msgstr "Nome:"
 msgid "List ID"
 msgstr "ID lista"
 
-#: collective/mailchimp/browser/controlpanel.pt:142
+#: collective/mailchimp/browser/controlpanel.pt:146
 msgid "List rating"
 msgstr "Valutazione lista"
 
@@ -151,11 +151,11 @@ msgstr "MailChimp"
 msgid "MailChimp API Key"
 msgstr "MailChimp API Key"
 
-#: collective/mailchimp/browser/controlpanel.pt:36
+#: collective/mailchimp/browser/controlpanel.pt:40
 msgid "MailChimp Account"
 msgstr "Account MailChimp"
 
-#: collective/mailchimp/browser/controlpanel.pt:123
+#: collective/mailchimp/browser/controlpanel.pt:127
 msgid "MailChimp Lists"
 msgstr "Newsletter MailChimp"
 
@@ -163,15 +163,15 @@ msgstr "Newsletter MailChimp"
 msgid "MailChimp settings"
 msgstr "Impostazioni MailChimp"
 
-#: collective/mailchimp/browser/controlpanel.pt:131
+#: collective/mailchimp/browser/controlpanel.pt:135
 msgid "Member count"
 msgstr "Numero iscritti"
 
-#: collective/mailchimp/browser/controlpanel.pt:133
+#: collective/mailchimp/browser/controlpanel.pt:137
 msgid "Member count since send"
 msgstr ""
 
-#: collective/mailchimp/browser/controlpanel.pt:55
+#: collective/mailchimp/browser/controlpanel.pt:59
 msgid "Member since:"
 msgstr "Iscritto da"
 
@@ -179,15 +179,15 @@ msgstr "Iscritto da"
 msgid "Modify portlet"
 msgstr "Modifica portlet"
 
-#: collective/mailchimp/browser/controlpanel.pt:130
+#: collective/mailchimp/browser/controlpanel.pt:134
 msgid "Name"
 msgstr "Nome"
 
-#: collective/mailchimp/browser/controlpanel.pt:111
+#: collective/mailchimp/browser/controlpanel.pt:115
 msgid "Phone:"
 msgstr "Telefono"
 
-#: collective/mailchimp/browser/controlpanel.pt:63
+#: collective/mailchimp/browser/controlpanel.pt:67
 msgid "Plan type:"
 msgstr "Tipo di piano"
 
@@ -203,7 +203,7 @@ msgstr "Configurazione del sito"
 msgid "Standard"
 msgstr "Standard"
 
-#: collective/mailchimp/browser/controlpanel.pt:95
+#: collective/mailchimp/browser/controlpanel.pt:99
 msgid "State:"
 msgstr "Regione:"
 
@@ -228,23 +228,23 @@ msgstr "Titolo"
 msgid "Title of the portlet"
 msgstr "Titolo della portlet"
 
-#: collective/mailchimp/browser/controlpanel.pt:107
+#: collective/mailchimp/browser/controlpanel.pt:111
 msgid "URL:"
 msgstr "URL:"
 
-#: collective/mailchimp/browser/controlpanel.pt:139
+#: collective/mailchimp/browser/controlpanel.pt:143
 msgid "Unsubscribed count"
 msgstr ""
 
-#: collective/mailchimp/browser/controlpanel.pt:136
+#: collective/mailchimp/browser/controlpanel.pt:140
 msgid "Unsubscribed count since send"
 msgstr ""
 
-#: collective/mailchimp/browser/controlpanel.pt:47
+#: collective/mailchimp/browser/controlpanel.pt:51
 msgid "Username:"
 msgstr "Nome utente:"
 
-#: collective/mailchimp/browser/controlpanel.pt:42
+#: collective/mailchimp/browser/controlpanel.pt:46
 msgid "Value"
 msgstr "Valore"
 
@@ -252,11 +252,11 @@ msgstr "Valore"
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr "Il tuo indirizzo email deve essere confermato. Per completare l'iscrizione clicca sul link all'interno della mail che ti abbiamo inviato."
 
-#: collective/mailchimp/browser/controlpanel.pt:129
+#: collective/mailchimp/browser/controlpanel.pt:133
 msgid "Web ID"
 msgstr "Web ID"
 
-#: collective/mailchimp/browser/controlpanel.pt:91
+#: collective/mailchimp/browser/controlpanel.pt:95
 msgid "Zip:"
 msgstr "CAP:"
 
@@ -349,6 +349,11 @@ msgstr "Impossibile iscriversi, l'email ${email} è già utilizzata nella newsle
 #: collective/mailchimp/browser/newsletter.py:135
 msgid "mailchimp_error_msg_banned"
 msgstr "Impossibile iscriversi, l'email ${email} è stata bandita."
+
+#. Default: "Your account has not been saved yet or is not valid."
+#: collective/mailchimp/browser/controlpanel.pt:33
+msgid "msg_mailchimp_no_account"
+msgstr ""
 
 #: collective/mailchimp/interfaces.py:185
 msgid "replace_interests"

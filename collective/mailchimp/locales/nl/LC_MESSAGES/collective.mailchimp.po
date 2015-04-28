@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.mailchimp\n"
-"POT-Creation-Date: 2015-04-23 14:29+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "PO-Revision-Date: 2015-04-23 16:29+0200\n"
 "Last-Translator: Maurits van Rees <.m.van.rees@zetsoftware.nl>\n"
 "Language-Team: Plone Nederland <plone-plone-nl@lists.plone.org>\n"
@@ -11,21 +11,21 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language: nl\n"
 "Language-Code: nl\n"
 "Language-Name: Dutch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.mailchimp\n"
+"Language: nl\n"
 
 #: collective/mailchimp/browser/portlet.py:90
 msgid "Add MailChimp Portlet"
 msgstr "MailChimp Portlet toevoegen"
 
-#: collective/mailchimp/browser/controlpanel.pt:83
+#: collective/mailchimp/browser/controlpanel.pt:87
 msgid "Address 1:"
 msgstr "Adres 1:"
 
-#: collective/mailchimp/browser/controlpanel.pt:87
+#: collective/mailchimp/browser/controlpanel.pt:91
 msgid "Address 2:"
 msgstr "Adres 2:"
 
@@ -33,19 +33,19 @@ msgstr "Adres 2:"
 msgid "Available lists"
 msgstr "Beschikbare Listen"
 
-#: collective/mailchimp/browser/controlpanel.pt:99
+#: collective/mailchimp/browser/controlpanel.pt:103
 msgid "City:"
 msgstr "Woonplaats:"
 
-#: collective/mailchimp/browser/controlpanel.pt:140
+#: collective/mailchimp/browser/controlpanel.pt:144
 msgid "Cleaned cound"
 msgstr "Opgeschoond aantal"
 
-#: collective/mailchimp/browser/controlpanel.pt:143
+#: collective/mailchimp/browser/controlpanel.pt:147
 msgid "Cleaned count since send"
 msgstr "Opgeschoond aantal sinds laatste verzending"
 
-#: collective/mailchimp/browser/controlpanel.pt:67
+#: collective/mailchimp/browser/controlpanel.pt:71
 msgid "Company:"
 msgstr "Bedrijf:"
 
@@ -53,27 +53,27 @@ msgstr "Bedrijf:"
 msgid "Configure portlet"
 msgstr "Portlet configureren"
 
-#: collective/mailchimp/browser/controlpanel.pt:103
+#: collective/mailchimp/browser/controlpanel.pt:107
 msgid "Country:"
 msgstr "Land:"
 
-#: collective/mailchimp/browser/controlpanel.pt:141
+#: collective/mailchimp/browser/controlpanel.pt:145
 msgid "Date created"
 msgstr "Datum aangemaakt"
 
-#: collective/mailchimp/browser/controlpanel.pt:138
+#: collective/mailchimp/browser/controlpanel.pt:142
 msgid "Default from email"
 msgstr "Standaard 'van' e-mailadres"
 
-#: collective/mailchimp/browser/controlpanel.pt:135
+#: collective/mailchimp/browser/controlpanel.pt:139
 msgid "Default from name"
 msgstr "Standaard 'van' naam"
 
-#: collective/mailchimp/browser/controlpanel.pt:134
+#: collective/mailchimp/browser/controlpanel.pt:138
 msgid "Default language"
 msgstr "Standaard taal"
 
-#: collective/mailchimp/browser/controlpanel.pt:137
+#: collective/mailchimp/browser/controlpanel.pt:141
 msgid "Default subject"
 msgstr "Standaard onderwerp"
 
@@ -81,7 +81,7 @@ msgstr "Standaard onderwerp"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: collective/mailchimp/browser/controlpanel.pt:51
+#: collective/mailchimp/browser/controlpanel.pt:55
 msgid "E-mails left:"
 msgstr "E-mails over:"
 
@@ -93,23 +93,23 @@ msgstr "MailChimp Portlet wijzigen"
 msgid "Email address"
 msgstr "E-Mail adres"
 
-#: collective/mailchimp/browser/controlpanel.pt:132
+#: collective/mailchimp/browser/controlpanel.pt:136
 msgid "Email type option"
 msgstr "E-mail type optie"
 
-#: collective/mailchimp/browser/controlpanel.pt:79
+#: collective/mailchimp/browser/controlpanel.pt:83
 msgid "Email:"
 msgstr "E-mail:"
 
-#: collective/mailchimp/browser/controlpanel.pt:115
+#: collective/mailchimp/browser/controlpanel.pt:119
 msgid "Fax:"
 msgstr "Fax:"
 
-#: collective/mailchimp/browser/controlpanel.pt:71
+#: collective/mailchimp/browser/controlpanel.pt:75
 msgid "First name:"
 msgstr "Eerste naam:"
 
-#: collective/mailchimp/browser/controlpanel.pt:128
+#: collective/mailchimp/browser/controlpanel.pt:132
 msgid "ID"
 msgstr "ID"
 
@@ -121,15 +121,15 @@ msgstr "Interesse groepen"
 msgid "Invalid email address"
 msgstr "Ongeldig E-Mail adres"
 
-#: collective/mailchimp/browser/controlpanel.pt:41
+#: collective/mailchimp/browser/controlpanel.pt:45
 msgid "Key"
 msgstr "Sleutel"
 
-#: collective/mailchimp/browser/controlpanel.pt:59
+#: collective/mailchimp/browser/controlpanel.pt:63
 msgid "Last login:"
 msgstr "Laatste login:"
 
-#: collective/mailchimp/browser/controlpanel.pt:75
+#: collective/mailchimp/browser/controlpanel.pt:79
 msgid "Last name:"
 msgstr "Achternaam:"
 
@@ -137,7 +137,7 @@ msgstr "Achternaam:"
 msgid "List ID"
 msgstr "Lijst ID"
 
-#: collective/mailchimp/browser/controlpanel.pt:142
+#: collective/mailchimp/browser/controlpanel.pt:146
 msgid "List rating"
 msgstr "Lijst waardering"
 
@@ -154,11 +154,11 @@ msgstr "MailChimp"
 msgid "MailChimp API Key"
 msgstr "MailChimp API Key"
 
-#: collective/mailchimp/browser/controlpanel.pt:36
+#: collective/mailchimp/browser/controlpanel.pt:40
 msgid "MailChimp Account"
 msgstr "Mailchimp account"
 
-#: collective/mailchimp/browser/controlpanel.pt:123
+#: collective/mailchimp/browser/controlpanel.pt:127
 msgid "MailChimp Lists"
 msgstr "MailChimp lijsten"
 
@@ -166,15 +166,15 @@ msgstr "MailChimp lijsten"
 msgid "MailChimp settings"
 msgstr "MailChimp instellingen"
 
-#: collective/mailchimp/browser/controlpanel.pt:131
+#: collective/mailchimp/browser/controlpanel.pt:135
 msgid "Member count"
 msgstr "Ledenaantal"
 
-#: collective/mailchimp/browser/controlpanel.pt:133
+#: collective/mailchimp/browser/controlpanel.pt:137
 msgid "Member count since send"
 msgstr "Ledenaantal sinds verzending"
 
-#: collective/mailchimp/browser/controlpanel.pt:55
+#: collective/mailchimp/browser/controlpanel.pt:59
 msgid "Member since:"
 msgstr "Lid sinds:"
 
@@ -182,15 +182,15 @@ msgstr "Lid sinds:"
 msgid "Modify portlet"
 msgstr "Portlet wijzigen"
 
-#: collective/mailchimp/browser/controlpanel.pt:130
+#: collective/mailchimp/browser/controlpanel.pt:134
 msgid "Name"
 msgstr "Naam:"
 
-#: collective/mailchimp/browser/controlpanel.pt:111
+#: collective/mailchimp/browser/controlpanel.pt:115
 msgid "Phone:"
 msgstr "Telefoon:"
 
-#: collective/mailchimp/browser/controlpanel.pt:63
+#: collective/mailchimp/browser/controlpanel.pt:67
 msgid "Plan type:"
 msgstr "Plan type:"
 
@@ -206,7 +206,7 @@ msgstr "Website instellingen"
 msgid "Standard"
 msgstr "Standaard"
 
-#: collective/mailchimp/browser/controlpanel.pt:95
+#: collective/mailchimp/browser/controlpanel.pt:99
 msgid "State:"
 msgstr "Status:"
 
@@ -231,23 +231,23 @@ msgstr "Titel"
 msgid "Title of the portlet"
 msgstr "Portlet titel"
 
-#: collective/mailchimp/browser/controlpanel.pt:107
+#: collective/mailchimp/browser/controlpanel.pt:111
 msgid "URL:"
 msgstr "URL:"
 
-#: collective/mailchimp/browser/controlpanel.pt:139
+#: collective/mailchimp/browser/controlpanel.pt:143
 msgid "Unsubscribed count"
 msgstr "Aantal uitgeschreven"
 
-#: collective/mailchimp/browser/controlpanel.pt:136
+#: collective/mailchimp/browser/controlpanel.pt:140
 msgid "Unsubscribed count since send"
 msgstr "Aantal uitgeschreven sinds verzenden"
 
-#: collective/mailchimp/browser/controlpanel.pt:47
+#: collective/mailchimp/browser/controlpanel.pt:51
 msgid "Username:"
 msgstr "Gebruikersnaam:"
 
-#: collective/mailchimp/browser/controlpanel.pt:42
+#: collective/mailchimp/browser/controlpanel.pt:46
 msgid "Value"
 msgstr "Waarde"
 
@@ -255,11 +255,11 @@ msgstr "Waarde"
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
 msgstr "We moeten uw email adres bevestigen om de nieuwsbrief inschrijving af te ronden. Klik op de link in de email die we u zojuist hebben verstuurd."
 
-#: collective/mailchimp/browser/controlpanel.pt:129
+#: collective/mailchimp/browser/controlpanel.pt:133
 msgid "Web ID"
 msgstr "Web ID"
 
-#: collective/mailchimp/browser/controlpanel.pt:91
+#: collective/mailchimp/browser/controlpanel.pt:95
 msgid "Zip:"
 msgstr "Postcode:"
 
@@ -353,6 +353,11 @@ msgstr "Aanmelden op nieuwsbrief mislukt. Het email adres '${email}' is al aange
 #: collective/mailchimp/browser/newsletter.py:135
 msgid "mailchimp_error_msg_banned"
 msgstr "Aanmelden op nieuwsbrief mislukt. Het e-mail adres '${email}' is verbannen."
+
+#. Default: "Your account has not been saved yet or is not valid."
+#: collective/mailchimp/browser/controlpanel.pt:33
+msgid "msg_mailchimp_no_account"
+msgstr ""
 
 #: collective/mailchimp/interfaces.py:185
 msgid "replace_interests"
