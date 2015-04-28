@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: collective.mailchimp\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"PO-Revision-Date: 2015-04-23 16:29+0200\n"
+"PO-Revision-Date: 2015-04-28 14:42+0200\n"
 "Last-Translator: Maurits van Rees <.m.van.rees@zetsoftware.nl>\n"
 "Language-Team: Plone Nederland <plone-plone-nl@lists.plone.org>\n"
 "MIME-Version: 1.0\n"
@@ -357,7 +357,7 @@ msgstr "Aanmelden op nieuwsbrief mislukt. Het e-mail adres '${email}' is verbann
 #. Default: "Your account has not been saved yet or is not valid."
 #: collective/mailchimp/browser/controlpanel.pt:33
 msgid "msg_mailchimp_no_account"
-msgstr ""
+msgstr "Uw account is nog niet opgeslagen of is niet geldig."
 
 #: collective/mailchimp/interfaces.py:185
 msgid "replace_interests"
