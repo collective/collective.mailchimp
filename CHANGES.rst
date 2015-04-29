@@ -5,7 +5,8 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix invalid pypi classifier.
+  [timo]
 
 
 1.4.0 (2015-04-29)
