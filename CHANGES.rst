@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4.0 (unreleased)
+1.4.0 (2015-04-29)
 ------------------
 
 - Show control panel even when api key is invalid.
