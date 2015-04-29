@@ -20,8 +20,8 @@ class AddForm(form.AddForm):
 
     label = _(u"Configure portlet")
 
-    def add(self, object):
-        ob = self.context.add(object)
+    def add(self, obj):
+        ob = self.context.add(obj)
         self._finishedAdd = True
         return ob
 
