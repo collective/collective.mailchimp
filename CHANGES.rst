@@ -1,16 +1,11 @@
 Changelog
 =========
 
-
-1.4.1 (unreleased)
+1.4.0 (2015-04-29)
 ------------------
 
 - Fix invalid pypi classifier.
   [timo]
-
-
-1.4.0 (2015-04-29)
-------------------
 
 - Show control panel even when api key is invalid.
   Fixes issue #8.
