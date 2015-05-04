@@ -4,6 +4,11 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
+- Disable inline validation in the mailchimp control panel.  It may
+  change the cache based on a new api key that the user has not yet
+  saved.
+  [maurits]
+
 - Remove mailchimp object before updating cache.  Otherwise a change
   in the api key is not picked up until after a restart.
   [maurits]
