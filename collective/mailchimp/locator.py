@@ -130,6 +130,12 @@ class MailchimpLocator(object):
             return None
 
     def updateCache(self):
+        # Update cache of data from the mailchimp server.  First reset
+        # our mailchimp object, as the user may have picked a
+        # different api key.  Alternatively, compare
+        # self.settings.api_key and self.mailchimp.apikey.
+        self.mailchimp = None
+        # Connecting will recreate the mailchimp object.
         self.connect()
         if not self.settings.api_key:
             return

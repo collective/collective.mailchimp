@@ -4,7 +4,9 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove mailchimp object before updating cache.  Otherwise a change
+  in the api key is not picked up until after a restart.
+  [maurits]
 
 
 1.4.0 (2015-04-29)
