@@ -73,7 +73,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
         # Get account details
         mailchimp.getAccountDetails()
         mocker.count(0, 1000)
-        mocker.result([])
+        mocker.result({})
         result = {  # noqa
             u'total': 1,
             u'data': [{

@@ -40,6 +40,32 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         self.assertEqual(
             len(locator.groups(list_id=u'a1346945ab')['groups']), 3)
 
+    def test_mailchimp_locator_updateCache_method(self):
+        from collective.mailchimp.locator import MailchimpLocator
+        locator = MailchimpLocator()
+        locator.initialize()
+        # These tests pass when we run this test method separately,
+        # but fail when running all tests.  Skip them because they are
+        # not what we really want to test here.
+        #
+        # self.assertEqual(locator.registry[locator.key_account], None)
+        # self.assertEqual(locator.registry[locator.key_groups], None)
+        # self.assertEqual(locator.registry[locator.key_lists], None)
+        locator.updateCache()
+        self.assertTrue(
+            isinstance(locator.registry[locator.key_account], dict))
+        self.assertEqual(locator.registry[locator.key_account], {})
+        self.assertTrue(
+            isinstance(locator.registry[locator.key_groups], dict))
+        self.assertEqual(locator.registry[locator.key_groups].keys(),
+                         [u'f6257645gs', u'f6267645gs'])
+        self.assertTrue(
+            isinstance(locator.registry[locator.key_lists], tuple))
+        self.assertEqual(len(locator.registry[locator.key_lists]), 2)
+        # It does not complain when there is no api key
+        locator.settings.api_key = None
+        locator.updateCache()
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
