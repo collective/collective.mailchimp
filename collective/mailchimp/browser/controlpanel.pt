@@ -172,6 +172,12 @@
       </fieldset>
     </div>
 
+    <script type="text/javascript">
+// Disable inline validation.  It may change the cache based on a new
+// api key that the user has not yet saved.
+$('.z3cformInlineValidation').removeClass('z3cformInlineValidation');
+    </script>
+
   </div>
 </body>
 </html>

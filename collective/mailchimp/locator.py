@@ -130,9 +130,18 @@ class MailchimpLocator(object):
             return None
 
     def updateCache(self):
+        # Update cache of data from the mailchimp server.  First reset
+        # our mailchimp object, as the user may have picked a
+        # different api key.  Alternatively, compare
+        # self.settings.api_key and self.mailchimp.apikey.
+        self.mailchimp = None
+        # Connecting will recreate the mailchimp object.
         self.connect()
         if not self.settings.api_key:
             return
+        # Note that we must call the _underscore methods.  These
+        # bypass the cache and go directly to mailchimp, so we are
+        # certain to have up to date information.
         account = self._account()
         groups = {}
         lists = self._lists()
@@ -140,10 +149,22 @@ class MailchimpLocator(object):
             list_id = mailchimp_list['id']
             groups[list_id] = self._groups(list_id=list_id)
 
-        # now save this to the registry
+        # Now save this to the registry, but only if there are
+        # changes, otherwise we would do a commit every time we look
+        # at the control panel.
         if type(account) is dict:
-            self.registry[self.key_account] = account
+            if self.registry[self.key_account] != account:
+                self.registry[self.key_account] = account
         if type(groups) is dict:
-            self.registry[self.key_groups] = groups
+            if self.registry[self.key_groups] != groups:
+                self.registry[self.key_groups] = groups
         if type(lists) is list:
-            self.registry[self.key_lists] = tuple(lists)
+            lists = tuple(lists)
+            if self.registry[self.key_lists] != lists:
+                # Note that unfortunately this happens far too often.
+                # In the 'subscribe_url_long' key of an item you can
+                # easily first see:
+                # 'http://edata.us3.list-manage.com/subscribe?u=abc123',
+                # and a second later:
+                # 'http://edata.us3.list-manage1.com/subscribe?u=abc123',
+                self.registry[self.key_lists] = lists
