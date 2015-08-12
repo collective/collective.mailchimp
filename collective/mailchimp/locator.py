@@ -55,8 +55,6 @@ class MailchimpLocator(object):
             return []
         except PostRequestError:
             return []
-        except:
-            raise
 
     def default_list_id(self):
         self.connect()

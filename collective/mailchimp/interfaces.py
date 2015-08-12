@@ -1,6 +1,7 @@
 import re
 
 from postmonkey import PostMonkey
+from postmonkey.exceptions import MailChimpException
 
 from zope import schema
 from zope.interface import Interface
@@ -215,7 +216,7 @@ class IMailchimpSettings(Interface):
         mailchimp = PostMonkey(data.api_key)
         try:
             return mailchimp.ping()
-        except:
+        except MailChimpException:
             raise Invalid(
                 u"Your MailChimp API key is not valid. Please go " +
                 u"to mailchimp.com and check your API key.")

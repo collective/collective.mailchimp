@@ -4,7 +4,8 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove bare excepts.
+  [timo]
 
 
 1.4.1 (2015-05-04)
