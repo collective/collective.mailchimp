@@ -43,7 +43,6 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
     def test_mailchimp_locator_updateCache_method(self):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()
-        locator.initialize()
         # These tests pass when we run this test method separately,
         # but fail when running all tests.  Skip them because they are
         # not what we really want to test here.

@@ -83,16 +83,15 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         data, errors = self.extractData()
         if 'email' in data:
             mailchimp = getUtility(IMailchimpLocator)
-
             # Retrieve list_id either from a hidden field in the form or fetch
             # the first list from mailchimp.
-            if 'list_id' in data:
+            if 'list_id' in data and data['list_id'] is not None:
                 list_id = data['list_id']
             else:
                 list_id = mailchimp.default_list_id()
 
             # Groupings
-            if 'interest_groups' in data:
+            if 'interest_groups' in data and data['interest_groups'] is not None:
                 interest_grouping = mailchimp.groups(list_id=list_id)
                 if interest_grouping and data['interest_groups']:
                     data['groupings'] = [
@@ -107,13 +106,12 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             if 'email_type' in data:
                 email_type = data['email_type']
             else:
-                email_type = None
+                email_type = 'HTML'
             # Subscribe to MailChimp list
             try:
-                mailchimp.subscribe(
+                response = mailchimp.subscribe(
                     list_id=list_id,
                     email_address=data['email'],
-                    merge_vars=data,
                     email_type=email_type,
                 )
             except MailChimpException, error:
@@ -159,7 +157,6 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                     raise ActionExecutionError(
                         Invalid(translated_error_msg)
                     )
-
             IStatusMessage(self.context.REQUEST).addStatusMessage(_(
                 u"We have to confirm your email address. In order to " +
                 u"finish the newsletter subscription, click on the link " +

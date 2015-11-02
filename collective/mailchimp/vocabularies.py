@@ -32,7 +32,7 @@ def interest_groups(context):
     groups = mailchimp.groups(list_id=list_id)
     if not groups:
         return SimpleVocabulary([])
-    groups = groups['groups']
+    groups = groups['categories']
     return SimpleVocabulary([
         SimpleTerm(
             value=group['name'].encode("utf-8"),
@@ -55,13 +55,6 @@ def email_type(context):
             value='html',
             token='html',
             title='HTML',
-        )
-    )
-    terms.append(
-        SimpleTerm(
-            value='mobile',
-            token='mobile',
-            title='Mobile',
         )
     )
     return SimpleVocabulary(terms)

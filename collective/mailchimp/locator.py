@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
+import json
 import logging
-from postmonkey import PostMonkey
+import requests
+from urllib import quote
+try:
+    import urlparse
+except ImportError:
+    from urllib import parse as urlparse
 from collective.mailchimp.interfaces import IMailchimpSettings
-from zope.component import getUtility
-from postmonkey import MailChimpException
-from postmonkey.exceptions import PostRequestError
+from collective.mailchimp.interfaces import IMailchimpLocator
 from plone.registry.interfaces import IRegistry
 from zope.interface import implements
-from collective.mailchimp.interfaces import IMailchimpLocator
+from zope.component import getUtility
+from . exceptions import (
+    SerializationError,
+    DeserializationError,
+    PostRequestError,
+    MailChimpException,
+    )
 
 _marker = object()
 logger = logging.getLogger('collective.mailchimp')
@@ -23,21 +33,75 @@ class MailchimpLocator(object):
     key_lists = "collective.mailchimp.cache.lists"
 
     def __init__(self):
-        self.mailchimp = None
         self.registry = None
         self.settings = None
+        self.params = {}
 
     def initialize(self):
         if self.registry is None:
             self.registry = getUtility(IRegistry)
         if self.settings is None:
             self.settings = self.registry.forInterface(IMailchimpSettings)
+        self.apikey = self.settings.api_key
+        parts = self.apikey.split('-')
+        if len(parts) != 2:
+            print "This doesn't look like an API Key: " + apikey
+            print "The API Key should have both a key and a server name, separated by a dash, like this: abcdefg8abcdefg6abcdefg4-us1"    
+        self.shard = parts[1]
+        self.api_root = "https://" + self.shard + ".api.mailchimp.com/3.0/" 
 
-    def connect(self):
-        if self.mailchimp is not None:
+    def _serialize_payload(self, payload):
+        """ Merges any default parameters from ``self.params`` with the
+        ``payload`` (giving the ``payload`` precedence) and attempts to
+        serialize the resulting ``dict`` to JSON.
+        Note: MailChimp expects the JSON string to be quoted (their docs
+        call it "URL encoded", but python's ``urllib`` calls it "quote").
+        Raises a ``SerializationError`` if data cannot be serialized.
+        """
+        params = self.params.copy()
+        params.update(payload)
+        try:
+            jsonstr = json.dumps(params)
+            serialized = quote(jsonstr)
+            return serialized
+        except TypeError:
+            raise SerializationError(payload)
+
+    def _deserialize_response(self, text):
+        """ Attempt to deserialize a JSON response from the server."""
+        try:
+            deserialized = json.loads(text)
+        except ValueError:
+            raise DeserializationError(text)
+        self._fail_if_mailchimp_exc(deserialized)
+        return deserialized
+
+    def _fail_if_mailchimp_exc(self, response):
+        """ If MailChimp returns an exception code and error, raise
+        ``MailChimpException``. This allows callers to wrap method calls in a
+        try/except clause and work with a single exception type for any
+        error returned by MailChimp.
+        """
+        # case: response is not a dict so it cannot be an error response
+        if not isinstance(response, dict):
             return
-        self.initialize()
-        self.mailchimp = PostMonkey(self.settings.api_key)
+        # case: response is a dict and may be an error response
+        elif 'code' in response and 'error' in response:
+            raise MailChimpException(response['code'], response['error'])
+
+    def api_request(self, url, request_type='get', params={}):
+        headers = {'content-type': 'application/json'}
+        params['apikey'] = self.apikey
+        payload = self._serialize_payload(params)
+        try:
+            if request_type.lower() == 'post':
+                resp = requests.post(url, auth=('apikey', self.apikey), params=payload, headers=headers)
+            else:
+                resp = requests.get(url, auth=('apikey', self.apikey), params=payload, headers=headers, )
+        except Exception, e:
+            raise PostRequestError(e)
+        decoded = self._deserialize_response(resp.text)
+        return decoded
 
     def lists(self):
         self.initialize()
@@ -47,17 +111,17 @@ class MailchimpLocator(object):
         return self._lists()
 
     def _lists(self):
-        self.connect()
         try:
             # lists returns a dict with 'total' and 'data'. we just need data
-            return self.mailchimp.lists()['data']
+            response = self.api_request(self.api_root + 'lists')
+            return response['lists']
         except MailChimpException:
             return []
         except PostRequestError:
             return []
 
     def default_list_id(self):
-        self.connect()
+        self.initialize()
         if self.settings.default_list:
             return self.settings.default_list
         lists = self.lists()
@@ -78,39 +142,38 @@ class MailchimpLocator(object):
     def _groups(self, list_id=None):
         if not list_id:
             return
-        self.connect()
         try:
             # mailchimp returns a list of groups for a single mailinglist.
             # We always choose the first and return just the groups part.
-            return self.mailchimp.listInterestGroupings(id=list_id)[0]
+            url = self.api_root +'lists/' + list_id + '/interest-categories'
+            return self.api_request(url)
         except MailChimpException, error:
-            if error.code == 211:
+            if error.status == 211:
                 # "This list does not have interest groups enabled"
                 # http://apidocs.mailchimp.com/api/1.3/exceptions.field.php#210-list-_-basic-actions
                 return
-            elif error.code == 200:
+            elif error.status == 200:
                 # "Invalid MailChimp List ID"
                 # http://apidocs.mailchimp.com/api/1.3/exceptions.field.php#200-list-related-errors
                 return
             raise
 
-    def subscribe(self, list_id, email_address, merge_vars, email_type):
-        self.connect()
+    def subscribe(self, list_id, email_address, email_type):
+        self.initialize()
         if not email_type:
             email_type = self.settings.email_type
         try:
-            self.mailchimp.listSubscribe(
-                id=list_id,
-                email_address=email_address,
-                merge_vars=merge_vars,
-                email_type=email_type,
-                double_optin=self.settings.double_optin,
-                update_existing=self.settings.update_existing,
-                replace_interests=self.settings.replace_interests,
-                send_welcome=self.settings.send_welcome
-            )
+            url = self.api_root + 'lists/' + list_id + '/members'
+            import pdb;pdb.set_trace()
+            response = self.api_request(url, request_type='post',
+                params=dict(status='subscribed',
+                            email_address=email_address,
+                            email_type=email_type))
+        except Exception, e:
+            raise PostRequestError(e)
         except MailChimpException:
             raise
+        return response
 
     def account(self):
         self.initialize()
@@ -118,23 +181,22 @@ class MailchimpLocator(object):
         if cache and cache is not _marker:
             return cache
         return self._account()
-
+	
     def _account(self):
-        self.connect()
         try:
-            return self.mailchimp.getAccountDetails()
+            return self.api_request(self.api_root)
         except MailChimpException:
             logger.exception("Exception getting account details.")
             return None
+
 
     def updateCache(self):
         # Update cache of data from the mailchimp server.  First reset
         # our mailchimp object, as the user may have picked a
         # different api key.  Alternatively, compare
         # self.settings.api_key and self.mailchimp.apikey.
-        self.mailchimp = None
         # Connecting will recreate the mailchimp object.
-        self.connect()
+        self.initialize()
         if not self.settings.api_key:
             return
         # Note that we must call the _underscore methods.  These
