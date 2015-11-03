@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import unittest2 as unittest
+import unittest
 
 from zope.component import getUtility
 
@@ -21,15 +21,18 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         from collective.mailchimp.interfaces import IMailchimpLocator
         self.assertTrue(getUtility(IMailchimpLocator))
 
-    def test_mailchimp_locator_connect_method(self):
+    def test_mailchimp_locator_initializ_method(self):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()
-        locator.connect()
-        self.assertTrue(locator.mailchimp is not False)
+        locator.initialize()
+        self.assertTrue(locator.apikey is not False)
+        self.assertTrue(locator.settings is not False)
 
     def test_mailchimp_locator_lists_method(self):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()
+        # TODO: results depend on responses from mailchimp server.
+        #       we should fix the mocks.
         self.assertTrue(locator.lists())
         self.assertEqual(len(locator.lists()), 2)
 
@@ -38,7 +41,7 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         locator = MailchimpLocator()
         self.assertTrue(locator.groups(list_id=u'a1346945ab'))
         self.assertEqual(
-            len(locator.groups(list_id=u'a1346945ab')['groups']), 3)
+            len(locator.groups(list_id=u'a1346945ab')['categories']), 3)
 
     def test_mailchimp_locator_updateCache_method(self):
         from collective.mailchimp.locator import MailchimpLocator

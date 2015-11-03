@@ -1,7 +1,7 @@
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.testing.z2 import Browser
-import unittest2 as unittest
+import unittest
 
 from zope.component import getMultiAdapter
 

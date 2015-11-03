@@ -37,13 +37,13 @@ setup(name='collective.mailchimp',
           'Products.CMFPlone',
           'plone.app.portlets',
           'plone.app.registry',
-          'postmonkey',
       ],
       extras_require={
           'test': [
-              'plone.app.testing',
               'mocker',
-              'plone.mocktestcase',
+              'plone.app.testing',
+              'plone.app.contenttypes',
+              'plone.app.robotframework[debug]',
           ],
       },
       entry_points="""
