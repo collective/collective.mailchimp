@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class SerializationError(Exception):
     """ Raised if a method call contains parameters that cannot be serialized to
     JSON. The object that caused the error is made available via the ``obj``
@@ -12,7 +14,7 @@ class SerializationError(Exception):
 
 class DeserializationError(Exception):
     """ Raised if MailChimp responds with anything other than valid JSON.
-    `PostMonkey` uses MailChimp's JSON API exclusively so it is unlikely
+    We use MailChimp's JSON API exclusively so it is unlikely
     that this will be raised. The response that caused the error is
     made available via the ``obj`` attribute.
     """

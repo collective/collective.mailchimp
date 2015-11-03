@@ -45,7 +45,8 @@ class MailchimpLocator(object):
         self.apikey = self.settings.api_key
         parts = self.apikey.split('-')
         if len(parts) != 2:
-            print "This doesn't look like an API Key: " + apikey
+            MailChimpException(response['code'], response['error'])
+            print "This doesn't look like an API Key: " + self.apikey
             print "The API Key should have both a key and a server name, separated by a dash, like this: abcdefg8abcdefg6abcdefg4-us1"    
         self.shard = parts[1]
         self.api_root = "https://" + self.shard + ".api.mailchimp.com/3.0/" 
@@ -91,10 +92,10 @@ class MailchimpLocator(object):
 
     def api_request(self, url, request_type='get', params={}):
         headers = {'content-type': 'application/json'}
-        params['apikey'] = self.apikey
         payload = self._serialize_payload(params)
         try:
             if request_type.lower() == 'post':
+                import pdb;pdb.set_trace()
                 resp = requests.post(url, auth=('apikey', self.apikey), params=payload, headers=headers)
             else:
                 resp = requests.get(url, auth=('apikey', self.apikey), params=payload, headers=headers, )
@@ -114,11 +115,13 @@ class MailchimpLocator(object):
         try:
             # lists returns a dict with 'total' and 'data'. we just need data
             response = self.api_request(self.api_root + 'lists')
-            return response['lists']
         except MailChimpException:
             return []
         except PostRequestError:
             return []
+        if 'lists' in response:
+            return response['lists']
+        return []
 
     def default_list_id(self):
         self.initialize()
@@ -164,15 +167,16 @@ class MailchimpLocator(object):
             email_type = self.settings.email_type
         try:
             url = self.api_root + 'lists/' + list_id + '/members'
-            import pdb;pdb.set_trace()
-            response = self.api_request(url, request_type='post',
-                params=dict(status='subscribed',
-                            email_address=email_address,
-                            email_type=email_type))
+            response = self.api_request(url,
+                            request_type='post',
+                            params=dict(status='subscribed',
+                                        email_address=str(email_address),
+                                        email_type=email_type))
         except Exception, e:
             raise PostRequestError(e)
         except MailChimpException:
             raise
+        logger.info(response)
         return response
 
     def account(self):
@@ -188,6 +192,9 @@ class MailchimpLocator(object):
         except MailChimpException:
             logger.exception("Exception getting account details.")
             return None
+            
+    def ping(self):
+        return self.api_request(self.api_root + 'ping')
 
 
     def updateCache(self):

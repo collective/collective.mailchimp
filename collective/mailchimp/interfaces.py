@@ -1,9 +1,9 @@
 import re
 
-from postmonkey import PostMonkey
-from postmonkey.exceptions import MailChimpException
+from . exceptions import MailChimpException
 
 from zope import schema
+from zope.component import getUtility
 from zope.interface import Interface
 from zope.interface import invariant
 from zope.interface import Invalid
@@ -81,7 +81,7 @@ class IMailchimpLocator(Interface):
     """Mailchimp API
     """
 
-    def connect():
+    def initialize():
         """Do a postmonkey with the API so your connected to mailchimp API"""
 
     def lists():
@@ -213,7 +213,7 @@ class IMailchimpSettings(Interface):
     def valid_api_key(data):
         if len(data.api_key) == 0:
             return
-        mailchimp = PostMonkey(data.api_key)
+        mailchimp = getUtility(IMailchimpLocator)
         try:
             return mailchimp.ping()
         except MailChimpException:
