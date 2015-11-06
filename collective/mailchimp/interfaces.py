@@ -1,9 +1,6 @@
 import re
 
-from . exceptions import MailChimpException
-
 from zope import schema
-from zope.component import getUtility
 from zope.interface import Interface
 from zope.interface import invariant
 from zope.interface import Invalid
@@ -213,10 +210,9 @@ class IMailchimpSettings(Interface):
     def valid_api_key(data):
         if len(data.api_key) == 0:
             return
-        mailchimp = getUtility(IMailchimpLocator)
-        try:
-            return mailchimp.ping()
-        except MailChimpException:
+        parts = data.api_key.split('-')
+        if len(parts) != 2:
             raise Invalid(
                 u"Your MailChimp API key is not valid. Please go " +
                 u"to mailchimp.com and check your API key.")
+    

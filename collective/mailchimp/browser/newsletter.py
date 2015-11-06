@@ -157,6 +157,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                     raise ActionExecutionError(
                         Invalid(translated_error_msg)
                     )
+
             IStatusMessage(self.context.REQUEST).addStatusMessage(_(
                 u"We have to confirm your email address. In order to " +
                 u"finish the newsletter subscription, click on the link " +
