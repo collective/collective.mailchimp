@@ -131,7 +131,7 @@ class IMailchimpSettings(Interface):
             default=u"Email type preference for the email (html, text, or "
                     u"mobile defaults to html)"),
         vocabulary="collective.mailchimp.vocabularies.EmailType",
-        default="text",
+        default="html",
         required=True,
     )
 

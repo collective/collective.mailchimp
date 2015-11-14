@@ -89,8 +89,8 @@ class MailchimpLocator(object):
         if not isinstance(response, dict):
             return
         # case: response is a dict and may be an error response
-        elif 'code' in response and 'error' in response:
-            raise MailChimpException(response['code'], response['error'])
+        elif 'status' in response and 'detail' in response:
+            raise MailChimpException(response['status'], response['detail'])
 
     def api_request(self, endpoint='', request_type='get', **kwargs):
         """ construct the request and do a get/post.
@@ -170,19 +170,22 @@ class MailchimpLocator(object):
     def subscribe(self, list_id, email_address, email_type):
         """ API call to subscribe a member to a list. """
         self.initialize()
+        opt_in_status = 'subscribed'
+        if self.settings.double_optin:
+            opt_in_status = 'pending'
         if not email_type:
             email_type = self.settings.email_type
         try:
             endpoint = 'lists/' + list_id + '/members'
             response = self.api_request(endpoint,
                             request_type='post',
-                            status='subscribed',
+                            status=opt_in_status,
                             email_address=email_address,
                             email_type=email_type)
-        except Exception, e:
-            raise PostRequestError(e)
         except MailChimpException:
             raise
+        except Exception, e:
+            raise PostRequestError(e)
         logger.info("Subscribed %s to list with id: %s." % \
             (email_address, list_id))
         logger.debug("Subscribed %s to list with id: %s.\n\n %s" % \

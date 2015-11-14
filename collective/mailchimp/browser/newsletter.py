@@ -115,7 +115,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                     email_type=email_type,
                 )
             except MailChimpException, error:
-                if error.code == 214:
+                if error.code == 400:
                     error_msg = _(
                         u"mailchimp_error_msg_already_subscribed",
                         default=u"Could not subscribe to newsletter. "
@@ -157,11 +157,17 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                     raise ActionExecutionError(
                         Invalid(translated_error_msg)
                     )
-
-            IStatusMessage(self.context.REQUEST).addStatusMessage(_(
+            registry = getUtility(IRegistry)
+            mailchimp_settings = registry.forInterface(IMailchimpSettings)
+            if mailchimp_settings.double_optin:
+                message = _(
                 u"We have to confirm your email address. In order to " +
                 u"finish the newsletter subscription, click on the link " +
-                u"inside the email we just send you."),
+                u"inside the email we just send you.")
+            else:
+                message = _(
+                u"You have been subscribed to our newsletter succesfully.")
+            IStatusMessage(self.context.REQUEST).addStatusMessage(message,
                 type="info"
             )
             portal = getSite()
