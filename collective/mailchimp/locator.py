@@ -36,6 +36,7 @@ class MailchimpLocator(object):
         """ Use settings if provided """
         self.registry = None
         self.settings = None
+        self.api_root = None
         if settings:
             self.settings = settings
 
@@ -46,6 +47,8 @@ class MailchimpLocator(object):
         if self.settings is None:
             self.settings = self.registry.forInterface(IMailchimpSettings)
         self.apikey = self.settings.api_key
+        if not self.apikey:
+            return
         parts = self.apikey.split('-')
         self.shard = parts[1]
         self.api_root = "https://" + self.shard + ".api.mailchimp.com/3.0/"
@@ -92,6 +95,8 @@ class MailchimpLocator(object):
     def api_request(self, endpoint='', request_type='get', **kwargs):
         """ construct the request and do a get/post.
         """
+        if not self.api_root:
+            return []
         headers = {'content-type': 'application/json'}
         url = urlparse.urljoin(self.api_root, endpoint)
         # we provide a json structure with the parameters.
