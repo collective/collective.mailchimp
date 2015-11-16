@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import unittest2 as unittest
 from plone.testing.z2 import Browser
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import SITE_OWNER_NAME
@@ -19,6 +18,8 @@ from plone.app.portlets.storage import PortletAssignmentMapping
 from collective.mailchimp.browser import portlet as mailchimp
 from collective.mailchimp.testing import \
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+
+import unittest
 
 
 class TestPortlet(unittest.TestCase):

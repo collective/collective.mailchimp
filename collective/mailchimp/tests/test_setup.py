@@ -1,9 +1,9 @@
-import unittest2 as unittest
-
 from Products.CMFCore.utils import getToolByName
 
 from collective.mailchimp.testing import \
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+
+import unittest
 
 
 class TestSetup(unittest.TestCase):

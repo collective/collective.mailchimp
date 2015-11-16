@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import unittest2 as unittest
-
 from zope.component import getUtility
 
 from collective.mailchimp.testing import \
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+
+import unittest
 
 
 class MailchimpLocatorIntegrationTest(unittest.TestCase):
