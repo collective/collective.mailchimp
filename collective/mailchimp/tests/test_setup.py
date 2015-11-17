@@ -44,7 +44,6 @@ class TestSetup(unittest.TestCase):
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
 
-
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']

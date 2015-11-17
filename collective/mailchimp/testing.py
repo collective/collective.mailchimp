@@ -7,7 +7,6 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.registry.interfaces import IRegistry
 from plone.testing import z2
-from zope.configuration import xmlconfig
 from zope.component import getUtility
 
 from collective.mailchimp.interfaces import IMailchimpSettings
@@ -19,7 +18,7 @@ class CollectiveMailchimp(PloneSandboxLayer):
     defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        self.loadZCML(package=collective.mailchimp)        
+        self.loadZCML(package=collective.mailchimp)
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.mailchimp:default')

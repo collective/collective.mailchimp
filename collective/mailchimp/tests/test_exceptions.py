@@ -1,12 +1,8 @@
 import unittest
 
-from zope.component import getUtility
-
-from collective.mailchimp.testing import \
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
-
 
 class TestExceptions(unittest.TestCase):
+
     def test_SerializationError_captures_obj(self):
         from ..exceptions import SerializationError
         dummy_obj = object()

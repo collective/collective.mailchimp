@@ -17,7 +17,7 @@ from . exceptions import (
     DeserializationError,
     PostRequestError,
     MailChimpException,
-    )
+)
 
 _marker = object()
 logger = logging.getLogger('collective.mailchimp')
@@ -103,9 +103,11 @@ class MailchimpLocator(object):
         payload = json.dumps(kwargs)
         try:
             if request_type.lower() == 'post':
-                resp = requests.post(url, auth=('apikey', self.apikey), data=payload, headers=headers)
+                resp = requests.post(url, auth=(
+                    'apikey', self.apikey), data=payload, headers=headers)
             else:
-                resp = requests.get(url, auth=('apikey', self.apikey), data=payload, headers=headers)
+                resp = requests.get(url, auth=(
+                    'apikey', self.apikey), data=payload, headers=headers)
         except Exception, e:
             raise PostRequestError(e)
         decoded = self._deserialize_response(resp.text)
@@ -178,18 +180,18 @@ class MailchimpLocator(object):
         try:
             endpoint = 'lists/' + list_id + '/members'
             response = self.api_request(endpoint,
-                            request_type='post',
-                            status=opt_in_status,
-                            email_address=email_address,
-                            email_type=email_type)
+                                        request_type='post',
+                                        status=opt_in_status,
+                                        email_address=email_address,
+                                        email_type=email_type)
         except MailChimpException:
             raise
         except Exception, e:
             raise PostRequestError(e)
-        logger.info("Subscribed %s to list with id: %s." % \
-            (email_address, list_id))
-        logger.debug("Subscribed %s to list with id: %s.\n\n %s" % \
-            (email_address, list_id, response))
+        logger.info("Subscribed %s to list with id: %s." %
+                    (email_address, list_id))
+        logger.debug("Subscribed %s to list with id: %s.\n\n %s" %
+                     (email_address, list_id, response))
         return response
 
     def account(self):

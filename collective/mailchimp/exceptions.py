@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+
 class SerializationError(Exception):
     """ Raised if a method call contains parameters that cannot be serialized to
     JSON. The object that caused the error is made available via the ``obj``
     attribute.
     """
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -18,6 +20,7 @@ class DeserializationError(Exception):
     that this will be raised. The response that caused the error is
     made available via the ``obj`` attribute.
     """
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -30,6 +33,7 @@ class PostRequestError(Exception):
     `PostRequestError` will be raised. It wraps the underlying exception
     object and makes it available via the ``exc`` attribute.
     """
+
     def __init__(self, exc):
         self.exc = exc
 
@@ -42,6 +46,7 @@ class MailChimpException(Exception):
     this exception will be raised. Contains the unmodified ``code`` (int) and
     ``error`` (unicode) attributes returned by MailChimp.
     """
+
     def __init__(self, code, error):
         self.code = code
         self.error = error

@@ -76,7 +76,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                     .items[group_index]['checked'] = True
 
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
-                             default=u"Subscribe"),
+                               default=u"Subscribe"),
                              name='subscribe')
     def handleApply(self, action):
         data, errors = self.extractData()
@@ -90,7 +90,8 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                 list_id = mailchimp.default_list_id()
 
             # Groupings
-            if 'interest_groups' in data and data['interest_groups'] is not None:
+            if ('interest_groups' in data and
+                    data['interest_groups'] is not None):
                 interest_grouping = mailchimp.groups(list_id=list_id)
                 if interest_grouping and data['interest_groups']:
                     data['groupings'] = [
@@ -108,7 +109,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                 email_type = 'HTML'
             # Subscribe to MailChimp list
             try:
-                response = mailchimp.subscribe(
+                mailchimp.subscribe(
                     list_id=list_id,
                     email_address=data['email'],
                     email_type=email_type,
@@ -160,15 +161,15 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             mailchimp_settings = registry.forInterface(IMailchimpSettings)
             if mailchimp_settings.double_optin:
                 message = _(
-                u"We have to confirm your email address. In order to " +
-                u"finish the newsletter subscription, click on the link " +
-                u"inside the email we just send you.")
+                    u"We have to confirm your email address. In order to " +
+                    u"finish the newsletter subscription, click on the link " +
+                    u"inside the email we just send you.")
             else:
                 message = _(
-                u"You have been subscribed to our newsletter succesfully.")
+                    u"You have been subscribed to our newsletter succesfully.")
             IStatusMessage(self.context.REQUEST).addStatusMessage(message,
-                type="info"
-            )
+                                                                  type="info"
+                                                                  )
             portal = getSite()
             self.request.response.redirect(portal.absolute_url())
 

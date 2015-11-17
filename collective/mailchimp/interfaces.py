@@ -215,4 +215,3 @@ class IMailchimpSettings(Interface):
             raise Invalid(
                 u"Your MailChimp API key is not valid. Please go " +
                 u"to mailchimp.com and check your API key.")
-    

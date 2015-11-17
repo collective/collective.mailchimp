@@ -6,7 +6,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ..exceptions import (
     PostRequestError,
     MailChimpException
-    )
+)
 
 from plone.app.registry.browser import controlpanel
 from plone.protect.interfaces import IDisableCSRFProtection
