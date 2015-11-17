@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from Products.statusmessages.interfaces import IStatusMessage
 
-from postmonkey import MailChimpException
-
 from zope.interface import Invalid
 from zope.interface import implements
 from zope.annotation.interfaces import IAttributeAnnotatable
@@ -21,6 +19,7 @@ from plone.z3cform.layout import wrap_form
 from plone.z3cform.fieldsets import extensible
 
 from collective.mailchimp import _
+from collective.mailchimp.exceptions import MailChimpException
 from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import INewsletterSubscribe
@@ -114,7 +113,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                     email_address=data['email'],
                     email_type=email_type,
                 )
-            except MailChimpException, error:
+            except MailChimpException as error:
                 if error.code == 400:
                     error_msg = _(
                         u"mailchimp_error_msg_already_subscribed",
