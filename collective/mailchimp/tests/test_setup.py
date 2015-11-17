@@ -12,7 +12,7 @@ class TestSetup(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.request = self.layer['request']        
+        self.request = self.layer['request']
 
     def test_product_installed(self):
         """Test if collective.mailchimp is installed."""

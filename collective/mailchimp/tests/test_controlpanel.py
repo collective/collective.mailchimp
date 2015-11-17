@@ -1,7 +1,6 @@
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.testing.z2 import Browser
-import unittest
 
 from zope.component import getMultiAdapter
 
@@ -15,6 +14,8 @@ from collective.mailchimp.testing import \
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
 
 from collective.mailchimp.interfaces import IMailchimpSettings
+
+import unittest
 
 
 class TestMailchimpSettingsControlPanel(unittest.TestCase):
