@@ -37,6 +37,7 @@ setup(name='collective.mailchimp',
           'Products.CMFPlone',
           'plone.app.portlets',
           'plone.app.registry',
+          'requests',
       ],
       extras_require={
           'test': [
