@@ -9,7 +9,11 @@ from ..exceptions import (
 )
 
 from plone.app.registry.browser import controlpanel
-from plone.protect.interfaces import IDisableCSRFProtection
+try:
+    from plone.protect.interfaces import IDisableCSRFProtection
+except ImportError:
+    # BBB for old plone.protect, default until at least Plone 4.3.7.
+    IDisableCSRFProtection = None
 from zope.interface import alsoProvides
 
 from collective.mailchimp.interfaces import IMailchimpSettings
@@ -43,7 +47,8 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     index = ViewPageTemplateFile('controlpanel.pt')
 
     def mailchimp_account(self):
-        alsoProvides(self.request, IDisableCSRFProtection)
+        if IDisableCSRFProtection is not None:
+            alsoProvides(self.request, IDisableCSRFProtection)
         mailchimp = getUtility(IMailchimpLocator)
         try:
             return mailchimp.account()
@@ -58,7 +63,8 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
             )
 
     def available_lists(self):
-        alsoProvides(self.request, IDisableCSRFProtection)
+        if IDisableCSRFProtection is not None:
+            alsoProvides(self.request, IDisableCSRFProtection)
         mailchimp = getUtility(IMailchimpLocator)
         try:
             return mailchimp.lists()
