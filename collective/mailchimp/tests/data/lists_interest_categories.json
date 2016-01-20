@@ -1,0 +1,69 @@
+{
+  "list_id": "57afe96172",
+  "categories": [
+    {
+      "list_id": "57afe96172",
+      "id": "a1e9f4b7f6",
+      "title": "Favorite Freddie Joke",
+      "display_order": 0,
+      "type": "checkboxes",
+      "_links": [
+        {
+          "rel": "self",
+          "href": "https://usX.api.mailchimp.com/3.0/lists/57afe96172/interest-categories/a1e9f4b7f6",
+          "method": "GET",
+          "targetSchema": "https://api.mailchimp.com/schema/3.0/Lists/InterestCategories/Instance.json"
+        },
+        {
+          "rel": "parent",
+          "href": "https://usX.api.mailchimp.com/3.0/lists/57afe96172/interest-categories",
+          "method": "GET",
+          "targetSchema": "https://api.mailchimp.com/schema/3.0/Lists/InterestCategories/Collection.json",
+          "schema": "https://api.mailchimp.com/schema/3.0/CollectionLinks/Lists/InterestCategories.json"
+        },
+        {
+          "rel": "update",
+          "href": "https://usX.api.mailchimp.com/3.0/lists/57afe96172/interest-categories/a1e9f4b7f6",
+          "method": "PATCH",
+          "targetSchema": "https://api.mailchimp.com/schema/3.0/Lists/InterestCategories/Instance.json",
+          "schema": "https://api.mailchimp.com/schema/3.0/Lists/InterestCategories/Instance.json"
+        },
+        {
+          "rel": "delete",
+          "href": "https://usX.api.mailchimp.com/3.0/lists/57afe96172/interest-categories/a1e9f4b7f6",
+          "method": "DELETE"
+        },
+        {
+          "rel": "interests",
+          "href": "https://usX.api.mailchimp.com/3.0/lists/57afe96172/interest-categories/a1e9f4b7f6/interests",
+          "method": "GET",
+          "targetSchema": "https://api.mailchimp.com/schema/3.0/Lists/Interests/Collection.json",
+          "schema": "https://api.mailchimp.com/schema/3.0/CollectionLinks/Lists/Interests.json"
+        }
+      ]
+    }
+  ],
+  "_links": [
+    {
+      "rel": "self",
+      "href": "https://usX.api.mailchimp.com/3.0/lists/57afe96172/interest-categories",
+      "method": "GET",
+      "targetSchema": "https://api.mailchimp.com/schema/3.0/Lists/InterestCategories/Collection.json",
+      "schema": "https://api.mailchimp.com/schema/3.0/CollectionLinks/Lists/InterestCategories.json"
+    },
+    {
+      "rel": "parent",
+      "href": "https://usX.api.mailchimp.com/3.0/lists/57afe96172/",
+      "method": "GET",
+      "targetSchema": "https://api.mailchimp.com/schema/3.0/Lists/Instance.json"
+    },
+    {
+      "rel": "create",
+      "href": "https://usX.api.mailchimp.com/3.0/lists/57afe96172/interest-categories",
+      "method": "POST",
+      "targetSchema": "https://api.mailchimp.com/schema/3.0/Lists/InterestCategories/Instance.json",
+      "schema": "https://api.mailchimp.com/schema/3.0/Lists/InterestCategories/Instance.json"
+    }
+  ],
+  "total_items": 1
+}

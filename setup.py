@@ -41,10 +41,9 @@ setup(name='collective.mailchimp',
       ],
       extras_require={
           'test': [
+              'mock',  # new, backport from Python 3.3
               'mocker',
               'plone.app.testing',
-              'plone.app.contenttypes',
-              'plone.app.robotframework[debug]',
           ],
       },
       entry_points="""

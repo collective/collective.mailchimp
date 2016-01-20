@@ -35,8 +35,8 @@ def interest_groups(context):
     groups = groups['categories']
     return SimpleVocabulary([
         SimpleTerm(
-            value=group['name'].encode("utf-8"),
-            title=group['name']
+            value=group['title'].encode("utf-8"),
+            title=group['title']
         ) for group in groups
     ])
 

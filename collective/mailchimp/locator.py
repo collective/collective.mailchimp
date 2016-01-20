@@ -50,6 +50,9 @@ class MailchimpLocator(object):
         if not self.apikey:
             return
         parts = self.apikey.split('-')
+        if not len(parts) > 1:
+            # bad api key, allow to fix
+            return
         self.shard = parts[1]
         self.api_root = "https://" + self.shard + ".api.mailchimp.com/3.0/"
 
@@ -101,13 +104,13 @@ class MailchimpLocator(object):
         url = urlparse.urljoin(self.api_root, endpoint)
         # we provide a json structure with the parameters.
         payload = json.dumps(kwargs)
+        if request_type.lower() == 'post':
+            request_method = requests.post
+        else:
+            request_method = requests.get
         try:
-            if request_type.lower() == 'post':
-                resp = requests.post(url, auth=(
-                    'apikey', self.apikey), data=payload, headers=headers)
-            else:
-                resp = requests.get(url, auth=(
-                    'apikey', self.apikey), data=payload, headers=headers)
+            resp = request_method(url, auth=(
+                'apikey', self.apikey), data=payload, headers=headers)
         except Exception, e:
             raise PostRequestError(e)
         decoded = self._deserialize_response(resp.text)
@@ -195,7 +198,7 @@ class MailchimpLocator(object):
         return response
 
     def account(self):
-        """ Get account details. This is caches as well """
+        """ Get account details. This is cached as well """
         self.initialize()
         cache = self.registry.get(self.key_account, _marker)
         if cache and cache is not _marker:
