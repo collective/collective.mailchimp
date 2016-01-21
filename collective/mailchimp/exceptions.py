@@ -47,9 +47,11 @@ class MailChimpException(Exception):
     ``error`` (unicode) attributes returned by MailChimp.
     """
 
-    def __init__(self, code, error):
+    def __init__(self, code, detail, errors=''):
         self.code = code
-        self.error = error
+        self.detail = detail
+        self.errors = errors
 
     def __str__(self):
-        return 'MailChimp error code %s: "%s"' % (self.code, self.error)
+        return 'MailChimp error code {0}: "{1}"\n{2}'.format(
+            self.code, self.detail, self.errors)

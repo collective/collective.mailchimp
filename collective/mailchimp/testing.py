@@ -78,6 +78,10 @@ class MockRequests(object):
         elif endpoint == 'lists':
             path = os.path.join(
                 TEST_DATA_DIR, 'lists.json')
+        elif re.compile('lists/.*/interest-categories/.*/interests').match(
+                endpoint):
+            path = os.path.join(
+                TEST_DATA_DIR, 'interests.json')
         elif re.compile('lists/.*/interest-categories').match(endpoint):
             path = os.path.join(
                 TEST_DATA_DIR, 'lists_interest_categories.json')

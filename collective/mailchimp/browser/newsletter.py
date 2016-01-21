@@ -91,15 +91,13 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             list_id = mailchimp.default_list_id()
 
         # Groupings
+        interests = None
         if 'interest_groups' in data and data['interest_groups'] is not None:
             interest_grouping = mailchimp.groups(list_id=list_id)
             if interest_grouping and data['interest_groups']:
-                data['groupings'] = [
-                    {
-                        'id': interest_grouping['id'],
-                        'groups': ",".join(data['interest_groups']),
-                    }
-                ]
+                # Create dictionary with as keys the interest groups, and as
+                # values always True.
+                interests = dict.fromkeys(data['interest_groups'], True)
 
         # Use email_type if one is provided by the form, if not choose the
         # default email type from the control panel settings.
@@ -113,6 +111,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                 list_id=list_id,
                 email_address=data['email'],
                 email_type=email_type,
+                interests=interests
             )
         except MailChimpException as error:
             return self.handle_error(error, data)
@@ -132,11 +131,14 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         self.request.response.redirect(portal.absolute_url())
 
     def handle_error(self, error, data):
+        # Current api v3 documentation only lists errors in the 400 and 500
+        # range.  The 400 code can mean a lot of things...
         if error.code == 400:
             error_msg = _(
                 u"mailchimp_error_msg_already_subscribed",
                 default=u"Could not subscribe to newsletter. "
-                        u"The email '${email}' is already subscribed.",
+                        u"Either the email '${email}' is already subscribed "
+                        u"or something else is wrong. Try again later.",
                 mapping={u"email": data['email']})
             translated_error_msg = self.context.translate(error_msg)
             raise WidgetActionExecutionError(

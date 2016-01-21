@@ -93,7 +93,10 @@ class MailchimpLocator(object):
             return
         # case: response is a dict and may be an error response
         elif 'status' in response and 'detail' in response:
-            raise MailChimpException(response['status'], response['detail'])
+            exc = MailChimpException(
+                response['status'], response['detail'], response.get('errors'))
+            logger.warn(exc)
+            raise exc
 
     def api_request(self, endpoint='', request_type='get', **kwargs):
         """ construct the request and do a get/post.
@@ -156,23 +159,52 @@ class MailchimpLocator(object):
             groups = cache.get(list_id, _marker)
             if groups and groups is not _marker:
                 return groups
-        return self._groups(list_id)
+        return self._groupings(list_id)
 
-    def _groups(self, list_id=None):
-        """ Actual API call to Mailchimp service to get the interest categories
-            for a given list.
+    def _groupings(self, list_id=None):
+        # Return combined list of interest categories with their group options.
+        # We only support one interest category per list.
+        # We take the top one.
+        categories = self._interest_categories(list_id)
+        if not categories or not categories['categories']:
+            return categories
+        # We could search for the category with the highest display_order key,
+        # but for a test list I made, this was zero in both interest
+        # categories...  So just take the first one.
+        category = categories['categories'][0]
+        category_id = category.get('id')
+        interests = self._interests(list_id, category_id)
+        categories['interests'] = interests.get('interests', [])
+        return categories
+
+    def _interest_categories(self, list_id=None):
+        """API call to Mailchimp to get interest categories.
         """
         if not list_id:
             return
+        url = 'lists/' + list_id + '/interest-categories'
         try:
-            # mailchimp returns a list of groups for a single mailinglist.
-            # We always choose the first and return just the groups part.
-            url = 'lists/' + list_id + '/interest-categories'
             return self.api_request(url)
         except MailChimpException:
             raise
 
-    def subscribe(self, list_id, email_address, email_type):
+    def _interests(self, list_id=None, interest_category_id=None):
+        """Actual API call to Mailchimp service to get the group options.
+
+        In api 1.3 this was given immediately with the list of interest
+        categories.  In api 3.0 we need to get each interest category
+        and ask for its interests/groups.
+        """
+        if not list_id or not interest_category_id:
+            return
+        url = 'lists/{0}/interest-categories/{1}/interests'.format(
+            list_id, interest_category_id)
+        try:
+            return self.api_request(url)
+        except MailChimpException:
+            raise
+
+    def subscribe(self, list_id, email_address, email_type, **kwargs):
         """ API call to subscribe a member to a list. """
         self.initialize()
         opt_in_status = 'subscribed'
@@ -180,13 +212,13 @@ class MailchimpLocator(object):
             opt_in_status = 'pending'
         if not email_type:
             email_type = self.settings.email_type
+        endpoint = 'lists/' + list_id + '/members'
         try:
-            endpoint = 'lists/' + list_id + '/members'
-            response = self.api_request(endpoint,
-                                        request_type='post',
+            response = self.api_request(endpoint, request_type='post',
                                         status=opt_in_status,
                                         email_address=email_address,
-                                        email_type=email_type)
+                                        email_type=email_type,
+                                        **kwargs)
         except MailChimpException:
             raise
         except Exception, e:
@@ -232,7 +264,7 @@ class MailchimpLocator(object):
         lists = self._lists()
         for mailchimp_list in lists:
             list_id = mailchimp_list['id']
-            groups[list_id] = self._groups(list_id=list_id)
+            groups[list_id] = self._groupings(list_id=list_id)
 
         # Now save this to the registry, but only if there are
         # changes, otherwise we would do a commit every time we look

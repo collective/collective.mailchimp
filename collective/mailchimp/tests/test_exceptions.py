@@ -27,8 +27,12 @@ class TestExceptions(unittest.TestCase):
     def test_MailChimpException_attrs(self):
         from ..exceptions import MailChimpException
         code = -90
-        error = 'Method fake_method is not exported by this server'
-        exc = MailChimpException(code, error)
+        detail = 'Method fake_method is not exported by this server'
+        errors = [{"field": "interests",
+                   "message": "Schema describes object, array found instead"}]
+        exc = MailChimpException(code, detail, errors)
         self.assertEqual(exc.code, code)
-        self.assertEqual(exc.error, error)
-        self.assertIn(error, exc.__str__())
+        self.assertEqual(exc.detail, detail)
+        self.assertEqual(exc.errors, errors)
+        self.assertIn(detail, exc.__str__())
+        self.assertIn('interests', exc.__str__())

@@ -41,9 +41,12 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
     def test_mailchimp_locator_groups_method(self):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()
-        self.assertTrue(locator.groups(list_id=u'57afe96172'))
-        self.assertEqual(
-            len(locator.groups(list_id=u'57afe96172')['categories']), 1)
+        groups = locator.groups(list_id=u'57afe96172')
+        self.assertTrue(groups)
+        self.assertEqual(len(groups['categories']), 1)
+        self.assertEqual(len(groups['interests']), 5)
+        self.assertEqual(groups['interests'][0]['name'],
+                         u"Sometimes you just gotta 'spress yourself.")
 
     def test_mailchimp_locator_updateCache_method(self):
         from collective.mailchimp.locator import MailchimpLocator
@@ -61,10 +64,15 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         self.assertTrue(isinstance(account, dict))
         self.assertEqual(account[u'account_id'], u'8d3a3db4d97663a9074efcc16')
         self.assertEqual(account[u'account_name'], u"Freddie's Jokes")
-        self.assertTrue(
-            isinstance(locator.registry[locator.key_groups], dict))
-        self.assertEqual(locator.registry[locator.key_groups].keys(),
+        groups = locator.registry[locator.key_groups]
+        self.assertTrue(isinstance(groups, dict))
+        self.assertEqual(groups.keys(),
                          [u'f6257645gs', u'f6267645gs', u'57afe96172'])
+        self.assertEqual(
+            groups[groups.keys()[0]].keys(),
+            [u'total_items', 'interests', u'_links', u'categories', u'list_id']
+            )
+
         self.assertTrue(
             isinstance(locator.registry[locator.key_lists], tuple))
         self.assertEqual(len(locator.registry[locator.key_lists]), 3)

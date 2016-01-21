@@ -32,12 +32,17 @@ def interest_groups(context):
     groups = mailchimp.groups(list_id=list_id)
     if not groups:
         return SimpleVocabulary([])
-    groups = groups['categories']
+    # Each category has a list of options/groups/interests.  We only support
+    # one interest category per list.  We take the first one.  We have stored
+    # this in the interests key.
+    interests = groups.get('interests')
+    if not interests:
+        return SimpleVocabulary([])
     return SimpleVocabulary([
         SimpleTerm(
-            value=group['title'].encode("utf-8"),
-            title=group['title']
-        ) for group in groups
+            value=group['id'].encode("utf-8"),
+            title=group['name']
+        ) for group in interests
     ])
 
 
