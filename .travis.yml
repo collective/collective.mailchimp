@@ -9,7 +9,7 @@ env:
     - PLONE=4
     - PLONE=5
 install:
-  - sed -ie "s#plone5.cfg#plone$PLONE_MAJOR_VERSION.cfg#" buildout.cfg
+  - sed -ie "s#plone5.cfg#plone$PLONE.cfg#" buildout.cfg
   - python bootstrap.py -c travis.cfg
   - bin/buildout -N -t 3 -c travis.cfg
 script:
