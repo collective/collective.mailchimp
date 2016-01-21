@@ -4,6 +4,10 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
+- Added support for Plone 5, kept 4.3 compatibility.  [jladage, didrix, maurits]
+
+- Updated to version 3.0 of the mailchimp api.  [jladage, didrix, maurits]
+
 - Remove bare excepts.
   [timo]
 
