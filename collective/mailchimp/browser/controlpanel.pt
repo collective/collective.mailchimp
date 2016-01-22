@@ -8,7 +8,7 @@
 
 <body>
 
-  <div id="content" 
+  <div id="content"
      metal:fill-slot="prefs_configlet_content">
 
     <div metal:use-macro="context/global_statusmessage/macros/portal_message">
@@ -24,7 +24,7 @@
 
     <h1 class="documentFirstHeading" tal:content="view/label">View Title</h1>
 
-    <div id="layout-contents" 
+    <div id="layout-contents"
          class="enableUnloadProtection enableAutoFocus enableFormTabbing enableUnlockProtection"
          tal:define="account view/mailchimp_account|nothing;
                      empty string:-">
@@ -135,7 +135,10 @@
     <script type="text/javascript">
 // Disable inline validation.  It may change the cache based on a new
 // api key that the user has not yet saved.
+// Plone 4:
 $('.z3cformInlineValidation').removeClass('z3cformInlineValidation');
+// Plone 5
+$('.pat-inlinevalidation').removeClass('pat-inlinevalidation');
     </script>
 
   </div>
