@@ -312,7 +312,7 @@ msgstr "Laat gebruikers hun e-mail type voorkeur kiezen in het formulier voor in
 
 #: collective/mailchimp/interfaces.py:56
 msgid "help_interest_groups"
-msgstr "help_interest_groups"
+msgstr ""
 
 #. Default: "Flag to determine whether we replace the interest groups with the groups provided or we add the providedgroups to the member's interest groups (optional, defaults to true)"
 #: collective/mailchimp/interfaces.py:186
@@ -375,4 +375,3 @@ msgstr "Inschrijven"
 #: collective/mailchimp/interfaces.py:174
 msgid "update_existing"
 msgstr "update_existing"
-
