@@ -21,24 +21,32 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         from collective.mailchimp.interfaces import IMailchimpLocator
         self.assertTrue(getUtility(IMailchimpLocator))
 
-    def test_mailchimp_locator_connect_method(self):
+    def test_mailchimp_locator_initialize_method(self):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()
-        locator.connect()
-        self.assertTrue(locator.mailchimp is not False)
+        self.assertEqual(locator.registry, None)
+        self.assertEqual(locator.settings, None)
+        self.assertEqual(locator.api_root, None)
+        locator.initialize()
+        self.assertTrue(locator.registry)
+        self.assertTrue(locator.settings)
+        self.assertTrue(locator.api_root)
 
     def test_mailchimp_locator_lists_method(self):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()
         self.assertTrue(locator.lists())
-        self.assertEqual(len(locator.lists()), 2)
+        self.assertEqual(len(locator.lists()), 3)
 
     def test_mailchimp_locator_groups_method(self):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()
-        self.assertTrue(locator.groups(list_id=u'a1346945ab'))
-        self.assertEqual(
-            len(locator.groups(list_id=u'a1346945ab')['groups']), 3)
+        groups = locator.groups(list_id=u'57afe96172')
+        self.assertTrue(groups)
+        self.assertEqual(len(groups['categories']), 1)
+        self.assertEqual(len(groups['interests']), 5)
+        self.assertEqual(groups['interests'][0]['name'],
+                         u"Sometimes you just gotta 'spress yourself.")
 
     def test_mailchimp_locator_updateCache_method(self):
         from collective.mailchimp.locator import MailchimpLocator
@@ -52,16 +60,22 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         # self.assertEqual(locator.registry[locator.key_groups], None)
         # self.assertEqual(locator.registry[locator.key_lists], None)
         locator.updateCache()
-        self.assertTrue(
-            isinstance(locator.registry[locator.key_account], dict))
-        self.assertEqual(locator.registry[locator.key_account], {})
-        self.assertTrue(
-            isinstance(locator.registry[locator.key_groups], dict))
-        self.assertEqual(locator.registry[locator.key_groups].keys(),
-                         [u'f6257645gs', u'f6267645gs'])
+        account = locator.registry[locator.key_account]
+        self.assertTrue(isinstance(account, dict))
+        self.assertEqual(account[u'account_id'], u'8d3a3db4d97663a9074efcc16')
+        self.assertEqual(account[u'account_name'], u"Freddie's Jokes")
+        groups = locator.registry[locator.key_groups]
+        self.assertTrue(isinstance(groups, dict))
+        self.assertEqual(groups.keys(),
+                         [u'f6257645gs', u'f6267645gs', u'57afe96172'])
+        self.assertEqual(
+            groups[groups.keys()[0]].keys(),
+            [u'total_items', 'interests', u'_links', u'categories', u'list_id']
+            )
+
         self.assertTrue(
             isinstance(locator.registry[locator.key_lists], tuple))
-        self.assertEqual(len(locator.registry[locator.key_lists]), 2)
+        self.assertEqual(len(locator.registry[locator.key_lists]), 3)
         # It does not complain when there is no api key
         locator.settings.api_key = None
         locator.updateCache()

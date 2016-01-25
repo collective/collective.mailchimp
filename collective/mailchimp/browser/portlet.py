@@ -40,8 +40,8 @@ class IMailChimpPortlet(IPortletDataProvider):
         min_length=1,
         value_type=schema.Choice(
             source='collective.mailchimp.vocabularies.AvailableLists'
-            )
         )
+    )
 
 
 class Assignment(base.Assignment):

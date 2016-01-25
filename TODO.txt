@@ -1,6 +1,4 @@
 TODO
 ====
 
-  [ ] Move from mocker to mock for unit tests.
-
   [ ] 100% test coverage.

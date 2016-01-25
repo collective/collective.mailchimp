@@ -3,10 +3,18 @@ from z3c.form.interfaces import WidgetActionExecutionError
 from zope.component import getUtility
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from postmonkey import MailChimpException
-from postmonkey.exceptions import PostRequestError
+from ..exceptions import (
+    PostRequestError,
+    MailChimpException
+)
 
 from plone.app.registry.browser import controlpanel
+try:
+    from plone.protect.interfaces import IDisableCSRFProtection
+except ImportError:
+    # BBB for old plone.protect, default until at least Plone 4.3.7.
+    IDisableCSRFProtection = None
+from zope.interface import alsoProvides
 
 from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import IMailchimpLocator
@@ -39,6 +47,8 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     index = ViewPageTemplateFile('controlpanel.pt')
 
     def mailchimp_account(self):
+        if IDisableCSRFProtection is not None:
+            alsoProvides(self.request, IDisableCSRFProtection)
         mailchimp = getUtility(IMailchimpLocator)
         try:
             return mailchimp.account()
@@ -53,6 +63,8 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
             )
 
     def available_lists(self):
+        if IDisableCSRFProtection is not None:
+            alsoProvides(self.request, IDisableCSRFProtection)
         mailchimp = getUtility(IMailchimpLocator)
         try:
             return mailchimp.lists()

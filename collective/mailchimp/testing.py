@@ -1,3 +1,6 @@
+import json
+import os
+import re
 from collective.mailchimp.interfaces import IMailchimpSettings
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
@@ -8,6 +11,89 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
 from zope.configuration import xmlconfig
+from mock import Mock
+from mock import patch
+
+DUMMY_API_KEY = u"abc-us1"
+TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'tests', 'data')
+
+
+class MockRequestsException(Exception):
+    """Exception raised in the requests mock.
+
+    This makes it easier to distinguish between exceptions of the
+    original and the patched module.
+    """
+
+
+class MockRequests(object):
+    """Class used as mock replacement for the requests module.
+    """
+
+    @staticmethod
+    def parse_arguments(*args, **kwargs):
+        """Parse the arguments and return whatever we need.
+        """
+        if len(args) != 1:
+            raise MockRequestsException(
+                'Expected 1 argument, got {0}: {1}'.format(
+                    len(args), args))
+        # Check url
+        url = args[0]
+        mailchimp_url = 'api.mailchimp.com/3.0/'
+        if mailchimp_url not in url:
+            raise MockRequestsException('Expected {0} in url {1}'.format(
+                mailchimp_url, url))
+        endpoint = url.split(mailchimp_url)[1]
+        # Check auth
+        auth = kwargs.get('auth')
+        if not auth:
+            raise MockRequestsException('Expected auth in keyword arguments.')
+        expected_auth = ('apikey', DUMMY_API_KEY)
+        if (not isinstance(auth, tuple) or len(auth) != 2 or
+                expected_auth != auth):
+            raise MockRequestsException(
+                'Expected auth {0} in keyword arguments. Got {1}'.format(
+                    expected_auth, auth))
+        data = kwargs.get('data')
+        # Load the data.
+        if not data:
+            raise MockRequestsException('Expected data in keyword arguments.')
+        data = json.loads(data)
+        if data:
+            raise MockRequestsException('TODO: handle data.')
+        return endpoint
+
+    @staticmethod
+    def post(*args, **kwargs):
+        """This is a mock for post and get in the requests module.
+
+        Return a json dictionary based on the end point.
+        """
+        endpoint = MockRequests.parse_arguments(*args, **kwargs)
+        path = ''
+        text = '{}'
+        if not endpoint:
+            path = os.path.join(TEST_DATA_DIR, 'account.json')
+        elif endpoint == 'lists':
+            path = os.path.join(
+                TEST_DATA_DIR, 'lists.json')
+        elif re.compile('lists/.*/interest-categories/.*/interests').match(
+                endpoint):
+            path = os.path.join(
+                TEST_DATA_DIR, 'interests.json')
+        elif re.compile('lists/.*/interest-categories').match(endpoint):
+            path = os.path.join(
+                TEST_DATA_DIR, 'lists_interest_categories.json')
+        else:
+            print('WARNING, unhandled endpoint in test: {0}'.format(endpoint))
+        if path:
+            with open(path) as datafile:
+                text = datafile.read()
+        # Return mock response with text.
+        return Mock(text=text)
+
+    get = post
 
 
 class CollectiveMailchimp(PloneSandboxLayer):
@@ -15,106 +101,14 @@ class CollectiveMailchimp(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        from mocker import Mocker
-        from mocker import ANY
-        from mocker import KWARGS
-        mocker = Mocker()
-        postmonkey = mocker.replace("postmonkey")
-        mailchimp = postmonkey.PostMonkey(ANY)
-        mocker.count(0, 1000)
-        # Lists
-        mailchimp.lists()
-        mocker.count(0, 1000)
-        mocker.result({
-            u'total': 2,
-            u'data': [
-                {
-                    u'id': u'f6257645gs',
-                    u'web_id': 625,
-                    u'name': u'ACME Newsletter',
-                    u'default_from_name': u'info@acme.com',
-                },
-                {
-                    u'id': u'f6267645gs',
-                    u'web_id': 626,
-                    u'name': u'ACME Newsletter 2',
-                    u'default_from_name': u'info@acme.com',
-                },
-            ]
-        })
-        # List Interest Groupings
-        mailchimp.listInterestGroupings(KWARGS)
-        mocker.count(0, 1000)
-        mocker.result([
-            {
-                u'groups': [
-                    {
-                        u'bit': u'1',
-                        u'display_order': u'1',
-                        u'name': u'Interest Group 1',
-                        u'subscribers': 0
-                    },
-                    {
-                        u'bit': u'2',
-                        u'display_order': u'2',
-                        u'name': u'Interest Group 2',
-                        u'subscribers': 0
-                    },
-                    {
-                        u'bit': u'3',
-                        u'display_order': u'3',
-                        u'name': u'Interest Group 3',
-                        u'subscribers': 1
-                    }
-                ]
-            }
-        ])
-
-        # Get account details
-        mailchimp.getAccountDetails()
-        mocker.count(0, 1000)
-        mocker.result({})
-        result = {  # noqa
-            u'total': 1,
-            u'data': [{
-                u'use_awesomebar': True,
-                u'beamer_address': u'NWVmY2ZkYjjNjc=@campaigns.mailchimp.com',
-                u'web_id': 17241,
-                u'name': u'Test Newsletter',
-                u'email_type_option': False,
-                u'modules': [],
-                u'default_language': u'de',
-                u'default_from_name': u'Timo Stollenwerk',
-                u'visibility': u'pub',
-                u'subscribe_url_long':
-                    u'http://johndoe.us4.list-manage1.com/subscribe?u=5e&id=fd',  # noqa
-                u'default_subject': u'Test Newsletter',
-                u'subscribe_url_short': u'http://eepurl.com/h6Rjg',
-                u'default_from_email': u'no-reply@timostollenwerk.net',
-                u'date_created': u'2011-12-27 16:15:03',
-                u'list_rating': 0,
-                u'id': u'f6257645gs',
-                u'stats': {
-                    u'grouping_count': 0,
-                    u'open_rate': None,
-                    u'member_count': 0,
-                    u'click_rate': None,
-                    u'cleaned_count_since_send': 0,
-                    u'member_count_since_send': 0,
-                    u'target_sub_rate': None,
-                    u'group_count': 0,
-                    u'avg_unsub_rate': None,
-                    u'merge_var_count': 2,
-                    u'unsubscribe_count': 0,
-                    u'cleaned_count': 0,
-                    u'avg_sub_rate': None,
-                    u'unsubscribe_count_since_send': 0,
-                    u'campaign_count': 1
-                    }
-                }
-            ]}
-
-        mocker.replay()
+        # Create patcher to mock the requests module that is imported in
+        # locator.py only.
+        self.requests_patcher = patch(
+            'collective.mailchimp.locator.requests', new_callable=MockRequests)
+        # It looks like the patcher is started automatically, although the
+        # documentation says you must start it explicitly.  Let's follow the
+        # documentation.  Then we can also nicely stop it in tearDownZope.
+        self.requests_patcher.start()
 
         # Load ZCML
         import collective.mailchimp
@@ -127,7 +121,12 @@ class CollectiveMailchimp(PloneSandboxLayer):
 
         registry = getUtility(IRegistry)
         mailchimp_settings = registry.forInterface(IMailchimpSettings)
-        mailchimp_settings.api_key = u"abc"
+        mailchimp_settings.api_key = DUMMY_API_KEY
+
+    def tearDownZope(self, app):
+        # Undo our requests patch.
+        self.requests_patcher.stop()
+
 
 COLLECTIVE_MAILCHIMP_FIXTURE = CollectiveMailchimp()
 COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING = IntegrationTesting(

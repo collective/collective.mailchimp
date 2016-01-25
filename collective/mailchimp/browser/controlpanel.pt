@@ -8,7 +8,7 @@
 
 <body>
 
-  <div id="content" 
+  <div id="content"
      metal:fill-slot="prefs_configlet_content">
 
     <div metal:use-macro="context/global_statusmessage/macros/portal_message">
@@ -24,7 +24,7 @@
 
     <h1 class="documentFirstHeading" tal:content="view/label">View Title</h1>
 
-    <div id="layout-contents" 
+    <div id="layout-contents"
          class="enableUnloadProtection enableAutoFocus enableFormTabbing enableUnlockProtection"
          tal:define="account view/mailchimp_account|nothing;
                      empty string:-">
@@ -49,47 +49,23 @@
           <tbody>
             <tr>
                <td i18n:translate="">Username:</td>
-               <td tal:content="account/username|empty"/>
-            </tr>
-            <tr>
-              <td i18n:translate="">E-mails left: </td>
-              <td tal:content="account/emails_left|empty"/>
-            </tr>
-            <tr>
-              <td i18n:translate="">Member since: </td>
-              <td tal:content="account/member_since|empty"/>
+               <td tal:content="account/account_name|empty"/>
             </tr>
             <tr>
               <td i18n:translate="">Last login: </td>
               <td tal:content="account/last_login|empty"/>
             </tr>
             <tr>
-              <td i18n:translate="">Plan type: </td>
-              <td tal:content="account/plan_type|empty"/>
-            </tr>
-            <tr>
               <td i18n:translate="">Company: </td>
               <td tal:content="account/contact/company|empty"/>
             </tr>
             <tr>
-              <td i18n:translate="">First name: </td>
-              <td tal:content="account/contact/fname|empty"/>
-            </tr>
-            <tr>
-              <td i18n:translate="">Last name: </td>
-              <td tal:content="account/contact/lname|empty"/>
-            </tr>
-            <tr>
-              <td i18n:translate="">Email: </td>
-              <td tal:content="account/contact/email|empty"/>
-            </tr>
-            <tr>
               <td i18n:translate="">Address 1: </td>
-              <td tal:content="account/contact/address1|empty"/>
+              <td tal:content="account/contact/addr1|empty"/>
             </tr>
             <tr>
               <td i18n:translate="">Address 2: </td>
-              <td tal:content="account/contact/address2|empty"/>
+              <td tal:content="account/contact/addr2|empty"/>
             </tr>
             <tr>
               <td i18n:translate="">Zip: </td>
@@ -107,19 +83,7 @@
               <td i18n:translate="">Country: </td>
               <td tal:content="account/contact/country|empty"/>
             </tr>
-            <tr>
-              <td i18n:translate="">URL: </td>
-              <td tal:content="account/contact/url|empty"/>
-            </tr>
-            <tr>
-              <td i18n:translate="">Phone: </td>
-              <td tal:content="account/contact/phone|empty"/>
-            </tr>
-            <tr>
-              <td i18n:translate="">Fax: </td>
-              <td tal:content="account/contact/fax|empty"/>
-            </tr>
-          </tbody>
+           </tbody>
         </table>
 
       </fieldset>
@@ -130,41 +94,37 @@
           <thead>
             <tr>
               <th i18n:translate="">ID</th>
-              <th i18n:translate="">Web ID</th>
               <th i18n:translate="">Name</th>
               <th i18n:translate="">Member count</th>
-              <th i18n:translate="">Email type option</th>
               <th i18n:translate="">Member count since send</th>
-              <th i18n:translate="">Default language</th>
               <th i18n:translate="">Default from name</th>
-              <th i18n:translate="">Unsubscribed count since send</th>
-              <th i18n:translate="">Default subject</th>
               <th i18n:translate="">Default from email</th>
+              <th i18n:translate="">Default subject</th>
+              <th i18n:translate="">Default language</th>
               <th i18n:translate="">Unsubscribed count</th>
+              <th i18n:translate="">Unsubscribed count since send</th>
               <th i18n:translate="">Cleaned cound</th>
+              <th i18n:translate="">Cleaned count since send</th>
               <th i18n:translate="">Date created</th>
               <th i18n:translate="">List rating</th>
-              <th i18n:translate="">Cleaned count since send</th>
             </tr>
           </thead>
           <tbody tal:repeat="list lists">
             <tr>
-              <td tal:content="list/id"></td>
-              <td tal:content="list/web_id"></td>
-              <td tal:content="list/name"></td>
-              <td tal:content="list/stats/member_count"></td>
-              <td tal:content="list/email_type_option"></td>
-              <td tal:content="list/stats/member_count_since_send"></td>
-              <td tal:content="list/default_language"></td>
-              <td tal:content="list/default_from_name"></td>
-              <td tal:content="list/stats/unsubscribe_count_since_send"></td>
-              <td tal:content="list/default_subject"></td>
-              <td tal:content="list/default_from_email"></td>
-              <td tal:content="list/stats/unsubscribe_count"></td>
-              <td tal:content="list/stats/cleaned_count"></td>
-              <td tal:content="list/date_created"></td>
-              <td tal:content="list/list_rating"></td>
-              <td tal:content="list/stats/cleaned_count_since_send"></td>
+              <td tal:content="list/id|empty"></td>
+              <td tal:content="list/name|empty"></td>
+              <td tal:content="list/stats/member_count|empty"></td>
+              <td tal:content="list/stats/member_count_since_send|empty"></td>
+              <td tal:content="list/campaign_defaults/from_name|empty"></td>
+              <td tal:content="list/campaign_defaults/from_email|empty"></td>
+              <td tal:content="list/campaign_defaults/subject|empty"></td>
+              <td tal:content="list/campaign_defaults/language|empty"></td>
+              <td tal:content="list/stats/unsubscribe_count|empty"></td>
+              <td tal:content="list/stats/unsubscribe_count_since_send|empty"></td>
+              <td tal:content="list/stats/cleaned_count|empty"></td>
+              <td tal:content="list/stats/cleaned_count_since_send|empty"></td>
+              <td tal:content="list/date_created|empty"></td>
+              <td tal:content="list/list_rating|empty"></td>
             </tr>
           </tbody>
         </table>
@@ -175,7 +135,10 @@
     <script type="text/javascript">
 // Disable inline validation.  It may change the cache based on a new
 // api key that the user has not yet saved.
+// Plone 4:
 $('.z3cformInlineValidation').removeClass('z3cformInlineValidation');
+// Plone 5
+$('.pat-inlinevalidation').removeClass('pat-inlinevalidation');
     </script>
 
   </div>

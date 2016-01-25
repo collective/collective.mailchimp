@@ -37,13 +37,12 @@ setup(name='collective.mailchimp',
           'Products.CMFPlone',
           'plone.app.portlets',
           'plone.app.registry',
-          'postmonkey',
+          'requests',
       ],
       extras_require={
           'test': [
+              'mock',  # new, backport from Python 3.3
               'plone.app.testing',
-              'mocker',
-              'plone.mocktestcase',
           ],
       },
       entry_points="""

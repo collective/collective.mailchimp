@@ -128,27 +128,6 @@ class TestPortletIntegration(unittest.TestCase):
             'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
         )
 
-    def test_postmonkey_mocker(self):
-        from postmonkey import PostMonkey
-        mailchimp = PostMonkey(u"abc")
-        self.assertEqual(mailchimp.lists(), {
-            u'total': 2,
-            u'data': [
-                {
-                    u'id': u'f6257645gs',
-                    u'web_id': 625,
-                    u'name': u'ACME Newsletter',
-                    u'default_from_name': u'info@acme.com',
-                },
-                {
-                    u'id': u'f6267645gs',
-                    u'web_id': 626,
-                    u'name': u'ACME Newsletter 2',
-                    u'default_from_name': u'info@acme.com',
-                }
-            ]
-        })
-
     def test_add_portlet_form(self):
         self.browser.open(
             self.portal_url +

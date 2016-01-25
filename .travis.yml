@@ -4,8 +4,17 @@ sudo: false
 cache:
   directories:
   - eggs
+env:
+  matrix:
+    - PLONE=4
+    - PLONE=5
 install:
-  - python bootstrap.py -c travis.cfg
+  - sed -ie "s#plone5.cfg#plone$PLONE.cfg#" buildout.cfg
+# Keep setuptools and zc.buildout the synced with buildout.cfg,
+# otherwise the buildout fails due to the non newest ('-N') option
+# when it wants to downgrade one of them to the pinned version.
+  - python bootstrap.py -c travis.cfg --buildout-version=2.5.0 --setuptools-version=19.4
+  - bin/buildout -c travis.cfg annotate
   - bin/buildout -N -t 3 -c travis.cfg
 script:
   - bin/code-analysis
