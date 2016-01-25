@@ -7,19 +7,19 @@ Introduction
 .. image:: https://coveralls.io/repos/collective/collective.mailchimp/badge.png?branch=master
     :target: https://coveralls.io/r/collective/collective.mailchimp
 
-.. image:: https://pypip.in/d/collective.mailchimp/badge.png
+.. image:: https://img.shields.io/pypi/dm/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: Downloads
 
-.. image:: https://pypip.in/v/collective.mailchimp/badge.png
+.. image:: https://img.shields.io/pypi/v/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: Latest Version
 
-.. image:: https://pypip.in/egg/collective.mailchimp/badge.png
+.. image:: https://img.shields.io/pypi/status/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: Egg Status
 
-.. image:: https://pypip.in/license/collective.mailchimp/badge.png
+.. image:: https://img.shields.io/pypi/l/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: License
 
