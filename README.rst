@@ -27,27 +27,25 @@ Introduction
    :target: https://landscape.io/github/collective/collective.mailchimp/master
    :alt: Code Health
 
-MailChimp integration for Plone.
+MailChimp integration for Plone 4 and 5.
 
 MailChimp_ helps you design email newsletters, share
 them on social networks, integrate with services you already use, and track
 your results.
 
 collective.mailchimp has been written from the scratch in order to replace
-raptus.mailchimp_ for newer
-versions of Plone (> 4.0).
+raptus.mailchimp_ for newer versions of Plone (> 4.0).
 
 .. _MailChimp: http://mailchimp.com
 .. _raptus.mailchimp: http://plone.org/products/raptus.mailchimp
 
 The difference between collective.mailchimp and raptus.mailchimp is:
 
-- postmonkey_ instead of greatape_ as Python wrapper (because greatape is completely untested, does not support the latest MailChimp API version and seems to be not actively developed any longer)
+- Directly use the MailChimp API instead of greatape_ as Python wrapper (because greatape is completely untested, does not support the latest MailChimp API version and seems to be not actively developed any longer)
 - z3c.form_ instead of formlib for forms (because formlib is deprecated)
 - plone.app.registry_ instead of portal_properties for storing properties (because portal_properties will be deprecated soon)
 - it is tested by automated software tests (because untested code is broken code)
 
-.. _postmonkey: http://pypi.python.org/pypi/postmonkey
 .. _greatape: http://pypi.python.org/pypi/greatape
 .. _z3c.form: http://pypi.python.org/pypi/z3c.form
 .. _plone.app.registry: http://pypi.python.org/pypi/plone.app.registry
