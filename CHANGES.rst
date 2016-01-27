@@ -4,6 +4,9 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
+- Move code to src folder to follow best practice.
+  [timo]
+
 - Set default value for interests to '{}' instead of None. This fixes https://github.com/collective/collective.mailchimp/issues/19.
   [timo]
 
