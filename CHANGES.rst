@@ -4,6 +4,9 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
+- Set default value for interests to '{}' instead of None. This fixes https://github.com/collective/collective.mailchimp/issues/19.
+  [timo]
+
 - Added support for Plone 5, kept 4.3 compatibility.
   [jladage, didrix, maurits]
 

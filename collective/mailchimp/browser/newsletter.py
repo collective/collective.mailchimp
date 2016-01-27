@@ -91,7 +91,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             list_id = mailchimp.default_list_id()
 
         # Groupings
-        interests = None
+        interests = {}
         if 'interest_groups' in data and data['interest_groups'] is not None:
             interest_grouping = mailchimp.groups(list_id=list_id)
             if interest_grouping and data['interest_groups']:
