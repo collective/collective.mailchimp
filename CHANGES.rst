@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.4.2 (unreleased)
-------------------
+2.0 (2016-01-28)
+----------------
 
 - Move code to src folder to follow best practice.
   [timo]
