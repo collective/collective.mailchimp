@@ -13,7 +13,11 @@ Changelog
 - Added support for Plone 5, kept 4.3 compatibility.
   [jladage, didrix, maurits]
 
-- Updated to version 3.0 of the mailchimp api.
+- Updated to version 3.0 of the mailchimp api.  The data that we get
+  from mailchimp with this api version is changed.  When you have
+  interest groups in your lists, and you do not see them anymore on
+  the subscribe form, you should visit the control panel again.  This
+  will update the data automatically.
   [jladage, didrix, maurits]
 
 - Remove bare excepts.

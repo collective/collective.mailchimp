@@ -50,7 +50,7 @@ The difference between collective.mailchimp and raptus.mailchimp is:
 .. _z3c.form: http://pypi.python.org/pypi/z3c.form
 .. _plone.app.registry: http://pypi.python.org/pypi/plone.app.registry
 
-collective.mailchimp is tested on Plone 4.x and should work on Plone > 3.3
+collective.mailchimp is tested on Plone 4.x and 5.x and should work on Plone > 3.3
 (with the appropriate version pins for plone.app.registry and z3c.form).
 
 
@@ -83,6 +83,11 @@ your MailChimp newsletter form. For instance to select the first and the fifth
 group entry use the following link::
 
     http://localhost:8080/Plone/@@newsletter?preselect_group=0&preselect_group=4
+
+Note: if you used version 1.4.1 of collective.mailchimp or earlier,
+you may no longer see the interest groups on the subscribe form.  You
+should visit the control panel again.  This will update the data
+automatically.
 
 
 Extend Newsletter Subscription Form
