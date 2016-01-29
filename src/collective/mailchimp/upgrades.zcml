@@ -29,4 +29,13 @@
       handler=".upgrades.install_mailchimp_cache"
       />
 
+  <genericsetup:upgradeStep
+      source="1400"
+      destination="2000"
+      title="Re-install collective.mailchimp to load new src folder."
+      description=""
+      profile="collective.mailchimp:default"
+      handler=".upgrades.reload_profile"
+      />
+
 </configure>
