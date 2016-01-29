@@ -61,10 +61,10 @@ Install collective.mailchimp by adding it to your buildout:
 
   [buildout]
 
-   ...
+  ...
 
-   eggs =
-       collective.mailchimp
+  eggs =
+      collective.mailchimp
 
 and then running "bin/buildout"
 
