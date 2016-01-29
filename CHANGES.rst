@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.1 (unreleased)
+2.0.1 (2016-01-29)
 ------------------
 
 - Add upgrade step to reload new src folder. Make sure you run the upgrade step, otherwise the add-on will not work properly. This fixes https://github.com/collective/collective.mailchimp/issues/21.
