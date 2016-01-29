@@ -57,7 +57,16 @@ collective.mailchimp is tested on Plone 4.x and 5.x and should work on Plone > 3
 Installation
 ============
 
-Just add collective.mailchimp to the eggs section of your buildout.
+Install collective.mailchimp by adding it to your buildout:
+
+  [buildout]
+
+   ...
+
+   eggs =
+       collective.mailchimp
+
+and then running "bin/buildout"
 
 
 Multiple MailChimp Lists
@@ -111,4 +120,21 @@ Issue Tracker
 
 Please report bugs to the `issue tracker on github`_.
 
+
+Support
+=======
+
+This package is maintained by `kitconcept`_ <info@kitconcept.com>.
+
+If you are having issues, please let us know.
+
+
+License
+=======
+
+The project is licensed under the GPLv2.
+
 .. _`issue tracker on github`: https://github.com/collective/collective.mailchimp/issues
+
+.. _`kitconcept`: https://kitconcept.com
+
