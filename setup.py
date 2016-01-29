@@ -54,6 +54,7 @@ setup(
         'Products.CMFPlone',
         'plone.app.portlets',
         'plone.app.registry',
+        'plone.app.upgrade',
         'requests',
     ],
     extras_require={
