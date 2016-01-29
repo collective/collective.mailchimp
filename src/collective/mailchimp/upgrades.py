@@ -2,6 +2,7 @@ from Products.CMFCore.utils import getToolByName
 
 from zope.component import getUtility
 
+from plone.app.upgrade.utils import loadMigrationProfile
 from plone.registry.interfaces import IRegistry
 
 from collective.mailchimp.interfaces import IMailchimpSettings
@@ -30,3 +31,10 @@ def install_mailchimp_stylesheet(context):
 def install_mailchimp_cache(context):
     setup = getToolByName(context, 'portal_setup')
     setup.runImportStepFromProfile(PROFILE_ID, 'plone.app.registry')
+
+
+def reload_profile(context):
+    loadMigrationProfile(
+        context,
+        'profile-collective.mailchimp:default'
+    )
