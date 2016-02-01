@@ -4,7 +4,8 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed MANIFEST.in so all files are added.  Releases 2.0 and 2.0.1
+  were missing non Python files.  [maurits]
 
 
 2.0.1 (2016-01-29)
