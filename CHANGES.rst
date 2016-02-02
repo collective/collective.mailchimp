@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.2 (unreleased)
+2.0.2 (2016-02-02)
 ------------------
 
 - Fixed MANIFEST.in so all files are added.  Releases 2.0 and 2.0.1
