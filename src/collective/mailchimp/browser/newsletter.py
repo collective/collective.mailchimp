@@ -171,7 +171,7 @@ class UnsubscribeNewsletterForm(NewsletterSubscriberForm):
 
     fields = field.Fields(INewsletterUnsubscribe)
     id = "newsletter-unsubscriber-form"
-    label = _(u"Unubscribe from newsletter")
+    label = _(u"Unsubscribe from newsletter")
 
     def updateActions(self):
         # Avoid calling NewsletterSubscriberForm.updateActions():
