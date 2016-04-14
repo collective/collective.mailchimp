@@ -167,9 +167,10 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 NewsletterView = wrap_form(NewsletterSubscriberForm)
 
 
-class UnsubscribeNewsletterForm(NewsletterSubscriberForm):
+class UnsubscribeNewsletterForm(extensible.ExtensibleForm, form.Form):
 
     fields = field.Fields(INewsletterUnsubscribe)
+    ignoreContext = True
     id = "newsletter-unsubscriber-form"
     label = _(u'mailchimp_unsubscribe_newsletter_form_title',
               default=u"Unsubscribe from newsletter")
@@ -177,12 +178,33 @@ class UnsubscribeNewsletterForm(NewsletterSubscriberForm):
     description = _(u'mailchimp_unsubscribe_newsletter_form_description',
                     default='')
 
-    def updateActions(self):
-        # Avoid calling NewsletterSubscriberForm.updateActions():
-        super(NewsletterSubscriberForm, self).updateActions()
+    def updateFields(self):
+        super(UnsubscribeNewsletterForm, self).updateFields()
+        self.fields['interest_groups'].widgetFactory = \
+            CheckBoxFieldWidget
 
     def updateWidgets(self):
         super(UnsubscribeNewsletterForm, self).updateWidgets()
+        registry = getUtility(IRegistry)
+        self.mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        self.mailchimp = getUtility(IMailchimpLocator)
+
+        # Set a given email address
+        if self.request.get('email'):
+            self.widgets['email'].value = self.request['email']
+
+        # Retrieve the list id either from the request/form or fall back to
+        # the default_list setting.
+        list_id = self.context.REQUEST.get('list_id')
+        list_id = list_id or self.request.form.get('form.widgets.list_id')
+        list_id = list_id or self.mailchimp_settings.default_list
+        self.widgets['list_id'].mode = HIDDEN_MODE
+        self.widgets['list_id'].value = list_id
+
+        # Show/hide interest_groups widget
+        self.available_interest_groups = self.mailchimp.groups(list_id=list_id)
+        if not self.available_interest_groups:
+            self.widgets['interest_groups'].mode = HIDDEN_MODE
 
     @button.buttonAndHandler(_(u"unsubscribe_newsletter_button",
                                default=u"Unsubscribe"),

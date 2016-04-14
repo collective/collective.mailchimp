@@ -74,7 +74,7 @@ class INewsletterSubscribe(Interface):
     )
 
 
-class INewsletterUnsubscribe(INewsletterSubscribe):
+class INewsletterUnsubscribe(Interface):
 
     email = schema.TextLine(
         title=_(u"Email address"),
@@ -84,6 +84,11 @@ class INewsletterUnsubscribe(INewsletterSubscribe):
         ),
         required=True,
         constraint=validate_email)
+
+    list_id = schema.TextLine(
+        title=_(u"List ID"),
+        required=False
+    )
 
     interest_groups = schema.Tuple(
         title=_(
