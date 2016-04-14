@@ -30,6 +30,13 @@ class MockRequests(object):
     """Class used as mock replacement for the requests module.
     """
 
+    def __init__(self):
+        self.calls = []
+
+    @property
+    def last_call(self):
+        return self.calls[-1]
+
     @staticmethod
     def parse_arguments(*args, **kwargs):
         """Parse the arguments and return whatever we need.
@@ -62,13 +69,14 @@ class MockRequests(object):
         data = json.loads(data)
         return endpoint, data
 
-    @staticmethod
-    def post(*args, **kwargs):
+    def post(self, *args, **kwargs):
         """This is a mock for post and get in the requests module.
 
         Return a json dictionary based on the end point.
         """
-        endpoint, data = MockRequests.parse_arguments(*args, **kwargs)
+        endpoint, data = self.parse_arguments(*args, **kwargs)
+        self.calls.append({'endpoint': endpoint,
+                           'data': data})
         path = ''
         text = '{}'
         if not endpoint:
