@@ -171,7 +171,11 @@ class UnsubscribeNewsletterForm(NewsletterSubscriberForm):
 
     fields = field.Fields(INewsletterUnsubscribe)
     id = "newsletter-unsubscriber-form"
-    label = _(u"Unsubscribe from newsletter")
+    label = _(u'mailchimp_unsubscribe_newsletter_form_title',
+              default=u"Unsubscribe from newsletter")
+
+    description = _(u'mailchimp_unsubscribe_newsletter_form_description',
+                    default='')
 
     def updateActions(self):
         # Avoid calling NewsletterSubscriberForm.updateActions():

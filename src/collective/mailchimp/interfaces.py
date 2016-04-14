@@ -86,10 +86,12 @@ class INewsletterUnsubscribe(INewsletterSubscribe):
         constraint=validate_email)
 
     interest_groups = schema.Tuple(
-        title=_(u"Unsubscribe from interest groups"),
+        title=_(
+            u'mailchimp_unsubscribe_interest_groups',
+            default=u"Unsubscribe only form the following interest groups"),
         description=_(
             u"mailchimp_help_unsubscribe_interest_groups",
-            default=u"Unsubscribe from the following interest groups."
+            default=u""
         ),
         value_type=schema.Choice(
             vocabulary="collective.mailchimp.vocabularies.InterestGroups",
@@ -98,10 +100,12 @@ class INewsletterUnsubscribe(INewsletterSubscribe):
     )
 
     unsubscribe = schema.Bool(
-        title=_(u"Unsubscribe from the complete List"),
+        title=_(
+            u'mailchimp_unsubscribe_newsletter',
+            default=u"Unsubscribe from the complete newsletter"),
         description=_(
-            u'mailchimp_unsubscribe_from_list',
-            default=u'Unsubscribe from all interest groups'),
+            u'mailchimp_help_unsubscribe_newsletter',
+            default=u''),
         )
 
 
