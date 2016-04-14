@@ -105,12 +105,13 @@ class MailchimpLocator(object):
             return []
         headers = {'content-type': 'application/json'}
         url = urlparse.urljoin(self.api_root, endpoint)
+
         # we provide a json structure with the parameters.
         payload = json.dumps(kwargs)
-        if request_type.lower() == 'post':
-            request_method = requests.post
-        else:
-            request_method = requests.get
+
+        assert request_type in ['get', 'post', 'put', 'delete', 'patch']
+        request_method = getattr(requests, request_type)
+
         try:
             resp = request_method(url, auth=(
                 'apikey', self.apikey), data=payload, headers=headers)
