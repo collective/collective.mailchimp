@@ -7,6 +7,12 @@ Changelog
 - Add @@unsubscribe-newsletter.
   [csenger]
 
+- Added basic Romanian translation
+  [ichim-david]
+
+- Fixed ignoral of new locales directory because of option set in gitignore
+  [ichim-david]
+
 
 2.0.2 (2016-02-02)
 ------------------

@@ -1,0 +1,378 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2016-04-13 HO:MI +ZONE\n"
+"PO-Revision-Date: 2016-04-13 HO:MI +ZONE\n"
+"Last-Translator: David Ichim <ichim.david@gmail.com\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: ro\n"
+"Language-Name: Romanian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.mailchimp\n"
+
+#: collective/mailchimp/browser/controlpanel.py:20
+msgid ""
+msgstr ""
+
+#: collective/mailchimp/browser/portlet.py:90
+msgid "Add MailChimp Portlet"
+msgstr "Adauga Portlet Mailchimp"
+
+#: collective/mailchimp/browser/controlpanel.pt:87
+msgid "Address 1:"
+msgstr "Adresa 1:"
+
+#: collective/mailchimp/browser/controlpanel.pt:91
+msgid "Address 2:"
+msgstr "Adresa 2:"
+
+#: collective/mailchimp/browser/portlet.py:37
+msgid "Available lists"
+msgstr "Liste disponibile"
+
+#: collective/mailchimp/browser/controlpanel.pt:103
+msgid "City:"
+msgstr "Oras:"
+
+#: collective/mailchimp/browser/controlpanel.pt:144
+msgid "Cleaned cound"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:147
+msgid "Cleaned count since send"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:71
+msgid "Company:"
+msgstr ""
+
+#: collective/mailchimp/browser/z3cformhelpers.py:21
+msgid "Configure portlet"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:107
+msgid "Country:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:145
+msgid "Date created"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:142
+msgid "Default from email"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:139
+msgid "Default from name"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:138
+msgid "Default language"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:141
+msgid "Default subject"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:15
+msgid "E-Mail"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:55
+msgid "E-mails left:"
+msgstr ""
+
+#: collective/mailchimp/browser/portlet.py:104
+msgid "Edit MailChimp Portlet"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:46
+msgid "Email address"
+msgstr "Adresa email"
+
+#: collective/mailchimp/browser/controlpanel.pt:136
+msgid "Email type option"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:83
+msgid "Email:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:119
+msgid "Fax:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:75
+msgid "First name:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:132
+msgid "ID"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:55
+msgid "Interest groups"
+msgstr "Grupuri de interes"
+
+#: collective/mailchimp/interfaces.py:30
+msgid "Invalid email address"
+msgstr "Adresă de email invalidă"
+
+#: collective/mailchimp/browser/controlpanel.pt:45
+msgid "Key"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:63
+msgid "Last login:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:79
+msgid "Last name:"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:74
+msgid "List ID"
+msgstr "ID listă"
+
+#: collective/mailchimp/browser/controlpanel.pt:146
+msgid "List rating"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:67
+msgid "Mail format"
+msgstr "Format email"
+
+#: collective/mailchimp/browser/portlet.py:56
+#: collective/mailchimp/profiles/default/controlpanel.xml
+msgid "MailChimp"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:117
+msgid "MailChimp API Key"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:40
+msgid "MailChimp Account"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:127
+msgid "MailChimp Lists"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.py:19
+msgid "MailChimp settings"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:135
+msgid "Member count"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:137
+msgid "Member count since send"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:59
+msgid "Member since:"
+msgstr ""
+
+#: collective/mailchimp/browser/z3cformhelpers.py:65
+msgid "Modify portlet"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:134
+msgid "Name"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:115
+msgid "Phone:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:67
+msgid "Plan type:"
+msgstr ""
+
+#: collective/mailchimp/browser/portlet.py:38
+msgid "Select available lists to subscribe to."
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:18
+msgid "Site Setup"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:32
+msgid "Standard"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:99
+msgid "State:"
+msgstr ""
+
+#: collective/mailchimp/browser/newsletter.py:38
+#: collective/mailchimp/browser/portlet.py:72
+msgid "Subscribe to newsletter"
+msgstr "Abonează-te la newsletter"
+
+#: collective/mailchimp/interfaces.py:14
+msgid "Subscriber list"
+msgstr "Lista de înscriere"
+
+#: collective/mailchimp/browser/portlet.py:91
+msgid "This portlet displays a subscription form for a MailChimp newsletter."
+msgstr ""
+
+#: collective/mailchimp/browser/portlet.py:33
+msgid "Title"
+msgstr ""
+
+#: collective/mailchimp/browser/portlet.py:34
+msgid "Title of the portlet"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:111
+msgid "URL:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:143
+msgid "Unsubscribed count"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:140
+msgid "Unsubscribed count since send"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:51
+msgid "Username:"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:46
+msgid "Value"
+msgstr ""
+
+#: collective/mailchimp/browser/newsletter.py:163
+msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
+msgstr "Trebuie să confirmăm adresa de email introdusă. Pentru a termina procesul de înscriere, fă click pe link-ul din email-ul ce tocmai l-am trimis."
+
+#: collective/mailchimp/browser/controlpanel.pt:133
+msgid "Web ID"
+msgstr ""
+
+#: collective/mailchimp/browser/controlpanel.pt:95
+msgid "Zip:"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:152
+msgid "default_list"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:162
+msgid "double_optin"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:130
+msgid "email_type"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:141
+msgid "email_type_is_optional"
+msgstr ""
+
+#. Default: "Enter in your MailChimp key here (.e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into mailchimp.com, go to account -> extras -> API Keys & Authorized Apps and copy the API Key to this field."
+#: collective/mailchimp/interfaces.py:118
+msgid "help_api_key"
+msgstr ""
+
+#. Default: "Default list which is used in the @@newsletter view if no list_id param is provided."
+#: collective/mailchimp/interfaces.py:153
+msgid "help_default_list"
+msgstr ""
+
+#. Default: "Flag to control whether a double opt-in confirmation message is sent, defaults to true. Abusing this may cause your account to be suspended."
+#: collective/mailchimp/interfaces.py:163
+msgid "help_double_optin"
+msgstr ""
+
+#. Default: "Please enter your email address."
+#: collective/mailchimp/interfaces.py:47
+msgid "help_email"
+msgstr "Introdu adresa ta de email"
+
+#. Default: "Email type preference for the email (html, text, or mobile defaults to html)"
+#: collective/mailchimp/interfaces.py:131
+msgid "help_email_type"
+msgstr "Tipul de email (html, text, sau mobil, html este setat in mod implicit"
+
+#. Default: "Let users choose their email type preference in the newsletter subscription form."
+#: collective/mailchimp/interfaces.py:142
+msgid "help_email_type_is_optional"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:56
+msgid "help_interest_groups"
+msgstr ""
+
+#. Default: "Flag to determine whether we replace the interest groups with the groups provided or we add the providedgroups to the member's interest groups (optional, defaults to true)"
+#: collective/mailchimp/interfaces.py:186
+msgid "help_replace_interests"
+msgstr ""
+
+#. Default: "If your double_optin is false and this is true, we will send your lists Welcome Email if this subscribe succeeds - this will *not* fire if we end up updating an existing subscriber. If double_optin is true, this has no effect. defaults to false."
+#: collective/mailchimp/interfaces.py:199
+msgid "help_send_welcome"
+msgstr ""
+
+#. Default: "Flag to control whether existing subscribers should be updated instead of throwing an error, defaults to false"
+#: collective/mailchimp/interfaces.py:175
+msgid "help_update_existing"
+msgstr ""
+
+#. Default: "Cancel"
+#: collective/mailchimp/browser/z3cformhelpers.py:50
+msgid "label_cancel"
+msgstr "Anulează"
+
+#. Default: "Save"
+#: collective/mailchimp/browser/z3cformhelpers.py:39
+msgid "label_save"
+msgstr "Salvează"
+
+#. Default: "Could not subscribe to newsletter. Please contact the site administrator: '${error}'"
+#: collective/mailchimp/browser/newsletter.py:149
+msgid "mailchimp_error_msg"
+msgstr "Nu s-a putut finaliza înscrierea la newsletter. Te rugăm să contacteazi administrator-ul site-ului: '${error}'"
+
+#. Default: "Could not subscribe to newsletter. The email '${email}' is already subscribed."
+#: collective/mailchimp/browser/newsletter.py:121
+msgid "mailchimp_error_msg_already_subscribed"
+msgstr "Nu s-a putut finaliza înscrierea la newsletter. Adresa de email '${email}' este deja înscrisă."
+
+#. Default: "Could not subscribe to newsletter. The email '${email}' has been banned."
+#: collective/mailchimp/browser/newsletter.py:135
+msgid "mailchimp_error_msg_banned"
+msgstr "Nu s-a putut finaliza înscrierea la newsletter. Adresa de email '${email}' este banată."
+
+#. Default: "Your account has not been saved yet or is not valid."
+#: collective/mailchimp/browser/controlpanel.pt:33
+msgid "msg_mailchimp_no_account"
+msgstr "Contul tău nu a fost salvat încă sau nu este valid."
+
+#: collective/mailchimp/interfaces.py:185
+msgid "replace_interests"
+msgstr ""
+
+#: collective/mailchimp/interfaces.py:198
+msgid "send_welcome"
+msgstr ""
+
+#. Default: "Subscribe"
+#: collective/mailchimp/browser/newsletter.py:79
+msgid "subscribe_to_newsletter_button"
+msgstr "Abonează-te"
+
+#: collective/mailchimp/interfaces.py:174
+msgid "update_existing"
+msgstr ""
+

@@ -21,7 +21,6 @@ htmlcov
 /.project
 /.pydevproject
 /.mr.developer.cfg
-/src/*
 *.mo
 docs/Makefile
 docs/make.bat
