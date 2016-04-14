@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import hashlib
 import json
 import logging
 import requests
@@ -227,6 +228,25 @@ class MailchimpLocator(object):
         logger.info("Subscribed %s to list with id: %s." %
                     (email_address, list_id))
         logger.debug("Subscribed %s to list with id: %s.\n\n %s" %
+                     (email_address, list_id, response))
+        return response
+
+    def update_subscriber(self, list_id, email_address, **kwargs):
+        """ API call to unsubscribe a member completely from a list."""
+        self.initialize()
+
+        email_hash = hashlib.md5(email_address).hexdigest()
+        endpoint = 'lists/' + list_id + '/members/' + email_hash
+        try:
+            response = self.api_request(endpoint, request_type='patch',
+                                        **kwargs)
+        except MailChimpException:
+            raise
+        except Exception, e:
+            raise PostRequestError(e)
+        logger.info("Unsubscribed %s from list with id: %s." %
+                    (email_address, list_id))
+        logger.debug("Unsubscribed %s from list with id: %s.\n\n %s" %
                      (email_address, list_id, response))
         return response
 

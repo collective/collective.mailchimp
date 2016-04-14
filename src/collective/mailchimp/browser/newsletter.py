@@ -23,6 +23,7 @@ from collective.mailchimp.exceptions import MailChimpException
 from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import INewsletterSubscribe
+from collective.mailchimp.interfaces import INewsletterUnsubscribe
 
 
 class NewsletterSubcriber(object):
@@ -164,3 +165,69 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             )
 
 NewsletterView = wrap_form(NewsletterSubscriberForm)
+
+
+class UnsubscribeNewsletterForm(NewsletterSubscriberForm):
+
+    fields = field.Fields(INewsletterUnsubscribe)
+    id = "newsletter-unsubscriber-form"
+    label = _(u"Unubscribe from newsletter")
+
+    def updateActions(self):
+        # Avoid calling NewsletterSubscriberForm.updateActions():
+        super(NewsletterSubscriberForm, self).updateActions()
+
+    def updateWidgets(self):
+        super(UnsubscribeNewsletterForm, self).updateWidgets()
+
+    @button.buttonAndHandler(_(u"unsubscribe_newsletter_button",
+                               default=u"Unsubscribe"),
+                             name='unsubscribe')
+    def handle_unsubscribe(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+
+        list_id = data.get('list_id') or self.mailchimp.default_list_id()
+        email = data['email']
+
+        update_data = {}
+        if data.get('unsubscribe'):
+            update_data['status'] = 'unsubscribed'
+        else:
+            interest_groups = {}
+            for group in data.get('interest_groups', []):
+                interest_groups[group] = False
+            update_data['interests'] = interest_groups
+
+        try:
+            self.mailchimp.update_subscriber(
+                list_id,
+                email_address=email,
+                **update_data
+            )
+        except MailChimpException as error:
+            if error.code != 404:
+                # If a subscriber did not exist we don't want to announce
+                # it. Treat only != 404 as an error.
+                IStatusMessage(self.request).addStatusMessage(
+                    _(u'mailchimp_unsubscribe_error_msg',
+                      default=u'We could not unsubscribe you from '
+                              u'the newsletter. '
+                              u"Please contact the site administrator: "
+                              u"'${error}'",
+                      mapping={u"error": error}),
+                    type="info")
+
+        IStatusMessage(self.request).addStatusMessage(
+            _(u'mailchimp_unsubscribed_msg',
+              default=(u'Thank you. You have been unsubscribed from '
+                       u'the Newsletter.')),
+            type="info")
+
+        portal = getSite()
+        self.request.response.redirect(portal.absolute_url())
+
+
+UnsubscribeNewsletterView = wrap_form(UnsubscribeNewsletterForm)

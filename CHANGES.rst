@@ -4,7 +4,8 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add @@unsubscribe-newsletter.
+  [csenger]
 
 
 2.0.2 (2016-02-02)
