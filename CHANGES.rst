@@ -202,8 +202,8 @@ Changelog
 1.0.1 (2012-10-28)
 ------------------
 
-Fix MANIFEST.in to include readme and changelog.
-[jone]
+- Fix MANIFEST.in to include readme and changelog.
+  [jone]
 
 
 1.0 (2012-10-17)
