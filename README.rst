@@ -108,9 +108,9 @@ collective.mailchimp.
 
 .. note::
 
-  - https://github.com/collective/collective.mailchimp/blob/master/collective/mailchimp/browser/extender.py
+  - https://github.com/collective/collective.mailchimp/blob/master/src/collective/mailchimp/browser/extender.py
 
-  - https://github.com/collective/collective.mailchimp/blob/master/collective/mailchimp/browser/extender.zcml
+  - https://github.com/collective/collective.mailchimp/blob/master/src/collective/mailchimp/browser/extender.zcml
 
   - http://packages.python.org/plone.app.discussion/howtos/howto_extend_the_comment_form.html.
 
