@@ -4,6 +4,8 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
+- Updated Dutch translations.  [jladage]
+
 - Added basic Romanian translation
   [ichim-david]
 
