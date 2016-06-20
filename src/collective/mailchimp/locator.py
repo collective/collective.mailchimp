@@ -231,11 +231,14 @@ class MailchimpLocator(object):
                      (email_address, list_id, response))
         return response
 
+    def get_email_hash(self, email_address):
+        return hashlib.md5(email_address).hexdigest()
+
     def update_subscriber(self, list_id, email_address, **kwargs):
-        """ API call to unsubscribe a member completely from a list."""
+        """API call to update a member's data"""
         self.initialize()
 
-        email_hash = hashlib.md5(email_address).hexdigest()
+        email_hash = self.get_email_hash(email_address)
         endpoint = 'lists/' + list_id + '/members/' + email_hash
         try:
             response = self.api_request(endpoint, request_type='patch',
@@ -244,9 +247,43 @@ class MailchimpLocator(object):
             raise
         except Exception, e:
             raise PostRequestError(e)
-        logger.info("Unsubscribed %s from list with id: %s." %
+        logger.info("Updated %s in list with id: %s." %
                     (email_address, list_id))
-        logger.debug("Unsubscribed %s from list with id: %s.\n\n %s" %
+        logger.debug("updated %s in list with id: %s.\n\n %s" %
+                     (email_address, list_id, response))
+        return response
+
+    def get_subscriber(self, list_id, email_address, **kwargs):
+        """ API call to unsubscribe a member completely from a list."""
+        self.initialize()
+
+        email_hash = self.get_email_hash(email_address)
+        endpoint = 'lists/' + list_id + '/members/' + email_hash
+        try:
+            response = self.api_request(endpoint, request_type='get',
+                                        **kwargs)
+        except MailChimpException:
+            raise
+        except Exception, e:
+            raise PostRequestError(e)
+        return response
+
+    def add_note_to_subscriber(self, list_id, email_address, note):
+        """ API call to unsubscribe a member completely from a list."""
+        self.initialize()
+
+        email_hash = self.get_email_hash(email_address)
+        endpoint = 'lists/' + list_id + '/members/' + email_hash + '/notes'
+        try:
+            response = self.api_request(endpoint, request_type='post',
+                                        note=note)
+        except MailChimpException:
+            raise
+        except Exception, e:
+            raise PostRequestError(e)
+        logger.info("Added note for %s in list with id: %s." %
+                    (email_address, list_id))
+        logger.debug("Added note for %s in list with id: %s.\n\n %s" %
                      (email_address, list_id, response))
         return response
 

@@ -77,6 +77,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             group_index = int(group_index)
             widgets['interest_groups'].items[group_index]['checked'] = True
 
+
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
                                default=u"Subscribe"),
                              name='subscribe')
@@ -91,7 +92,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
         # interest groups
         interests = {}
-        interest_groups = data.get('interest_groups', [])
+        interest_groups = data.pop('interest_groups', [])
         if self.available_interest_groups and interest_groups:
             # Create dictionary with as keys the interest groups, and as
             # values always True.
@@ -107,7 +108,8 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                 list_id=list_id,
                 email_address=data['email'],
                 email_type=email_type,
-                interests=interests
+                interests=interests,
+                merge_fields=data,
             )
         except MailChimpException as error:
             return self.handle_error(error, data)
