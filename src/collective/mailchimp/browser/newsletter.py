@@ -168,4 +168,4 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                 Invalid(translated_error_msg)
             )
 
-NewsletterView = wrap_form(NewsletterSubscriberForm)
+NewsletterView = wrap_form(NewsletterSubscriberForm) # noqa
