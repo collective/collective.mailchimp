@@ -129,10 +129,18 @@ Issue Tracker
 Please report bugs to the `issue tracker on github`_.
 
 
-Support
+Credits
 =======
 
-This package is maintained by `kitconcept`_ <info@kitconcept.com>.
+.. image:: https://kitconcept.com/logo.png
+   :height: 461px
+   :width: 100px
+   :scale: 100 %
+   :alt: kitconcept
+   :align: center
+   :target: https://www.kitconcept.com/
+
+This plugin is developed and maintained by `kitconcept`_.
 
 If you are having issues, please let us know.
 
