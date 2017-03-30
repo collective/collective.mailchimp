@@ -4,9 +4,10 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Updated Dutch translations.  [jladage]
+- Updated Dutch translations.  
+  [jladage]
 
-- Added basic Romanian translation
+- Added basic Romanian translation.n
   [ichim-david]
 
 - Fixed ignoral of new locales directory because of option set in gitignore
