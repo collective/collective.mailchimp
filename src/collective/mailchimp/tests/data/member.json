@@ -1,0 +1,90 @@
+{
+   "ip_signup" : "92.212.38.100",
+   "merge_fields" : {
+      "MMERGE4" : "",
+      "MMERGE6" : "",
+      "MMERGE3" : "",
+      "FNAME" : "",
+      "MMERGE5" : "",
+      "LNAME" : ""
+   },
+   "_links" : [
+      {
+         "rel" : "self",
+         "href" : "https://us4.api.mailchimp.com/3.0/lists/57afe96172/members/6a8c8987382504f5edccf76644baf173",
+         "method" : "GET",
+         "targetSchema" : "https://us4.api.mailchimp.com/schema/3.0/Lists/Members/Instance.json"
+      },
+      {
+         "rel" : "parent",
+         "href" : "https://us4.api.mailchimp.com/3.0/lists/57afe96172/members",
+         "method" : "GET",
+         "schema" : "https://us4.api.mailchimp.com/schema/3.0/CollectionLinks/Lists/Members.json",
+         "targetSchema" : "https://us4.api.mailchimp.com/schema/3.0/Lists/Members/Collection.json"
+      },
+      {
+         "rel" : "update",
+         "href" : "https://us4.api.mailchimp.com/3.0/lists/57afe96172/members/6a8c8987382504f5edccf76644baf173",
+         "method" : "PATCH",
+         "schema" : "https://us4.api.mailchimp.com/schema/3.0/Lists/Members/Instance.json"
+      },
+      {
+         "rel" : "upsert",
+         "href" : "https://us4.api.mailchimp.com/3.0/lists/57afe96172/members/6a8c8987382504f5edccf76644baf173",
+         "method" : "PUT",
+         "schema" : "https://us4.api.mailchimp.com/schema/3.0/Lists/Members/Instance.json"
+      },
+      {
+         "rel" : "delete",
+         "href" : "https://us4.api.mailchimp.com/3.0/lists/57afe96172/members/6a8c8987382504f5edccf76644baf173",
+         "method" : "DELETE"
+      },
+      {
+         "rel" : "activity",
+         "href" : "https://us4.api.mailchimp.com/3.0/lists/57afe96172/members/6a8c8987382504f5edccf76644baf173/activity",
+         "method" : "GET",
+         "targetSchema" : "https://us4.api.mailchimp.com/schema/3.0/Lists/Members/Activity/Collection.json"
+      },
+      {
+         "rel" : "goals",
+         "href" : "https://us4.api.mailchimp.com/3.0/lists/57afe96172/members/6a8c8987382504f5edccf76644baf173/goals",
+         "method" : "GET",
+         "targetSchema" : "https://us4.api.mailchimp.com/schema/3.0/Lists/Members/Goals/Collection.json"
+      },
+      {
+         "rel" : "notes",
+         "href" : "https://us4.api.mailchimp.com/3.0/lists/57afe96172/members/6a8c8987382504f5edccf76644baf173/notes",
+         "method" : "GET",
+         "targetSchema" : "https://us4.api.mailchimp.com/schema/3.0/Lists/Members/Notes/Collection.json"
+      }
+   ],
+   "timestamp_opt" : "2016-04-11T05:05:58+00:00",
+   "status" : "unsubscribed",
+   "email_client" : "",
+   "ip_opt" : "92.212.38.100",
+   "list_id" : "57afe96172",
+   "vip" : false,
+   "timestamp_signup" : "2016-04-11T05:05:01+00:00",
+   "id" : "6a8c8987382504f5edccf76644baf173",
+   "email_address" : "freddy@freddiesjokes.com",
+   "location" : {
+      "dstoff" : 2,
+      "longitude" : 8.27102,
+      "timezone" : "Europe/Berlin",
+      "gmtoff" : 1,
+      "country_code" : "DE",
+      "latitude" : 50
+   },
+   "interests" : {
+      "a1e9f4b7f6" : true
+   },
+   "language" : "",
+   "unique_email_id" : "6e6d1be850",
+   "stats" : {
+      "avg_open_rate" : 0,
+      "avg_click_rate" : 0
+   },
+   "member_rating" : 2,
+   "last_changed" : "2016-04-13T17:32:09+00:00",
+   "email_type" : "text"
+}

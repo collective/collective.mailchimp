@@ -46,6 +46,13 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="unsubscribe-newsletter"
+    for="*"
+    class=".newsletter.UnsubscribeNewsletterView"
+    permission="zope2.View"
+    />
+
   <!-- <include file="extender.zcml" /> -->
 
 </configure>

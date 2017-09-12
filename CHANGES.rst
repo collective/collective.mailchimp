@@ -4,10 +4,13 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Updated Dutch translations.  
+- Add @@unsubscribe-newsletter.
+  [csenger]
+
+- Updated Dutch translations.
   [jladage]
 
-- Added basic Romanian translation.n
+- Added basic Romanian translation
   [ichim-david]
 
 - Fixed ignoral of new locales directory because of option set in gitignore
