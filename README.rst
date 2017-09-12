@@ -1,6 +1,3 @@
-Introduction
-============
-
 .. image:: https://secure.travis-ci.org/collective/collective.mailchimp.png
     :target: http://travis-ci.org/collective/collective.mailchimp
 
@@ -34,6 +31,10 @@ Introduction
 .. image:: https://raw.githubusercontent.com/collective/collective.mailchimp/master/kitconcept.png
    :alt: kitconcept
    :target: https://kitconcept.com/
+
+
+Introduction
+============
 
 MailChimp integration for Plone 4 and 5.
 
@@ -140,7 +141,7 @@ Please report bugs to the `issue tracker on github`_.
 Credits
 =======
 
-.. image:: https://kitconcept.com/logo.png
+.. image:: https://raw.githubusercontent.com/collective/collective.mailchimp/master/kitconcept.png
    :height: 461px
    :width: 100px
    :scale: 100 %
