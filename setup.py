@@ -39,8 +39,8 @@ setup(
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
-    keywords='Python Plone',
-    author='Timo Stollenwerk',
+    keywords='Python Plone MailChimp Mail Newsletter',
+    author='kitconcept GmbH (Timo Stollenwerk)',
     author_email='stollenwerk@kitconcept.com',
     url='https://pypi.python.org/pypi/collective.mailchimp',
     license='GPL version 2',
@@ -54,6 +54,7 @@ setup(
         'Products.CMFPlone',
         'plone.app.portlets',
         'plone.app.registry',
+        'plone.app.imaging',  # needed for controlpanel
         'plone.app.upgrade',
         'requests',
     ],

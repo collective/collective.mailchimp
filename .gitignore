@@ -10,7 +10,7 @@ htmlcov
 /build
 /dist
 /local.cfg
-/*.egg-info
+*.egg-info
 *.egg
 *.eggs
 /.installed.cfg
