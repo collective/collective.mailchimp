@@ -4,6 +4,10 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
+- Add plone.app.imaging to dependencies in setup.py. This is needed for Plone
+  5.0.8 compatibility.
+  [timo]
+
 - Add @@unsubscribe-newsletter.
   [csenger]
 
