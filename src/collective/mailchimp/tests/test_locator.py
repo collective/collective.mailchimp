@@ -48,6 +48,15 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         self.assertEqual(groups['interests'][0]['name'],
                          u"Sometimes you just gotta 'spress yourself.")
 
+    def test_mailchimp_locator_update_subscriber_method(self):
+        from collective.mailchimp.locator import MailchimpLocator
+        locator = MailchimpLocator()
+        member = locator.update_subscriber('57afe96172',
+                                           'freddy@freddiesjokes.com',
+                                           interests={'a1e9f4b7f6': True})
+        self.assertTrue(member)
+        self.assertEqual(member['interests']['a1e9f4b7f6'], True)
+
     def test_mailchimp_locator_updateCache_method(self):
         from collective.mailchimp.locator import MailchimpLocator
         locator = MailchimpLocator()

@@ -30,6 +30,13 @@ class MockRequests(object):
     """Class used as mock replacement for the requests module.
     """
 
+    def __init__(self):
+        self.calls = []
+
+    @property
+    def last_call(self):
+        return self.calls[-1]
+
     @staticmethod
     def parse_arguments(*args, **kwargs):
         """Parse the arguments and return whatever we need.
@@ -60,17 +67,16 @@ class MockRequests(object):
         if not data:
             raise MockRequestsException('Expected data in keyword arguments.')
         data = json.loads(data)
-        if data:
-            raise MockRequestsException('TODO: handle data.')
-        return endpoint
+        return endpoint, data
 
-    @staticmethod
-    def post(*args, **kwargs):
+    def post(self, *args, **kwargs):
         """This is a mock for post and get in the requests module.
 
         Return a json dictionary based on the end point.
         """
-        endpoint = MockRequests.parse_arguments(*args, **kwargs)
+        endpoint, data = self.parse_arguments(*args, **kwargs)
+        self.calls.append({'endpoint': endpoint,
+                           'data': data})
         path = ''
         text = '{}'
         if not endpoint:
@@ -85,6 +91,10 @@ class MockRequests(object):
         elif re.compile('lists/.*/interest-categories').match(endpoint):
             path = os.path.join(
                 TEST_DATA_DIR, 'lists_interest_categories.json')
+        elif re.compile('lists/.*/members/[^/]*$').match(
+                endpoint):
+            path = os.path.join(
+                TEST_DATA_DIR, 'member.json')
         else:
             print('WARNING, unhandled endpoint in test: {0}'.format(endpoint))
         if path:
@@ -94,6 +104,9 @@ class MockRequests(object):
         return Mock(text=text)
 
     get = post
+    put = post
+    delete = post
+    patch = post
 
 
 class CollectiveMailchimp(PloneSandboxLayer):

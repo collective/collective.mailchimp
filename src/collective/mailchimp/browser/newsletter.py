@@ -23,6 +23,7 @@ from collective.mailchimp.exceptions import MailChimpException
 from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import INewsletterSubscribe
+from collective.mailchimp.interfaces import INewsletterUnsubscribe
 
 
 class NewsletterSubcriber(object):
@@ -49,31 +50,33 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
     def updateWidgets(self):
         super(NewsletterSubscriberForm, self).updateWidgets()
-        # Show/hide mail format option widget
+        widgets = self.widgets
         registry = getUtility(IRegistry)
-        mailchimp_settings = registry.forInterface(IMailchimpSettings)
-        if not mailchimp_settings.email_type_is_optional:
-            self.widgets['email_type'].mode = HIDDEN_MODE
+        self.mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        self.mailchimp = getUtility(IMailchimpLocator)
+
+        # Show/hide mail format option widget
+        if not self.mailchimp_settings.email_type_is_optional:
+            widgets['email_type'].mode = HIDDEN_MODE
+
         # Retrieve the list id either from the request/form or fall back to
         # the default_list setting.
-        if 'list_id' in self.context.REQUEST:
-            list_id = self.context.REQUEST['list_id']
-        elif 'form.widgets.list_id' in self.request.form:
-            list_id = self.request.form['form.widgets.list_id']
-        else:
-            list_id = mailchimp_settings.default_list
-        self.widgets['list_id'].mode = HIDDEN_MODE
-        self.widgets['list_id'].value = list_id
+        list_id = self.context.REQUEST.get('list_id')
+        list_id = list_id or self.request.form.get('form.widgets.list_id')
+        list_id = list_id or self.mailchimp_settings.default_list
+        widgets['list_id'].mode = HIDDEN_MODE
+        widgets['list_id'].value = list_id
+
         # Show/hide interest_groups widget
-        mailchimp = getUtility(IMailchimpLocator)
-        groups = mailchimp.groups(list_id=list_id)
-        if not groups:
-            self.widgets['interest_groups'].mode = HIDDEN_MODE
-        if 'preselect_group' in self.context.REQUEST:
-            for group_index in self.request['preselect_group']:
-                group_index = int(group_index)
-                self.widgets['interest_groups']\
-                    .items[group_index]['checked'] = True
+        self.available_interest_groups = self.mailchimp.groups(list_id=list_id)
+        if not self.available_interest_groups:
+            widgets['interest_groups'].mode = HIDDEN_MODE
+
+        preselected_groups = self.request.get('preselected_group', [])
+        for group_index in preselected_groups:
+            group_index = int(group_index)
+            widgets['interest_groups'].items[group_index]['checked'] = True
+
 
     @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
                                default=u"Subscribe"),
@@ -82,42 +85,36 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         data, errors = self.extractData()
         if 'email' not in data:
             return
-        mailchimp = getUtility(IMailchimpLocator)
+
         # Retrieve list_id either from a hidden field in the form or fetch
         # the first list from mailchimp.
-        if 'list_id' in data and data['list_id'] is not None:
-            list_id = data['list_id']
-        else:
-            list_id = mailchimp.default_list_id()
+        list_id = data.get('list_id') or self.mailchimp.default_list_id()
 
-        # Groupings
+        # interest groups
         interests = {}
-        if 'interest_groups' in data and data['interest_groups'] is not None:
-            interest_grouping = mailchimp.groups(list_id=list_id)
-            if interest_grouping and data['interest_groups']:
-                # Create dictionary with as keys the interest groups, and as
-                # values always True.
-                interests = dict.fromkeys(data['interest_groups'], True)
+        interest_groups = data.pop('interest_groups', [])
+        if self.available_interest_groups and interest_groups:
+            # Create dictionary with as keys the interest groups, and as
+            # values always True.
+            interests = dict.fromkeys(interest_groups, True)
 
         # Use email_type if one is provided by the form, if not choose the
         # default email type from the control panel settings.
-        if 'email_type' in data:
-            email_type = data['email_type']
-        else:
-            email_type = 'HTML'
+        email_type = data.get('email_type', 'HTML')
+
         # Subscribe to MailChimp list
         try:
-            mailchimp.subscribe(
+            self.mailchimp.subscribe(
                 list_id=list_id,
                 email_address=data['email'],
                 email_type=email_type,
-                interests=interests
+                interests=interests,
+                merge_fields=data,
             )
         except MailChimpException as error:
             return self.handle_error(error, data)
-        registry = getUtility(IRegistry)
-        mailchimp_settings = registry.forInterface(IMailchimpSettings)
-        if mailchimp_settings.double_optin:
+
+        if self.mailchimp_settings.double_optin:
             message = _(
                 u"We have to confirm your email address. In order to " +
                 u"finish the newsletter subscription, click on the link " +
@@ -125,6 +122,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         else:
             message = _(
                 u"You have been subscribed to our newsletter succesfully.")
+
         IStatusMessage(self.context.REQUEST).addStatusMessage(
             message, type="info")
         portal = getSite()
@@ -169,3 +167,95 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             )
 
 NewsletterView = wrap_form(NewsletterSubscriberForm) # noqa
+
+
+class UnsubscribeNewsletterForm(extensible.ExtensibleForm, form.Form):
+
+    fields = field.Fields(INewsletterUnsubscribe)
+    ignoreContext = True
+    id = "newsletter-unsubscriber-form"
+    label = _(u'mailchimp_unsubscribe_newsletter_form_title',
+              default=u"Unsubscribe from newsletter")
+
+    description = _(u'mailchimp_unsubscribe_newsletter_form_description',
+                    default='')
+
+    def updateFields(self):
+        super(UnsubscribeNewsletterForm, self).updateFields()
+        self.fields['interest_groups'].widgetFactory = \
+            CheckBoxFieldWidget
+
+    def updateWidgets(self):
+        super(UnsubscribeNewsletterForm, self).updateWidgets()
+        registry = getUtility(IRegistry)
+        self.mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        self.mailchimp = getUtility(IMailchimpLocator)
+
+        # Set a given email address
+        if self.request.get('email'):
+            self.widgets['email'].value = self.request['email']
+
+        # Retrieve the list id either from the request/form or fall back to
+        # the default_list setting.
+        list_id = self.context.REQUEST.get('list_id')
+        list_id = list_id or self.request.form.get('form.widgets.list_id')
+        list_id = list_id or self.mailchimp_settings.default_list
+        self.widgets['list_id'].mode = HIDDEN_MODE
+        self.widgets['list_id'].value = list_id
+
+        # Show/hide interest_groups widget
+        self.available_interest_groups = self.mailchimp.groups(list_id=list_id)
+        if not self.available_interest_groups:
+            self.widgets['interest_groups'].mode = HIDDEN_MODE
+
+    @button.buttonAndHandler(_(u"unsubscribe_newsletter_button",
+                               default=u"Unsubscribe"),
+                             name='unsubscribe')
+    def handle_unsubscribe(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+
+        list_id = data.get('list_id') or self.mailchimp.default_list_id()
+        email = data['email']
+
+        update_data = {}
+        if data.get('unsubscribe'):
+            update_data['status'] = 'unsubscribed'
+        else:
+            interest_groups = {}
+            for group in data.get('interest_groups', []):
+                interest_groups[group] = False
+            update_data['interests'] = interest_groups
+
+        try:
+            self.mailchimp.update_subscriber(
+                list_id,
+                email_address=email,
+                **update_data
+            )
+        except MailChimpException as error:
+            if error.code != 404:
+                # If a subscriber did not exist we don't want to announce
+                # it. Treat only != 404 as an error.
+                IStatusMessage(self.request).addStatusMessage(
+                    _(u'mailchimp_unsubscribe_error_msg',
+                      default=u'We could not unsubscribe you from '
+                              u'the newsletter. '
+                              u"Please contact the site administrator: "
+                              u"'${error}'",
+                      mapping={u"error": error}),
+                    type="info")
+
+        IStatusMessage(self.request).addStatusMessage(
+            _(u'mailchimp_unsubscribed_msg',
+              default=(u'Thank you. You have been unsubscribed from '
+                       u'the Newsletter.')),
+            type="info")
+
+        portal = getSite()
+        self.request.response.redirect(portal.absolute_url())
+
+
+UnsubscribeNewsletterView = wrap_form(UnsubscribeNewsletterForm)

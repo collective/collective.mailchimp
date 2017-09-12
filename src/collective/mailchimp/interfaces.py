@@ -74,6 +74,46 @@ class INewsletterSubscribe(Interface):
     )
 
 
+class INewsletterUnsubscribe(Interface):
+
+    email = schema.TextLine(
+        title=_(u"Email address"),
+        description=_(
+            u"help_email",
+            default=u"Please enter your email address."
+        ),
+        required=True,
+        constraint=validate_email)
+
+    list_id = schema.TextLine(
+        title=_(u"List ID"),
+        required=False
+    )
+
+    interest_groups = schema.Tuple(
+        title=_(
+            u'mailchimp_unsubscribe_interest_groups',
+            default=u"Unsubscribe only form the following interest groups"),
+        description=_(
+            u"mailchimp_help_unsubscribe_interest_groups",
+            default=u""
+        ),
+        value_type=schema.Choice(
+            vocabulary="collective.mailchimp.vocabularies.InterestGroups",
+        ),
+        required=False,
+    )
+
+    unsubscribe = schema.Bool(
+        title=_(
+            u'mailchimp_unsubscribe_newsletter',
+            default=u"Unsubscribe from the complete newsletter"),
+        description=_(
+            u'mailchimp_help_unsubscribe_newsletter',
+            default=u''),
+        )
+
+
 class IMailchimpLocator(Interface):
     """Mailchimp API
     """
