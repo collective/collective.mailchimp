@@ -31,7 +31,7 @@ MailChimp integration for Plone 4 and 5.
 
 MailChimp helps you design email newsletters, share them on social networks, integrate with services you already use, and track your results.
 
-collective.mailchimp provides a @newsletter view to let visitors subscribe to one or more MailChimp mailing lists. It also provides a MailChimp portlet in case you want to display your newsletter subscription as part of an existing site. 
+collective.mailchimp provides a @newsletter view to let visitors subscribe to one or more MailChimp mailing lists. It also provides a MailChimp portlet in case you want to display your newsletter subscription as part of an existing site.
 
 The newsletter subscriptions forms in both the view and the portlet are extendable, so you can add custom fields that can be stored in your MailChimp subscriber list.
 
@@ -44,7 +44,7 @@ collective.mailchimp is tested on Plone 4.x and 5.x and should work on Plone > 3
 Installation
 ============
 
-Install collective.mailchimp by adding it to your buildout:
+Install collective.mailchimp by adding it to your buildout::
 
   [buildout]
 
