@@ -27,6 +27,14 @@ Introduction
    :target: https://landscape.io/github/collective/collective.mailchimp/master
    :alt: Code Health
 
+.. This README is meant for consumption by humans and pypi. Pypi can render rst files so please do not use Sphinx features.
+   If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide_addons.html
+   This text does not appear on pypi or github. It is a comment.
+
+.. image:: https://raw.githubusercontent.com/collective/collective.mailchimp/master/kitconcept.png
+   :alt: kitconcept
+   :target: https://kitconcept.com/
+
 MailChimp integration for Plone 4 and 5.
 
 MailChimp helps you design email newsletters, share them on social networks, integrate with services you already use, and track your results.
