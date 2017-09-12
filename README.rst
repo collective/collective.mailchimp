@@ -4,6 +4,10 @@
 .. image:: https://img.shields.io/coveralls/collective/collective.mailchimp/master.svg
     :target: https://coveralls.io/r/collective/collective.mailchimp
 
+.. image:: https://landscape.io/github/collective/collective.mailchimp/master/landscape.svg
+   :target: https://landscape.io/github/collective/collective.mailchimp/master
+   :alt: Code Health
+
 .. image:: https://img.shields.io/pypi/v/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: Latest Version
@@ -15,10 +19,6 @@
 .. image:: https://img.shields.io/pypi/l/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: License
-
-.. image:: https://landscape.io/github/collective/collective.mailchimp/master/landscape.svg
-   :target: https://landscape.io/github/collective/collective.mailchimp/master
-   :alt: Code Health
 
 .. This README is meant for consumption by humans and pypi. Pypi can render rst files so please do not use Sphinx features.
    If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide_addons.html
