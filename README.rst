@@ -1,9 +1,8 @@
 .. image:: https://secure.travis-ci.org/collective/collective.mailchimp.png
     :target: http://travis-ci.org/collective/collective.mailchimp
 
-.. image:: https://coveralls.io/repos/collective/collective.mailchimp/badge.png?branch=master
+.. image:: https://img.shields.io/coveralls/collective/collective.mailchimp/master.svg
     :target: https://coveralls.io/r/collective/collective.mailchimp
-
 
 .. image:: https://img.shields.io/pypi/v/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
