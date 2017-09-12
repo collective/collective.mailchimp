@@ -28,13 +28,12 @@
    If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide_addons.html
    This text does not appear on pypi or github. It is a comment.
 
+Introduction
+============
+
 .. image:: https://raw.githubusercontent.com/collective/collective.mailchimp/master/kitconcept.png
    :alt: kitconcept
    :target: https://kitconcept.com/
-
-
-Introduction
-============
 
 MailChimp integration for Plone 4 and 5.
 
