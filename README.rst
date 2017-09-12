@@ -17,7 +17,7 @@
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: License
 
-.. image:: https://landscape.io/github/collective/collective.mailchimp/master/landscape.svg?style=plastic
+.. image:: https://landscape.io/github/collective/collective.mailchimp/master/landscape.svg
    :target: https://landscape.io/github/collective/collective.mailchimp/master
    :alt: Code Health
 
