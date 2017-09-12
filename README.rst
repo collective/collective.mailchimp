@@ -8,13 +8,13 @@
    :target: https://landscape.io/github/collective/collective.mailchimp/master
    :alt: Code Health
 
-.. image:: https://img.shields.io/pypi/v/collective.mailchimp.svg
-    :target: https://pypi.python.org/pypi/collective.mailchimp/
-    :alt: Latest Version
-
 .. image:: https://img.shields.io/pypi/status/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
     :alt: Egg Status
+
+.. image:: https://img.shields.io/pypi/v/collective.mailchimp.svg
+    :target: https://pypi.python.org/pypi/collective.mailchimp/
+    :alt: Latest Version
 
 .. image:: https://img.shields.io/pypi/l/collective.mailchimp.svg
     :target: https://pypi.python.org/pypi/collective.mailchimp/
