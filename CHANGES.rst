@@ -4,18 +4,21 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Add plone.app.imaging to dependencies in setup.py. This is needed for Plone
-  5.0.8 compatibility.
+New Features:
+
+- Plone 5.0.8 compatibility. Add plone.app.imaging to dependencies in setup.py.
   [timo]
 
 - Add @@unsubscribe-newsletter.
   [csenger]
 
-- Updated Dutch translations.
-  [jladage]
-
 - Added basic Romanian translation
   [ichim-david]
+
+Bugfixes:
+
+- Updated Dutch translations.
+  [jladage]
 
 - Fixed ignoral of new locales directory because of option set in gitignore
   [ichim-david]
@@ -24,12 +27,16 @@ Changelog
 2.0.2 (2016-02-02)
 ------------------
 
+Bugfixes:
+
 - Fixed MANIFEST.in so all files are added.  Releases 2.0 and 2.0.1
   were missing non Python files.  [maurits]
 
 
 2.0.1 (2016-01-29)
 ------------------
+
+Bugfixes:
 
 - Add upgrade step to reload new src folder. Make sure you run the upgrade step, otherwise the add-on will not work properly. This fixes https://github.com/collective/collective.mailchimp/issues/21.
   [timo]
