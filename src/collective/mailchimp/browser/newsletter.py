@@ -77,10 +77,13 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             group_index = int(group_index)
             widgets['interest_groups'].items[group_index]['checked'] = True
 
-
-    @button.buttonAndHandler(_(u"subscribe_to_newsletter_button",
-                               default=u"Subscribe"),
-                             name='subscribe')
+    @button.buttonAndHandler(
+        _(
+            u"subscribe_to_newsletter_button",
+            default=u"Subscribe"
+        ),
+        name='subscribe'
+    )
     def handleApply(self, action):
         data, errors = self.extractData()
         if 'email' not in data:
