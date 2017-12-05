@@ -61,6 +61,7 @@ setup(
         'test': [
             'mock',  # new, backport from Python 3.3
             'plone.app.testing',
+            'plone.app.imaging',  # test dependency on Plone 5.0.x only
         ],
     },
     entry_points="""
