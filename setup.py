@@ -54,7 +54,6 @@ setup(
         'Products.CMFPlone',
         'plone.app.portlets',
         'plone.app.registry',
-        'plone.app.imaging',  # needed for controlpanel
         'plone.app.upgrade',
         'requests',
     ],
