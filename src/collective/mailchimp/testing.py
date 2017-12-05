@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import os
 import re
@@ -96,7 +97,7 @@ class MockRequests(object):
             path = os.path.join(
                 TEST_DATA_DIR, 'member.json')
         else:
-            print('WARNING, unhandled endpoint in test: {0}'.format(endpoint))
+            pass
         if path:
             with open(path) as datafile:
                 text = datafile.read()

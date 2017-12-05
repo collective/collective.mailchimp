@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This is a copy of the z3cformhelpers.py file from the z3cform branch of
 # plone.app.portlets. As soon as PLIP https://dev.plone.org/ticket/11838
 # has been merged into Plone we can remove this file and import

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from zope import schema

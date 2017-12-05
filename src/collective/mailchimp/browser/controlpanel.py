@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from zope.interface import Invalid
 from z3c.form.interfaces import WidgetActionExecutionError
 from zope.component import getUtility
