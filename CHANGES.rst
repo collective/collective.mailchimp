@@ -4,7 +4,9 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Remove plone.app.imaging dependency in setup.py for Plone 5.1 & plone.restapi compatibility.
+- Make plone.app.imaging a test dependency only in setup.py. This fixes an
+  issue with Plone 5.1 and plone.restapi. plone.app.imaging is a hard
+  dependency on Plone 5.0 (CMFPlone) and optional on Plone 5.1.
   [timo]
 
 
