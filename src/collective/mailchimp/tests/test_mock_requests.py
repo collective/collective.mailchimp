@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.mailchimp.testing import \
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
 from collective.mailchimp.testing import DUMMY_API_KEY

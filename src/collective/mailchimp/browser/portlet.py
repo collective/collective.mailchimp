@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from zope.interface import alsoProvides
 from z3c.form.interfaces import IFormLayer

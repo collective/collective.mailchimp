@@ -4,7 +4,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove plone.app.imaging dependency in setup.py for Plone 5.1 & plone.restapi compatibility.
+  [timo]
 
 
 2.1.0 (2017-09-12)
