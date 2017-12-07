@@ -8,6 +8,7 @@ env:
   matrix:
     - PLONE_VERSION=4.3.x
     - PLONE_VERSION=5.0.x
+    - PLONE_VERSION=5.1.x
 install:
   - sed -ie "s#plone-5.0.x.cfg.cfg#plone-$PLONE_VERSION.cfg#" buildout.cfg
 # Keep setuptools and zc.buildout the synced with buildout.cfg,
