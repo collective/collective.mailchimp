@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.1 (unreleased)
+2.2.0 (2017-12-07)
 ------------------
 
 - Make plone.app.imaging a test dependency only in setup.py. This fixes an
