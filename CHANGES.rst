@@ -4,7 +4,8 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 5.1 compatibility.
+  [timo]
 
 
 2.2.0 (2017-12-07)
