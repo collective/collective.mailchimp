@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.1 (unreleased)
+2.2.1 (2018-01-05)
 ------------------
 
 - Plone 5.1 compatibility.
