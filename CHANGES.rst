@@ -4,7 +4,9 @@ Changelog
 2.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix error handling in @@newsletter to validate form extenders
+  [csenger]
+
 
 
 2.2.1 (2018-01-05)

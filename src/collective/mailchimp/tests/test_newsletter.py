@@ -2,11 +2,40 @@
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.testing.z2 import Browser
+from plone.z3cform.fieldsets import extensible
+from zope.component import adapts
+from zope.component import provideAdapter
+from zope.interface import Interface
+from zope.interface import Invalid
+from zope import schema
 
+from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
 from collective.mailchimp.testing import \
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
 
 import unittest
+
+
+def validate(value):
+    if value is not True:
+        raise Invalid(u'Required test field not checked')
+    return True
+
+
+class ITestExtenderSchema(Interface):
+
+    accept = schema.Bool(
+        title=u'accept',
+        required=True,
+        constraint=validate,
+    )
+
+
+class TestExtender(extensible.FormExtender):
+    adapts(Interface, Interface, NewsletterSubscriberForm)
+
+    def update(self):
+        self.add(ITestExtenderSchema)
 
 
 class TestNewsletterView(unittest.TestCase):
@@ -36,6 +65,33 @@ class TestNewsletterView(unittest.TestCase):
             "Not an email address"
         self.browser.getControl(name="form.buttons.subscribe").click()
         self.assertTrue("Invalid email address" in self.browser.contents)
+
+
+class TestNewsletterExtender(unittest.TestCase):
+
+    layer = COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+
+    def setUp(self):
+        app = self.layer['app']
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        self.portal_url = self.portal.absolute_url()
+        self.browser = Browser(app)
+        self.browser.handleErrors = False
+        self.browser.addHeader(
+            'Authorization',
+            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+        )
+        provideAdapter(factory=TestExtender)
+
+    def test_newsletter_extender(self):
+        self.browser.open("%s/newsletter" % self.portal_url)
+        self.browser.getControl(name="form.widgets.email").value = \
+            "valid@email.com"
+        self.browser.getControl(name="form.buttons.subscribe").click()
+        self.assertTrue("Required test field not checked" in
+                        self.browser.contents)
+
 
 #    def test_form_with_valid_email_address(self):
 #        self.browser.open("%s/newsletter" % self.portal_url)
