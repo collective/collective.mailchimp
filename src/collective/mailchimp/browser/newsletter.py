@@ -86,7 +86,8 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
     )
     def handleApply(self, action):
         data, errors = self.extractData()
-        if 'email' not in data:
+        if errors:
+            self.status = self.formErrorsMessage
             return
 
         # Retrieve list_id either from a hidden field in the form or fetch
