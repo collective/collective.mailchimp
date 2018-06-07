@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.2 (unreleased)
+2.2.2 (2018-06-07)
 ------------------
 
 - Fix error handling in @@newsletter to validate form extenders
