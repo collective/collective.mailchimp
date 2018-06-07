@@ -14,7 +14,7 @@ install:
 # Keep setuptools and zc.buildout the synced with buildout.cfg,
 # otherwise the buildout fails due to the non newest ('-N') option
 # when it wants to downgrade one of them to the pinned version.
-  - python bootstrap.py -c travis.cfg --buildout-version=2.5.0 --setuptools-version=19.4
+  - python bootstrap.py -c travis.cfg --buildout-version=2.5.0 --setuptools-version=38.7.0
   - bin/buildout -c travis.cfg annotate
   - bin/buildout -N -t 3 -c travis.cfg
 script:
