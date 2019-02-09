@@ -43,4 +43,5 @@ class ExtraBehaviorExtender(extensible.FormExtender):
         if 'extra.foo' not in self.form.fields.keys():
             self.add(IExtraBehavior, prefix="extra")
 
+
 provideAdapter(factory=ExtraBehaviorExtender, name=u"test.extender")  # noqa

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.mailchimp.browser import portlet as mailchimp
 from collective.mailchimp.testing import (
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING,
 )
 from plone.app.portlets.storage import PortletAssignmentMapping
 from plone.app.testing import setRoles
@@ -43,7 +43,8 @@ class TestPortlet(unittest.TestCase):
     def testInvokeAddview(self):
         portlet = getUtility(IPortletType, name='portlet.MailChimp')
         mapping = self.portal.restrictedTraverse(
-            '++contextportlets++plone.leftcolumn')
+            '++contextportlets++plone.leftcolumn'
+        )
         for m in mapping.keys():
             del mapping[m]
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
@@ -65,15 +66,13 @@ class TestPortlet(unittest.TestCase):
         request = self.portal.REQUEST
         view = self.portal.restrictedTraverse('@@plone')
         manager = getUtility(
-            IPortletManager,
-            name='plone.leftcolumn',
-            context=self.portal
+            IPortletManager, name='plone.leftcolumn', context=self.portal
         )
         assignment = mailchimp.Assignment(name="foo")
 
         renderer = getMultiAdapter(
-            (context, request, view, manager, assignment),
-            IPortletRenderer)
+            (context, request, view, manager, assignment), IPortletRenderer
+        )
         self.failUnless(isinstance(renderer, mailchimp.Renderer))
 
 
@@ -88,26 +87,30 @@ class TestRenderer(unittest.TestCase):
         setHooks()
         # Make sure News Items use simple_publication_workflow
         self.portal.portal_workflow.setChainForPortalTypes(
-            ['News Item'], ['simple_publication_workflow'])
+            ['News Item'], ['simple_publication_workflow']
+        )
 
-    def renderer(self, context=None, request=None, view=None, manager=None,
-                 assignment=None):
+    def renderer(
+        self,
+        context=None,
+        request=None,
+        view=None,
+        manager=None,
+        assignment=None,
+    ):
         context = context or self.portal
         request = request or self.portal.REQUEST
         view = view or self.portal.restrictedTraverse('@@plone')
         manager = manager or getUtility(
-            IPortletManager,
-            name='plone.leftcolumn',
-            context=self.portal
+            IPortletManager, name='plone.leftcolumn', context=self.portal
         )
         assignment = assignment or mailchimp.Assignment(
-            template='portlet_recent',
-            macro='portlet'
+            template='portlet_recent', macro='portlet'
         )
 
         return getMultiAdapter(
-            (context, request, view, manager, assignment),
-            IPortletRenderer)
+            (context, request, view, manager, assignment), IPortletRenderer
+        )
 
 
 class TestPortletIntegration(unittest.TestCase):
@@ -124,13 +127,13 @@ class TestPortletIntegration(unittest.TestCase):
         self.browser.handleErrors = False
         self.browser.addHeader(
             'Authorization',
-            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
+            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
         )
 
     def test_add_portlet_form(self):
         self.browser.open(
-            self.portal_url +
-            "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp"
+            self.portal_url
+            + "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp"
         )
 
         self.assertTrue("Add MailChimp Portlet" in self.browser.contents)
@@ -141,18 +144,17 @@ class TestPortletIntegration(unittest.TestCase):
 
     def test_add_portlet(self):
         self.browser.open(
-            self.portal_url +
-            "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp"
+            self.portal_url
+            + "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp"
         )
         self.browser.getControl("Title").value = "ACME Newsletter Portlet"
         self.browser.getControl(
-            name="form.widgets.available_lists:list", index=0)\
-            .value = ["f6257645gs"]
+            name="form.widgets.available_lists:list", index=0
+        ).value = ["f6257645gs"]
         self.browser.getControl("Save").click()
 
         self.assertEqual(
-            self.browser.url,
-            self.portal_url + '/@@manage-portlets'
+            self.browser.url, self.portal_url + '/@@manage-portlets'
         )
         self.assertTrue("Hide" in self.browser.contents)
         self.assertTrue("MailChimp" in self.browser.contents)
@@ -164,28 +166,28 @@ class TestPortletIntegration(unittest.TestCase):
     def test_edit_portlet(self):
         # Create portlet
         self.browser.open(
-            self.portal_url +
-            "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp"
+            self.portal_url
+            + "/++contextportlets++plone.leftcolumn/+/portlet.MailChimp"
         )
         self.browser.getControl("Title").value = "ACME Newsletter Portlet"
         self.browser.getControl(
-            name="form.widgets.available_lists:list", index=0)\
-            .value = ["f6257645gs"]
+            name="form.widgets.available_lists:list", index=0
+        ).value = ["f6257645gs"]
         self.browser.getControl("Save").click()
         # Edit portlet
         self.browser.open(
-            self.portal_url +
-            "/++contextportlets++plone.leftcolumn/mailchimp/edit"
+            self.portal_url
+            + "/++contextportlets++plone.leftcolumn/mailchimp/edit"
         )
         self.browser.getControl("Title").value = "Lorem Ipsum"
         self.browser.getControl(
-            name="form.widgets.available_lists:list", index=0)\
-            .value = ["f6267645gs"]
+            name="form.widgets.available_lists:list", index=0
+        ).value = ["f6267645gs"]
         self.browser.getControl("Save").click()
 
         self.browser.open(
-            self.portal_url +
-            "/++contextportlets++plone.leftcolumn/mailchimp/edit"
+            self.portal_url
+            + "/++contextportlets++plone.leftcolumn/mailchimp/edit"
         )
         self.assertTrue("Lorem Ipsum" in self.browser.contents)
         self.browser.open(self.portal_url)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
 from collective.mailchimp.testing import (
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING,
 )
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
@@ -24,11 +24,7 @@ def validate(value):
 
 class ITestExtenderSchema(Interface):
 
-    accept = schema.Bool(
-        title=u'accept',
-        required=True,
-        constraint=validate,
-    )
+    accept = schema.Bool(title=u'accept', required=True, constraint=validate)
 
 
 class TestExtender(extensible.FormExtender):
@@ -61,8 +57,9 @@ class TestNewsletterView(unittest.TestCase):
 
     def test_form_with_invalid_email_address(self):
         self.browser.open("%s/newsletter" % self.portal_url)
-        self.browser.getControl(name="form.widgets.email").value = \
-            "Not an email address"
+        self.browser.getControl(
+            name="form.widgets.email"
+        ).value = "Not an email address"
         self.browser.getControl(name="form.buttons.subscribe").click()
         self.assertTrue("Invalid email address" in self.browser.contents)
 
@@ -86,11 +83,13 @@ class TestNewsletterExtender(unittest.TestCase):
 
     def test_newsletter_extender(self):
         self.browser.open("%s/newsletter" % self.portal_url)
-        self.browser.getControl(name="form.widgets.email").value = \
-            "valid@email.com"
+        self.browser.getControl(
+            name="form.widgets.email"
+        ).value = "valid@email.com"
         self.browser.getControl(name="form.buttons.subscribe").click()
-        self.assertTrue("Required test field not checked" in
-                        self.browser.contents)
+        self.assertTrue(
+            "Required test field not checked" in self.browser.contents
+        )
 
 
 #    def test_form_with_valid_email_address(self):
@@ -141,19 +140,27 @@ class TestUnsubscribeNewsletterView(unittest.TestCase):
 
     def test_form_with_email_address(self):
         self.browser.open("%s/unsubscribe-newsletter" % self.portal_url)
-        self.browser.getControl(name="form.widgets.email").value = \
-            "freddy@freddiesjokes.com"
+        self.browser.getControl(
+            name="form.widgets.email"
+        ).value = "freddy@freddiesjokes.com"
         unsub_all_checkbox = self.browser.getControl(
-            name='form.widgets.unsubscribe:list', index=0)
+            name='form.widgets.unsubscribe:list', index=0
+        )
         unsub_all_checkbox.value = ['checked']
         self.browser.getControl(name="form.buttons.unsubscribe").click()
 
         from collective.mailchimp.locator import requests
+
         self.assertEqual(
             requests.last_call,
-            {'endpoint': (u'lists/f6257645gs/members/'
-                          u'06f12badc3b5fffc57576822131ded7c'),
-             'data': {u'status': u'unsubscribed'}})
+            {
+                'endpoint': (
+                    u'lists/f6257645gs/members/'
+                    u'06f12badc3b5fffc57576822131ded7c'
+                ),
+                'data': {u'status': u'unsubscribed'},
+            },
+        )
 
 
 def test_suite():

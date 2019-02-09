@@ -16,8 +16,9 @@ def update_registry(context):
 
 def install_mailchimp_stylesheet(context):
     csstool = getToolByName(context, 'portal_css', None)
-    stylesheet_id = \
+    stylesheet_id = (
         '++resource++collective.mailchimp.stylesheets/mailchimp.css'
+    )
     if stylesheet_id not in csstool.getResourceIds():
         csstool.manage_addStylesheet(
             id=stylesheet_id,
@@ -34,7 +35,4 @@ def install_mailchimp_cache(context):
 
 
 def reload_profile(context):
-    loadMigrationProfile(
-        context,
-        'profile-collective.mailchimp:default'
-    )
+    loadMigrationProfile(context, 'profile-collective.mailchimp:default')

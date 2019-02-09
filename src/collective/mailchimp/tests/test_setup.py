@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.mailchimp.testing import (
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING,
 )
 from Products.CMFCore.utils import getToolByName
 
@@ -9,6 +9,7 @@ import unittest
 
 try:
     from Products.CMFPlone.factory import _IMREALLYPLONE5
+
     _IMREALLYPLONE5  # noqa
 except ImportError:
     PLONE_5 = False
@@ -27,6 +28,7 @@ class TestSetup(unittest.TestCase):
     def test_browserlayer_available(self):
         from plone.browserlayer import utils
         from collective.mailchimp.interfaces import ICollectiveMailchimp
+
         self.failUnless(ICollectiveMailchimp in utils.registered_layers())
 
     def test_mailchimp_css_available(self):
@@ -43,21 +45,25 @@ class TestSetup(unittest.TestCase):
             from zope.component import getUtility
             from plone.registry.interfaces import IRegistry
             from Products.CMFPlone.interfaces import IResourceRegistry
+
             reg = getUtility(IRegistry)
             resources = reg.collectionOfInterface(
-                IResourceRegistry, prefix="plone.resources", check=False)
+                IResourceRegistry, prefix="plone.resources", check=False
+            )
             key = 'resource-collective-mailchimp-stylesheets'
             self.assertIn(key, resources.keys())
             self.assertEqual(
                 resources[key].css,
-                ['++resource++collective.mailchimp.stylesheets/mailchimp.css'])
+                ['++resource++collective.mailchimp.stylesheets/mailchimp.css'],
+            )
 
     def test_mailchimp_css_enabled(self):
         if not PLONE_5:
             # Plone 4
             cssreg = getToolByName(self.portal, "portal_css")
-            self.assertTrue(cssreg.getResource(
-                '++resource++collective.mailchimp.stylesheets/mailchimp.css'
+            self.assertTrue(
+                cssreg.getResource(
+                    '++resource++collective.mailchimp.stylesheets/mailchimp.css'
                 ).getEnabled()
             )
         else:

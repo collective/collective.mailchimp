@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.testing import (
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING,
 )
 from plone.app.testing import logout
 from plone.app.testing import SITE_OWNER_NAME
@@ -25,24 +25,27 @@ class TestMailchimpSettingsControlPanel(unittest.TestCase):
         self.registry.registerInterface(IMailchimpSettings)
 
     def test_mailchimp_controlpanel_view(self):
-        view = getMultiAdapter((self.portal, self.portal.REQUEST),
-                               name="mailchimp-settings")
+        view = getMultiAdapter(
+            (self.portal, self.portal.REQUEST), name="mailchimp-settings"
+        )
         view = view.__of__(self.portal)
         self.failUnless(view())
 
     def test_mailchimp_controlpanel_view_protected(self):
         from AccessControl import Unauthorized
+
         logout()
         self.assertRaises(
             Unauthorized,
             self.portal.restrictedTraverse,
-            '@@mailchimp-settings'
+            '@@mailchimp-settings',
         )
 
     def test_mailchimp_in_controlpanel(self):
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
         self.failUnless(
-            'mailchimp' in [
+            'mailchimp'
+            in [
                 a.getAction(self)['id']
                 for a in self.controlpanel.listActions()
             ]
@@ -50,7 +53,8 @@ class TestMailchimpSettingsControlPanel(unittest.TestCase):
 
     def test_record_api_key(self):
         record = self.registry.records[
-            'collective.mailchimp.interfaces.IMailchimpSettings.api_key']
+            'collective.mailchimp.interfaces.IMailchimpSettings.api_key'
+        ]
         self.failUnless('api_key' in IMailchimpSettings)
         self.assertEquals(record.value, u"")
 

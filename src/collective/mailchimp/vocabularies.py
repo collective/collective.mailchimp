@@ -10,8 +10,8 @@ def available_lists(context):
     lists = mailchimp.lists()
     if not lists:
         return SimpleVocabulary([])
-    return SimpleVocabulary([
-        SimpleTerm(value=li['id'], title=li['name']) for li in lists]
+    return SimpleVocabulary(
+        [SimpleTerm(value=li['id'], title=li['name']) for li in lists]
     )
 
 
@@ -37,28 +37,16 @@ def interest_groups(context):
     interests = groups.get('interests')
     if not interests:
         return SimpleVocabulary([])
-    return SimpleVocabulary([
-        SimpleTerm(
-            value=group['id'].encode("utf-8"),
-            title=group['name']
-        ) for group in interests
-    ])
+    return SimpleVocabulary(
+        [
+            SimpleTerm(value=group['id'].encode("utf-8"), title=group['name'])
+            for group in interests
+        ]
+    )
 
 
 def email_type(context):
     terms = []
-    terms.append(
-        SimpleTerm(
-            value='text',
-            token='text',
-            title='Plain text',
-        )
-    )
-    terms.append(
-        SimpleTerm(
-            value='html',
-            token='html',
-            title='HTML',
-        )
-    )
+    terms.append(SimpleTerm(value='text', token='text', title='Plain text'))
+    terms.append(SimpleTerm(value='html', token='html', title='HTML'))
     return SimpleVocabulary(terms)

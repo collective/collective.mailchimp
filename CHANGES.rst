@@ -4,7 +4,9 @@ Changelog
 2.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Prepare to work with Python 3.
+  Isort, black, fixed deprecated Python 2 syntax AST errors.
+  [jensens]
 
 
 2.2.2 (2018-06-07)

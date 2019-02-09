@@ -54,4 +54,5 @@ class MailChimpException(Exception):
 
     def __str__(self):
         return 'MailChimp error code {0}: "{1}"\n{2}'.format(
-            self.code, self.detail, self.errors)
+            self.code, self.detail, self.errors
+        )

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.mailchimp.testing import (
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING,
 )
 from zope.component import getUtility
 
@@ -19,10 +19,12 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
 
     def test_mailchimp_locator_registration(self):
         from collective.mailchimp.interfaces import IMailchimpLocator
+
         self.assertTrue(getUtility(IMailchimpLocator))
 
     def test_mailchimp_locator_initialize_method(self):
         from collective.mailchimp.locator import MailchimpLocator
+
         locator = MailchimpLocator()
         self.assertEqual(locator.registry, None)
         self.assertEqual(locator.settings, None)
@@ -34,31 +36,39 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
 
     def test_mailchimp_locator_lists_method(self):
         from collective.mailchimp.locator import MailchimpLocator
+
         locator = MailchimpLocator()
         self.assertTrue(locator.lists())
         self.assertEqual(len(locator.lists()), 3)
 
     def test_mailchimp_locator_groups_method(self):
         from collective.mailchimp.locator import MailchimpLocator
+
         locator = MailchimpLocator()
         groups = locator.groups(list_id=u'57afe96172')
         self.assertTrue(groups)
         self.assertEqual(len(groups['categories']), 1)
         self.assertEqual(len(groups['interests']), 5)
-        self.assertEqual(groups['interests'][0]['name'],
-                         u"Sometimes you just gotta 'spress yourself.")
+        self.assertEqual(
+            groups['interests'][0]['name'],
+            u"Sometimes you just gotta 'spress yourself.",
+        )
 
     def test_mailchimp_locator_update_subscriber_method(self):
         from collective.mailchimp.locator import MailchimpLocator
+
         locator = MailchimpLocator()
-        member = locator.update_subscriber('57afe96172',
-                                           'freddy@freddiesjokes.com',
-                                           interests={'a1e9f4b7f6': True})
+        member = locator.update_subscriber(
+            '57afe96172',
+            'freddy@freddiesjokes.com',
+            interests={'a1e9f4b7f6': True},
+        )
         self.assertTrue(member)
         self.assertEqual(member['interests']['a1e9f4b7f6'], True)
 
     def test_mailchimp_locator_updateCache_method(self):
         from collective.mailchimp.locator import MailchimpLocator
+
         locator = MailchimpLocator()
         locator.initialize()
         # These tests pass when we run this test method separately,
@@ -75,15 +85,21 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         self.assertEqual(account[u'account_name'], u"Freddie's Jokes")
         groups = locator.registry[locator.key_groups]
         self.assertTrue(isinstance(groups, dict))
-        self.assertEqual(groups.keys(),
-                         [u'f6257645gs', u'f6267645gs', u'57afe96172'])
+        self.assertEqual(
+            groups.keys(), [u'f6257645gs', u'f6267645gs', u'57afe96172']
+        )
         self.assertEqual(
             groups[groups.keys()[0]].keys(),
-            [u'total_items', 'interests', u'_links', u'categories', u'list_id']
-            )
+            [
+                u'total_items',
+                'interests',
+                u'_links',
+                u'categories',
+                u'list_id',
+            ],
+        )
 
-        self.assertTrue(
-            isinstance(locator.registry[locator.key_lists], tuple))
+        self.assertTrue(isinstance(locator.registry[locator.key_lists], tuple))
         self.assertEqual(len(locator.registry[locator.key_lists]), 3)
         # It does not complain when there is no api key
         locator.settings.api_key = None

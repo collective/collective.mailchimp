@@ -45,25 +45,31 @@ class MockRequests(object):
         """
         if len(args) != 1:
             raise MockRequestsException(
-                'Expected 1 argument, got {0}: {1}'.format(
-                    len(args), args))
+                'Expected 1 argument, got {0}: {1}'.format(len(args), args)
+            )
         # Check url
         url = args[0]
         mailchimp_url = 'api.mailchimp.com/3.0/'
         if mailchimp_url not in url:
-            raise MockRequestsException('Expected {0} in url {1}'.format(
-                mailchimp_url, url))
+            raise MockRequestsException(
+                'Expected {0} in url {1}'.format(mailchimp_url, url)
+            )
         endpoint = url.split(mailchimp_url)[1]
         # Check auth
         auth = kwargs.get('auth')
         if not auth:
             raise MockRequestsException('Expected auth in keyword arguments.')
         expected_auth = ('apikey', DUMMY_API_KEY)
-        if (not isinstance(auth, tuple) or len(auth) != 2 or
-                expected_auth != auth):
+        if (
+            not isinstance(auth, tuple)
+            or len(auth) != 2
+            or expected_auth != auth
+        ):
             raise MockRequestsException(
                 'Expected auth {0} in keyword arguments. Got {1}'.format(
-                    expected_auth, auth))
+                    expected_auth, auth
+                )
+            )
         data = kwargs.get('data')
         # Load the data.
         if not data:
@@ -77,26 +83,23 @@ class MockRequests(object):
         Return a json dictionary based on the end point.
         """
         endpoint, data = self.parse_arguments(*args, **kwargs)
-        self.calls.append({'endpoint': endpoint,
-                           'data': data})
+        self.calls.append({'endpoint': endpoint, 'data': data})
         path = ''
         text = '{}'
         if not endpoint:
             path = os.path.join(TEST_DATA_DIR, 'account.json')
         elif endpoint == 'lists':
-            path = os.path.join(
-                TEST_DATA_DIR, 'lists.json')
+            path = os.path.join(TEST_DATA_DIR, 'lists.json')
         elif re.compile('lists/.*/interest-categories/.*/interests').match(
-                endpoint):
-            path = os.path.join(
-                TEST_DATA_DIR, 'interests.json')
+            endpoint
+        ):
+            path = os.path.join(TEST_DATA_DIR, 'interests.json')
         elif re.compile('lists/.*/interest-categories').match(endpoint):
             path = os.path.join(
-                TEST_DATA_DIR, 'lists_interest_categories.json')
-        elif re.compile('lists/.*/members/[^/]*$').match(
-                endpoint):
-            path = os.path.join(
-                TEST_DATA_DIR, 'member.json')
+                TEST_DATA_DIR, 'lists_interest_categories.json'
+            )
+        elif re.compile('lists/.*/members/[^/]*$').match(endpoint):
+            path = os.path.join(TEST_DATA_DIR, 'member.json')
         else:
             pass
         if path:
@@ -119,7 +122,8 @@ class CollectiveMailchimp(PloneSandboxLayer):
         # Create patcher to mock the requests module that is imported in
         # locator.py only.
         self.requests_patcher = patch(
-            'collective.mailchimp.locator.requests', new_callable=MockRequests)
+            'collective.mailchimp.locator.requests', new_callable=MockRequests
+        )
         # It looks like the patcher is started automatically, although the
         # documentation says you must start it explicitly.  Let's follow the
         # documentation.  Then we can also nicely stop it in tearDownZope.
@@ -127,9 +131,12 @@ class CollectiveMailchimp(PloneSandboxLayer):
 
         # Load ZCML
         import collective.mailchimp
-        xmlconfig.file('configure.zcml',
-                       collective.mailchimp,
-                       context=configurationContext)
+
+        xmlconfig.file(
+            'configure.zcml',
+            collective.mailchimp,
+            context=configurationContext,
+        )
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.mailchimp:default')
@@ -146,7 +153,9 @@ class CollectiveMailchimp(PloneSandboxLayer):
 COLLECTIVE_MAILCHIMP_FIXTURE = CollectiveMailchimp()
 COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING = IntegrationTesting(
     bases=(COLLECTIVE_MAILCHIMP_FIXTURE,),
-    name="CollectiveMailchimp:Integration")
+    name="CollectiveMailchimp:Integration",
+)
 COLLECTIVE_MAILCHIMP_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(COLLECTIVE_MAILCHIMP_FIXTURE,),
-    name="CollectiveMailchimp:Functional")
+    name="CollectiveMailchimp:Functional",
+)

@@ -41,10 +41,8 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
     def updateFields(self):
         super(NewsletterSubscriberForm, self).updateFields()
-        self.fields['interest_groups'].widgetFactory = \
-            CheckBoxFieldWidget
-        self.fields['email_type'].widgetFactory = \
-            RadioFieldWidget
+        self.fields['interest_groups'].widgetFactory = CheckBoxFieldWidget
+        self.fields['email_type'].widgetFactory = RadioFieldWidget
 
     def updateWidgets(self):
         super(NewsletterSubscriberForm, self).updateWidgets()
@@ -76,11 +74,8 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             widgets['interest_groups'].items[group_index]['checked'] = True
 
     @button.buttonAndHandler(
-        _(
-            u"subscribe_to_newsletter_button",
-            default=u"Subscribe"
-        ),
-        name='subscribe'
+        _(u"subscribe_to_newsletter_button", default=u"Subscribe"),
+        name='subscribe',
     )
     def handleApply(self, action):
         data, errors = self.extractData()
@@ -118,15 +113,18 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
         if self.mailchimp_settings.double_optin:
             message = _(
-                u"We have to confirm your email address. In order to " +
-                u"finish the newsletter subscription, click on the link " +
-                u"inside the email we just send you.")
+                u"We have to confirm your email address. In order to "
+                + u"finish the newsletter subscription, click on the link "
+                + u"inside the email we just send you."
+            )
         else:
             message = _(
-                u"You have been subscribed to our newsletter succesfully.")
+                u"You have been subscribed to our newsletter succesfully."
+            )
 
         IStatusMessage(self.context.REQUEST).addStatusMessage(
-            message, type="info")
+            message, type="info"
+        )
         portal = getSite()
         self.request.response.redirect(portal.absolute_url())
 
@@ -137,36 +135,36 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             error_msg = _(
                 u"mailchimp_error_msg_already_subscribed",
                 default=u"Could not subscribe to newsletter. "
-                        u"Either the email '${email}' is already subscribed "
-                        u"or something else is wrong. Try again later.",
-                mapping={u"email": data['email']})
+                u"Either the email '${email}' is already subscribed "
+                u"or something else is wrong. Try again later.",
+                mapping={u"email": data['email']},
+            )
             translated_error_msg = self.context.translate(error_msg)
             raise WidgetActionExecutionError(
-                'email',
-                Invalid(translated_error_msg)
+                'email', Invalid(translated_error_msg)
             )
         elif error.code == 220:
             error_msg = _(
                 u"mailchimp_error_msg_banned",
                 default=u"Could not subscribe to newsletter. "
-                        u"The email '${email}' has been banned.",
-                mapping={u"email": data['email']})
+                u"The email '${email}' has been banned.",
+                mapping={u"email": data['email']},
+            )
             translated_error_msg = self.context.translate(error_msg)
             raise WidgetActionExecutionError(
-                'email',
-                Invalid(translated_error_msg)
+                'email', Invalid(translated_error_msg)
             )
         else:
             error_msg = _(
                 u"mailchimp_error_msg",
                 default=u"Could not subscribe to newsletter. "
-                        u"Please contact the site administrator: "
-                        u"'${error}'",
-                mapping={u"error": error})
-            translated_error_msg = self.context.translate(error_msg)
-            raise ActionExecutionError(
-                Invalid(translated_error_msg)
+                u"Please contact the site administrator: "
+                u"'${error}'",
+                mapping={u"error": error},
             )
+            translated_error_msg = self.context.translate(error_msg)
+            raise ActionExecutionError(Invalid(translated_error_msg))
+
 
 NewsletterView = wrap_form(NewsletterSubscriberForm)  # noqa
 
@@ -176,16 +174,18 @@ class UnsubscribeNewsletterForm(extensible.ExtensibleForm, form.Form):
     fields = field.Fields(INewsletterUnsubscribe)
     ignoreContext = True
     id = "newsletter-unsubscriber-form"
-    label = _(u'mailchimp_unsubscribe_newsletter_form_title',
-              default=u"Unsubscribe from newsletter")
+    label = _(
+        u'mailchimp_unsubscribe_newsletter_form_title',
+        default=u"Unsubscribe from newsletter",
+    )
 
-    description = _(u'mailchimp_unsubscribe_newsletter_form_description',
-                    default='')
+    description = _(
+        u'mailchimp_unsubscribe_newsletter_form_description', default=''
+    )
 
     def updateFields(self):
         super(UnsubscribeNewsletterForm, self).updateFields()
-        self.fields['interest_groups'].widgetFactory = \
-            CheckBoxFieldWidget
+        self.fields['interest_groups'].widgetFactory = CheckBoxFieldWidget
 
     def updateWidgets(self):
         super(UnsubscribeNewsletterForm, self).updateWidgets()
@@ -210,9 +210,10 @@ class UnsubscribeNewsletterForm(extensible.ExtensibleForm, form.Form):
         if not self.available_interest_groups:
             self.widgets['interest_groups'].mode = HIDDEN_MODE
 
-    @button.buttonAndHandler(_(u"unsubscribe_newsletter_button",
-                               default=u"Unsubscribe"),
-                             name='unsubscribe')
+    @button.buttonAndHandler(
+        _(u"unsubscribe_newsletter_button", default=u"Unsubscribe"),
+        name='unsubscribe',
+    )
     def handle_unsubscribe(self, action):
         data, errors = self.extractData()
         if errors:
@@ -233,28 +234,34 @@ class UnsubscribeNewsletterForm(extensible.ExtensibleForm, form.Form):
 
         try:
             self.mailchimp.update_subscriber(
-                list_id,
-                email_address=email,
-                **update_data
+                list_id, email_address=email, **update_data
             )
         except MailChimpException as error:
             if error.code != 404:
                 # If a subscriber did not exist we don't want to announce
                 # it. Treat only != 404 as an error.
                 IStatusMessage(self.request).addStatusMessage(
-                    _(u'mailchimp_unsubscribe_error_msg',
-                      default=u'We could not unsubscribe you from '
-                              u'the newsletter. '
-                              u"Please contact the site administrator: "
-                              u"'${error}'",
-                      mapping={u"error": error}),
-                    type="info")
+                    _(
+                        u'mailchimp_unsubscribe_error_msg',
+                        default=u'We could not unsubscribe you from '
+                        u'the newsletter. '
+                        u"Please contact the site administrator: "
+                        u"'${error}'",
+                        mapping={u"error": error},
+                    ),
+                    type="info",
+                )
 
         IStatusMessage(self.request).addStatusMessage(
-            _(u'mailchimp_unsubscribed_msg',
-              default=(u'Thank you. You have been unsubscribed from '
-                       u'the Newsletter.')),
-            type="info")
+            _(
+                u'mailchimp_unsubscribed_msg',
+                default=(
+                    u'Thank you. You have been unsubscribed from '
+                    u'the Newsletter.'
+                ),
+            ),
+            type="info",
+        )
 
         portal = getSite()
         self.request.response.redirect(portal.absolute_url())

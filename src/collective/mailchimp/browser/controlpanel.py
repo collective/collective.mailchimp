@@ -19,7 +19,6 @@ except ImportError:
     IDisableCSRFProtection = None
 
 
-
 class MailchimpSettingsEditForm(controlpanel.RegistryEditForm):
 
     schema = IMailchimpSettings
@@ -53,11 +52,11 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
             return mailchimp.account()
         except PostRequestError:
             return []
-        except MailChimpException, error:
+        except MailChimpException as error:
             raise WidgetActionExecutionError(
                 Invalid(
-                    u"Could not fetch account details from MailChimp. " +
-                    u"Please check your MailChimp API key: %s" % error
+                    u"Could not fetch account details from MailChimp. "
+                    + u"Please check your MailChimp API key: %s" % error
                 )
             )
 
@@ -67,10 +66,10 @@ class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
         mailchimp = getUtility(IMailchimpLocator)
         try:
             return mailchimp.lists()
-        except MailChimpException, error:
+        except MailChimpException as error:
             raise WidgetActionExecutionError(
                 Invalid(
-                    u"Could not fetch available lists from MailChimp. " +
-                    u"Please check your MailChimp API key: %s" % error
+                    u"Could not fetch available lists from MailChimp. "
+                    + u"Please check your MailChimp API key: %s" % error
                 )
             )

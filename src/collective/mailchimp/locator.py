@@ -96,7 +96,8 @@ class MailchimpLocator(object):
         # case: response is a dict and may be an error response
         elif 'status' in response and 'detail' in response:
             exc = MailChimpException(
-                response['status'], response['detail'], response.get('errors'))
+                response['status'], response['detail'], response.get('errors')
+            )
             logger.warn(exc)
             raise exc
 
@@ -115,9 +116,13 @@ class MailchimpLocator(object):
         request_method = getattr(requests, request_type)
 
         try:
-            resp = request_method(url, auth=(
-                'apikey', self.apikey), data=payload, headers=headers)
-        except Exception, e:
+            resp = request_method(
+                url,
+                auth=('apikey', self.apikey),
+                data=payload,
+                headers=headers,
+            )
+        except Exception as e:
             raise PostRequestError(e)
         decoded = self._deserialize_response(resp.text)
         return decoded
@@ -201,7 +206,8 @@ class MailchimpLocator(object):
         if not list_id or not interest_category_id:
             return
         url = 'lists/{0}/interest-categories/{1}/interests'.format(
-            list_id, interest_category_id)
+            list_id, interest_category_id
+        )
         try:
             return self.api_request(url)
         except MailChimpException:
@@ -217,19 +223,25 @@ class MailchimpLocator(object):
             email_type = self.settings.email_type
         endpoint = 'lists/' + list_id + '/members'
         try:
-            response = self.api_request(endpoint, request_type='post',
-                                        status=opt_in_status,
-                                        email_address=email_address,
-                                        email_type=email_type,
-                                        **kwargs)
+            response = self.api_request(
+                endpoint,
+                request_type='post',
+                status=opt_in_status,
+                email_address=email_address,
+                email_type=email_type,
+                **kwargs
+            )
         except MailChimpException:
             raise
-        except Exception, e:
+        except Exception as e:
             raise PostRequestError(e)
-        logger.info("Subscribed %s to list with id: %s." %
-                    (email_address, list_id))
-        logger.debug("Subscribed %s to list with id: %s.\n\n %s" %
-                     (email_address, list_id, response))
+        logger.info(
+            "Subscribed %s to list with id: %s." % (email_address, list_id)
+        )
+        logger.debug(
+            "Subscribed %s to list with id: %s.\n\n %s"
+            % (email_address, list_id, response)
+        )
         return response
 
     def get_email_hash(self, email_address):
@@ -242,16 +254,20 @@ class MailchimpLocator(object):
         email_hash = self.get_email_hash(email_address)
         endpoint = 'lists/' + list_id + '/members/' + email_hash
         try:
-            response = self.api_request(endpoint, request_type='patch',
-                                        **kwargs)
+            response = self.api_request(
+                endpoint, request_type='patch', **kwargs
+            )
         except MailChimpException:
             raise
-        except Exception, e:
+        except Exception as e:
             raise PostRequestError(e)
-        logger.info("Updated %s in list with id: %s." %
-                    (email_address, list_id))
-        logger.debug("updated %s in list with id: %s.\n\n %s" %
-                     (email_address, list_id, response))
+        logger.info(
+            "Updated %s in list with id: %s." % (email_address, list_id)
+        )
+        logger.debug(
+            "updated %s in list with id: %s.\n\n %s"
+            % (email_address, list_id, response)
+        )
         return response
 
     def get_subscriber(self, list_id, email_address, **kwargs):
@@ -261,11 +277,10 @@ class MailchimpLocator(object):
         email_hash = self.get_email_hash(email_address)
         endpoint = 'lists/' + list_id + '/members/' + email_hash
         try:
-            response = self.api_request(endpoint, request_type='get',
-                                        **kwargs)
+            response = self.api_request(endpoint, request_type='get', **kwargs)
         except MailChimpException:
             raise
-        except Exception, e:
+        except Exception as e:
             raise PostRequestError(e)
         return response
 
@@ -276,16 +291,20 @@ class MailchimpLocator(object):
         email_hash = self.get_email_hash(email_address)
         endpoint = 'lists/' + list_id + '/members/' + email_hash + '/notes'
         try:
-            response = self.api_request(endpoint, request_type='post',
-                                        note=note)
+            response = self.api_request(
+                endpoint, request_type='post', note=note
+            )
         except MailChimpException:
             raise
-        except Exception, e:
+        except Exception as e:
             raise PostRequestError(e)
-        logger.info("Added note for %s in list with id: %s." %
-                    (email_address, list_id))
-        logger.debug("Added note for %s in list with id: %s.\n\n %s" %
-                     (email_address, list_id, response))
+        logger.info(
+            "Added note for %s in list with id: %s." % (email_address, list_id)
+        )
+        logger.debug(
+            "Added note for %s in list with id: %s.\n\n %s"
+            % (email_address, list_id, response)
+        )
         return response
 
     def account(self):

@@ -24,8 +24,8 @@ from zope.interface import implements
 class IMailChimpPortlet(IPortletDataProvider):
 
     name = schema.TextLine(
-        title=_(u'Title'),
-        description=_(u'Title of the portlet'))
+        title=_(u'Title'), description=_(u'Title of the portlet')
+    )
 
     available_lists = schema.List(
         title=_(u'Available lists'),
@@ -34,7 +34,7 @@ class IMailChimpPortlet(IPortletDataProvider):
         min_length=1,
         value_type=schema.Choice(
             source='collective.mailchimp.vocabularies.AvailableLists'
-        )
+        ),
     )
 
 
@@ -83,13 +83,15 @@ class AddForm(AddForm):
     fields['available_lists'].widgetFactory = CheckBoxFieldWidget
     label = _(u"Add MailChimp Portlet")
     description = _(
-        u"This portlet displays a subscription form for a " +
-        u"MailChimp newsletter.")
+        u"This portlet displays a subscription form for a "
+        + u"MailChimp newsletter."
+    )
 
     def create(self, data):
         return Assignment(
             name=data.get('name', u''),
-            available_lists=data.get('available_lists', []))
+            available_lists=data.get('available_lists', []),
+        )
 
 
 class EditForm(EditForm):
@@ -97,5 +99,6 @@ class EditForm(EditForm):
     fields['available_lists'].widgetFactory = CheckBoxFieldWidget
     label = _(u"Edit MailChimp Portlet")
     description = _(
-        u"This portlet displays a subscription form for a " +
-        u"MailChimp newsletter.")
+        u"This portlet displays a subscription form for a "
+        + u"MailChimp newsletter."
+    )

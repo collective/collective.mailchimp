@@ -6,15 +6,16 @@ from setuptools import setup
 
 
 long_description = (
-    open('README.rst').read() +
-    '\n' +
-    'Contributors\n' +
-    '============\n' +
-    '\n' +
-    open('CONTRIBUTORS.rst').read() +
-    '\n' +
-    open('CHANGES.rst').read() +
-    '\n')
+    open('README.rst').read()
+    + '\n'
+    + 'Contributors\n'
+    + '============\n'
+    + '\n'
+    + open('CONTRIBUTORS.rst').read()
+    + '\n'
+    + open('CHANGES.rst').read()
+    + '\n'
+)
 
 
 setup(
@@ -65,7 +66,7 @@ setup(
             # test dependency on Plone 5.0.x only, has been removed on Plone 5.1
             # (https://github.com/plone/Products.CMFPlone/commit/dddf689c775dd5aef393b409e1f5f779688edfe3#diff-085c6e538aa5c34629ab5692ea6872ef)
             'plone.app.imaging',
-        ],
+        ]
     },
     entry_points="""
     [z3c.autoinclude.plugin]
