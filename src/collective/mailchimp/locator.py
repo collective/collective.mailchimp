@@ -6,7 +6,6 @@ from .exceptions import SerializationError
 from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from plone.registry.interfaces import IRegistry
-from urllib import quote
 from zope.component import getUtility
 from zope.interface import implementer
 
@@ -14,6 +13,7 @@ import hashlib
 import json
 import logging
 import requests
+import six.moves
 
 
 try:
@@ -70,7 +70,7 @@ class MailchimpLocator(object):
         params.update(payload)
         try:
             jsonstr = json.dumps(params)
-            serialized = quote(jsonstr)
+            serialized = six.moves.urllib.parse.quote(jsonstr)
             return serialized
         except TypeError:
             raise SerializationError(payload)

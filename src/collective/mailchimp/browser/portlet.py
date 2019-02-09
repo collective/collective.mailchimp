@@ -4,7 +4,6 @@ from .z3cformhelpers import EditForm
 from Acquisition import aq_inner
 from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
 from collective.mailchimp.interfaces import INewsletterSubscribe
-from plone.app.portlets import PloneMessageFactory as _
 from plone.app.portlets.portlets import base
 from plone.memoize.compress import xhtml_compress
 from plone.memoize.instance import memoize
@@ -17,8 +16,12 @@ from z3c.form import field
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.interfaces import IFormLayer
 from zope import schema
+from zope.i18nmessageid import MessageFactory
 from zope.interface import alsoProvides
 from zope.interface import implementer
+
+
+_ = MessageFactory('collective.mailchimp')
 
 
 class IMailChimpPortlet(IPortletDataProvider):
