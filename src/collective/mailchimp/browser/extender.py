@@ -6,9 +6,9 @@ from plone.z3cform.fieldsets import extensible
 from zope import schema
 from zope.annotation import factory
 from zope.annotation.attribute import AttributeAnnotations
-from zope.component import adapts
+from zope.component import adapter
 from zope.component import provideAdapter
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
@@ -18,9 +18,9 @@ class IExtraBehavior(Interface):
     bar = schema.TextLine(title=u"Bar")
 
 
+@implementer(IExtraBehavior)
+@adapter(NewsletterSubcriber)
 class ExtraBehavior(Persistent):
-    implements(IExtraBehavior)
-    adapts(NewsletterSubcriber)
 
     foo = u""
     bar = u""
@@ -31,8 +31,8 @@ provideAdapter(ExtraBehavior)
 provideAdapter(AttributeAnnotations)
 
 
+@adapter(Interface, IDefaultBrowserLayer, NewsletterSubscriberForm)
 class ExtraBehaviorExtender(extensible.FormExtender):
-    adapts(Interface, IDefaultBrowserLayer, NewsletterSubscriberForm)
 
     def __init__(self, context, request, form):
         self.context = context

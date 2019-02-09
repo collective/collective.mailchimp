@@ -20,12 +20,13 @@ from z3c.form.interfaces import WidgetActionExecutionError
 from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.component import getUtility
 from zope.component.hooks import getSite
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Invalid
 
 
+@implementer(INewsletterSubscribe, IAttributeAnnotatable)
 class NewsletterSubcriber(object):
-    implements(INewsletterSubscribe, IAttributeAnnotatable)
+
     title = u""
 
 

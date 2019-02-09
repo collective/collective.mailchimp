@@ -8,7 +8,7 @@ from collective.mailchimp.interfaces import IMailchimpSettings
 from plone.registry.interfaces import IRegistry
 from urllib import quote
 from zope.component import getUtility
-from zope.interface import implements
+from zope.interface import implementer
 
 import hashlib
 import json
@@ -25,11 +25,11 @@ _marker = object()
 logger = logging.getLogger('collective.mailchimp')
 
 
+@implementer(IMailchimpLocator)
 class MailchimpLocator(object):
     """Utility for MailChimp API calls.
     """
 
-    implements(IMailchimpLocator)
     key_account = "collective.mailchimp.cache.account"
     key_groups = "collective.mailchimp.cache.groups"
     key_lists = "collective.mailchimp.cache.lists"

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from .z3cformhelpers import AddForm
+from .z3cformhelpers import EditForm
 from Acquisition import aq_inner
 from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
 from collective.mailchimp.interfaces import INewsletterSubscribe
@@ -14,11 +16,9 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.form import field
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.interfaces import IFormLayer
-from z3cformhelpers import AddForm
-from z3cformhelpers import EditForm
 from zope import schema
 from zope.interface import alsoProvides
-from zope.interface import implements
+from zope.interface import implementer
 
 
 class IMailChimpPortlet(IPortletDataProvider):
@@ -38,8 +38,8 @@ class IMailChimpPortlet(IPortletDataProvider):
     )
 
 
+@implementer(IMailChimpPortlet)
 class Assignment(base.Assignment):
-    implements(IMailChimpPortlet)
 
     def __init__(self, name=u'', available_lists=[]):
         self.name = name

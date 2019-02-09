@@ -6,6 +6,7 @@ Changelog
 
 - Prepare to work with Python 3.
   Isort, black, fixed deprecated Python 2 syntax AST errors.
+  implements to implementer.
   [jensens]
 
 
