@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
+from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
+from collective.mailchimp.testing import (
+    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+)
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.testing.z2 import Browser
 from plone.z3cform.fieldsets import extensible
+from zope import schema
 from zope.component import adapts
 from zope.component import provideAdapter
 from zope.interface import Interface
 from zope.interface import Invalid
-from zope import schema
-
-from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
-from collective.mailchimp.testing import \
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
 
 import unittest
 

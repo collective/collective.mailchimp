@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from zope.component import getUtility
-from zope.schema.vocabulary import SimpleVocabulary
-from zope.schema.vocabulary import SimpleTerm
-
 from collective.mailchimp.interfaces import IMailchimpLocator
+from zope.component import getUtility
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 def available_lists(context):

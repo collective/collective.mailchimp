@@ -1,20 +1,15 @@
 # -*- coding: utf-8 -*-
+from collective.mailchimp.interfaces import IMailchimpSettings
+from collective.mailchimp.testing import (
+    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+)
+from plone.app.testing import logout
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
-from plone.testing.z2 import Browser
-
-from zope.component import getMultiAdapter
-
-from Products.CMFCore.utils import getToolByName
-
 from plone.registry import Registry
-
-from plone.app.testing import logout
-
-from collective.mailchimp.testing import \
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
-
-from collective.mailchimp.interfaces import IMailchimpSettings
+from plone.testing.z2 import Browser
+from Products.CMFCore.utils import getToolByName
+from zope.component import getMultiAdapter
 
 import unittest
 

@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
+from collective.mailchimp.browser.newsletter import NewsletterSubcriber
 from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
-from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-from zope import schema
-from zope.interface import implements
-from zope.interface import Interface
+from persistent import Persistent
 from plone.z3cform.fieldsets import extensible
-from zope.component import adapts, provideAdapter
+from zope import schema
 from zope.annotation import factory
 from zope.annotation.attribute import AttributeAnnotations
-from persistent import Persistent
-
-from collective.mailchimp.browser.newsletter import NewsletterSubcriber
+from zope.component import adapts
+from zope.component import provideAdapter
+from zope.interface import implements
+from zope.interface import Interface
+from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
 class IExtraBehavior(Interface):

@@ -1,31 +1,24 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
-from zope.interface import alsoProvides
-from z3c.form.interfaces import IFormLayer
-from plone.z3cform.interfaces import IWrappedForm
-from plone.z3cform import z2
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from zope.interface import implements
-from zope import schema
-
-from z3c.form import field
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
-
-from plone.memoize.compress import xhtml_compress
-from plone.memoize.instance import memoize
-
-from plone.portlets.interfaces import IPortletDataProvider
-
+from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
+from collective.mailchimp.interfaces import INewsletterSubscribe
 from plone.app.portlets import PloneMessageFactory as _
 from plone.app.portlets.portlets import base
-
+from plone.memoize.compress import xhtml_compress
+from plone.memoize.instance import memoize
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.z3cform import z2
+from plone.z3cform.interfaces import IWrappedForm
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from z3c.form import field
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from z3c.form.interfaces import IFormLayer
 from z3cformhelpers import AddForm
 from z3cformhelpers import EditForm
-
-from collective.mailchimp.interfaces import INewsletterSubscribe
-from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
+from zope import schema
+from zope.interface import alsoProvides
+from zope.interface import implements
 
 
 class IMailChimpPortlet(IPortletDataProvider):

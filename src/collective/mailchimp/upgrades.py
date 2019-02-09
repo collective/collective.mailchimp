@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
-
-from zope.component import getUtility
-
+from collective.mailchimp.interfaces import IMailchimpSettings
 from plone.app.upgrade.utils import loadMigrationProfile
 from plone.registry.interfaces import IRegistry
+from Products.CMFCore.utils import getToolByName
+from zope.component import getUtility
 
-from collective.mailchimp.interfaces import IMailchimpSettings
+
 PROFILE_ID = "profile-collective.mailchimp:default"
 
 

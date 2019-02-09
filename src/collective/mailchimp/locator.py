@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
+from .exceptions import DeserializationError
+from .exceptions import MailChimpException
+from .exceptions import PostRequestError
+from .exceptions import SerializationError
+from collective.mailchimp.interfaces import IMailchimpLocator
+from collective.mailchimp.interfaces import IMailchimpSettings
+from plone.registry.interfaces import IRegistry
+from urllib import quote
+from zope.component import getUtility
+from zope.interface import implements
+
 import hashlib
 import json
 import logging
 import requests
-from urllib import quote
+
+
 try:
     import urlparse
 except ImportError:
     from urllib import parse as urlparse
-from collective.mailchimp.interfaces import IMailchimpSettings
-from collective.mailchimp.interfaces import IMailchimpLocator
-from plone.registry.interfaces import IRegistry
-from zope.interface import implements
-from zope.component import getUtility
-from . exceptions import (
-    SerializationError,
-    DeserializationError,
-    PostRequestError,
-    MailChimpException,
-)
 
 _marker = object()
 logger = logging.getLogger('collective.mailchimp')

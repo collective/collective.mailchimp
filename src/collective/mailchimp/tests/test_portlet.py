@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
-from plone.testing.z2 import Browser
-from plone.app.testing import TEST_USER_ID
+from collective.mailchimp.browser import portlet as mailchimp
+from collective.mailchimp.testing import (
+    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+)
+from plone.app.portlets.storage import PortletAssignmentMapping
+from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
-from plone.app.testing import setRoles
-from zope.component import getUtility, getMultiAdapter
-from zope.site.hooks import setHooks
-
-from plone.portlets.interfaces import IPortletType
-from plone.portlets.interfaces import IPortletManager
+from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletAssignment
 from plone.portlets.interfaces import IPortletDataProvider
+from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
-
-from plone.app.portlets.storage import PortletAssignmentMapping
-
-from collective.mailchimp.browser import portlet as mailchimp
-from collective.mailchimp.testing import \
-    COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+from plone.portlets.interfaces import IPortletType
+from plone.testing.z2 import Browser
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.site.hooks import setHooks
 
 import unittest
 

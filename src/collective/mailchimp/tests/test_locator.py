@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from zope.component import getUtility
-
-from collective.mailchimp.testing import \
+from collective.mailchimp.testing import (
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+)
+from zope.component import getUtility
 
 import unittest
 

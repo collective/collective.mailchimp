@@ -3,17 +3,16 @@
 # plone.app.portlets. As soon as PLIP https://dev.plone.org/ticket/11838
 # has been merged into Plone we can remove this file and import
 # z3cformhelpers.py from plone.app.portlets.
-from z3c.form import button
-from z3c.form import form
-from zope.component import getMultiAdapter
-from zope.interface import implements
-
-from Acquisition import aq_parent, aq_inner
-
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from plone.app.portlets import PloneMessageFactory as _
 from plone.app.portlets.browser.interfaces import IPortletAddForm
 from plone.app.portlets.browser.interfaces import IPortletEditForm
 from plone.app.portlets.interfaces import IPortletPermissionChecker
+from z3c.form import button
+from z3c.form import form
+from zope.component import getMultiAdapter
+from zope.interface import implements
 
 
 class AddForm(form.AddForm):

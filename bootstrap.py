@@ -18,12 +18,17 @@ The script accepts buildout command-line options, so you can
 use the -c option to specify an alternate configuration file.
 """
 
+from optparse import OptionParser
+
 import os
+import pkg_resources
+import setuptools
 import shutil
+import subprocess
 import sys
 import tempfile
+import zc.buildout.buildout
 
-from optparse import OptionParser
 
 __version__ = '2015-07-01'
 # See zc.buildout's changelog if this version is up to date.
@@ -115,8 +120,6 @@ if options.setuptools_to_dir is not None:
     setup_args['to_dir'] = options.setuptools_to_dir
 
 ez['use_setuptools'](**setup_args)
-import setuptools
-import pkg_resources
 
 # This does not (always?) update the default working set.  We will
 # do it.
@@ -187,7 +190,6 @@ if version:
     requirement = '=='.join((requirement, version))
 cmd.append(requirement)
 
-import subprocess
 if subprocess.call(cmd) != 0:
     raise Exception(
         "Failed to execute command:\n%s" % repr(cmd)[1:-1])
@@ -197,7 +199,6 @@ if subprocess.call(cmd) != 0:
 
 ws.add_entry(tmpeggs)
 ws.require(requirement)
-import zc.buildout.buildout
 
 if not [a for a in args if '=' not in a]:
     args.append('bootstrap')

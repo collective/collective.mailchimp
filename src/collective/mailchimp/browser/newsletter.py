@@ -1,29 +1,27 @@
 # -*- coding: utf-8 -*-
-from Products.statusmessages.interfaces import IStatusMessage
-
-from zope.interface import Invalid
-from zope.interface import implements
-from zope.annotation.interfaces import IAttributeAnnotatable
-from zope.component.hooks import getSite
-from zope.component import getUtility
-
-from z3c.form import form, field, button
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
-from z3c.form.browser.radio import RadioFieldWidget
-from z3c.form.interfaces import ActionExecutionError
-from z3c.form.interfaces import WidgetActionExecutionError
-from z3c.form.interfaces import HIDDEN_MODE
-
-from plone.registry.interfaces import IRegistry
-from plone.z3cform.layout import wrap_form
-from plone.z3cform.fieldsets import extensible
-
 from collective.mailchimp import _
 from collective.mailchimp.exceptions import MailChimpException
 from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import INewsletterSubscribe
 from collective.mailchimp.interfaces import INewsletterUnsubscribe
+from plone.registry.interfaces import IRegistry
+from plone.z3cform.fieldsets import extensible
+from plone.z3cform.layout import wrap_form
+from Products.statusmessages.interfaces import IStatusMessage
+from z3c.form import button
+from z3c.form import field
+from z3c.form import form
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from z3c.form.browser.radio import RadioFieldWidget
+from z3c.form.interfaces import ActionExecutionError
+from z3c.form.interfaces import HIDDEN_MODE
+from z3c.form.interfaces import WidgetActionExecutionError
+from zope.annotation.interfaces import IAttributeAnnotatable
+from zope.component import getUtility
+from zope.component.hooks import getSite
+from zope.interface import implements
+from zope.interface import Invalid
 
 
 class NewsletterSubcriber(object):

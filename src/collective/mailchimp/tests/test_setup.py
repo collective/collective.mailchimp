@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
-from collective.mailchimp.testing import \
+from collective.mailchimp.testing import (
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING
+)
 from Products.CMFCore.utils import getToolByName
+
 import unittest
+
 
 try:
     from Products.CMFPlone.factory import _IMREALLYPLONE5

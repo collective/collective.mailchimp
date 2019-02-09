@@ -1,25 +1,23 @@
 # -*- coding: utf-8 -*-
-from zope.interface import Invalid
+from ..exceptions import MailChimpException
+from ..exceptions import PostRequestError
+from collective.mailchimp import _
+from collective.mailchimp.interfaces import IMailchimpLocator
+from collective.mailchimp.interfaces import IMailchimpSettings
+from plone.app.registry.browser import controlpanel
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.form.interfaces import WidgetActionExecutionError
 from zope.component import getUtility
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.interface import alsoProvides
+from zope.interface import Invalid
 
-from ..exceptions import (
-    PostRequestError,
-    MailChimpException
-)
 
-from plone.app.registry.browser import controlpanel
 try:
     from plone.protect.interfaces import IDisableCSRFProtection
 except ImportError:
     # BBB for old plone.protect, default until at least Plone 4.3.7.
     IDisableCSRFProtection = None
-from zope.interface import alsoProvides
 
-from collective.mailchimp.interfaces import IMailchimpSettings
-from collective.mailchimp.interfaces import IMailchimpLocator
-from collective.mailchimp import _
 
 
 class MailchimpSettingsEditForm(controlpanel.RegistryEditForm):

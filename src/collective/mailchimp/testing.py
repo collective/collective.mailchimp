@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
+from collective.mailchimp.interfaces import IMailchimpSettings
+from mock import Mock
+from mock import patch
+from plone.app.testing import applyProfile
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import PloneSandboxLayer
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
+from zope.configuration import xmlconfig
+
 import json
 import os
 import re
-from collective.mailchimp.interfaces import IMailchimpSettings
-from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
-from plone.app.testing import PloneSandboxLayer
-from plone.app.testing import applyProfile
-from plone.app.testing import PLONE_FIXTURE
-from plone.app.testing import IntegrationTesting
-from plone.app.testing import FunctionalTesting
 
-from zope.configuration import xmlconfig
-from mock import Mock
-from mock import patch
 
 DUMMY_API_KEY = u"abc-us1"
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'tests', 'data')
