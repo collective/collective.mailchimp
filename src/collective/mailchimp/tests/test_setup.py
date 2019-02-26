@@ -63,7 +63,7 @@ class TestSetup(unittest.TestCase):
             cssreg = getToolByName(self.portal, "portal_css")
             self.assertTrue(
                 cssreg.getResource(
-                    '++resource++collective.mailchimp.stylesheets/mailchimp.css'
+                    '++resource++collective.mailchimp.stylesheets/mailchimp.css'  # noqa
                 ).getEnabled()
             )
         else:
