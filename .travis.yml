@@ -1,19 +1,33 @@
 language: python
 python: "2.7"
-sudo: false
+dist: xenial
+sudo: required
 cache:
   directories:
-  - eggs
-env:
-  matrix:
-    - PLONE_VERSION=4.3.x
-    - PLONE_VERSION=5.0.x
-    - PLONE_VERSION=5.1.x
+    - eggs
+matrix:
+  include:
+    - python: "2.7"
+      env: PLONE_VERSION=4.3.x
+    - python: "2.7"
+      env: PLONE_VERSION=5.0.x
+    - python: "2.7"
+      env: PLONE_VERSION=5.1.x
+    - python: "2.7"
+      env: PLONE_VERSION=5.2.x
+  # - python: "3.6"
+  #   env: PLONE_VERSION=5.2.x
+  # - python: "3.7"
+  #   env: PLONE_VERSION=5.2.x
+  exclude:
+    - python: "2.7"
+  # - python: "3.6"
+  # - python: "3.7"
 install:
   - sed -ie "s#plone-5.0.x.cfg.cfg#plone-$PLONE_VERSION.cfg#" buildout.cfg
-# Keep setuptools and zc.buildout the synced with buildout.cfg,
-# otherwise the buildout fails due to the non newest ('-N') option
-# when it wants to downgrade one of them to the pinned version.
+  # Keep setuptools and zc.buildout the synced with buildout.cfg,
+  # otherwise the buildout fails due to the non newest ('-N') option
+  # when it wants to downgrade one of them to the pinned version.
   - python bootstrap.py -c travis.cfg --buildout-version=2.5.0 --setuptools-version=38.7.0
   - bin/buildout -c travis.cfg annotate
   - bin/buildout -N -t 3 -c travis.cfg
