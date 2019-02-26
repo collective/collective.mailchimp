@@ -24,7 +24,7 @@ matrix:
   # - python: "3.6"
   # - python: "3.7"
 install:
-  - sed -ie "s#plone-x.x.x.cfg.cfg#plone-$PLONE_VERSION#" travis.cfg
+  - sed -ie "s#plone-x.x.x.cfg#plone-$PLONE_VERSION.cfg#" travis.cfg
   - make
   - bin/buildout -c travis.cfg annotate
   - bin/buildout -N -t 3 -c travis.cfg
