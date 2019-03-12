@@ -27,6 +27,9 @@ build-py3:
 bin/python bin/pip:
 	virtualenv --clear --python=python$(version) .
 
+test:
+	bin/test
+
 clean:
 	git clean -Xdf
 
