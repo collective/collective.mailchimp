@@ -23,6 +23,8 @@ matrix:
     - python: "2.7"
   # - python: "3.6"
   # - python: "3.7"
+  allow_failures:
+    - env: PLONE_VERSION=5.2.x
 install:
   - sed -ie "s#plone-x.x.x.cfg#plone-$PLONE_VERSION.cfg#" travis.cfg
   - make
