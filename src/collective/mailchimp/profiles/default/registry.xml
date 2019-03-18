@@ -4,6 +4,7 @@
      <record name="collective.mailchimp.cache.lists">
         <field type="plone.registry.field.Tuple">
             <title>Mailchimp Lists</title>
+            <value_type type="plone.registry.field.Dict" />
         </field>
     </record>
     <record name="collective.mailchimp.cache.groups">
