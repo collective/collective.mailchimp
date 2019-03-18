@@ -4,6 +4,8 @@ Changelog
 2.2.3 (unreleased)
 ------------------
 
+New Features:
+
 - Prepare to work with Python 3.
   Isort, black, fixed deprecated Python 2 syntax AST errors.
   implements to implementer.
@@ -14,13 +16,16 @@ Changelog
 2.2.2 (2018-06-07)
 ------------------
 
+Bugfixes:
+
 - Fix error handling in @@newsletter to validate form extenders
   [csenger]
 
 
-
 2.2.1 (2018-01-05)
 ------------------
+
+Bugfixes:
 
 - Plone 5.1 compatibility.
   [timo]
@@ -28,6 +33,8 @@ Changelog
 
 2.2.0 (2017-12-07)
 ------------------
+
+New Features:
 
 - Make plone.app.imaging a test dependency only in setup.py. This fixes an
   issue with Plone 5.1 and plone.restapi. plone.app.imaging is a hard

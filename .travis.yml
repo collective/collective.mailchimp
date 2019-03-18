@@ -27,9 +27,8 @@ matrix:
     - env: PLONE_VERSION=5.2.x
 install:
   - sed -ie "s#plone-x.x.x.cfg#plone-$PLONE_VERSION.cfg#" travis.cfg
-  - make
-  - bin/buildout -c travis.cfg annotate
-  - bin/buildout -N -t 3 -c travis.cfg
+  - pip install -r requirements.txt
+  - buildout -c travis.cfg
 script:
   - bin/code-analysis
   - bin/test

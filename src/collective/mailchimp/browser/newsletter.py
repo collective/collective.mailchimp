@@ -229,9 +229,10 @@ class UnsubscribeNewsletterForm(extensible.ExtensibleForm, form.Form):
             update_data['status'] = 'unsubscribed'
         else:
             interest_groups = {}
-            for group in data.get('interest_groups', []):
-                interest_groups[group] = False
-            update_data['interests'] = interest_groups
+            if data.get('interest_groups'):
+                for group in data.get('interest_groups', []):
+                    interest_groups[group] = False
+                update_data['interests'] = interest_groups
 
         try:
             self.mailchimp.update_subscriber(
