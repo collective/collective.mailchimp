@@ -33,7 +33,6 @@ provideAdapter(AttributeAnnotations)
 
 @adapter(Interface, IDefaultBrowserLayer, NewsletterSubscriberForm)
 class ExtraBehaviorExtender(extensible.FormExtender):
-
     def __init__(self, context, request, form):
         self.context = context
         self.request = request

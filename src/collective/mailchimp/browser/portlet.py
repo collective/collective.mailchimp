@@ -43,7 +43,6 @@ class IMailChimpPortlet(IPortletDataProvider):
 
 @implementer(IMailChimpPortlet)
 class Assignment(base.Assignment):
-
     def __init__(self, name=u'', available_lists=[]):
         self.name = name
         self.available_lists = available_lists
