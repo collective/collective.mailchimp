@@ -4,6 +4,9 @@ Changelog
 2.2.3 (unreleased)
 ------------------
 
+- Fix existing French translations
+  [laulaz]
+
 - Prepare to work with Python 3.
   Isort, black, fixed deprecated Python 2 syntax AST errors.
   implements to implementer.
