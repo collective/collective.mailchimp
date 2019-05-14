@@ -60,13 +60,7 @@ setup(
         'requests',
     ],
     extras_require={
-        'test': [
-            'mock',  # new, backport from Python 3.3
-            'plone.app.testing',
-            # test dependency on Plone 5.0.x only, has been removed on Plone 5.1
-            # (https://github.com/plone/Products.CMFPlone/commit/dddf689c775dd5aef393b409e1f5f779688edfe3#diff-085c6e538aa5c34629ab5692ea6872ef)
-            'plone.app.imaging',
-        ]
+        'test': ['mock', 'plone.app.testing']  # new, backport from Python 3.3
     },
     entry_points="""
     [z3c.autoinclude.plugin]
