@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.3 (unreleased)
+2.2.3 (2019-05-14)
 ------------------
 
 - Don't show interest groups if empty
