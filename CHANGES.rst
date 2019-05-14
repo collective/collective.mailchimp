@@ -4,6 +4,9 @@ Changelog
 2.2.3 (unreleased)
 ------------------
 
+- Don't show interest groups if empty
+  [laulaz]
+
 - Fix existing French translations
   [laulaz]
 
