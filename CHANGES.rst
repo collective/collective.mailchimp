@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.3 (unreleased)
+3.0.0 (2019-06-14)
 ------------------
 
 - Uninstall profile
