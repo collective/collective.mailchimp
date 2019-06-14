@@ -1,0 +1,6 @@
+<layers>
+  <layer
+    name="collective.mailchimp"
+    remove="true"
+    />
+</layers>

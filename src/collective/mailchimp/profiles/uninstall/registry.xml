@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<registry>
+ <records interface="collective.mailchimp.interfaces.IMailchimpSettings" remove="true"/>
+    <record name="collective.mailchimp.cache.lists" remove="true">
+    </record>
+    <record name="collective.mailchimp.cache.groups" remove="true">
+    </record>
+    <record name="collective.mailchimp.cache.account" remove="true">
+    </record>
+</registry>
