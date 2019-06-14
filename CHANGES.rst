@@ -4,6 +4,9 @@ Changelog
 2.2.3 (unreleased)
 ------------------
 
+- Uninstall profile
+  [erral]
+
 - Don't show interest groups if empty
   [laulaz]
 
