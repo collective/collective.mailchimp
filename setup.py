@@ -20,7 +20,7 @@ long_description = (
 
 setup(
     name='collective.mailchimp',
-    version='2.2.3.dev0',
+    version='3.0.1.dev0',
     description="MailChimp integration for Plone.",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -60,7 +60,7 @@ setup(
         'requests',
     ],
     extras_require={
-        'test': ['mock', 'plone.app.testing']  # new, backport from Python 3.3
+        'test': ['mock', 'plone.app.testing', 'plone.api']
     },
     entry_points="""
     [z3c.autoinclude.plugin]
