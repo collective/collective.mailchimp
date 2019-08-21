@@ -1,7 +1,22 @@
 Changelog
 =========
 
-2.2.3 (unreleased)
+3.0.1 (unreleased)
+------------------
+
+New Features:
+
+- Uninstall profile
+  [erral]
+
+- Don't show interest groups if empty
+  [laulaz]
+
+- Fix existing French translations
+  [laulaz]
+
+
+3.0.0 (2019-06-14)
 ------------------
 
 New Features:

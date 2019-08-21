@@ -66,7 +66,8 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
         # Show/hide interest_groups widget
         self.available_interest_groups = self.mailchimp.groups(list_id=list_id)
-        if not self.available_interest_groups:
+        if not self.available_interest_groups or \
+           self.available_interest_groups.get('total_items') == 0:
             widgets['interest_groups'].mode = HIDDEN_MODE
 
         preselected_groups = self.request.get('preselected_group', [])

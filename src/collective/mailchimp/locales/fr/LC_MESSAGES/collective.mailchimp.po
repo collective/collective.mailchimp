@@ -179,7 +179,7 @@ msgstr ""
 
 #: collective/mailchimp/browser/z3cformhelpers.py:65
 msgid "Modify portlet"
-msgstr "Modifier la portlet"
+msgstr "Modifier le portlet"
 
 #: collective/mailchimp/browser/controlpanel.pt:134
 msgid "Name"
@@ -195,7 +195,7 @@ msgstr ""
 
 #: collective/mailchimp/browser/portlet.py:38
 msgid "Select available lists to subscribe to."
-msgstr "Sélectionner les listes mise à disposition."
+msgstr "Sélectionner les listes mises à disposition."
 
 #: collective/mailchimp/browser/controlpanel.pt:18
 msgid "Site Setup"
@@ -220,7 +220,7 @@ msgstr "Liste d'abonnés"
 
 #: collective/mailchimp/browser/portlet.py:91
 msgid "This portlet displays a subscription form for a MailChimp newsletter."
-msgstr "Cette portlet affiche un formulaire d'abonnement à une newsletter MailChimp."
+msgstr "Ce portlet affiche un formulaire d'abonnement à une newsletter MailChimp."
 
 #: collective/mailchimp/browser/portlet.py:33
 msgid "Title"
@@ -252,7 +252,7 @@ msgstr ""
 
 #: collective/mailchimp/browser/newsletter.py:163
 msgid "We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you."
-msgstr "Nous devons confirmer votre adresse email. Pour terminer votre abonnement à la newsletter, cliquer sur le lien dans le mail que nous venons juste de vous envoyer."
+msgstr "Nous devons confirmer votre adresse email. Pour terminer votre abonnement à la newsletter, cliquez sur le lien dans le mail que nous venons juste de vous envoyer."
 
 #: collective/mailchimp/browser/controlpanel.pt:133
 msgid "Web ID"
@@ -281,7 +281,7 @@ msgstr ""
 #. Default: "Enter in your MailChimp key here (.e.g. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Log into mailchimp.com, go to account -> extras -> API Keys & Authorized Apps and copy the API Key to this field."
 #: collective/mailchimp/interfaces.py:118
 msgid "help_api_key"
-msgstr "Entrer ici votre clé d'API MailChimp (i.e. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Pour celà connectez vous sur mailchimp.com, aller dans 'account' -> 'extras' -> 'API Keys & Authorized Apps' et copier/coller la clé API dans ce champ."
+msgstr "Entrer ici votre clé d'API MailChimp (i.e. '8b785dcabe4b5aa24ef84201ea7dcded-us4'). Pour cela, connectez-vous sur mailchimp.com, allez dans 'account' -> 'extras' -> 'API Keys & Authorized Apps' et copiez/collez la clé API dans ce champ."
 
 #. Default: "Default list which is used in the @@newsletter view if no list_id param is provided."
 #: collective/mailchimp/interfaces.py:153
@@ -315,12 +315,12 @@ msgstr ""
 #. Default: "Flag to determine whether we replace the interest groups with the groups provided or we add the providedgroups to the member's interest groups (optional, defaults to true)"
 #: collective/mailchimp/interfaces.py:186
 msgid "help_replace_interests"
-msgstr "Champ pour déterminer si nous remplaçons les centres d'intérêt avec les listes mise à disposition ou si nous ajoutons les listes mise à disposition aux centres d'intérêts du membre (optionnel, défaut à oui)"
+msgstr "Champ pour déterminer si nous remplaçons les centres d'intérêt avec les listes mises à disposition ou si nous ajoutons les listes mises à disposition aux centres d'intérêts du membre (optionnel, défaut à oui)"
 
 #. Default: "If your double_optin is false and this is true, we will send your lists Welcome Email if this subscribe succeeds - this will *not* fire if we end up updating an existing subscriber. If double_optin is true, this has no effect. defaults to false."
 #: collective/mailchimp/interfaces.py:199
 msgid "help_send_welcome"
-msgstr "Si l'option de double validation n'est pas activée et cette option est activé, nous enverrons le mail d'accueil de votre liste si l'abonnement est validé - cet envoi n'aura pas lieu si c'est abonné déjà existant. Si l'option de double validation est activée, cet option n'a aucun effet. Défaut : désactivé."
+msgstr "Si l'option de double validation n'est pas activée et si cette option est activée, nous enverrons le mail d'accueil de votre liste si l'abonnement est validé - cet envoi n'aura pas lieu pour un abonné déjà existant. Si l'option de double validation est activée, cette option n'a aucun effet. Défaut : désactivé."
 
 #. Default: "Flag to control whether existing subscribers should be updated instead of throwing an error, defaults to false"
 #: collective/mailchimp/interfaces.py:175

@@ -20,7 +20,7 @@ long_description = (
 
 setup(
     name='collective.mailchimp',
-    version='2.2.3.dev0',
+    version='3.0.1.dev0',
     description="MailChimp integration for Plone.",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -66,6 +66,7 @@ setup(
             # test dependency on Plone 5.0.x only, has been removed on Plone 5.1
             # (https://github.com/plone/Products.CMFPlone/commit/dddf689c775dd5aef393b409e1f5f779688edfe3#diff-085c6e538aa5c34629ab5692ea6872ef)
             'plone.app.imaging',
+            'plone.api',
         ]
     },
     entry_points="""
