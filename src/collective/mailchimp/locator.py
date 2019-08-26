@@ -245,7 +245,7 @@ class MailchimpLocator(object):
         return response
 
     def get_email_hash(self, email_address):
-        return hashlib.md5(email_address).hexdigest()
+        return hashlib.md5(email_address.encode('utf-8')).hexdigest()
 
     def update_subscriber(self, list_id, email_address, **kwargs):
         """API call to update a member's data"""

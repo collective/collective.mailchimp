@@ -86,16 +86,17 @@ class MailchimpLocatorIntegrationTest(unittest.TestCase):
         groups = locator.registry[locator.key_groups]
         self.assertTrue(isinstance(groups, dict))
         self.assertEqual(
-            groups.keys(), [u'f6257645gs', u'f6267645gs', u'57afe96172']
+            sorted(groups.keys()),
+            [u'57afe96172', u'f6257645gs', u'f6267645gs'],
         )
         self.assertEqual(
-            groups[groups.keys()[0]].keys(),
+            sorted(groups[sorted(groups.keys())[0]].keys()),
             [
-                u'total_items',
-                'interests',
                 u'_links',
                 u'categories',
+                u'interests',
                 u'list_id',
+                u'total_items',
             ],
         )
 
