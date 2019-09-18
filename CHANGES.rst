@@ -18,6 +18,9 @@ New Features:
 - Fix existing French translations
   [laulaz]
 
+- Redirect to navigation root after (un)subscription
+  [daggelpop]
+
 
 3.0.0 (2019-06-14)
 ------------------

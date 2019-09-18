@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+from Products.CMFCore.utils import getToolByName
 from collective.mailchimp import _
 from collective.mailchimp.exceptions import MailChimpException
 from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import INewsletterSubscribe
 from collective.mailchimp.interfaces import INewsletterUnsubscribe
+from plone.app.layout.navigation.root import getNavigationRootObject
 from plone.registry.interfaces import IRegistry
 from plone.z3cform.fieldsets import extensible
 from plone.z3cform.layout import wrap_form
@@ -19,7 +21,6 @@ from z3c.form.interfaces import HIDDEN_MODE
 from z3c.form.interfaces import WidgetActionExecutionError
 from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.component import getUtility
-from zope.component.hooks import getSite
 from zope.interface import implementer
 from zope.interface import Invalid
 
@@ -127,8 +128,9 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         IStatusMessage(self.context.REQUEST).addStatusMessage(
             message, type="info"
         )
-        portal = getSite()
-        self.request.response.redirect(portal.absolute_url())
+        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+        site = getNavigationRootObject(self.context, portal)
+        self.request.response.redirect(site.absolute_url())
 
     def handle_error(self, error, data):
         # Current api v3 documentation only lists errors in the 400 and 500
@@ -266,8 +268,9 @@ class UnsubscribeNewsletterForm(extensible.ExtensibleForm, form.Form):
             type="info",
         )
 
-        portal = getSite()
-        self.request.response.redirect(portal.absolute_url())
+        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+        site = getNavigationRootObject(self.context, portal)
+        self.request.response.redirect(site.absolute_url())
 
 
 UnsubscribeNewsletterView = wrap_form(UnsubscribeNewsletterForm)
