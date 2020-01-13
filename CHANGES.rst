@@ -9,8 +9,10 @@ New Features:
 - Add Plone 5.2 and Python 3.7 classifiers.
   [timo]
 
-- Uninstall profile
+- Add uninstall profile
   [erral]
+
+Bug Fixes:
 
 - Don't show interest groups if empty
   [laulaz]
