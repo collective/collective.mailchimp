@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.1 (unreleased)
+3.1.0 (2020-01-13)
 ------------------
 
 New Features:
