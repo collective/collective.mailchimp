@@ -3,3 +3,6 @@ graft docs
 include *.rst
 include *.txt
 global-exclude *.pyc
+exclude Makefile
+exclude kitconcept.png
+exclude pyproject.toml
