@@ -4,7 +4,7 @@ Changelog
 3.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix controlpanel field validation for Plone 6
 
 
 3.1.0 (2020-01-13)

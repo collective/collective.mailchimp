@@ -168,7 +168,7 @@ class IMailchimpSettings(Interface):
         ),
         vocabulary="collective.mailchimp.vocabularies.EmailType",
         default="html",
-        required=True,
+        required=False,
     )
 
     email_type_is_optional = schema.Bool(
@@ -178,7 +178,7 @@ class IMailchimpSettings(Interface):
             default=u"Let users choose their email type preference in the "
             u"newsletter subscription form.",
         ),
-        required=True,
+        required=False,
         default=False,
     )
 
@@ -201,7 +201,7 @@ class IMailchimpSettings(Interface):
             u"message is sent, defaults to true. Abusing this may "
             u"cause your account to be suspended.",
         ),
-        required=True,
+        required=False,
         default=True,
     )
 
@@ -212,7 +212,7 @@ class IMailchimpSettings(Interface):
             default=u"Flag to control whether existing subscribers should be "
             u"updated instead of throwing an error, defaults to false",
         ),
-        required=True,
+        required=False,
         default=False,
     )
 
@@ -225,7 +225,7 @@ class IMailchimpSettings(Interface):
             u"groups to the member's interest groups (optional, "
             u"defaults to true)",
         ),
-        required=True,
+        required=False,
         default=True,
     )
 
@@ -239,7 +239,7 @@ class IMailchimpSettings(Interface):
             u"an existing subscriber. If double_optin is true, this "
             u"has no effect. defaults to false.",
         ),
-        required=True,
+        required=False,
         default=False,
     )
 
