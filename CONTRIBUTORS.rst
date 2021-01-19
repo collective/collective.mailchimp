@@ -3,3 +3,4 @@
 - Jean-Paul Ladage
 - Jean-Michel Francois
 - Carsten Senger
+- Peter Holzer

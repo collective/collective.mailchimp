@@ -160,7 +160,7 @@ class IMailchimpSettings(Interface):
     )
 
     email_type = schema.Choice(
-        title=_(u"email_type"),
+        title=_(u"email_type", default=u"Email type"),
         description=_(
             u"help_email_type",
             default=u"Email type preference for the email (html, text, or "
@@ -168,22 +168,22 @@ class IMailchimpSettings(Interface):
         ),
         vocabulary="collective.mailchimp.vocabularies.EmailType",
         default="html",
-        required=True,
+        required=False,
     )
 
     email_type_is_optional = schema.Bool(
-        title=_(u"email_type_is_optional"),
+        title=_(u"email_type_is_optional", default=u"Email type is optional"),
         description=_(
             u"help_email_type_is_optional",
             default=u"Let users choose their email type preference in the "
             u"newsletter subscription form.",
         ),
-        required=True,
+        required=False,
         default=False,
     )
 
     default_list = schema.Choice(
-        title=_(u"default_list"),
+        title=_(u"default_list", default=u"Default list"),
         description=_(
             u"help_default_list",
             default=u"Default list which is used in the @@newsletter view if "
@@ -194,30 +194,30 @@ class IMailchimpSettings(Interface):
     )
 
     double_optin = schema.Bool(
-        title=_(u"double_optin"),
+        title=_(u"double_optin", default=u"Double opt-in"),
         description=_(
             u"help_double_optin",
             default=u"Flag to control whether a double opt-in confirmation "
             u"message is sent, defaults to true. Abusing this may "
             u"cause your account to be suspended.",
         ),
-        required=True,
+        required=False,
         default=True,
     )
 
     update_existing = schema.Bool(
-        title=_(u"update_existing"),
+        title=_(u"update_existing", default=u"Update existing"),
         description=_(
             u"help_update_existing",
             default=u"Flag to control whether existing subscribers should be "
             u"updated instead of throwing an error, defaults to false",
         ),
-        required=True,
+        required=False,
         default=False,
     )
 
     replace_interests = schema.Bool(
-        title=_(u"replace_interests"),
+        title=_(u"replace_interests", default=u"Replace interests"),
         description=_(
             u"help_replace_interests",
             default=u"Flag to determine whether we replace the interest "
@@ -225,12 +225,12 @@ class IMailchimpSettings(Interface):
             u"groups to the member's interest groups (optional, "
             u"defaults to true)",
         ),
-        required=True,
+        required=False,
         default=True,
     )
 
     send_welcome = schema.Bool(
-        title=_(u"send_welcome"),
+        title=_(u"send_welcome", default=u"Send welcome"),
         description=_(
             u"help_send_welcome",
             default=u"If your double_optin is false and this is true, we "
@@ -239,7 +239,7 @@ class IMailchimpSettings(Interface):
             u"an existing subscriber. If double_optin is true, this "
             u"has no effect. defaults to false.",
         ),
-        required=True,
+        required=False,
         default=False,
     )
 
