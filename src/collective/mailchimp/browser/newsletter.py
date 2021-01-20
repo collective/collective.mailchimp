@@ -103,7 +103,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
         # Use email_type if one is provided by the form, if not choose the
         # default email type from the control panel settings.
-        email_type = data.get('email_type', 'HTML')
+        email_type = data.get('email_type') or self.mailchimp_settings.email_type
 
         # Subscribe to MailChimp list
         try:
