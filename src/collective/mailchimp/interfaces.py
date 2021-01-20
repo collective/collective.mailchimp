@@ -66,7 +66,7 @@ class INewsletterSubscribe(Interface):
     email_type = schema.Choice(
         title=_(u"Mail format"),
         vocabulary="collective.mailchimp.vocabularies.EmailType",
-        default="text",
+        default="html",
         required=False,
     )
 
