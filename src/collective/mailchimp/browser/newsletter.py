@@ -89,6 +89,9 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         # Retrieve list_id either from a hidden field in the form or fetch
         # the first list from mailchimp.
         list_id = data.get('list_id') or self.mailchimp.default_list_id()
+        # list_id has to be updated for merge_fields=data to work if None
+        if "list_id" in data and not data.get('list_id'):
+            data['list_id'] = list_id
 
         # interest groups
         interests = {}
