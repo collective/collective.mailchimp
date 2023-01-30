@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from .z3cformhelpers import AddForm
-from .z3cformhelpers import EditForm
 from Acquisition import aq_inner
 from collective.mailchimp.browser.newsletter import NewsletterSubscriberForm
 from collective.mailchimp.interfaces import INewsletterSubscribe
 from plone.app.portlets.portlets import base
+from plone.autoform.directives import widget
 from plone.memoize.compress import xhtml_compress
 from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
@@ -30,6 +29,7 @@ class IMailChimpPortlet(IPortletDataProvider):
         title=_(u'Title'), description=_(u'Title of the portlet')
     )
 
+    widget(available_lists=CheckBoxFieldWidget)
     available_lists = schema.List(
         title=_(u'Available lists'),
         description=_(u'Select available lists to subscribe to.'),
@@ -68,22 +68,16 @@ class Renderer(base.Renderer):
     def name(self):
         return self.data.name or _(u"Subscribe to newsletter")
 
-    @memoize
-    def _data(self):
-        catalog = getToolByName(self.context, 'portal_catalog')
-        return catalog(portal_type='MailChimp Item')
 
     def update(self):
         super(Renderer, self).update()
-        z2.switch_on(self, request_layer=IFormLayer)
-        self.form = self.form(aq_inner(self.context), self.request)
+        self.form = NewsletterSubscriberForm(aq_inner(self.context), self.request)
         alsoProvides(self.form, IWrappedForm)
         self.form.update()
 
 
-class AddForm(AddForm):
-    fields = field.Fields(IMailChimpPortlet)
-    fields['available_lists'].widgetFactory = CheckBoxFieldWidget
+class AddForm(base.AddForm):
+    schema = IMailChimpPortlet
     label = _(u"Add MailChimp Portlet")
     description = _(
         u"This portlet displays a subscription form for a "
@@ -97,9 +91,8 @@ class AddForm(AddForm):
         )
 
 
-class EditForm(EditForm):
-    fields = field.Fields(IMailChimpPortlet)
-    fields['available_lists'].widgetFactory = CheckBoxFieldWidget
+class EditForm(base.EditForm):
+    schema = IMailChimpPortlet
     label = _(u"Edit MailChimp Portlet")
     description = _(
         u"This portlet displays a subscription form for a "

@@ -4,6 +4,8 @@ Changelog
 3.1.1 (unreleased)
 ------------------
 
+- Update portlet template and fix portlet code for Plone 5.2/6. [fredvd]
+
 - Fix posting of interests to the mailchimp API, interest_groups were transformed to bytes string.
   [fredvd] 
 

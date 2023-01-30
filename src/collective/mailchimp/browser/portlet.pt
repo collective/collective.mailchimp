@@ -5,13 +5,12 @@
       lang="en"
       tal:omit-tag="">
 
-  <dl tal:attributes="class string:portlet portletMailChimp portletMailChimp-${view/name}">
-    <dt class="portletHeader">
-      <span tal:content="view/name">Title of the portlet</span>
-    </dt>
-    <dd class="portletItem odd" tal:content="structure view/form/render">
-      here comes the subscriber-form
-    </dd>
-  </dl>
+<aside class="portlet portletMailChimp portletMailChimp-${view/name}">
 
+  <header class="portletHeader">
+    <span tal:content="view/name">Title of the portlet</span>
+  </header>
+  <div class="portletContent" tal:content="structure view/form/render" />
+ 
+</aside>
 </html>
