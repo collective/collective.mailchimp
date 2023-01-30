@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
 from collective.mailchimp import _
 from collective.mailchimp.exceptions import MailChimpException
 from collective.mailchimp.interfaces import IMailchimpLocator
@@ -10,6 +9,8 @@ from plone.app.layout.navigation.root import getNavigationRootObject
 from plone.registry.interfaces import IRegistry
 from plone.z3cform.fieldsets import extensible
 from plone.z3cform.layout import wrap_form
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_text
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from z3c.form import field
@@ -99,8 +100,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         if self.available_interest_groups and interest_groups:
             # Create dictionary with as keys the interest groups, and as
             # values always True.
-            interests = dict.fromkeys(interest_groups, True)
-
+            interests = dict.fromkeys(map(safe_text, interest_groups), True)
         # Use email_type if one is provided by the form, if not choose the
         # default email type from the control panel settings.
         email_type = data.get('email_type') or self.mailchimp_settings.email_type

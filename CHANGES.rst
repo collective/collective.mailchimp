@@ -4,6 +4,9 @@ Changelog
 3.1.1 (unreleased)
 ------------------
 
+- Fix posting of interests to the mailchimp API, interest_groups were transformed to bytes string.
+  [fredvd] 
+
 - Fix controlpanel field validation for Plone 6
   [agitator]
 
