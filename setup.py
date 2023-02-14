@@ -28,6 +28,7 @@ setup(
         "Environment :: Web Environment",
         "Development Status :: 5 - Production/Stable",
         "Framework :: Plone",
+        "Framework :: Plone :: Addon",
         "Framework :: Plone :: 4.0",
         "Framework :: Plone :: 4.1",
         "Framework :: Plone :: 4.2",
