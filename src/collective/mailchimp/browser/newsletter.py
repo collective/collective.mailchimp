@@ -51,7 +51,11 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         super(NewsletterSubscriberForm, self).updateWidgets()
         widgets = self.widgets
         registry = getUtility(IRegistry)
-        self.mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        try:
+            self.mailchimp_settings = registry.forInterface(IMailchimpSettings)
+        except KeyError:
+            self.mailchimp_settings = None
+            return
         self.mailchimp = getUtility(IMailchimpLocator)
 
         # Show/hide mail format option widget

@@ -47,7 +47,10 @@ class MailchimpLocator(object):
         if self.registry is None:
             self.registry = getUtility(IRegistry)
         if self.settings is None:
-            self.settings = self.registry.forInterface(IMailchimpSettings)
+            try:
+                self.settings = self.registry.forInterface(IMailchimpSettings)
+            except KeyError:
+                return
         self.apikey = self.settings.api_key
         if not self.apikey:
             return
