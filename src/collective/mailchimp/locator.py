@@ -245,6 +245,8 @@ class MailchimpLocator(object):
         return response
 
     def get_email_hash(self, email_address):
+        if isinstance(email_address, str):
+            email_address = email_address.encode("utf-8")
         return hashlib.md5(email_address).hexdigest()
 
     def update_subscriber(self, list_id, email_address, **kwargs):
