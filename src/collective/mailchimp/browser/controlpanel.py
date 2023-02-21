@@ -6,6 +6,7 @@ from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from plone.app.registry.browser import controlpanel
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.Five.browser import BrowserView
 from z3c.form.interfaces import WidgetActionExecutionError
 from zope.component import getUtility
 from zope.interface import alsoProvides
@@ -36,6 +37,8 @@ class MailchimpSettingsEditForm(controlpanel.RegistryEditForm):
         super(MailchimpSettingsEditForm, self).updateWidgets()
 
     def updateCache(self):
+        if IDisableCSRFProtection is not None:
+            alsoProvides(self.request, IDisableCSRFProtection)
         mailchimp = getUtility(IMailchimpLocator)
         mailchimp.updateCache()
 
@@ -43,6 +46,10 @@ class MailchimpSettingsEditForm(controlpanel.RegistryEditForm):
 class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     form = MailchimpSettingsEditForm
     index = ViewPageTemplateFile('controlpanel.pt')
+
+
+class MailchimpData(BrowserView):
+    label = _(u"MailChimp data")
 
     def mailchimp_account(self):
         if IDisableCSRFProtection is not None:

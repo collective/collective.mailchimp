@@ -1,0 +1,136 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/prefs_main_template/macros/master"
+      i18n:domain="collective.mailchimp">
+
+<body>
+
+  <div id="content"
+     metal:fill-slot="prefs_configlet_content">
+
+    <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+      Portal status message
+    </div>
+
+    <a href=""
+       id="setup-link"
+       tal:attributes="href string:$portal_url/@@overview-controlpanel"
+       i18n:translate="">
+        Site Setup
+    </a> &rsaquo;
+
+    <h1 class="documentFirstHeading" tal:content="view/label">View Title</h1>
+    <p><a href=""
+      tal:attributes="href string:$portal_url/@@mailchimp-settings"
+      i18n:translate="">View MailChimp settings</a></p>
+
+    <div id="layout-contents"
+         class="enableUnloadProtection enableAutoFocus enableFormTabbing enableUnlockProtection"
+         tal:define="account view/mailchimp_account|nothing;
+                     empty string:-">
+      <div id="mailchimp-no-valid-account" class="warning" tal:condition="not:account"
+            i18n:translate="msg_mailchimp_no_account">
+        Your account has not been saved yet or is not valid.
+      </div>
+      <fieldset id="fieldset-account" tal:condition="account">
+        <legend id="fieldsetlegend-account" i18n:translate="">MailChimp Account</legend>
+        Account
+        <table class="listing">
+          <thead>
+            <tr>
+              <th i18n:translate="">Key</th>
+              <th i18n:translate="">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               <td i18n:translate="">Username:</td>
+               <td tal:content="account/account_name|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Last login: </td>
+              <td tal:content="account/last_login|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Company: </td>
+              <td tal:content="account/contact/company|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Address 1: </td>
+              <td tal:content="account/contact/addr1|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Address 2: </td>
+              <td tal:content="account/contact/addr2|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Zip: </td>
+              <td tal:content="account/contact/zip|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">State: </td>
+              <td tal:content="account/contact/state|empty"/>
+            </tr>
+            <tr>
+               <td i18n:translate="">City: </td>
+              <td tal:content="account/contact/city|empty"/>
+            </tr>
+            <tr>
+              <td i18n:translate="">Country: </td>
+              <td tal:content="account/contact/country|empty"/>
+            </tr>
+           </tbody>
+        </table>
+
+      </fieldset>
+      <fieldset id="fieldset-lists" tal:condition="account">
+        <legend id="fieldsetlegend-preview" i18n:translate="">MailChimp Lists</legend>
+        <table class="listing"
+               tal:define="lists python:view.available_lists()">
+          <thead>
+            <tr>
+              <th i18n:translate="">ID</th>
+              <th i18n:translate="">Name</th>
+              <th i18n:translate="">Member count</th>
+              <th i18n:translate="">Member count since send</th>
+              <th i18n:translate="">Default from name</th>
+              <th i18n:translate="">Default from email</th>
+              <th i18n:translate="">Default subject</th>
+              <th i18n:translate="">Default language</th>
+              <th i18n:translate="">Unsubscribed count</th>
+              <th i18n:translate="">Unsubscribed count since send</th>
+              <th i18n:translate="">Cleaned cound</th>
+              <th i18n:translate="">Cleaned count since send</th>
+              <th i18n:translate="">Date created</th>
+              <th i18n:translate="">List rating</th>
+            </tr>
+          </thead>
+          <tbody tal:repeat="list lists">
+            <tr>
+              <td tal:content="list/id|empty"></td>
+              <td tal:content="list/name|empty"></td>
+              <td tal:content="list/stats/member_count|empty"></td>
+              <td tal:content="list/stats/member_count_since_send|empty"></td>
+              <td tal:content="list/campaign_defaults/from_name|empty"></td>
+              <td tal:content="list/campaign_defaults/from_email|empty"></td>
+              <td tal:content="list/campaign_defaults/subject|empty"></td>
+              <td tal:content="list/campaign_defaults/language|empty"></td>
+              <td tal:content="list/stats/unsubscribe_count|empty"></td>
+              <td tal:content="list/stats/unsubscribe_count_since_send|empty"></td>
+              <td tal:content="list/stats/cleaned_count|empty"></td>
+              <td tal:content="list/stats/cleaned_count_since_send|empty"></td>
+              <td tal:content="list/date_created|empty"></td>
+              <td tal:content="list/list_rating|empty"></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </fieldset>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -12,6 +12,12 @@ Breaking changes:
 
 New features:
 
+- Split the controlpanel into two separate pages: settings and data.
+  Until now, if the settings resulted in an error while fetching the data from mailchimp,
+  you could not fix this because the whole control panel would fail to load.
+  Fixes `issue 26 <https://github.com/collective/collective.mailchimp/issues/26>`_.
+  [maurits]
+
 - Updated tests and infrastructure for Plone 5.2, Python 3.
   Plone 6 should work, but it not tested yet.
   [maurits]
