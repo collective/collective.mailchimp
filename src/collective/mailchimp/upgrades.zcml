@@ -38,4 +38,12 @@
       handler=".upgrades.reload_profile"
       />
 
+  <genericsetup:upgradeDepends
+      source="2000"
+      destination="3000"
+      title="Register css resource"
+      profile="collective.mailchimp:default"
+      import_steps="plone.app.registry"
+      />
+
 </configure>

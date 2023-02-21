@@ -17,4 +17,14 @@
             <title>Mailchimp account details</title>
         </field>
     </record>
+
+ <records prefix="plone.bundles/collective.mailchimp"
+          interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="depends"></value>
+    <value key="enabled">True</value>
+    <value key="load_defer">True</value>
+    <value key="jscompilation"></value>
+    <value key="csscompilation">++resource++collective.mailchimp.stylesheets/mailchimp.css</value>
+ </records>
+
 </registry>

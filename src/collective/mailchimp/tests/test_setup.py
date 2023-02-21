@@ -39,44 +39,25 @@ class TestSetup(unittest.TestCase):
 
         self.failUnless(ICollectiveMailchimp in utils.registered_layers())
 
-    def test_mailchimp_css_available(self):
-        if not PLONE_5:
-            # Plone 4
-            cssreg = getToolByName(self.portal, "portal_css")
-            stylesheets_ids = cssreg.getResourceIds()
-            self.assertTrue(
-                '++resource++collective.mailchimp.stylesheets/mailchimp.css'
-                in stylesheets_ids
-            )
-        else:
-            # Plone 5
-            from zope.component import getUtility
-            from plone.registry.interfaces import IRegistry
-            from Products.CMFPlone.interfaces import IResourceRegistry
+    def test_mailchimp_resource_bundle_available(self):
+        from zope.component import getUtility
+        from plone.registry.interfaces import IRegistry
+        from Products.CMFPlone.interfaces import IResourceRegistry
 
-            reg = getUtility(IRegistry)
-            resources = reg.collectionOfInterface(
-                IResourceRegistry, prefix="plone.resources", check=False
-            )
-            key = 'resource-collective-mailchimp-stylesheets'
-            self.assertIn(key, resources.keys())
-            self.assertEqual(
-                resources[key].css,
-                ['++resource++collective.mailchimp.stylesheets/mailchimp.css'],
-            )
+        reg = getUtility(IRegistry)
+        resources = reg.collectionOfInterface(
+            IResourceRegistry, prefix="plone.bundles", check=False
+        )
+        key = 'collective.mailchimp'
+        self.assertIn(key, resources.keys())
 
     def test_mailchimp_css_enabled(self):
-        if not PLONE_5:
-            # Plone 4
-            cssreg = getToolByName(self.portal, "portal_css")
-            self.assertTrue(
-                cssreg.getResource(
-                    '++resource++collective.mailchimp.stylesheets/mailchimp.css'  # noqa
-                ).getEnabled()
-            )
-        else:
-            # Don't know how to test this in Plone 5.
-            pass
+        portal_url = self.portal.absolute_url()
+        css = "++resource++collective.mailchimp.stylesheets/mailchimp.css"
+        url = f"{portal_url}/{css}"
+        # render the homepage
+        html = self.portal()
+        self.assertIn(url, html)
 
 
 class TestUninstall(unittest.TestCase):
@@ -106,6 +87,26 @@ class TestUninstall(unittest.TestCase):
         from plone.browserlayer import utils
 
         self.assertNotIn(ICollectiveMailchimp, utils.registered_layers())
+
+    def test_mailchimp_resource_bundle_removed(self):
+        from zope.component import getUtility
+        from plone.registry.interfaces import IRegistry
+        from Products.CMFPlone.interfaces import IResourceRegistry
+
+        reg = getUtility(IRegistry)
+        resources = reg.collectionOfInterface(
+            IResourceRegistry, prefix="plone.bundles", check=False
+        )
+        key = 'collective.mailchimp'
+        self.assertNotIn(key, resources.keys())
+
+    def test_mailchimp_css_disabled(self):
+        portal_url = self.portal.absolute_url()
+        css = "++resource++collective.mailchimp.stylesheets/mailchimp.css"
+        url = f"{portal_url}/{css}"
+        # render the homepage
+        html = self.portal()
+        self.assertNotIn(url, html)
 
 
 def test_suite():

@@ -7,4 +7,9 @@
     </record>
     <record name="collective.mailchimp.cache.account" remove="true">
     </record>
+
+ <records prefix="plone.bundles/collective.mailchimp"
+          interface='Products.CMFPlone.interfaces.IBundleRegistry'
+          remove="true" />
+
 </registry>
