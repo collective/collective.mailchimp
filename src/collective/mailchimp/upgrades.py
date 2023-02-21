@@ -16,6 +16,8 @@ def update_registry(context):
 
 def install_mailchimp_stylesheet(context):
     csstool = getToolByName(context, 'portal_css', None)
+    if csstool is None:
+        return
     stylesheet_id = (
         '++resource++collective.mailchimp.stylesheets/mailchimp.css'
     )
