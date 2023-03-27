@@ -38,4 +38,13 @@
       handler=".upgrades.reload_profile"
       />
 
+  <genericsetup:upgradeStep
+      source="2000"
+      destination="2001"
+      title="Add maximum lists number setting in registry"
+      description=""
+      profile="collective.mailchimp:default"
+      handler=".upgrades.add_max_lists_number_setting"
+      />
+
 </configure>

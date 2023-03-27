@@ -193,6 +193,19 @@ class IMailchimpSettings(Interface):
         required=False,
     )
 
+    max_lists_number = schema.Int(
+        title=_(u"max_lists_number", default=u"Maximum lists number"),
+        description=_(
+            u"help_max_lists_number",
+            default=u"Maximum number of lists you want to retrieve from "
+            u"MailChimp API (maximum supported is 1000).",
+        ),
+        default=50,
+        min=1,
+        max=1000,
+        required=True,
+    )
+
     double_optin = schema.Bool(
         title=_(u"double_optin", default=u"Double opt-in"),
         description=_(

@@ -18,8 +18,10 @@ import six.moves
 
 try:
     import urlparse
+    from urllib import urlencode
 except ImportError:
     from urllib import parse as urlparse
+    from urllib.parse import urlencode
 
 _marker = object()
 logger = logging.getLogger('collective.mailchimp')
@@ -101,13 +103,15 @@ class MailchimpLocator(object):
             logger.warn(exc)
             raise exc
 
-    def api_request(self, endpoint='', request_type='get', **kwargs):
+    def api_request(self, endpoint='', request_type='get', query_params={}, **kwargs):
         """ construct the request and do a get/post.
         """
         if not self.api_root:
             return []
         headers = {'content-type': 'application/json'}
         url = urlparse.urljoin(self.api_root, endpoint)
+        if query_params:
+            url = "{}?{}".format(url, urlencode(query_params))
 
         # we provide a json structure with the parameters.
         payload = json.dumps(kwargs)
@@ -139,9 +143,10 @@ class MailchimpLocator(object):
 
     def _lists(self):
         """ The actual API call for lists. """
+        count = self.settings.max_lists_number
         try:
             # lists returns a dict with 'total' and 'data'. we just need data
-            response = self.api_request('lists')
+            response = self.api_request('lists', query_params={"count": count})
         except PostRequestError:
             return []
         if 'lists' in response:
