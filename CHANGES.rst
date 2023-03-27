@@ -20,6 +20,12 @@ Bug fixes:
 
 - Register resource bundle so our css is loaded on Plone 5.2 and higher.  [maurits]
 
+- Increase limit to 50 (by default) when retrieving lists from mailchimp.
+  The API default was getting only 10 lists, which is really too few (and can
+  prevent you from selecting the correct default list for example).
+  The limit is a setting that can be changed on a per-site basis.
+  [laulaz]
+
 - Update portlet template and fix portlet code for Plone 5.2/6. [fredvd]
 
 - Fix posting of interests to the mailchimp API, interest_groups were transformed to bytes string.

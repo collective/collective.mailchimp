@@ -38,3 +38,22 @@ def install_mailchimp_cache(context):
 
 def reload_profile(context):
     loadMigrationProfile(context, 'profile-collective.mailchimp:default')
+
+
+def add_max_lists_number_setting(context):
+    registry = getUtility(IRegistry)
+    # we need to omit other fields because vocabularies (ex: available_lists)
+    # use our new (not existing) field and cause traceback
+    registry.registerInterface(
+        IMailchimpSettings,
+        omit=(
+            'api_key',
+            'default_list',
+            'double_optin',
+            'email_type',
+            'email_type_is_optional',
+            'replace_interests',
+            'send_welcome',
+            'update_existing',
+        ),
+    )
