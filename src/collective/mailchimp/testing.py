@@ -54,7 +54,8 @@ class MockRequests(object):
             raise MockRequestsException(
                 'Expected {0} in url {1}'.format(mailchimp_url, url)
             )
-        endpoint = url.split(mailchimp_url)[1]
+        # Remove mailchimp & query from url to get only the endpoint
+        endpoint = url.split(mailchimp_url)[1].split("?")[0]
         # Check auth
         auth = kwargs.get('auth')
         if not auth:
