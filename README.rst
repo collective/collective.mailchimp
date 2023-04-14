@@ -28,7 +28,8 @@ Introduction
    :alt: kitconcept
    :target: https://kitconcept.com/
 
-MailChimp integration for Plone 4 and 5.
+MailChimp integration for Plone 5.2 and 6.0 on Python 3.
+Use ``collective.mailchimp`` 3.x for earlier Plone and Python versions.
 
 MailChimp helps you design email newsletters, share them on social networks, integrate with services you already use, and track your results.
 
