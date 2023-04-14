@@ -12,6 +12,13 @@
     class=".controlpanel.MailchimpSettingsControlPanel"
     permission="cmf.ManagePortal"
     />
+  <browser:page
+    name="mailchimp-data"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".controlpanel.MailchimpData"
+    template="data.pt"
+    permission="cmf.ManagePortal"
+    />
 
   <!-- Portlet -->
   <include package="plone.app.portlets" />
