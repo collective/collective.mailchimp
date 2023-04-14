@@ -7,6 +7,7 @@ from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
+from zope.component.hooks import getSite
 from zope.interface import implementer
 
 import hashlib
@@ -37,15 +38,29 @@ class MailchimpLocator(object):
     key_lists = "collective.mailchimp.cache.lists"
 
     def __init__(self, settings={}):
-        """ Use settings if provided """
+        """ Use settings if provided
+
+        Note that the __init__ method is only called once at startup.
+        settings can only be passed when you directly instantiate a
+        MailchimpLocator, for example in tests.
+        """
         self.registry = None
         self.settings = None
         self.api_root = None
         if settings:
             self.settings = settings
+        self.site_path = ""
 
     def initialize(self):
         """ Load settings from registry and construct api root"""
+        site_path = "/".join(getSite().getPhysicalPath())
+        if self.site_path != site_path:
+            # Settings are for a different Plone Site.
+            # See https://github.com/collective/collective.mailchimp/issues/31
+            self.site_path = site_path
+            self.registry = None
+            self.settings = None
+            self.api_root = None
         if self.registry is None:
             self.registry = getUtility(IRegistry)
         if self.settings is None:

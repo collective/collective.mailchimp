@@ -18,6 +18,10 @@ New features:
 
 Bug fixes:
 
+- Reinitialize the locator when called on a different Plone Site.
+  Fixes `issue 31 <https://github.com/collective/collective.mailchimp/issues/31>`_.
+  [maurits]
+
 - Register resource bundle so our css is loaded on Plone 5.2 and higher.  [maurits]
 
 - Increase limit to 50 (by default) when retrieving lists from mailchimp.
