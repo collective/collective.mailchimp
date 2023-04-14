@@ -20,7 +20,7 @@ long_description = (
 
 setup(
     name='collective.mailchimp',
-    version='3.1.1',
+    version='3.1.2.dev0',
     description="MailChimp integration for Plone.",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
