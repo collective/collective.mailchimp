@@ -49,7 +49,10 @@ class MailchimpLocator(object):
         if self.registry is None:
             self.registry = getUtility(IRegistry)
         if self.settings is None:
-            self.settings = self.registry.forInterface(IMailchimpSettings)
+            try:
+                self.settings = self.registry.forInterface(IMailchimpSettings)
+            except KeyError:
+                return
         self.apikey = self.settings.api_key
         if not self.apikey:
             return
@@ -250,6 +253,8 @@ class MailchimpLocator(object):
         return response
 
     def get_email_hash(self, email_address):
+        if isinstance(email_address, str):
+            email_address = email_address.encode("utf-8")
         return hashlib.md5(email_address).hexdigest()
 
     def update_subscriber(self, list_id, email_address, **kwargs):

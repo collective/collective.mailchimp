@@ -146,7 +146,7 @@ class TestUnsubscribeNewsletterView(unittest.TestCase):
         unsub_all_checkbox = self.browser.getControl(
             name='form.widgets.unsubscribe:list', index=0
         )
-        unsub_all_checkbox.value = ['checked']
+        unsub_all_checkbox.value = ['selected']
         self.browser.getControl(name="form.buttons.unsubscribe").click()
 
         from collective.mailchimp.locator import requests

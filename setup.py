@@ -20,7 +20,7 @@ long_description = (
 
 setup(
     name='collective.mailchimp',
-    version='3.1.1.dev0',
+    version='4.0.0.dev0',
     description="MailChimp integration for Plone.",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -29,17 +29,10 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Framework :: Plone",
         "Framework :: Plone :: Addon",
-        "Framework :: Plone :: 4.0",
-        "Framework :: Plone :: 4.1",
-        "Framework :: Plone :: 4.2",
-        "Framework :: Plone :: 4.3",
-        "Framework :: Plone :: 5.0",
-        "Framework :: Plone :: 5.1",
         "Framework :: Plone :: 5.2",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Framework :: Plone",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
@@ -54,6 +47,8 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
+    # Python 3.6 is EOL, but I don't want to break it needlessly.
+    python_requires=">=3.6",
     install_requires=[
         'setuptools',
         'Products.CMFPlone',

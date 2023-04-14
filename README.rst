@@ -1,6 +1,3 @@
-.. image:: https://secure.travis-ci.org/collective/collective.mailchimp.png
-    :target: http://travis-ci.org/collective/collective.mailchimp
-
 .. image:: https://img.shields.io/coveralls/collective/collective.mailchimp/master.svg
     :target: https://coveralls.io/r/collective/collective.mailchimp
 

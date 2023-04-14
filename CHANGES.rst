@@ -1,8 +1,24 @@
 Changelog
 =========
 
-3.1.1 (unreleased)
+4.0.0 (unreleased)
 ------------------
+
+Breaking changes:
+
+- Dropped support for Plone 5.1 and older.  [maurits]
+
+- Dropped support for Python 2.  [maurits]
+
+New features:
+
+- Updated tests and infrastructure for Plone 5.2, Python 3.
+  Plone 6 should work, but it not tested yet.
+  [maurits]
+
+Bug fixes:
+
+- Register resource bundle so our css is loaded on Plone 5.2 and higher.  [maurits]
 
 - Increase limit to 50 (by default) when retrieving lists from mailchimp.
   The API default was getting only 10 lists, which is really too few (and can
@@ -13,7 +29,7 @@ Changelog
 - Update portlet template and fix portlet code for Plone 5.2/6. [fredvd]
 
 - Fix posting of interests to the mailchimp API, interest_groups were transformed to bytes string.
-  [fredvd] 
+  [fredvd]
 
 - Fix controlpanel field validation for Plone 6
   [agitator]

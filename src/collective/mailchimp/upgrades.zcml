@@ -47,4 +47,12 @@
       handler=".upgrades.add_max_lists_number_setting"
       />
 
+  <genericsetup:upgradeDepends
+      source="2001"
+      destination="3000"
+      title="Register css resource"
+      profile="collective.mailchimp:default"
+      import_steps="plone.app.registry"
+      />
+
 </configure>

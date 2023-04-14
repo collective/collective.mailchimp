@@ -43,6 +43,7 @@
     name="newsletter"
     for="*"
     class=".newsletter.NewsletterView"
+    layer="..interfaces.ICollectiveMailchimp"
     permission="zope2.View"
     />
 
@@ -50,6 +51,7 @@
     name="unsubscribe-newsletter"
     for="*"
     class=".newsletter.UnsubscribeNewsletterView"
+    layer="..interfaces.ICollectiveMailchimp"
     permission="zope2.View"
     />
 
