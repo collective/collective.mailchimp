@@ -16,24 +16,24 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - python-version: '3.7'
-            plone-version: '5.2'
           - python-version: '3.8'
             plone-version: '5.2'
+          - python-version: '3.12'
+            plone-version: '6.0'
 
     steps:
       # git checkout
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # python setup
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
 
       # buildout eggs cache
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: eggs
           key: ${{ runner.os }}-py${{ matrix.python-version }}-plone${{ matrix.plone-version }}-${{ hashFiles('*.cfg') }}
@@ -42,10 +42,8 @@ jobs:
             ${{ runner.os }}-py${{ matrix.python-version }}-
 
       # python install
-      - run: pip install virtualenv
-      - run: pip install wheel
       - name: pip install
-        run: pip install -r requirements.txt
+        run: pip install -r requirements-${{ matrix.plone-version }}.txt
 
       # buildout
       - name: buildout

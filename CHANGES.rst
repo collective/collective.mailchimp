@@ -4,7 +4,13 @@ Changelog
 4.0.0a2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+Breaking changes:
+
+- Drop support for Python 3.7 and older.  [maurits]
+
+New features:
+
+- Test on Plone 6.0 as well, next to Plone 5.2.  [maurits]
 
 
 4.0.0a1 (2023-04-14)

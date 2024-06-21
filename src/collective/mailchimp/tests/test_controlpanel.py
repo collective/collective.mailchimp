@@ -29,7 +29,7 @@ class TestMailchimpSettingsControlPanel(unittest.TestCase):
             (self.portal, self.portal.REQUEST), name="mailchimp-settings"
         )
         # view = view.__of__(self.portal)
-        self.failUnless(view())
+        self.assertTrue(view())
 
     def test_mailchimp_controlpanel_view_protected(self):
         from AccessControl import Unauthorized
@@ -43,7 +43,7 @@ class TestMailchimpSettingsControlPanel(unittest.TestCase):
 
     def test_mailchimp_in_controlpanel(self):
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
-        self.failUnless(
+        self.assertTrue(
             'mailchimp'
             in [
                 a.getAction(self)['id']
@@ -55,8 +55,8 @@ class TestMailchimpSettingsControlPanel(unittest.TestCase):
         record = self.registry.records[
             'collective.mailchimp.interfaces.IMailchimpSettings.api_key'
         ]
-        self.failUnless('api_key' in IMailchimpSettings)
-        self.assertEquals(record.value, u"")
+        self.assertTrue('api_key' in IMailchimpSettings)
+        self.assertEqual(record.value, u"")
 
 
 class ControlpanelFunctionalTest(unittest.TestCase):

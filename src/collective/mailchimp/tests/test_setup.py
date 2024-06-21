@@ -3,26 +3,12 @@ from collective.mailchimp.testing import (
     COLLECTIVE_MAILCHIMP_INTEGRATION_TESTING,
 )
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import get_installer
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 
 import unittest
-
-
-try:
-    from Products.CMFPlone.factory import _IMREALLYPLONE5
-
-    _IMREALLYPLONE5  # noqa
-except ImportError:
-    PLONE_5 = False
-else:
-    PLONE_5 = True
-
-try:
-    from Products.CMFPlone.utils import get_installer
-except ImportError:
-    get_installer = None
 
 
 class TestSetup(unittest.TestCase):
@@ -37,7 +23,7 @@ class TestSetup(unittest.TestCase):
         from plone.browserlayer import utils
         from collective.mailchimp.interfaces import ICollectiveMailchimp
 
-        self.failUnless(ICollectiveMailchimp in utils.registered_layers())
+        self.assertTrue(ICollectiveMailchimp in utils.registered_layers())
 
     def test_mailchimp_resource_bundle_available(self):
         from zope.component import getUtility
@@ -54,10 +40,9 @@ class TestSetup(unittest.TestCase):
     def test_mailchimp_css_enabled(self):
         portal_url = self.portal.absolute_url()
         css = "++resource++collective.mailchimp.stylesheets/mailchimp.css"
-        url = f"{portal_url}/{css}"
         # render the homepage
         html = self.portal()
-        self.assertIn(url, html)
+        self.assertIn(css, html)
 
 
 class TestUninstall(unittest.TestCase):
@@ -66,19 +51,16 @@ class TestUninstall(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        if get_installer:
-            self.installer = get_installer(self.portal, self.layer['request'])
-        else:
-            self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.installer = get_installer(self.portal, self.layer['request'])
         roles_before = api.user.get_roles(TEST_USER_ID)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer.uninstallProducts(['collective.mailchimp'])
+        self.installer.uninstall_product('collective.mailchimp')
         setRoles(self.portal, TEST_USER_ID, roles_before)
 
     def test_product_uninstalled(self):
         """Test if collective.mailchimp is cleanly uninstalled."""
         self.assertFalse(
-            self.installer.isProductInstalled('collective.mailchimp')
+            self.installer.is_product_installed('collective.mailchimp')
         )
 
     def test_browserlayer_removed(self):
@@ -103,10 +85,9 @@ class TestUninstall(unittest.TestCase):
     def test_mailchimp_css_disabled(self):
         portal_url = self.portal.absolute_url()
         css = "++resource++collective.mailchimp.stylesheets/mailchimp.css"
-        url = f"{portal_url}/{css}"
         # render the homepage
         html = self.portal()
-        self.assertNotIn(url, html)
+        self.assertNotIn(css, html)
 
 
 def test_suite():
