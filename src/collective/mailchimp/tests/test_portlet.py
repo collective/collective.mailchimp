@@ -33,12 +33,12 @@ class TestPortlet(unittest.TestCase):
 
     def testPortletTypeRegistered(self):
         portlet = getUtility(IPortletType, name='portlet.MailChimp')
-        self.assertEquals(portlet.addview, 'portlet.MailChimp')
+        self.assertEqual(portlet.addview, 'portlet.MailChimp')
 
     def testInterfaces(self):
         portlet = mailchimp.Assignment(name="foo")
-        self.failUnless(IPortletAssignment.providedBy(portlet))
-        self.failUnless(IPortletDataProvider.providedBy(portlet.data))
+        self.assertTrue(IPortletAssignment.providedBy(portlet))
+        self.assertTrue(IPortletDataProvider.providedBy(portlet.data))
 
     def testInvokeAddview(self):
         portlet = getUtility(IPortletType, name='portlet.MailChimp')
@@ -50,8 +50,8 @@ class TestPortlet(unittest.TestCase):
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
         addview.createAndAdd(data={})
 
-        self.assertEquals(len(mapping), 1)
-        self.failUnless(isinstance(mapping.values()[0], mailchimp.Assignment))
+        self.assertEqual(len(mapping), 1)
+        self.assertTrue(isinstance(mapping.values()[0], mailchimp.Assignment))
 
     def testInvokeEditView(self):
         mapping = PortletAssignmentMapping()
@@ -59,7 +59,7 @@ class TestPortlet(unittest.TestCase):
 
         mapping['foo'] = mailchimp.Assignment(name="foo")
         editview = getMultiAdapter((mapping['foo'], request), name='edit')
-        self.failUnless(isinstance(editview, mailchimp.EditForm))
+        self.assertTrue(isinstance(editview, mailchimp.EditForm))
 
     def testRenderer(self):
         context = self.portal
@@ -73,7 +73,7 @@ class TestPortlet(unittest.TestCase):
         renderer = getMultiAdapter(
             (context, request, view, manager, assignment), IPortletRenderer
         )
-        self.failUnless(isinstance(renderer, mailchimp.Renderer))
+        self.assertTrue(isinstance(renderer, mailchimp.Renderer))
 
 
 class TestRenderer(unittest.TestCase):
