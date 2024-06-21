@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.0.0a3 (unreleased)
+4.0.0a3 (2024-06-22)
 --------------------
 
 - More often catch errors contacting MailChimp.
