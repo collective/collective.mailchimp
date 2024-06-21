@@ -7,7 +7,12 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 def available_lists(context):
     mailchimp = getUtility(IMailchimpLocator)
-    lists = mailchimp.lists()
+    try:
+        lists = mailchimp.lists()
+    except Exception as exc:
+        # Do not break completely, otherwise forms fail to load.
+        logger.warn(exc)
+        lists = []
     if not lists:
         return SimpleVocabulary([])
     return SimpleVocabulary(
@@ -28,7 +33,13 @@ def interest_groups(context):
         list_id = mailchimp.default_list_id()
         if not list_id:
             return SimpleVocabulary([])
-    groups = mailchimp.groups(list_id=list_id)
+    try:
+        groups = mailchimp.groups(list_id=list_id)
+    except Exception as exc:
+        # Do not break completely, otherwise forms fail to load.
+        logger.warn(exc)
+        groups = []
+
     if not groups:
         return SimpleVocabulary([])
     # Each category has a list of options/groups/interests.  We only support

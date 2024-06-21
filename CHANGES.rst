@@ -4,7 +4,11 @@ Changelog
 4.0.0a3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- More often catch errors contacting MailChimp.
+  Catch errors in vocabularies, otherwise the subscribe form not even shows up.
+  Catch errors updating the cache, otherwise the controlpanel gives an error,
+  preventing a chance to fix it.
+  [maurits]
 
 
 4.0.0a2 (2024-06-21)

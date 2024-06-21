@@ -7,11 +7,16 @@ from collective.mailchimp.interfaces import IMailchimpSettings
 from plone.app.registry.browser import controlpanel
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.Five.browser import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form.interfaces import WidgetActionExecutionError
 from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.interface import Invalid
 
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 try:
     from plone.protect.interfaces import IDisableCSRFProtection
@@ -40,8 +45,15 @@ class MailchimpSettingsEditForm(controlpanel.RegistryEditForm):
         if IDisableCSRFProtection is not None:
             alsoProvides(self.request, IDisableCSRFProtection)
         mailchimp = getUtility(IMailchimpLocator)
-        mailchimp.updateCache()
-
+        try:
+            mailchimp.updateCache()
+        except Exception as exc:
+            # Do not break completely, otherwise the controlpanel fails to load.
+            logger.warn(exc)
+            IStatusMessage(self.request).addStatusMessage(
+                f"Error contacting MailChimp: {exc}",
+                type="error",
+            )
 
 class MailchimpSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     form = MailchimpSettingsEditForm
