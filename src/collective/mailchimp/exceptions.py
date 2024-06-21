@@ -56,3 +56,23 @@ class MailChimpException(Exception):
         return 'MailChimp error code {0}: "{1}"\n{2}'.format(
             self.code, self.detail, self.errors
         )
+
+
+class AkamaiException(MailChimpException):
+    """Akamai is an provider upstream for MailChimp.
+
+    It may give 503 code if you are blocked.  Sample:
+
+    {'type': 'akamai_error_message', 'title': 'akamai_503', 'status': 503,
+     'ref_no': 'Reference Number: ...'}
+    """
+
+    def __init__(self, code, detail, errors=''):
+        self.code = code
+        self.detail = detail
+        self.errors = errors
+
+    def __str__(self):
+        return 'Akamai error code {0}: "{1}"\n{2}'.format(
+            self.code, self.detail, self.errors
+        )

@@ -12,6 +12,12 @@ New features:
 
 - Test on Plone 6.0 as well, next to Plone 5.2.  [maurits]
 
+Bug fixes:
+
+- Catch 503 error from Akamai, which is an upstream provider for MailChimp.
+  You get this when you are (temporarily) blocked.
+  [maurits]
+
 
 4.0.0a1 (2023-04-14)
 --------------------

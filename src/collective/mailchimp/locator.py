@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from .exceptions import AkamaiException
 from .exceptions import DeserializationError
 from .exceptions import MailChimpException
 from .exceptions import PostRequestError
@@ -114,10 +115,40 @@ class MailchimpLocator(object):
         if not isinstance(response, dict):
             return
         # case: response is a dict and may be an error response
-        elif 'status' in response and 'detail' in response:
+        # We need a status.
+        if 'status' not in response:
+            return
+        status = response['status']
+        if 'detail' in response:
             exc = MailChimpException(
-                response['status'], response['detail'], response.get('errors')
+                status, response['detail'], response.get('errors')
             )
+            logger.warn(exc)
+            raise exc
+        # Is status a number?
+        try:
+            status = int(status)
+        except ValueError:
+            return
+        if status >= 400:
+            # Maybe we should do this from 300 onwards, but that would include
+            # redirects, which might be fine.  In my case I have seen 503,
+            # which apparently means we are blocked. Hopefully temporarily.
+            # {'type': 'akamai_error_message', 'title': 'akamai_503', 'status': 503,
+            #  'ref_no': 'Reference Number: ...'}
+            if (
+                response.get('type', '') == 'akamai_error_message'
+                and 'ref_no' in response
+            ):
+                exc = AkamaiException(
+                    status, response['ref_no'], response.get('title')
+                )
+            else:
+                # Log the full response, as we cannot really parse it.
+                logger.warn("Can't properly parse response: %r", response)
+                exc = MailChimpException(
+                    status, 'no details available', response.get('errors')
+                )
             logger.warn(exc)
             raise exc
 
