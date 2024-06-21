@@ -14,6 +14,10 @@ New features:
 
 Bug fixes:
 
+- Raise BadRequest error when the list id is illegal.
+  This tries to avoid hacking attempts that can get you banned.
+  [maurits]
+
 - Catch 503 error from Akamai, which is an upstream provider for MailChimp.
   You get this when you are (temporarily) blocked.
   [maurits]

@@ -20,10 +20,18 @@ from z3c.form.browser.radio import RadioFieldWidget
 from z3c.form.interfaces import ActionExecutionError
 from z3c.form.interfaces import HIDDEN_MODE
 from z3c.form.interfaces import WidgetActionExecutionError
+from zExceptions import BadRequest
 from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.component import getUtility
 from zope.interface import implementer
 from zope.interface import Invalid
+
+import re
+
+
+# Characters that are allowed in some fields.
+# This tries to prevent hacking attempts that get us blocked.
+CHARS_ALLOWED = re.compile(r"^[a-zA-Z0-9\-_\./@\+]*$").match
 
 
 @implementer(INewsletterSubscribe, IAttributeAnnotatable)
@@ -93,7 +101,15 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
 
         # Retrieve list_id either from a hidden field in the form or fetch
         # the first list from mailchimp.
-        list_id = data.get('list_id') or self.mailchimp.default_list_id()
+        list_id = data.get('list_id')
+        if list_id and not CHARS_ALLOWED(list_id):
+            # I saw a hacker adapt the hidden field:
+            # "actual-id' UNION ALL SELECT NULL,NULL,NULL,NULL#"
+            # Currently the list id is hexadecimal, but I suppose
+            # we can't rely on that.
+            raise BadRequest("list_id has disallowed characters")
+
+        list_id = list_id or self.mailchimp.default_list_id()
         # list_id has to be updated for merge_fields=data to work if None
         if "list_id" in data and not data.get('list_id'):
             data['list_id'] = list_id
@@ -102,12 +118,20 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         interests = {}
         interest_groups = data.pop('interest_groups', [])
         if self.available_interest_groups and interest_groups:
+            interest_groups = map(safe_text, interest_groups)
+            for group in interest_groups:
+                if not CHARS_ALLOWED(group):
+                    raise BadRequest("interest_groups has disallowed characters")
             # Create dictionary with as keys the interest groups, and as
             # values always True.
-            interests = dict.fromkeys(map(safe_text, interest_groups), True)
+            interests = dict.fromkeys(interest_groups, True)
         # Use email_type if one is provided by the form, if not choose the
         # default email type from the control panel settings.
-        email_type = data.get('email_type') or self.mailchimp_settings.email_type
+        email_type = data.get('email_type')
+        if email_type and not CHARS_ALLOWED(email_type):
+            raise BadRequest("email_type has disallowed characters")
+
+        email_type = email_type or self.mailchimp_settings.email_type
 
         # Subscribe to MailChimp list
         try:
