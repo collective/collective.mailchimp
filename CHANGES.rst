@@ -12,6 +12,20 @@ New features:
 
 - Test on Plone 6.0 as well, next to Plone 5.2.  [maurits]
 
+Bug fixes:
+
+- Handle all exceptions when subscribing or unsubscribing.
+  Otherwise you will keep seeing the form and never see an error.
+  [maurits]
+
+- Raise BadRequest error when the list id is illegal.
+  This tries to avoid hacking attempts that can get you banned.
+  [maurits]
+
+- Catch 503 error from Akamai, which is an upstream provider for MailChimp.
+  You get this when you are (temporarily) blocked.
+  [maurits]
+
 
 4.0.0a1 (2023-04-14)
 --------------------
