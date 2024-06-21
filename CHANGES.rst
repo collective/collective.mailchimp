@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.0.0a4 (unreleased)
+4.0.0a4 (2024-06-22)
 --------------------
 
 - Fix missing import of 'logging'.  [maurits]
