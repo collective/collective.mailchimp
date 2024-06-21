@@ -25,9 +25,11 @@ from zope.component import getUtility
 from zope.interface import implementer
 from zope.interface import Invalid
 
+import logging
 import re
 
 
+logger = logging.getLogger(__name__)
 # Characters that are allowed in some fields.
 # This tries to prevent hacking attempts that get us blocked.
 CHARS_ALLOWED = re.compile(r"^[a-zA-Z0-9\-_\./@\+]*$").match
@@ -78,7 +80,11 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
         widgets['list_id'].value = list_id
 
         # Show/hide interest_groups widget
-        self.available_interest_groups = self.mailchimp.groups(list_id=list_id)
+        try:
+            self.available_interest_groups = self.mailchimp.groups(list_id=list_id)
+        except Exception as exc:
+            logger.warning(exc)
+            self.available_interest_groups = []
         if not self.available_interest_groups or \
            self.available_interest_groups.get('total_items') == 0:
             widgets['interest_groups'].mode = HIDDEN_MODE

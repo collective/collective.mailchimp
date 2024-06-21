@@ -4,7 +4,8 @@ Changelog
 4.0.0a5 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Catch errors in newsletter page when getting groups.
+  [maurits]
 
 
 4.0.0a4 (2024-06-22)
