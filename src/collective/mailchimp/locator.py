@@ -288,7 +288,7 @@ class MailchimpLocator(object):
         except MailChimpException:
             raise
         except Exception as e:
-           raise PostRequestError(e)
+            raise PostRequestError(e)
         logger.info(
             "Subscribed %s to list with id: %s." % (email_address, list_id)
         )

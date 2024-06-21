@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from collective.mailchimp import _
-from collective.mailchimp.exceptions import MailChimpException
 from collective.mailchimp.interfaces import IMailchimpLocator
 from collective.mailchimp.interfaces import IMailchimpSettings
 from collective.mailchimp.interfaces import INewsletterSubscribe
@@ -142,7 +141,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
                 interests=interests,
                 merge_fields=data,
             )
-        except MailChimpException as error:
+        except Exception as error:
             return self.handle_error(error, data)
 
         if self.mailchimp_settings.double_optin:
@@ -166,7 +165,9 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
     def handle_error(self, error, data):
         # Current api v3 documentation only lists errors in the 400 and 500
         # range.  The 400 code can mean a lot of things...
-        if error.code == 400:
+        # Also, not all exceptions have a code.
+        error_code = getattr(error, "code", 500)
+        if error_code == 400:
             error_msg = _(
                 u"mailchimp_error_msg_already_subscribed",
                 default=u"Could not subscribe to newsletter. "
@@ -178,7 +179,7 @@ class NewsletterSubscriberForm(extensible.ExtensibleForm, form.Form):
             raise WidgetActionExecutionError(
                 'email', Invalid(translated_error_msg)
             )
-        elif error.code == 220:
+        elif error_code == 220:
             error_msg = _(
                 u"mailchimp_error_msg_banned",
                 default=u"Could not subscribe to newsletter. "
@@ -272,8 +273,8 @@ class UnsubscribeNewsletterForm(extensible.ExtensibleForm, form.Form):
             self.mailchimp.update_subscriber(
                 list_id, email_address=email, **update_data
             )
-        except MailChimpException as error:
-            if error.code != 404:
+        except Exception as error:
+            if getattr(error, "code", 500) != 404:
                 # If a subscriber did not exist we don't want to announce
                 # it. Treat only != 404 as an error.
                 IStatusMessage(self.request).addStatusMessage(

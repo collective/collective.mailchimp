@@ -14,6 +14,10 @@ New features:
 
 Bug fixes:
 
+- Handle all exceptions when subscribing or unsubscribing.
+  Otherwise you will keep seeing the form and never see an error.
+  [maurits]
+
 - Raise BadRequest error when the list id is illegal.
   This tries to avoid hacking attempts that can get you banned.
   [maurits]
