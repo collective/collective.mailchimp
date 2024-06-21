@@ -1,5 +1,14 @@
 name: Tests
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
