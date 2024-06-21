@@ -4,6 +4,11 @@ from zope.component import getUtility
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 def available_lists(context):
     mailchimp = getUtility(IMailchimpLocator)
