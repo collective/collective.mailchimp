@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.0.0a5 (unreleased)
+4.0.0a5 (2024-06-22)
 --------------------
 
 - Catch errors in newsletter page when getting groups.
